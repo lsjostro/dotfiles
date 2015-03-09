@@ -75,6 +75,12 @@ Plugin 'fatih/vim-go'
 " tinymode (resize windows ^W+^jkhl)
 Plugin 'vim-scripts/tinymode.vim'
 
+" python virtualenv support
+Plugin 'jmcantrell/vim-virtualenv'
+
+" jinja support
+Plugin 'mitsuhiko/vim-jinja.git'
+
 " END OF VUNDLE PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""
 " All of your Plugins must be added before the following line
@@ -170,6 +176,19 @@ set shortmess=atI
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <leader>q :bd<cr>
+map <leader>w :w<cr>
+map <leader>ve :tabe ~/.vimrc<cr>
+
+" Git mappings
+map <leader>ga :Git add -p<cr>
+map <leader>gw :Gwrite<cr>
+map <leader>gb :Git checkout -b<space>
+map <leader>gp :Git pull<cr>
+map <leader>gd :Git diff<cr>
+map <leader>gs :Git status<cr>
+map <leader>gf :Git fetch<cr>
+map <leader>gc :Gcommit<cr>
+map <leader>pr :!stash pr create<space>
 
 " Paste mode
 map <leader>pp :setlocal paste!<cr>
@@ -240,7 +259,7 @@ let g:syntastic_auto_loc_list=1
 "don't care about warnings
 let g:syntastic_quiet_messages = {'level': 'warnings'}
 "Python
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['python', 'pylint']
 
 " Coffee Script Compilation
 " Compile the current file into a vertcally split screen
@@ -250,6 +269,7 @@ map <Leader>cs <esc>:CoffeeCompile vert<cr>
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
+" let g:airline_section_b = '%{strftime("%c")}'
 set noshowmode
 " ====== Make tabs be addressable via Apple+1 or 2 or 3, etc
 " Use numbers to pick the tab you want (like iTerm)
