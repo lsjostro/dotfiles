@@ -58,7 +58,8 @@ Plugin 'rosstimson/bats.vim'
 " Make Ctrl+w o, function with toggle niceness
 Plugin 'vim-scripts/ZoomWin'
 
-Plugin 'kchmck/vim-coffee-script'
+" pep8 indentation
+Plugin 'hynek/vim-python-pep8-indent'
 
 " requires exuberant ctags
 Plugin 'majutsushi/tagbar'
@@ -177,7 +178,7 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <leader>q :bd<cr>
 map <leader>w :w<cr>
-map <leader>ve :tabe ~/.vimrc<cr>
+map <leader>ve :tabe ~/Code/dotfiles/vimrc<cr>
 
 " Git mappings
 map <leader>ga :Git add -p<cr>
@@ -261,10 +262,6 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 "Python
 let g:syntastic_python_checkers = ['python', 'pylint']
 
-" Coffee Script Compilation
-" Compile the current file into a vertcally split screen
-map <Leader>cs <esc>:CoffeeCompile vert<cr>
-
 " Airline stuff
 set laststatus=2
 let g:airline_powerline_fonts = 1
@@ -308,6 +305,10 @@ autocmd FileType html,css,scss,jade,ruby,yaml setlocal softtabstop=2
 autocmd BufNewFile,BufRead *.json setlocal shiftwidth=2
 autocmd BufNewFile,BufRead *.json setlocal tabstop=2
 autocmd BufNewFile,BufRead *.json setlocal softtabstop=2
+
+" Python
+au FileType py set textwidth=79
+
 
 " window resize
 func s:CustomResize(offset, vertical)
