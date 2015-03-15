@@ -82,6 +82,9 @@ Plugin 'jmcantrell/vim-virtualenv'
 " jinja support
 Plugin 'mitsuhiko/vim-jinja.git'
 
+" Clojure support
+Plugin 'guns/vim-clojure-static'
+
 " END OF VUNDLE PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""
 " All of your Plugins must be added before the following line
