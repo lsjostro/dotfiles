@@ -73,11 +73,16 @@ Plugin 'bronson/vim-trailing-whitespace'
 " golang support
 Plugin 'fatih/vim-go'
 
+" coffee support
+Plugin 'kchmck/vim-coffee-script'
+
 " tinymode (resize windows ^W+^jkhl)
 Plugin 'vim-scripts/tinymode.vim'
 
 " python virtualenv support
 Plugin 'jmcantrell/vim-virtualenv'
+
+Plugin 'vim-scripts/pydoc.vim'
 
 " jinja support
 Plugin 'mitsuhiko/vim-jinja.git'
@@ -115,6 +120,7 @@ set autoread                    "Reload files changed outside vim
 set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
+set invnumber
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -181,6 +187,7 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <leader>q :bd<cr>
 map <leader>w :w<cr>
+map <leader>y :w !pbcopy<cr>
 map <leader>ve :tabe ~/Code/dotfiles/vimrc<cr>
 
 " Git mappings
@@ -309,9 +316,7 @@ autocmd BufNewFile,BufRead *.json setlocal shiftwidth=2
 autocmd BufNewFile,BufRead *.json setlocal tabstop=2
 autocmd BufNewFile,BufRead *.json setlocal softtabstop=2
 
-" Python
-au FileType py set textwidth=79
-
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
 " window resize
 func s:CustomResize(offset, vertical)
