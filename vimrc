@@ -45,14 +45,8 @@ Plugin 'vim-scripts/ZoomWin'
 " pep8 indentation
 Plugin 'hynek/vim-python-pep8-indent'
 
-" easy aligin
-Plugin 'junegunn/vim-easy-align'
-
 " highlight trailing white
 Plugin 'bronson/vim-trailing-whitespace'
-
-" golang support
-Plugin 'fatih/vim-go'
 
 " coffee support
 Plugin 'kchmck/vim-coffee-script'
@@ -64,9 +58,6 @@ Plugin 'vim-scripts/tinymode.vim'
 Plugin 'jmcantrell/vim-virtualenv'
 
 Plugin 'vim-scripts/pydoc.vim'
-
-" jinja support
-Plugin 'mitsuhiko/vim-jinja.git'
 
 " Clojure support
 Plugin 'guns/vim-clojure-static'
@@ -194,6 +185,9 @@ map <leader>4 :set tabstop=4 shiftwidth=4<cr>
 " Toggle line number
 map <Leader>i <esc>:set invnumber<cr>
 
+" CWD to select file dir
+nmap <Leader>cd :lcd %:p:h<cr>
+
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -224,13 +218,6 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-nmap <Leader>a <Plug>(EasyAlign)
-
-nmap <Leader>cd :lcd %:p:h<cr>
 " ===== SYNTASTIC
 "mark syntax errors with :signs
 let g:syntastic_enable_signs=1
@@ -247,7 +234,6 @@ let g:syntastic_python_checkers = ['python', 'pylint']
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
-" let g:airline_section_b = '%{strftime("%c")}'
 set noshowmode
 " Support for github flavored markdown
 " via https://github.com/jtratner/vim-flavored-markdown
@@ -269,39 +255,8 @@ autocmd BufNewFile,BufRead *.json setlocal softtabstop=2
 
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
-" window resize
-func s:CustomResize(offset, vertical)
-    let curwindow = winnr()
-
-    " if bottommost window, resize window just above, otherwise current window
-    exec 'wincmd '.(a:vertical ? 'h' : 'j')
-    if winnr() == curwindow
-        exec 'wincmd '.(a:vertical ? 'l' : 'k')
-    else
-        wincmd p
-    endif
-
-    let resize_command = (a:vertical ? 'vertical resize' : 'resize')
-    exec resize_command.printf(' %+d', a:offset)
-
-    " restore current window
-    exec curwindow.'wincmd w'
-endfunc
-
-func VerticalCustomResize(offset)
-    call s:CustomResize(a:offset, 1)
-endfun
-
-func HorizonCustomResize(offset)
-    call s:CustomResize(a:offset, 0)
-endfun
-
 call tinymode#EnterMap('winsize', '<C-W><C-j>', '<C-j>')
 call tinymode#EnterMap('winsize', '<C-W><C-k>', '<C-k>')
 call tinymode#EnterMap('winsize', '<C-W><C-h>', '<C-h>')
 call tinymode#EnterMap('winsize', '<C-W><C-l>', '<C-l>')
-call tinymode#Map('winsize', '<C-j>', ':call HorizonCustomResize(+2)')
-call tinymode#Map('winsize', '<C-k>', ':call HorizonCustomResize(-2)')
-call tinymode#Map('winsize', '<C-h>', ':call VerticalCustomResize(+5)')
-call tinymode#Map('winsize', '<C-l>', ':call VerticalCustomResize(-5)')
 call tinymode#ModeMsg("winsize", "window resizing with C-hjkl")
