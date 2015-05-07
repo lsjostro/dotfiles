@@ -51,19 +51,11 @@ Plugin 'bronson/vim-trailing-whitespace'
 " coffee support
 Plugin 'kchmck/vim-coffee-script'
 
-" tinymode (resize windows ^W+^jkhl)
-Plugin 'vim-scripts/tinymode.vim'
-
 " python virtualenv support
 Plugin 'jmcantrell/vim-virtualenv'
 
-Plugin 'vim-scripts/pydoc.vim'
-
 " Clojure support
 Plugin 'guns/vim-clojure-static'
-
-" Vim navigation in tmux
-" Plugin 'christoomey/vim-tmux-navigator'
 
 " END OF VUNDLE PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -158,7 +150,7 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <leader>q :bd<cr>
 map <leader>w :w<cr>
-map <leader>y :w !pbcopy<cr>
+map <leader>y :w !pbcopy<cr><cr>
 map <leader>ve :tabe ~/Code/dotfiles/vimrc<cr>
 map <leader>vc :tabe ~/.cloudmonkey/config<cr>
 map <leader>vt :tabe ~/.tmux.conf<cr>
@@ -194,6 +186,11 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" Smart win resize
+map <C-W><C-j> <C-W>3+
+map <C-W><C-k> <C-W>3-
+map <C-W><C-h> <C-W>10<
+map <C-W><C-l> <C-W>10>
 
 " Color theme (drawing from altercation/vim-colors-solarized Bundle)
 syntax enable
@@ -243,20 +240,7 @@ augroup markdown
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
 
-" Use 2-space indent for html,css,scss,ruby,yaml
-autocmd FileType html,css,scss,jade,ruby,yaml setlocal shiftwidth=2
-autocmd FileType html,css,scss,jade,ruby,yaml setlocal tabstop=2
-autocmd FileType html,css,scss,jade,ruby,yaml setlocal softtabstop=2
-
-" Deal with json as a file extension (filetype javascript)
-autocmd BufNewFile,BufRead *.json setlocal shiftwidth=2
-autocmd BufNewFile,BufRead *.json setlocal tabstop=2
-autocmd BufNewFile,BufRead *.json setlocal softtabstop=2
-
-autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-
-call tinymode#EnterMap('winsize', '<C-W><C-j>', '<C-j>')
-call tinymode#EnterMap('winsize', '<C-W><C-k>', '<C-k>')
-call tinymode#EnterMap('winsize', '<C-W><C-h>', '<C-h>')
-call tinymode#EnterMap('winsize', '<C-W><C-l>', '<C-l>')
-call tinymode#ModeMsg("winsize", "window resizing with C-hjkl")
+" Use 2-space indent for this filetypes
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal tabstop=2
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal softtabstop=2
