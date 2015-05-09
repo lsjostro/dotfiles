@@ -146,9 +146,14 @@ set sidescrolloff=15
 set sidescroll=1
 set shortmess=atI
 
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
-nnoremap <leader>q :bd<cr>
+map <leader>q :bd<cr>
 map <leader>w :w<cr>
 map <leader>y :w !pbcopy<cr><cr>
 map <leader>ve :tabe ~/Code/dotfiles/vimrc<cr>
@@ -198,6 +203,11 @@ set background=dark
 colorscheme solarized
 color solarized
 
+" Use 2-space indent for this filetypes
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal tabstop=2
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal softtabstop=2
+
 " For MacVim
 if has("gui_running")
     set guifont=Sauce\ Code\ Powerline:h16
@@ -208,12 +218,6 @@ if has("gui_running")
     set t_Co=256
     set guitablabel=%M\ %t
 endif
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
 
 " ===== SYNTASTIC
 "mark syntax errors with :signs
@@ -239,8 +243,3 @@ augroup markdown
     au!
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
-
-" Use 2-space indent for this filetypes
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal tabstop=2
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal softtabstop=2
