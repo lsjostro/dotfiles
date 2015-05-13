@@ -122,8 +122,11 @@ filetype indent on
 " Display tabs and trailing spaces visually
 " set list listchars=tab:\ \ ,trail:Ã‚Â·
 
-set wrap       "Wrap lines
-set linebreak  "Wrap lines at convenient points
+set nowrap       "NoWrap lines
+" set linebreak  "Wrap lines at convenient points
+set tw=79
+set colorcolumn=80
+set fo-=t
 
 " ================ Completion =======================
 set wildmode=list:longest
@@ -153,6 +156,8 @@ set ffs=unix,dos,mac
 
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
 map <leader>q :bd<cr>
 map <leader>w :w<cr>
 map <leader>y :w !pbcopy<cr><cr>
