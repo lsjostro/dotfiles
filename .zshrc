@@ -191,5 +191,3 @@ command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 # brew install zsh-syntax-highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
