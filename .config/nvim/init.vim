@@ -1,79 +1,40 @@
-" ========================================
-" Vim plugin configuration
-" ========================================
-" Install:
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-"
-" Filetype off is required by vundle
-filetype off
+call plug#begin('~/.vim/plugged')
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle (required)
-Plugin 'gmarik/Vundle.vim'
-
-"""""""""""""""""""" MY VUNDLES """""""""""""""""""""""
-" Make Git pervasive in vim ( :Gblame + Glog + many more )
-Plugin 'tpope/vim-fugitive'
-
-" awesome syntax highlighting
-Plugin 'scrooloose/syntastic'
-
-" Command+T replacement (ctrl+P)
-Plugin 'kien/ctrlp.vim'
+" remove trailing whitespace
+Plug 'bronson/vim-trailing-whitespace'
 
 " comment lines out (gc in visual mode)
-Plugin 'tomtom/tcomment_vim.git'
-
-" Make it look amazing
-Plugin 'altercation/vim-colors-solarized'
+Plug 'tomtom/tcomment_vim'
 
 " Pimped out bar at the bottom of current buffer
-Plugin 'bling/vim-airline.git'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-" Search everything in the current dir via :Ack
-Plugin 'mileszs/ack.vim'
+" Golang
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode'
 
-" Enable Markdown Preview + GitHub flavored markdown
-Plugin 'jtratner/vim-flavored-markdown.git'
-Plugin 'nelstrom/vim-markdown-preview'
+" Autocomplete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 
-" Make Ctrl+w o, function with toggle niceness
-Plugin 'vim-scripts/ZoomWin'
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-" pep8 indentation
-Plugin 'hynek/vim-python-pep8-indent'
+" Terraform
+Plug 'hashivim/vim-terraform'
+Plug 'b4b4r07/vim-hcl'
 
-" highlight trailing white
-Plugin 'bronson/vim-trailing-whitespace'
+" Jsonnet filetype plugin
+Plug 'google/vim-jsonnet'
 
-" coffee support
-Plugin 'kchmck/vim-coffee-script'
-
-" python virtualenv support
-Plugin 'jmcantrell/vim-virtualenv'
-
-" Clojure support
-Plugin 'guns/vim-clojure-static'
-
-" END OF VUNDLE PLUGINS
-""""""""""""""""""""""""""""""""""""""""""""""""
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" Initialize plugin system
+call plug#end()
 filetype plugin indent on     " required!
-"
-" Brief help
-" :PluginList          - list configured bundles
-" :PluginInstall(!)    - install(update) bundles
-" :PluginSearch(!) foo - search(or refresh cache first) for foo
-" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
 
 " ================ General Config ====================
 set backspace=indent,eol,start  "Allow backspace in insert mode
@@ -95,6 +56,10 @@ set hidden
 
 "turn on syntax highlighting
 syntax on
+
+if has("nvim")
+  set termguicolors
+endif
 
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
@@ -154,6 +119,8 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+imap § <Esc>
+
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 vnoremap < <gv  " better indentation
@@ -161,8 +128,7 @@ vnoremap > >gv  " better indentation
 map <leader>q :bd<cr>
 map <leader>w :w<cr>
 map <leader>y :w !pbcopy<cr><cr>
-map <leader>ve :tabe ~/Code/dotfiles/vimrc<cr>
-map <leader>vc :tabe ~/.cloudmonkey/config<cr>
+map <leader>ve :tabe ~/.config/nvim/init.vim<cr>
 map <leader>vt :tabe ~/.tmux.conf<cr>
 " File explorer
 map <leader>e :Ex<cr>
@@ -177,6 +143,17 @@ map <leader>gs :Git status<cr>
 map <leader>gf :Git fetch<cr>
 map <leader>gc :Gcommit<cr>
 map <leader>pr :!stash pr create<space>
+
+" FZF
+map <silent> <space> :Buffers<cr>
+map <silent> ,` :Buffers<cr>
+map <silent> ,; :Commits<cr>
+map <silent> ,e :GitFiles<cr>
+map <silent> ,d :Files<cr>
+map <silent> ,f :History<cr>
+map <silent> ,g :BLines<cr>
+map <silent> ,/ :Ag<cr>
+map <silent> ,m :Marks<cr>
 
 " Paste mode
 map <leader>pp :setlocal paste!<cr>
@@ -203,10 +180,13 @@ map <C-W><C-h> <C-W>10<
 map <C-W><C-l> <C-W>10>
 
 " Color theme (drawing from altercation/vim-colors-solarized Bundle)
+let g:neosolarized_italic=1
 syntax enable
 set background=dark
-colorscheme solarized
-color solarized
+colorscheme NeoSolarized
+highlight Comment cterm=italic
+" color solarized
+" let g:solarized_termcolors=256
 
 " Use 2-space indent for this filetypes
 autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
@@ -236,6 +216,36 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 "Python
 let g:syntastic_python_checkers = ['python', 'pylint']
 
+" enable autocomplete
+let g:deoplete#enable_at_startup = 1
+
+" Git
+let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_sign_added = '◊'
+let g:gitgutter_sign_modified = '▲'
+let g:gitgutter_sign_removed = '◊'
+let g:gitgutter_sign_removed_first_line = '◊'
+let g:gitgutter_sign_modified_removed = '◊'
+" Golang
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+" let g:go_auto_sameids = 1
+let g:go_auto_type_info = 0
+" let g:go_def_mapping_enabled = 0
+let g:go_info_mode = 'guru'
+"let g:go_updatetime = 20
+"
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
+autocmd FileType go nmap <S-k> <Plug>(go-doc)
+autocmd FileType go nmap <Leader>d <Plug>(go-doc-vertical)
+
 " Airline stuff
 set laststatus=2
 let g:airline_powerline_fonts = 1
@@ -248,3 +258,4 @@ augroup markdown
     au!
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
+

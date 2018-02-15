@@ -1,0 +1,13 @@
+*~
+*.a
+*.class
+/.idea
+*.iml
+*.ipr
+*.iwr
+*.iws
+*.la
+*.o
+*.pyc
+*.so
+*.swp
