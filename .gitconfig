@@ -16,9 +16,6 @@ default = tracking
 [branch "master"]
 rebase = true
 
-[init]
-templatedir = ~/.git_template
-
 [alias]
 b = branch -va
 f = fetch
