@@ -27,6 +27,7 @@ brew "kail"
 # Dev tools
 brew "git"
 brew "git-crypt"
+brew "diff-so-fancy"
 brew "go"
 brew "python3"
 brew "jsonnet"
