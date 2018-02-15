@@ -1,4 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/Users/lsjostrom/Code/b9d-infra/terraform/infra/battlefield/admin1-euw1-aws.b9d.io/manifests'
-let g:netrw_dirhist_2='/Users/lsjostrom/Code/dollhouse/3rdparty/jvm/com/twitter'

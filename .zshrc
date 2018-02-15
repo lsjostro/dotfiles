@@ -22,6 +22,7 @@ alias ll='ls -al'
 alias vim="/usr/local/bin/nvim"
 alias vi="/usr/local/bin/nvim"
 alias ag='ag --pager less'
+alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
 
 # =============
 #    HISTORY
@@ -190,3 +191,5 @@ command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 # brew install zsh-syntax-highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
