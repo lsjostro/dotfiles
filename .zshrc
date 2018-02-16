@@ -169,12 +169,12 @@ bindkey '^g' _jump
 
 
 function e {
-  tmux select-window -t0
+  tmux select-window -t1
   nvr --remote "$@"
 }
 
 function ev {
-  tmux select-window -t0
+  tmux select-window -t1
   nvr --remote -O "$@"
 }
 
