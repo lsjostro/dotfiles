@@ -54,8 +54,12 @@ setopt share_history
 autoload -U colors && colors
 setopt promptsubst
 
-local ret_status="%(?:%{$fg_bold[green]%}$:%{$fg_bold[red]%}$)"
-PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
+function short_pwd {
+  echo $PWD | sed "s:${HOME}:~:" | sed "s:/\(.\)[^/]*:/\1:g" | sed "s:/[^/]*$:/$(basename $PWD):"
+}
+
+local ret_status="%(?:%{$fg_bold[yellow]%}$:%{$fg_bold[red]%}$)"
+PROMPT='%{$fg[magenta]%}$(short_pwd)%{$reset_color%} $(git_prompt_info)%{$reset_color%}${ret_status}%{$reset_color%} '
 RPROMPT='%{$fg[yellow]%}$(date +%r)%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
