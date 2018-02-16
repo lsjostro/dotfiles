@@ -8,7 +8,7 @@ name = Lars Sjöström
 email = lars@radicore.se
 
 [column]
-	ui = auto
+ui = auto
 
 [push]
 default = tracking
@@ -32,7 +32,7 @@ wc = whatchanged --abbrev-commit --date=relative --date-order --pretty='format:%
 
 ll = log --graph --date=relative --topo-order --pretty='format:%C(yellow)%h%C(yellow)%d %Cblue%ar %Cgreenby %an%Creset -- %s'
 lla = log --graph --date=relative --topo-order --pretty='format:%Cgreen%h %Cblue%ar %Credby %an%Creset -- %s' --all
-gl = log --decorate --graph --abbrev-commit --color --color-words --topo-order --pretty=medium 
+gl = log --decorate --graph --abbrev-commit --color --color-words --topo-order --pretty=medium
 gla = log --decorate --graph --abbrev-commit --color --color-words --topo-order --pretty=medium --all
 sl = log --decorate --graph --abbrev-commit --color --topo-order --pretty=oneline
 sla = log --decorate --graph --abbrev-commit --color --topo-order --pretty=oneline --all
@@ -92,8 +92,8 @@ remote = green
 [color "diff"]
 meta = blue bold
 frag = magenta bold
-old = red 
-new = green 
+old = red
+new = green
 
 [color "status"]
 added = blue bold
@@ -126,10 +126,10 @@ main-revgraph = yellow default normal
 pp-commit = magenta default bold
 diff-chunk = magenta default bold
 
-# vim: ft=conf:
 [diff-so-fancy]
 	useUnicodeRuler = true
 	stripLeadingSymbols = true
 [hub]
 	protocol = git
-
+#
+# vim: ft=conf:
