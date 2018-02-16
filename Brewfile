@@ -9,6 +9,9 @@ tap "boz/repo"
 brew "zsh"
 brew "tmux"
 brew "neovim"
+brew "fasd"
+brew "fzf"
+brew "zsh-syntax-highlighting"
 
 # Cloud
 brew "awscli"
@@ -43,11 +46,8 @@ brew "colordiff"
 brew "gnu-sed"
 brew "gnu-tar"
 brew "tree"
-brew "fasd"
-brew "fzf"
 brew "direnv"
 brew "gnupg"
-brew "zsh-syntax-highlighting"
 
 # System/ Network tools
 brew "wget"
