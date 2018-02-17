@@ -11,7 +11,7 @@ eval $(gdircolors ~/.dircolors/dircolors.256dark)
 command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -f terminal16m -O style=solarizeddark %s"
 export LESS=" -R "
 export GOPATH=$HOME
-export PATH=$PATH:$HOME/bin:/usr/local/sbin
+export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/sbin
 
 # =============
 #    ALIAS
