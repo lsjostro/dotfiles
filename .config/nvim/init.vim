@@ -37,6 +37,7 @@ call plug#end()
 filetype plugin indent on     " required!
 
 " ================ General Config ====================
+language en_US
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
