@@ -2,9 +2,9 @@ tap "homebrew/core"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "caskroom/cask"
+tap "caskroom/fonts"
 tap "caskroom/versions"
 tap "boz/repo"
-tap "caskroom/fonts"
 
 # Essentials
 brew "zsh"
