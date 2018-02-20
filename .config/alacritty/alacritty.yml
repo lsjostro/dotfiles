@@ -43,19 +43,22 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Source Code Pro for Powerline
+    family: Source Code Pro
+    # family: Menlo
     # Style can be specified to pick a specific face.
     style: Medium
 
   # The bold font face
   bold:
-    family: Source Code Pro for Powerline
+    family: Source Code Pro
+    # family: Menlo
     # Style can be specified to pick a specific face.
     style: Bold
 
   # The italic font face
   italic:
-    family: Source Code Pro for Powerline
+    # family: Menlo
+    family: Source Code Pro
     # Style can be specified to pick a specific face.
     style: Italic
 

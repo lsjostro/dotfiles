@@ -4,6 +4,7 @@ tap "homebrew/services"
 tap "caskroom/cask"
 tap "caskroom/versions"
 tap "boz/repo"
+tap "caskroom/fonts"
 
 # Essentials
 brew "zsh"
@@ -12,6 +13,7 @@ brew "tmux"
 brew "neovim"
 brew "fasd"
 brew "fzf"
+cask "font-source-code-pro"
 
 # Cloud
 brew "awscli"
