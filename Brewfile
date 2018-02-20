@@ -7,11 +7,11 @@ tap "boz/repo"
 
 # Essentials
 brew "zsh"
+brew "zplug"
 brew "tmux"
 brew "neovim"
 brew "fasd"
 brew "fzf"
-brew "zsh-syntax-highlighting"
 
 # Cloud
 brew "awscli"

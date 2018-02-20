@@ -4,25 +4,64 @@
 export TERM=xterm-256color
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
-eval $(gdircolors ~/.dircolors/dircolors.256dark)
-
-#
-# sudo pip install pygments-style-solarized
 command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -f terminal16m -O style=solarizeddark %s"
 export LESS=" -R "
 export GOPATH=$HOME
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/sbin
 
+export FZF_TMUX=1
+export FZF_COMPLETION_TRIGGER=";"
+
 # =============
 #    ALIAS
 # =============
 
+eval $(gdircolors ~/.dircolors/dircolors.256dark)
 alias ls='gls --color=auto'
 alias ll='ls -al'
-alias vim="/usr/local/bin/nvim"
-alias vi="/usr/local/bin/nvim"
+alias vim="nvim"
+alias vi="nvim"
 alias ag='ag --pager less'
 alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
+
+function e {
+  tmux select-window -t1
+  nvr --remote "$@"
+}
+function ev {
+  tmux select-window -t1
+  nvr --remote -O "$@"
+}
+
+# =============
+#    Zplug
+# =============
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
+
+# Check if install and load
+if ! zplug check; then
+    zplug install
+fi
+zplug load
+
+# ==================
+#   AUTOCOMPLETION
+# ==================
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Kubernetes
+command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
+command -v kops >/dev/null 2>&1 && source <(kops completion zsh)
+command -v helm >/dev/null 2>&1 && source <(helm completion zsh)
+# Google cloud SDK
+command -v gcloud >/dev/null 2>&1 && source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+# Dir env (brew install direnv)
+command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 # =============
 #    HISTORY
@@ -95,51 +134,7 @@ function parse_git_dirty() {
   fi
 }
 
-# ===================
-#    AUTOCOMPLETION
-# ===================
-# enable completion
-autoload -Uz compinit
-compinit
-
-zmodload -i zsh/complist
-
-WORDCHARS=''
-
-unsetopt menu_complete   # do not autoselect the first completion entry
-unsetopt flowcontrol
-setopt auto_menu         # show completion menu on successive tab press
-setopt complete_in_word
-setopt always_to_end
-
-# autocompletion with an arrow-key driven interface
-zstyle ':completion:*:*:*:*:*' menu select
-
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-
-# Don't complete uninteresting users
-zstyle ':completion:*:*:*:users' ignored-patterns \
-        adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
-        clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
-        gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
-        ldap lp mail mailman mailnull man messagebus  mldonkey mysql nagios \
-        named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
-        operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
-        rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
-        usbmux uucp vcsa wwwrun xfs '_*'
-
-zstyle '*' single-ignored show
-
-# Automatically update PATH entries
-zstyle ':completion:*' rehash true
-
-# Keep directories and files separated
-zstyle ':completion:*' list-dirs-first true
-
+#
 # ===================
 #    KEY BINDINGS
 # ===================
@@ -150,7 +145,9 @@ bindkey -e
 # may begin with ^ to anchor the search to the beginning of the line.
 bindkey '^r' history-incremental-search-backward
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Substring search plugin
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
 
 cd_func () {
   local dir
@@ -171,29 +168,7 @@ _jump() {
 zle -N _jump
 bindkey '^g' _jump
 
-
-function e {
-  tmux select-window -t1
-  nvr --remote "$@"
-}
-
-function ev {
-  tmux select-window -t1
-  nvr --remote -O "$@"
-}
-
-# Kubernetes
-command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
-command -v kops >/dev/null 2>&1 && source <(kops completion zsh)
-command -v helm >/dev/null 2>&1 && source <(helm completion zsh)
-
-# Google cloud SDK
-command -v gcloud >/dev/null 2>&1 && source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-
-# Dir env (brew install direnv)
-command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
-
-# brew install zsh-syntax-highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-[ -r ~/.zsh_private ] && source ~/.zsh_private
+# ===================
+#    Load private
+# ===================
+[ -f ~/.zsh_private ] && source ~/.zsh_private
