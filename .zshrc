@@ -171,4 +171,4 @@ bindkey '^g' _jump
 # ===================
 #    Load private
 # ===================
-[ -f ~/.zsh_private ] && source ~/.zsh_private
+[ -f ~/.zsh_private ] && source ~/.zsh_private || return 0
