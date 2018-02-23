@@ -53,7 +53,6 @@ zplug load
 # ==================
 #   AUTOCOMPLETION
 # ==================
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Kubernetes
 command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
 command -v kops >/dev/null 2>&1 && source <(kops completion zsh)
@@ -168,6 +167,7 @@ _jump() {
 zle -N _jump
 bindkey '^g' _jump
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # ===================
 #    Load private
 # ===================
