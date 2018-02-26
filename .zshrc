@@ -2,6 +2,7 @@
 #    EXPORT
 # =============
 export TERM=xterm-256color
+export DISPLAY=:0
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
 command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -f terminal16m -O style=solarizeddark %s"

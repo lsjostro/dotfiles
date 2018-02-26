@@ -1,0 +1,23 @@
+#!/bin/bash
+set -e
+if [[ "$SSH_ASKPASS" == $0 ]]; then
+  exec lpass show --field Passphrase $_KEYID
+fi
+
+if [[ -z "$1" ]]; then
+  _key=$(lpass ls --color=never ssh | cut -d ' ' -f1 | fzf -1 -0)
+  exec $0 $_key
+fi
+
+_tmp=$(mktemp -d)
+cd $_tmp
+mkdir -p $(dirname $1)
+mkfifo -m 600 $1
+
+function cleanup {
+  rm -rf $_tmp
+}
+trap cleanup EXIT
+
+lpass show --field='Private Key' $1 > $1 &
+echo | SSH_ASKPASS=$0 _KEYID=$1 ssh-add $1
