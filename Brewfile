@@ -51,6 +51,7 @@ brew "gnu-tar"
 brew "tree"
 brew "direnv"
 brew "gnupg"
+brew "lastpass-cli"
 
 # System/ Network tools
 brew "wget"
