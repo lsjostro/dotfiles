@@ -20,4 +20,4 @@ function cleanup {
 trap cleanup EXIT
 
 lpass show --field='Private Key' $1 > $1 &
-echo | SSH_ASKPASS=$0 _KEYID=$1 ssh-add $1
+SSH_ASKPASS=$0 _KEYID=$1 ssh-add $1 2>&1 > /dev/null < /dev/null
