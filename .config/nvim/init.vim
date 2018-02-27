@@ -10,6 +10,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Markdown
+Plug 'tpope/vim-markdown'
+Plug 'jtratner/vim-flavored-markdown'
+
+
 " remove trailing whitespace
 Plug 'bronson/vim-trailing-whitespace'
 

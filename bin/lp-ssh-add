@@ -5,6 +5,7 @@ if [[ "$SSH_ASKPASS" == $0 ]]; then
 fi
 
 if [[ -z "$1" ]]; then
+  # "ssh" below is by convention in lastpass. Change to whatever folder you are using.
   _key=$(lpass ls --color=never ssh | cut -d ' ' -f1 | fzf -1 -0)
   exec $0 $_key
 fi
