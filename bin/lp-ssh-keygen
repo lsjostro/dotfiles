@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+function cleanup {
+  rm -rf $_tmp
+}
+trap cleanup EXIT
+
+_tmp=$(mktemp -d)
+cd $_tmp
+mkdir -p $(dirname $1)
+mkfifo -m 600 $1 && mkfifo -m 600 $1.pub
+
+PASS=$(openssl rand -base64 48)
+yes | ssh-keygen -t rsa -P $PASS -f $1 2>&1 > /dev/null &
+printf "Name: $1\nNoteType: SSH Key\nFormat: RSA\nPassphrase:$PASS\nPrivate Key:$(cat $1)\nPublic Key:$(cat $1.pub)" | \
+  lpass add $1 --sync=now --non-interactive --note-type=ssh-key
