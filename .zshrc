@@ -24,6 +24,7 @@ alias vim="nvim"
 alias vi="nvim"
 alias ag='ag --pager less'
 alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
+alias lp-ssh-pubkey='lpass show --field="Public Key" --clip'
 
 function e {
   tmux select-window -t1
