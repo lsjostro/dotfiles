@@ -2,15 +2,22 @@
 set -e
 set -o pipefail
 
+function _usage {
+  echo "Usage: $0 ssh/<keyname>"
+  exit 1
+}
+
 function _dupkey {
   echo "Key already exist"
-  exit 1
+  exit 2
 }
 
 function cleanup {
   rm -rf $_tmp
 }
 trap cleanup EXIT
+
+[ -z "$1" ] && _usage
 
 _tmp=$(mktemp -d)
 cd $_tmp
