@@ -2,6 +2,11 @@
 set -e
 set -o pipefail
 
+function _dupkey {
+  echo "Key already exist"
+  exit 1
+}
+
 function cleanup {
   rm -rf $_tmp
 }
@@ -11,6 +16,9 @@ _tmp=$(mktemp -d)
 cd $_tmp
 mkdir -p $(dirname $1)
 mkfifo -m 600 $1 && mkfifo -m 600 $1.pub
+
+DUP=$(lpass ls $1)
+[ -z "$DUP" ] || _dupkey
 
 PASS=$(openssl rand -base64 48)
 yes | ssh-keygen -t rsa -P $PASS -f $1 2>&1 > /dev/null &
