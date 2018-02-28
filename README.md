@@ -5,7 +5,7 @@
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Init git repo
-git clone git@github.com:lsjostro/dotfiles.git $HOME/.dot_git --bare && \
+git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
   git --work-tree $HOME --git-dir $HOME/.dot_git checkout --force && \
   mkdir -p $HOME/.dot_git/info && echo '*' > $HOME/.dot_git/info/exclude
 
