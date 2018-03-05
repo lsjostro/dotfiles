@@ -12,6 +12,7 @@ export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin
 
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
+export LPASS_AGENT_TIMEOUT=60
 
 # =============
 #    ALIAS
