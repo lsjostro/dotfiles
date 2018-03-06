@@ -52,6 +52,7 @@ brew "tree"
 brew "direnv"
 brew "gnupg"
 brew "lastpass-cli"
+cask "keybase"
 
 # System/ Network tools
 brew "wget"
