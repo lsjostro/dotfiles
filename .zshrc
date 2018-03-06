@@ -53,6 +53,13 @@ if ! zplug check; then
 fi
 zplug load
 
+# ==========================
+#    Zsh syntax highlighter
+# ==========================
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+typeset -A ZSH_HIGHLIGHT_STYLES
+# ZSH_HIGHLIGHT_STYLES[alias]='fg=163'
+
 # ==================
 #   AUTOCOMPLETION
 # ==================
