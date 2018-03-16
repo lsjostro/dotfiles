@@ -138,8 +138,8 @@ vnoremap > >gv  " better indentation
 map <leader>q :bd<cr>
 map <leader>w :w<cr>
 map <leader>y :w !pbcopy<cr><cr>
-map <leader>ve :tabe ~/.config/nvim/init.vim<cr>
-map <leader>vt :tabe ~/.tmux.conf<cr>
+map <leader>ve :e ~/.config/nvim/init.vim<cr>
+
 " File explorer
 map <leader>e :Ex<cr>
 
