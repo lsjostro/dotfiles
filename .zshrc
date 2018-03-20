@@ -1,7 +1,7 @@
 # =============
 #    EXPORT
 # =============
-export TERM=xterm-256color
+export TERM=xterm-256color-italic
 export DISPLAY=:0
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim

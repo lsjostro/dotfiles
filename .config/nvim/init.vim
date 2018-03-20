@@ -190,11 +190,12 @@ map <C-W><C-h> <C-W>10<
 map <C-W><C-l> <C-W>10>
 
 " Color theme (drawing from altercation/vim-colors-solarized Bundle)
-let g:neosolarized_italic=1
 syntax enable
 set background=dark
 colorscheme NeoSolarized
-highlight Comment cterm=italic
+let g:neosolarized_italic=1
+highlight Comment gui=italic cterm=italic
+highlight htmlArg gui=italic cterm=italic
 " color solarized
 " let g:solarized_termcolors=256
 
@@ -231,11 +232,11 @@ let g:deoplete#enable_at_startup = 1
 
 " Git
 let g:gitgutter_override_sign_column_highlight = 0
-let g:gitgutter_sign_added = '◊'
-let g:gitgutter_sign_modified = '▲'
-let g:gitgutter_sign_removed = '◊'
-let g:gitgutter_sign_removed_first_line = '◊'
-let g:gitgutter_sign_modified_removed = '◊'
+let g:gitgutter_sign_added = ''
+let g:gitgutter_sign_modified = ''
+let g:gitgutter_sign_removed = ''
+let g:gitgutter_sign_removed_first_line = ''
+let g:gitgutter_sign_modified_removed = ''
 " Golang
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1

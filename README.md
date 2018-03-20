@@ -11,6 +11,7 @@ git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
 
 # Install software and plugins
 brew bundle
+tic ~/etc/xterm-256color-italic.terminfo
 pip3 install neovim neovim-remote Pygments pygments-style-solarized
 nvim -c ":PlugInstall"
 nvim -c ":GoInstallBinaries"
