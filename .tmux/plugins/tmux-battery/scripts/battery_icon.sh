@@ -15,13 +15,13 @@ medium_charge_icon=""
 low_charge_icon=""
 
 charged_default="❇ "
-charged_default_osx="🔋 "
-charging_default="⚡️ "
-attached_default="⚠️ "
-full_charge_icon_default="🌕 "
-high_charge_icon_default="🌖 "
-medium_charge_icon_default="🌗 "
-low_charge_icon_default="🌘 "
+charged_default_osx=" "
+charging_default=" ⚡️"
+attached_default=" "
+full_charge_icon_default=" "
+high_charge_icon_default="i "
+medium_charge_icon_default=" "
+low_charge_icon_default=" "
 
 charged_default() {
 	if is_osx; then
@@ -57,7 +57,7 @@ print_icon() {
             printf "$high_charge_icon"
         elif [ $percentage -le 50 -a $percentage -ge 16 ];then
             printf "$medium_charge_icon"
-        elif [ "$percentage" == "" ];then  
+        elif [ "$percentage" == "" ];then
             printf "$full_charge_icon_default"  # assume it's a desktop
         else
             printf "$low_charge_icon"
