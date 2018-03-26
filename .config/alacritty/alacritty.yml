@@ -359,3 +359,5 @@ key_bindings:
   - { key: F,        mods: Alt,     chars: "\x1bf"                       }
   - { key: B,        mods: Alt,     chars: "\x1bb"                       }
   - { key: D,        mods: Alt,     chars: "\x1bd"                       }
+  - { key: L,        mods: Alt,     chars: "\x1bf"                       }
+  - { key: H,        mods: Alt,     chars: "\x1bb"                       }
