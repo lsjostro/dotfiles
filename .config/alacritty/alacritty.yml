@@ -71,8 +71,8 @@ font:
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
-    x: -0.25
-    y: 7
+    x: -0.75
+    y: 5.0
   #   x: 0.0
   #   y: 0.0
 
@@ -81,7 +81,7 @@ font:
   # the right, increase the y offset to move the glyph upward.
   glyph_offset:
     x: 0.0
-    y: 0.0
+    y: 4.5
 
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
@@ -217,10 +217,6 @@ shell:
   program: /usr/local/bin/zsh
   args:
     - --login
-    - -c
-    - /usr/local/bin/tmux
-    - attach
-    - -t0
 #   args:
 #     - --login
 
