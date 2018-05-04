@@ -10,10 +10,12 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Tandem (share nvim session)
+Plug 'typeintandem/nvim'
+
 " Markdown
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
-
 
 " remove trailing whitespace
 Plug 'bronson/vim-trailing-whitespace'
@@ -63,6 +65,10 @@ set invnumber
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right
 set hidden
+
+" Nvim python runtime environment
+let g:python3_host_prog = "/usr/local/bin/python3"
+let g:python_host_prog = "/usr/local/bin/python2"
 
 "turn on syntax highlighting
 syntax on
