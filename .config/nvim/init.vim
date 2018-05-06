@@ -10,9 +10,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" Tandem (share nvim session)
-Plug 'typeintandem/nvim'
-
 " Markdown
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
