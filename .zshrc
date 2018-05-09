@@ -1,7 +1,7 @@
 # =============
 #    EXPORT
 # =============
-export TERM=xterm-256color-italic
+export TERM=xterm-256color
 export DISPLAY=:0
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
@@ -18,8 +18,8 @@ export LPASS_AGENT_TIMEOUT=60
 #    ALIAS
 # =============
 
-eval $(gdircolors ~/.dircolors/dircolors.256dark)
-alias ls='gls --color=auto'
+eval $(dircolors ~/.dircolors/dircolors.256dark)
+alias ls='ls --color=auto'
 alias ll='ls -al'
 alias vim="nvim"
 alias vi="nvim"
@@ -41,7 +41,7 @@ function ev {
 # =============
 #    Zplug
 # =============
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=$HOME/.zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -70,7 +70,7 @@ command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
 command -v kops >/dev/null 2>&1 && source <(kops completion zsh)
 command -v helm >/dev/null 2>&1 && source <(helm completion zsh)
 # Google cloud SDK
-command -v gcloud >/dev/null 2>&1 && source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
 # Dir env (brew install direnv)
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 

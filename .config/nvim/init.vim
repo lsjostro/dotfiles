@@ -45,7 +45,7 @@ call plug#end()
 filetype plugin indent on     " required!
 
 " ================ General Config ====================
-language en_US
+"language en_US
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
@@ -64,8 +64,8 @@ set invnumber
 set hidden
 
 " Nvim python runtime environment
-let g:python3_host_prog = "/usr/local/bin/python3"
-let g:python_host_prog = "/usr/local/bin/python2"
+" let g:python3_host_prog = "/usr/local/bin/python3"
+" let g:python_host_prog = "/usr/local/bin/python2"
 
 "turn on syntax highlighting
 syntax on
