@@ -48,6 +48,7 @@ zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
+zplug "arunvelsriram/kube-fzf", use:kube-fzf.sh
 
 # Check if install and load
 if ! zplug check; then
