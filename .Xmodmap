@@ -2,11 +2,11 @@ keysym semicolon = semicolon colon odiaeresis Odiaeresis
 keysym apostrophe = apostrophe quotedbl adiaeresis Adiaeresis
 keysym bracketleft = bracketleft braceleft aring Aring
 
+keycode 112 = Left
+keycode 117 = Right
+
 remove Lock = Caps_Lock
-!remove Control = Control_L
-!!keysym Control_L = Caps_Lock
 keysym Caps_Lock = Control_L
-!!add Lock = Caps_Lock
 add Control = Control_L
 
 

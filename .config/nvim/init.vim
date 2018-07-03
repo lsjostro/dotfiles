@@ -5,6 +5,7 @@ Plug 'roxma/nvim-completion-manager'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -13,6 +14,12 @@ Plug 'airblade/vim-gitgutter'
 " Markdown
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
+
+" Toml
+Plug 'cespare/vim-toml'
+
+" Ripgrep :Rg
+Plug 'jremmen/vim-ripgrep'
 
 " remove trailing whitespace
 Plug 'bronson/vim-trailing-whitespace'
@@ -245,6 +252,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
