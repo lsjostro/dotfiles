@@ -258,6 +258,7 @@ let g:go_info_mode = 'guru'
 "let g:go_updatetime = 20
 "
 autocmd FileType go nmap <Leader>i <Plug>(go-info)
+autocmd FileType go nmap <Leader>r :GoIfErr<cr>
 autocmd FileType go nmap <S-k> <Plug>(go-doc)
 autocmd FileType go nmap <Leader>d <Plug>(go-doc-vertical)
 

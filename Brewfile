@@ -14,6 +14,7 @@ brew "neovim"
 brew "fasd"
 brew "fzf"
 cask "font-source-code-pro"
+cask "karabiner"
 
 # Cloud
 brew "awscli"
