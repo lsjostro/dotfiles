@@ -1,6 +1,11 @@
 call plug#begin('~/.vim/plugged')
 " Autocomplete
-Plug 'roxma/nvim-completion-manager'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-go'
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -237,8 +242,9 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 "Python
 let g:syntastic_python_checkers = ['python', 'pylint']
 
-" enable autocomplete
-let g:deoplete#enable_at_startup = 1
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
 
 " Git
 let g:gitgutter_override_sign_column_highlight = 0
