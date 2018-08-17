@@ -33,6 +33,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go'
 Plug 'nsf/gocode'
 
+" Bazel
+Plug 'bazelbuild/vim-ft-bzl'
+
 " Rust
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'

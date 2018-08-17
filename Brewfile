@@ -64,3 +64,6 @@ brew "wget"
 brew "htop"
 brew "openvpn"
 brew "openconnect"
+
+# Other
+cask "signal"
