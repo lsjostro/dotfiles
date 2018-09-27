@@ -46,6 +46,7 @@ cask "java8"
 brew "node"
 brew "bazel"
 brew "ag"
+brew "ripgrep"
 brew "jq"
 
 # Gnu / terminal tools
