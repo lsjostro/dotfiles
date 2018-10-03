@@ -2,7 +2,6 @@ tap "homebrew/core"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "caskroom/cask"
-tap "caskroom/fonts"
 tap "caskroom/versions"
 tap "boz/repo"
 
@@ -47,6 +46,7 @@ brew "bazel"
 brew "ag"
 brew "ripgrep"
 brew "jq"
+cask "docker"
 
 # Gnu / terminal tools
 brew "coreutils"
