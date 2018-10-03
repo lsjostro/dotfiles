@@ -25,7 +25,6 @@ brew "vault"
 # Kubernetes tools
 brew "kubernetes-cli"
 brew "kubernetes-helm"
-brew "kops"
 brew "kail"
 
 # Dev tools
