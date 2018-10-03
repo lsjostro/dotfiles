@@ -65,4 +65,5 @@ brew "openvpn"
 brew "openconnect"
 
 # Other
+cask "spotify"
 cask "signal"
