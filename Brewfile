@@ -13,8 +13,7 @@ brew "tmux"
 brew "neovim"
 brew "fasd"
 brew "fzf"
-cask "font-source-code-pro"
-cask "karabiner"
+cask "karabiner-elements"
 
 # Cloud
 brew "awscli"
