@@ -211,6 +211,8 @@ colorscheme NeoSolarized
 let g:neosolarized_italic=1
 highlight Comment gui=italic cterm=italic
 highlight htmlArg gui=italic cterm=italic
+highlight String guifg=#2aa198 gui=italic
+
 " color solarized
 " let g:solarized_termcolors=256
 
@@ -275,10 +277,29 @@ autocmd FileType go nmap <S-k> <Plug>(go-doc)
 autocmd FileType go nmap <Leader>d <Plug>(go-doc-vertical)
 
 " Airline stuff
-set laststatus=2
+" set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 set noshowmode
+
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+
+nnoremap <S-h> :call ToggleHiddenAll()<CR>
 " Support for github flavored markdown
 " via https://github.com/jtratner/vim-flavored-markdown
 " with .md extensions
