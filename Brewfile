@@ -13,6 +13,7 @@ brew "neovim"
 brew "fasd"
 brew "fzf"
 cask "karabiner-elements"
+cask "alacritty"
 
 # Cloud
 brew "awscli"
