@@ -15,7 +15,3 @@ tic ~/etc/xterm-256color-italic.terminfo
 pip3 install neovim neovim-remote Pygments pygments-style-solarized
 nvim -c ":PlugInstall"
 nvim -c ":GoInstallBinaries"
-
-# Precompiled Alacritty binary
-curl -LO https://github.com/lsjostro/dotfiles/releases/download/v1.0/Alacritty.app.tar
-```
