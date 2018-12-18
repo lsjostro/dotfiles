@@ -20,4 +20,10 @@ git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
 pip3 install Pygments pygments-style-solarized
 nvim -c ":PlugInstall"
 nvim -c ":GoInstallBinaries"
+
+# enable user systemd units
+systemctl --user enable ssh-agent
+systemctl --user enable oidc-agent
+systemctl --user enable dunst
+systemctl --user enable redshift
 ```
