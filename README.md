@@ -6,7 +6,7 @@
 # prereqs
 pacman -S base-devel git wget dialog
 # AUR packages
-wget -qO-https://github.com/Jguer/yay/releases/download/v9.0.1/yay_9.0.1_x86_64.tar.gz | tar xvz && yay*/yay -S yay-bin 
+wget -qO- https://github.com/Jguer/yay/releases/download/v9.0.1/yay_9.0.1_x86_64.tar.gz | tar xvz && yay*/yay -S yay-bin 
 
 # Essentials
 yay -S xorg xorg-xinit xinit-xsession lightdm-gtk-greeter go openssh fasd direnv zsh neovim neovim-remote python-neovim tmux alacritty ttf-google-fonts-git fzf rofi redshift lastpass-cli dunst google-chrome-beta kubectl-bin diff-so-fancy xdg-utils google-cloud-sdk ripgrep i3lock
