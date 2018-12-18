@@ -207,6 +207,7 @@ colorscheme NeoSolarized
 let g:neosolarized_italic=1
 highlight Comment gui=italic cterm=italic
 highlight htmlArg gui=italic cterm=italic
+highlight String guifg=#2aa198 gui=italic
 " color solarized
 " let g:solarized_termcolors=256
 
