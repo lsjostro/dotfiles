@@ -49,6 +49,8 @@ Plug 'b4b4r07/vim-hcl'
 " Jsonnet filetype plugin
 Plug 'google/vim-jsonnet'
 
+Plug 'w0rp/ale'
+
 " Initialize plugin system
 call plug#end()
 filetype plugin indent on     " required!
@@ -176,6 +178,21 @@ map <leader>e :Ex<cr>
 " map <leader>gf :Git fetch<cr>
 " map <leader>gc :Gcommit<cr>
 " map <leader>pr :!stash pr create<space>
+
+"Ale
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = ''      "       ﱥ   ﬡ  樂
+let g:ale_sign_warning = ''
+" let g:ale_linters = {'go': ['gofmt']}
+" let g:ale_linters = {'go': ['go build', 'gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
+" let g:ale_linters = {'go': ['gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
+let g:ale_linters = {'go': ['gofmt', 'gometalinter']}
+let g:go_gometalinter_options = join([
+ \    '--fast'
+ \ ], ' ')
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " FZF
 map <silent> <space> :Buffers<cr>
