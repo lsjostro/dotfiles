@@ -1,0 +1,12 @@
+{
+  "coc.preferences.diagnostic.errorSign": "",
+  "coc.preferences.diagnostic.warningSign": "",
+  "coc.preferences.noselect": false,
+  "languageserver": {
+    "golang": {
+      "command": "bingo",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
+  }
+}
