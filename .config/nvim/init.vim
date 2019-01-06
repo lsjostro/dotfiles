@@ -216,7 +216,6 @@ map <C-W><C-l> <C-W>10>
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
