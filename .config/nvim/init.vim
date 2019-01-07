@@ -1,11 +1,5 @@
 call plug#begin('~/.vim/plugged')
 " Autocomplete
-" Plug 'ncm2/ncm2'
-" Plug 'roxma/nvim-yarp'
-" Plug 'ncm2/ncm2-go'
-" Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-tmux'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 " Plugin outside ~/.vim/plugged with post-update hook
@@ -142,6 +136,7 @@ set wildignore+=*.pyc
 set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
+set completeopt=noinsert,menuone,noselect
 
 " ================ Scrolling ========================
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
@@ -311,8 +306,6 @@ let g:neosolarized_italic=1
 highlight Comment gui=italic cterm=italic
 highlight htmlArg gui=italic cterm=italic
 highlight String guifg=#2aa198 gui=italic
-" color solarized
-" let g:solarized_termcolors=256
 
 " Use 2-space indent for this filetypes
 autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
@@ -342,12 +335,6 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 "Python
 let g:syntastic_python_checkers = ['python', 'pylint']
 
-" enable autocomplete
-" let g:deoplete#enable_at_startup = 1
-
-" enable ncm2 for all buffers
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
 
 " Git
 let g:gitgutter_override_sign_column_highlight = 0
