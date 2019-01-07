@@ -1,11 +1,12 @@
 call plug#begin('~/.vim/plugged')
 " Autocomplete
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-go'
+" Plug 'ncm2/ncm2'
+" Plug 'roxma/nvim-yarp'
+" Plug 'ncm2/ncm2-bufword'
+" Plug 'ncm2/ncm2-tmux'
+" Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-go'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -52,6 +53,9 @@ Plug 'b4b4r07/vim-hcl'
 " Jsonnet filetype plugin
 Plug 'google/vim-jsonnet'
 
+" Ale
+Plug 'w0rp/ale'
+
 " Initialize plugin system
 call plug#end()
 filetype plugin indent on     " required!
@@ -62,8 +66,14 @@ set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
-set gcr=a:blinkon0              "Disable cursor blink
+" set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
+set noerrorbells
+set ruler
+set cursorline
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+set autochdir
+set nofoldenable                " disable folding
 set autoread                    "Reload files changed outside vim
 set hlsearch
 " Makes search act like search in modern browsers
@@ -105,6 +115,7 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set expandtab
+set nojoinspaces
 
 filetype plugin on
 filetype indent on
@@ -159,15 +170,15 @@ map <leader>ve :e ~/.config/nvim/init.vim<cr>
 map <leader>e :Ex<cr>
 
 " Git mappings
-map <leader>ga :Git add -p<cr>
-map <leader>gw :Gwrite<cr>
-map <leader>gb :Git checkout -b<space>
-map <leader>gp :Git pull<cr>
-map <leader>gd :Git diff<cr>
-map <leader>gs :Git status<cr>
-map <leader>gf :Git fetch<cr>
-map <leader>gc :Gcommit<cr>
-map <leader>pr :!stash pr create<space>
+" map <leader>ga :Git add -p<cr>
+" map <leader>gw :Gwrite<cr>
+" map <leader>gb :Git checkout -b<space>
+" map <leader>gp :Git pull<cr>
+" map <leader>gd :Git diff<cr>
+" map <leader>gs :Git status<cr>
+" map <leader>gf :Git fetch<cr>
+" map <leader>gc :Gcommit<cr>
+" map <leader>pr :!stash pr create<space>
 
 " FZF
 map <silent> <space> :Buffers<cr>
@@ -179,6 +190,21 @@ map <silent> ,f :History<cr>
 map <silent> ,g :BLines<cr>
 map <silent> ,/ :Ag<cr>
 map <silent> ,m :Marks<cr>
+
+"Ale
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = ''      "       ﱥ   ﬡ  樂
+let g:ale_sign_warning = ''
+" let g:ale_linters = {'go': ['gofmt']}
+" let g:ale_linters = {'go': ['go build', 'gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
+" let g:ale_linters = {'go': ['gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
+let g:ale_linters = {'go': ['gofmt', 'gometalinter']}
+let g:go_gometalinter_options = join([
+ \    '--fast'
+ \ ], ' ')
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Paste mode
 map <leader>pp :setlocal paste!<cr>
@@ -204,6 +230,79 @@ map <C-W><C-k> <C-W>3-
 map <C-W><C-h> <C-W>10<
 map <C-W><C-l> <C-W>10>
 
+"" COC completion
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` for navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+" vmap <leader>fr  <Plug>(coc-format-selected)
+" nmap <leader>fr  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>af  <Plug>(coc-fix-current)
+
+" tags
+set tags=./tags;/
+
 " Color theme (drawing from altercation/vim-colors-solarized Bundle)
 syntax enable
 set background=dark
@@ -212,9 +311,6 @@ let g:neosolarized_italic=1
 highlight Comment gui=italic cterm=italic
 highlight htmlArg gui=italic cterm=italic
 highlight String guifg=#2aa198 gui=italic
-
-" color solarized
-" let g:solarized_termcolors=256
 
 " Use 2-space indent for this filetypes
 autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
@@ -244,8 +340,6 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 "Python
 let g:syntastic_python_checkers = ['python', 'pylint']
 
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
 " Git

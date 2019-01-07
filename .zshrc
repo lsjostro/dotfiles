@@ -8,7 +8,7 @@ export EDITOR=nvim
 command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -f terminal16m -O style=solarizeddark %s"
 export LESS=" -R "
 export GOPATH=$HOME
-export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin
+export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin
 
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
