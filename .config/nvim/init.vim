@@ -187,7 +187,7 @@ map <silent> ,; :Commits<cr>
 map <silent> ,e :GitFiles<cr>
 map <silent> ,d :Files<cr>
 map <silent> ,f :History<cr>
-map <silent> ,g :BLines<cr>
+" map <silent> ,g :BLines<cr>
 map <silent> ,/ :Ag<cr>
 map <silent> ,m :Marks<cr>
 
