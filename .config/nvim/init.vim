@@ -1,11 +1,5 @@
 call plug#begin('~/.vim/plugged')
 " Autocomplete
-" Plug 'ncm2/ncm2'
-" Plug 'roxma/nvim-yarp'
-" Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-tmux'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-go'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 " Plugin outside ~/.vim/plugged with post-update hook
@@ -39,12 +33,12 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Golang
 Plug 'fatih/vim-go'
-Plug 'mdempsky/gocode'
+" Plug 'mdempsky/gocode'
 
 " Rust
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'roxma/nvim-cm-racer'
+" Plug 'racer-rust/vim-racer'
+" Plug 'roxma/nvim-cm-racer'
 
 " Terraform
 Plug 'hashivim/vim-terraform'
@@ -143,6 +137,7 @@ set wildignore+=*.pyc
 set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
+set completeopt=noinsert,menuone,noselect
 
 " ================ Scrolling ========================
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
@@ -312,11 +307,6 @@ highlight Comment gui=italic cterm=italic
 highlight htmlArg gui=italic cterm=italic
 highlight String guifg=#2aa198 gui=italic
 
-" Use 2-space indent for this filetypes
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal tabstop=2
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal softtabstop=2
-
 " For MacVim
 if has("gui_running")
     set guifont=Sauce\ Code\ Powerline:h16
@@ -329,18 +319,16 @@ if has("gui_running")
 endif
 
 " ===== SYNTASTIC
-"mark syntax errors with :signs
-let g:syntastic_enable_signs=1
-"automatically jump to the error when saving the file
-let g:syntastic_auto_jump=0
-"show the error list automatically
-let g:syntastic_auto_loc_list=1
-"don't care about warnings
-let g:syntastic_quiet_messages = {'level': 'warnings'}
-"Python
-let g:syntastic_python_checkers = ['python', 'pylint']
-
-set completeopt=noinsert,menuone,noselect
+" "mark syntax errors with :signs
+" let g:syntastic_enable_signs=1
+" "automatically jump to the error when saving the file
+" let g:syntastic_auto_jump=0
+" "show the error list automatically
+" let g:syntastic_auto_loc_list=1
+" "don't care about warnings
+" let g:syntastic_quiet_messages = {'level': 'warnings'}
+" "Python
+" let g:syntastic_python_checkers = ['python', 'pylint']
 
 " Git
 let g:gitgutter_override_sign_column_highlight = 0
@@ -349,6 +337,7 @@ let g:gitgutter_sign_modified = ''
 let g:gitgutter_sign_removed = ''
 let g:gitgutter_sign_removed_first_line = ''
 let g:gitgutter_sign_modified_removed = ''
+
 " Golang
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -363,12 +352,12 @@ let g:go_highlight_types = 1
 " let g:go_auto_sameids = 1
 let g:go_auto_type_info = 0
 " let g:go_def_mapping_enabled = 0
-let g:go_info_mode = 'guru'
+" let g:go_info_mode = 'guru'
 "let g:go_updatetime = 20
 "
-autocmd FileType go nmap <Leader>i <Plug>(go-info)
-autocmd FileType go nmap <S-k> <Plug>(go-doc)
-autocmd FileType go nmap <Leader>d <Plug>(go-doc-vertical)
+" autocmd FileType go nmap <Leader>i <Plug>(go-info)
+" autocmd FileType go nmap <S-k> <Plug>(go-doc)
+" autocmd FileType go nmap <Leader>d <Plug>(go-doc-vertical)
 
 " Airline stuff
 " set laststatus=2
@@ -401,4 +390,9 @@ augroup markdown
     au!
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
+
+" Use 2-space indent for this filetypes
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal tabstop=2
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal softtabstop=2
 
