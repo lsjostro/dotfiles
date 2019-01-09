@@ -72,7 +72,7 @@ set autoread                    "Reload files changed outside vim
 set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
-set invnumber
+set number
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -186,6 +186,23 @@ map <silent> ,f :History<cr>
 map <silent> ,/ :Ag<cr>
 map <silent> ,m :Marks<cr>
 
+let g:fzf_layout = { 'up': '~40%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Comment'],
+  \ 'bg':      ['bg', 'Comment'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'PMenuSel', 'PMenuSel', 'Normal'],
+  \ 'bg+':     ['bg', 'PMenuSel', 'PMenuSel'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Normal'] }
+
+
 "Ale
 let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_column_always = 1
@@ -203,15 +220,24 @@ let g:go_gometalinter_options = join([
 
 " Paste mode
 map <leader>pp :setlocal paste!<cr>
+
+" X clipboard copy
+vmap <silent> ,y :!xclip -f -sel clip<cr>
+" X clipboard paste
+map <silent> ,v :-1r !xclip -o -sel clip<cr>
+
 " Quickly switch between tabstop
 map <leader>2 :set tabstop=2 shiftwidth=2<cr>
 map <leader>4 :set tabstop=4 shiftwidth=4<cr>
 
 " Toggle line number
-map <Leader>i <esc>:set invnumber<cr>
+" map <Leader>i <esc>:set invnumber<cr>
 
 " CWD to select file dir
 nmap <Leader>cd :lcd %:p:h<cr>
+
+"" "Turn off search highlight
+map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -331,12 +357,26 @@ endif
 " let g:syntastic_python_checkers = ['python', 'pylint']
 
 " Git
+
+let g:SCMDiffCommand = "git"
+let VCSCommandDeleteOnHide = 1
+let g:git_branch_status_nogit=""
+let g:git_branch_status_around="[]"
+let g:git_branch_status_text=""
+let g:git_branch_status_head_current=1
 let g:gitgutter_override_sign_column_highlight = 0
-let g:gitgutter_sign_added = ''
-let g:gitgutter_sign_modified = ''
-let g:gitgutter_sign_removed = ''
-let g:gitgutter_sign_removed_first_line = ''
-let g:gitgutter_sign_modified_removed = ''
+let g:gitgutter_sign_added = ''
+let g:gitgutter_sign_modified = ''
+let g:gitgutter_sign_removed = ''
+let g:gitgutter_sign_removed_first_line = ''
+let g:gitgutter_sign_modified_removed = ''
+
+" let g:gitgutter_override_sign_column_highlight = 0
+" let g:gitgutter_sign_added = ''
+" let g:gitgutter_sign_modified = ''
+" let g:gitgutter_sign_removed = ''
+" let g:gitgutter_sign_removed_first_line = ''
+" let g:gitgutter_sign_modified_removed = ''
 
 " Golang
 let g:go_highlight_build_constraints = 1
@@ -363,7 +403,35 @@ let g:go_auto_type_info = 0
 " set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
+let g:airline_skip_empty_sections = 1
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+let g:airline_section_x = ''   " Hide file type
+let g:airline_section_z = "\uf0c9 %l \ufb87 %c"
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'c'  : 'C',
+      \ 'i'  : 'I',
+      \ 'ic' : 'I',
+      \ 'ix' : 'I',
+      \ 'n'  : "\ue62b",
+      \ 'ni' : "\ue62b",
+      \ 'no' : "\ue62b",
+      \ 'R'  : 'R',
+      \ 'Rv' : 'R',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ 't'  : 'T',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ }
+
+let s:hidden_all = 1
 set noshowmode
+set noruler
+set laststatus=0
+set noshowcmd
 
 let s:hidden_all = 0
 function! ToggleHiddenAll()
@@ -381,8 +449,8 @@ function! ToggleHiddenAll()
         set showcmd
     endif
 endfunction
-
 nnoremap <S-h> :call ToggleHiddenAll()<CR>
+
 " Support for github flavored markdown
 " via https://github.com/jtratner/vim-flavored-markdown
 " with .md extensions
@@ -396,3 +464,6 @@ autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
 autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal tabstop=2
 autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal softtabstop=2
 
+"" Jsonnet
+let g:jsonnet_fmt_fail_silently = 0
+autocmd BufNewFile,BufAdd,BufRead *.libjsonnet setlocal ft=jsonnet
