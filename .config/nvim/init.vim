@@ -33,12 +33,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Golang
 Plug 'fatih/vim-go'
-" Plug 'mdempsky/gocode'
 
 " Rust
 Plug 'rust-lang/rust.vim'
-" Plug 'racer-rust/vim-racer'
-" Plug 'roxma/nvim-cm-racer'
 
 " Terraform
 Plug 'hashivim/vim-terraform'
@@ -224,7 +221,7 @@ map <leader>pp :setlocal paste!<cr>
 " X clipboard copy
 vmap <silent> ,y :!xclip -f -sel clip<cr>
 " X clipboard paste
-map <silent> ,v :-1r !xclip -o -sel clip<cr>
+map <silent> ,v :-1r !xclip -o -sel clip<cr>`z
 
 " Quickly switch between tabstop
 map <leader>2 :set tabstop=2 shiftwidth=2<cr>
