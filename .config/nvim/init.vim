@@ -5,6 +5,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -13,6 +14,12 @@ Plug 'airblade/vim-gitgutter'
 " Markdown
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
+
+" Toml
+Plug 'cespare/vim-toml'
+
+" Ripgrep :Rg
+Plug 'jremmen/vim-ripgrep'
 
 " remove trailing whitespace
 Plug 'bronson/vim-trailing-whitespace'
@@ -26,15 +33,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Golang
 Plug 'fatih/vim-go'
-Plug 'nsf/gocode'
-
-" Bazel
-Plug 'bazelbuild/vim-ft-bzl'
 
 " Rust
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'roxma/nvim-cm-racer'
 
 " Terraform
 Plug 'hashivim/vim-terraform'
@@ -43,6 +44,7 @@ Plug 'b4b4r07/vim-hcl'
 " Jsonnet filetype plugin
 Plug 'google/vim-jsonnet'
 
+" Ale
 Plug 'w0rp/ale'
 
 " Initialize plugin system
@@ -50,15 +52,12 @@ call plug#end()
 filetype plugin indent on     " required!
 
 " ================ General Config ====================
-language en_US
-set ttimeout
-set ttimeoutlen=0
-set isk+=_,$,@,%,#,-            " none of these should be word dividers, so make them not be
+"language en_US
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
-"set gcr=a:blinkon0              "Disable cursor blink
+" set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set noerrorbells
 set ruler
@@ -70,7 +69,7 @@ set autoread                    "Reload files changed outside vim
 set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
-set invnumber
+set number
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -108,7 +107,6 @@ set softtabstop=4
 set tabstop=4
 set expandtab
 set nojoinspaces
-
 
 filetype plugin on
 filetype indent on
@@ -174,6 +172,34 @@ map <leader>e :Ex<cr>
 " map <leader>gc :Gcommit<cr>
 " map <leader>pr :!stash pr create<space>
 
+" FZF
+map <silent> <space> :Buffers<cr>
+map <silent> ,` :Buffers<cr>
+map <silent> ,; :Commits<cr>
+map <silent> ,e :GitFiles<cr>
+map <silent> ,d :Files<cr>
+map <silent> ,f :History<cr>
+" map <silent> ,g :BLines<cr>
+map <silent> ,/ :Ag<cr>
+map <silent> ,m :Marks<cr>
+
+let g:fzf_layout = { 'up': '~40%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Comment'],
+  \ 'bg':      ['bg', 'Comment'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'PMenuSel', 'PMenuSel', 'Normal'],
+  \ 'bg+':     ['bg', 'PMenuSel', 'PMenuSel'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Normal'] }
+
+
 "Ale
 let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_column_always = 1
@@ -189,28 +215,26 @@ let g:go_gometalinter_options = join([
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" FZF
-map <silent> <space> :Buffers<cr>
-map <silent> ,` :Buffers<cr>
-map <silent> ,; :Commits<cr>
-map <silent> ,e :GitFiles<cr>
-map <silent> ,d :Files<cr>
-map <silent> ,f :History<cr>
-"map <silent> ,g :BLines<cr>
-map <silent> ,/ :Ag<cr>
-map <silent> ,m :Marks<cr>
-
 " Paste mode
 map <leader>pp :setlocal paste!<cr>
+
+" X clipboard copy
+vmap <silent> ,y :!xclip -f -sel clip<cr>
+" X clipboard paste
+map <silent> ,v :-1r !xclip -o -sel clip<cr>`z
+
 " Quickly switch between tabstop
 map <leader>2 :set tabstop=2 shiftwidth=2<cr>
 map <leader>4 :set tabstop=4 shiftwidth=4<cr>
 
 " Toggle line number
-map <Leader>i <esc>:set invnumber<cr>
+" map <Leader>i <esc>:set invnumber<cr>
 
 " CWD to select file dir
 nmap <Leader>cd :lcd %:p:h<cr>
+
+"" "Turn off search highlight
+map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -294,7 +318,6 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>af  <Plug>(coc-fix-current)
 
-
 " tags
 set tags=./tags;/
 
@@ -306,11 +329,6 @@ let g:neosolarized_italic=1
 highlight Comment gui=italic cterm=italic
 highlight htmlArg gui=italic cterm=italic
 highlight String guifg=#2aa198 gui=italic
-
-" Use 2-space indent for this filetypes
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal tabstop=2
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal softtabstop=2
 
 " For MacVim
 if has("gui_running")
@@ -324,25 +342,39 @@ if has("gui_running")
 endif
 
 " ===== SYNTASTIC
-"mark syntax errors with :signs
-let g:syntastic_enable_signs=1
-"automatically jump to the error when saving the file
-let g:syntastic_auto_jump=0
-"show the error list automatically
-let g:syntastic_auto_loc_list=1
-"don't care about warnings
-let g:syntastic_quiet_messages = {'level': 'warnings'}
-"Python
-let g:syntastic_python_checkers = ['python', 'pylint']
-
+" "mark syntax errors with :signs
+" let g:syntastic_enable_signs=1
+" "automatically jump to the error when saving the file
+" let g:syntastic_auto_jump=0
+" "show the error list automatically
+" let g:syntastic_auto_loc_list=1
+" "don't care about warnings
+" let g:syntastic_quiet_messages = {'level': 'warnings'}
+" "Python
+" let g:syntastic_python_checkers = ['python', 'pylint']
 
 " Git
+
+let g:SCMDiffCommand = "git"
+let VCSCommandDeleteOnHide = 1
+let g:git_branch_status_nogit=""
+let g:git_branch_status_around="[]"
+let g:git_branch_status_text=""
+let g:git_branch_status_head_current=1
 let g:gitgutter_override_sign_column_highlight = 0
-let g:gitgutter_sign_added = ''
-let g:gitgutter_sign_modified = ''
-let g:gitgutter_sign_removed = ''
-let g:gitgutter_sign_removed_first_line = ''
-let g:gitgutter_sign_modified_removed = ''
+let g:gitgutter_sign_added = ''
+let g:gitgutter_sign_modified = ''
+let g:gitgutter_sign_removed = ''
+let g:gitgutter_sign_removed_first_line = ''
+let g:gitgutter_sign_modified_removed = ''
+
+" let g:gitgutter_override_sign_column_highlight = 0
+" let g:gitgutter_sign_added = ''
+" let g:gitgutter_sign_modified = ''
+" let g:gitgutter_sign_removed = ''
+" let g:gitgutter_sign_removed_first_line = ''
+" let g:gitgutter_sign_modified_removed = ''
+
 " Golang
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -357,19 +389,65 @@ let g:go_highlight_types = 1
 " let g:go_auto_sameids = 1
 let g:go_auto_type_info = 0
 " let g:go_def_mapping_enabled = 0
-let g:go_info_mode = 'guru'
+" let g:go_info_mode = 'guru'
 "let g:go_updatetime = 20
 "
-autocmd FileType go nmap <Leader>i <Plug>(go-info)
-autocmd FileType go nmap <Leader>r :GoIfErr<cr>
-autocmd FileType go nmap <S-k> <Plug>(go-doc)
-autocmd FileType go nmap <Leader>d <Plug>(go-doc-vertical)
+" autocmd FileType go nmap <Leader>i <Plug>(go-info)
+" autocmd FileType go nmap <S-k> <Plug>(go-doc)
+" autocmd FileType go nmap <Leader>d <Plug>(go-doc-vertical)
 
 " Airline stuff
-set laststatus=2
+" set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
+let g:airline_skip_empty_sections = 1
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+let g:airline_section_x = ''   " Hide file type
+let g:airline_section_z = "\uf0c9 %l \ufb87 %c"
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'c'  : 'C',
+      \ 'i'  : 'I',
+      \ 'ic' : 'I',
+      \ 'ix' : 'I',
+      \ 'n'  : "\ue62b",
+      \ 'ni' : "\ue62b",
+      \ 'no' : "\ue62b",
+      \ 'R'  : 'R',
+      \ 'Rv' : 'R',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ 't'  : 'T',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ }
+
+let s:hidden_all = 1
 set noshowmode
+set noruler
+set laststatus=0
+set noshowcmd
+
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+nnoremap <S-h> :call ToggleHiddenAll()<CR>
+
 " Support for github flavored markdown
 " via https://github.com/jtratner/vim-flavored-markdown
 " with .md extensions
@@ -378,3 +456,11 @@ augroup markdown
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
 
+" Use 2-space indent for this filetypes
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal tabstop=2
+autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal softtabstop=2
+
+"" Jsonnet
+let g:jsonnet_fmt_fail_silently = 0
+autocmd BufNewFile,BufAdd,BufRead *.libjsonnet setlocal ft=jsonnet
