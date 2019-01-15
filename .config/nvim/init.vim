@@ -45,7 +45,7 @@ Plug 'b4b4r07/vim-hcl'
 Plug 'google/vim-jsonnet'
 
 " Ale
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Initialize plugin system
 call plug#end()
@@ -70,6 +70,7 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
 set number
+set signcolumn=yes
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -201,17 +202,17 @@ let g:fzf_colors =
 
 
 "Ale
-let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = ''      "       ﱥ   ﬡ  樂
-let g:ale_sign_warning = ''
-" let g:ale_linters = {'go': ['gofmt']}
-" let g:ale_linters = {'go': ['go build', 'gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
-" let g:ale_linters = {'go': ['gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
-let g:ale_linters = {'go': ['gofmt', 'gometalinter']}
-let g:go_gometalinter_options = join([
- \    '--fast'
- \ ], ' ')
+" let g:airline#extensions#ale#enabled = 1
+" let g:ale_sign_column_always = 1
+" let g:ale_sign_error = ''      "       ﱥ   ﬡ  樂
+" let g:ale_sign_warning = ''
+" " let g:ale_linters = {'go': ['gofmt']}
+" " let g:ale_linters = {'go': ['go build', 'gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
+" " let g:ale_linters = {'go': ['gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
+" let g:ale_linters = {'go': ['gofmt', 'gometalinter']}
+" let g:go_gometalinter_options = join([
+"  \    '--fast'
+"  \ ], ' ')
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -391,6 +392,8 @@ let g:go_auto_type_info = 0
 " let g:go_def_mapping_enabled = 0
 " let g:go_info_mode = 'guru'
 "let g:go_updatetime = 20
+" Let coc.nvim handle GoDef.
+let g:go_def_mapping_enabled = 0
 "
 " autocmd FileType go nmap <Leader>i <Plug>(go-info)
 " autocmd FileType go nmap <S-k> <Plug>(go-doc)
