@@ -69,3 +69,4 @@ brew "openconnect"
 # Other
 cask "spotify"
 cask "signal"
+cask "steam"
