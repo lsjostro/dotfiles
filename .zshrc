@@ -71,7 +71,6 @@ command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
 command -v helm >/dev/null 2>&1 && source <(helm completion zsh)
 # Google cloud SDK
 command -v gcloud >/dev/null 2>&1 && source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-# Dir env (brew install direnv)
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 command -v cargo >/dev/null 2>&1 && source $HOME/.cargo/env
 
