@@ -45,7 +45,7 @@ Plug 'b4b4r07/vim-hcl'
 Plug 'google/vim-jsonnet'
 
 " Ale
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Initialize plugin system
 call plug#end()
@@ -159,7 +159,7 @@ map <leader>y :w !pbcopy<cr><cr>
 map <leader>ve :e ~/.config/nvim/init.vim<cr>
 
 " File explorer
-map <leader>e :Ex<cr>
+" map <leader>e :Ex<cr>
 
 " Git mappings
 " map <leader>ga :Git add -p<cr>
@@ -174,14 +174,14 @@ map <leader>e :Ex<cr>
 
 " FZF
 map <silent> <space> :Buffers<cr>
-map <silent> ,` :Buffers<cr>
-map <silent> ,; :Commits<cr>
-map <silent> ,e :GitFiles<cr>
-map <silent> ,d :Files<cr>
-map <silent> ,f :History<cr>
-" map <silent> ,g :BLines<cr>
-map <silent> ,/ :Ag<cr>
-map <silent> ,m :Marks<cr>
+map <silent> <leader>` :Buffers<cr>
+map <silent> <leader>; :Commits<cr>
+map <silent> <leader>e :GitFiles<cr>
+map <silent> <leader>d :Files<cr>
+map <silent> <leader>f :History<cr>
+" map <silent> <leader>g :BLines<cr>
+map <silent> <leader>/ :Rg<cr>
+map <silent> <leader>m :Marks<cr>
 
 let g:fzf_layout = { 'up': '~40%' }
 let g:fzf_colors =
@@ -201,17 +201,17 @@ let g:fzf_colors =
 
 
 "Ale
-let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = ''      "       ﱥ   ﬡ  樂
-let g:ale_sign_warning = ''
+" let g:airline#extensions#ale#enabled = 1
+" let g:ale_sign_column_always = 1
+" let g:ale_sign_error = ''      "       ﱥ   ﬡ  樂
+" let g:ale_sign_warning = ''
 " let g:ale_linters = {'go': ['gofmt']}
 " let g:ale_linters = {'go': ['go build', 'gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
 " let g:ale_linters = {'go': ['gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
-let g:ale_linters = {'go': ['gofmt', 'gometalinter']}
-let g:go_gometalinter_options = join([
- \    '--fast'
- \ ], ' ')
+" let g:ale_linters = {'go': ['gofmt', 'gometalinter']}
+" let g:go_gometalinter_options = join([
+"  \    '--fast'
+"  \ ], ' ')
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -341,18 +341,6 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
-" ===== SYNTASTIC
-" "mark syntax errors with :signs
-" let g:syntastic_enable_signs=1
-" "automatically jump to the error when saving the file
-" let g:syntastic_auto_jump=0
-" "show the error list automatically
-" let g:syntastic_auto_loc_list=1
-" "don't care about warnings
-" let g:syntastic_quiet_messages = {'level': 'warnings'}
-" "Python
-" let g:syntastic_python_checkers = ['python', 'pylint']
-
 " Git
 
 let g:SCMDiffCommand = "git"
@@ -367,13 +355,6 @@ let g:gitgutter_sign_modified = ''
 let g:gitgutter_sign_removed = ''
 let g:gitgutter_sign_removed_first_line = ''
 let g:gitgutter_sign_modified_removed = ''
-
-" let g:gitgutter_override_sign_column_highlight = 0
-" let g:gitgutter_sign_added = ''
-" let g:gitgutter_sign_modified = ''
-" let g:gitgutter_sign_removed = ''
-" let g:gitgutter_sign_removed_first_line = ''
-" let g:gitgutter_sign_modified_removed = ''
 
 " Golang
 let g:go_highlight_build_constraints = 1
