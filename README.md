@@ -4,12 +4,18 @@
 # Arch Linux packages
 
 # prereqs
-pacman -S base-devel git wget dialog
+pacman -S base-devel git wget dialog wpa_supplicant iw
 # AUR packages
-wget -qO- https://github.com/Jguer/yay/releases/download/v9.0.1/yay_9.0.1_x86_64.tar.gz | tar xvz && yay*/yay -S yay-bin 
+wget -qO- https://github.com/Jguer/yay/releases/download/v9.0.1/yay_9.0.1_x86_64.tar.gz | tar xvz && yay*/yay -S yay-bin
 
 # Essentials
-yay -S xorg xorg-xinit xinit-xsession xf86-video-intel xf86-input-libinput libinput alsa-utils pulseaudio maim lightdm-gtk-greeter acpi powertop wpa_supplicant go openssh fasd direnv zsh neovim neovim-remote python-neovim tmux alacritty ttf-google-fonts-git fzf rofi redshift lastpass-cli dunst google-chrome-beta kubectl-bin diff-so-fancy xdg-utils google-cloud-sdk ripgrep i3lock
+yay -S xorg xorg-xinit xinit-xsession xf86-video-intel xf86-input-libinput \
+  libinput alsa-utils pulseaudio libnotify maim lightdm-gtk-greeter acpi \
+  powertop go openssh fasd direnv zsh neovim neovim-remote python-neovim tmux \
+  alacritty ttf-google-fonts-git ttf-ibm-plex fzf rofi redshift lastpass-cli \
+  dunst google-chrome-beta kubectl-bin diff-so-fancy xdg-utils aws-cli \
+  google-cloud-sdk ripgrep i3lock pygmentize python-pygments \
+  python-pygments-style-solarized docker
 
 # Init git repo
 git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
@@ -17,7 +23,6 @@ git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
   mkdir -p $HOME/.dot_git/info && echo '*' > $HOME/.dot_git/info/exclude
 
 # Install plugins
-pip3 install Pygments pygments-style-solarized
 nvim -c ":PlugInstall"
 nvim -c ":GoInstallBinaries"
 
