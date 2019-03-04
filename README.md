@@ -13,9 +13,9 @@ yay -S xorg xorg-xinit xinit-xsession xf86-video-intel xf86-input-libinput \
   libinput alsa-utils pulseaudio libnotify maim lightdm-gtk-greeter acpi \
   powertop go openssh fasd direnv zsh neovim neovim-remote python-neovim tmux \
   alacritty ttf-google-fonts-git ttf-ibm-plex fzf rofi redshift lastpass-cli \
-  dunst google-chrome-beta kubectl-bin diff-so-fancy xdg-utils aws-cli \
-  google-cloud-sdk ripgrep i3lock pygmentize python-pygments \
-  python-pygments-style-solarized docker
+  htop dunst google-chrome-beta kubectl-bin diff-so-fancy xdg-utils aws-cli \
+  google-cloud-sdk bazel ripgrep i3lock pygmentize python-pygments \
+  python-pygments-style-solarized docker flatpak keybase-bin
 
 # Init git repo
 git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
