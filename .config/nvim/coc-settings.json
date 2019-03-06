@@ -2,6 +2,9 @@
   "coc.preferences.diagnostic.errorSign": "",
   "coc.preferences.diagnostic.warningSign": "",
   "coc.preferences.noselect": false,
+  "yaml.schemas": {
+    "kubernetes": "/*.yaml",
+  },
   "languageserver": {
     "bash": {
       "command": "bash-language-server",
