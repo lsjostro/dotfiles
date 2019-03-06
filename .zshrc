@@ -14,6 +14,8 @@ export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
 export LPASS_AGENT_TIMEOUT=60
 
+export GO111MODULE=on
+
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 # =============
