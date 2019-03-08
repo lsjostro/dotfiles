@@ -15,7 +15,7 @@ yay -S xorg xorg-xinit xinit-xsession xf86-video-intel xf86-input-libinput \
   alacritty ttf-google-fonts-git ttf-ibm-plex fzf rofi redshift lastpass-cli \
   htop dunst google-chrome-beta kubectl-bin diff-so-fancy xdg-utils aws-cli \
   google-cloud-sdk bazel ripgrep i3lock pygmentize python-pygments \
-  python-pygments-style-solarized docker flatpak keybase-bin
+  python-pygments-style-solarized docker flatpak keybase-bin yarn terminus-font
 
 # Init git repo
 git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
@@ -24,7 +24,11 @@ git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
 
 # Install plugins
 nvim -c ":PlugInstall"
-nvim -c ":GoInstallBinaries"
+nvim -c ":CocInstall coc-yaml coc-json"
+
+# LSP
+yarn global add dockerfile-language-server-nodejs
+yarn global add bash-language-server
 
 # enable user systemd units
 systemctl --user enable ssh-agent
