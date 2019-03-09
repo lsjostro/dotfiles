@@ -1,8 +1,12 @@
 ## Init dotfiles
 
 ```bash
-# Arch Linux packages
+# Init git repo
+git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
+  git --work-tree $HOME --git-dir $HOME/.dot_git checkout --force && \
+  mkdir -p $HOME/.dot_git/info && echo '*' > $HOME/.dot_git/info/exclude
 
+# Arch Linux packages
 # prereqs
 pacman -S base-devel git wget dialog wpa_supplicant iw
 # AUR packages
@@ -18,20 +22,22 @@ yay -S xorg xorg-xinit xinit-xsession xf86-video-intel xf86-input-libinput \
   python-pygments-style-solarized docker flatpak keybase-bin yarn terminus-font \
   jsonnet
 
-# Init git repo
-git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
-  git --work-tree $HOME --git-dir $HOME/.dot_git checkout --force && \
-  mkdir -p $HOME/.dot_git/info && echo '*' > $HOME/.dot_git/info/exclude
-
 # Install plugins
 nvim -c ":PlugInstall"
 nvim -c ":CocInstall coc-yaml coc-json"
 
-# LSP
+# install language servers
+go get github.com/saibing/bingo
 yarn global add dockerfile-language-server-nodejs
 yarn global add bash-language-server
 
+#keybase
+keybase login
+keybase config set mountdir $HOME/kbfs
+
 # enable user systemd units
+sudo systemctl enable netctl-auto@wlp2s0.service
+systemctl --user enable kbfs
 systemctl --user enable ssh-agent
 systemctl --user enable oidc-agent
 systemctl --user enable dunst
