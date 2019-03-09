@@ -8,7 +8,7 @@ git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
 
 # Arch Linux packages
 # prereqs
-pacman -S base-devel git wget dialog wpa_supplicant iw
+sudo pacman -S base-devel git wget dialog wpa_supplicant iw sudo
 # AUR packages
 wget -qO- https://github.com/Jguer/yay/releases/download/v9.0.1/yay_9.0.1_x86_64.tar.gz | tar xvz && yay*/yay -S yay-bin
 
@@ -39,7 +39,13 @@ keybase config set mountdir $HOME/kbfs
 sudo systemctl enable netctl-auto@wlp2s0.service
 systemctl --user enable kbfs
 systemctl --user enable ssh-agent
+go get github.com/shelmangroup/oidc-agent
 systemctl --user enable oidc-agent
 systemctl --user enable dunst
 systemctl --user enable redshift
+
+# additional groups
+sudo groupadd autologin
+sudo gpasswd -a $USER docker
+sudo gpasswd -a $USER autologin
 ```
