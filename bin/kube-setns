@@ -1,3 +1,0 @@
-#!/bin/bash
-set -xeuo pipefail
-kubectl config set-context $(kubectl config current-context||echo) --namespace "$1"

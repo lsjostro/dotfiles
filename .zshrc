@@ -50,6 +50,7 @@ source $ZPLUG_HOME/init.zsh
 
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
+zplug "thecasualcoder/kube-fzf", as:command, use:"{*pod,*.sh}"
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "arunvelsriram/kube-fzf", use:kube-fzf.sh
