@@ -2,7 +2,7 @@ tap "homebrew/core"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "caskroom/cask"
-tap "caskroom/versions"
+#tap "caskroom/versions"
 tap "boz/repo"
 
 # Essentials
@@ -21,12 +21,14 @@ cask "google-cloud-sdk"
 
 # Hashicorp
 brew "terraform"
+brew "packer"
 brew "vault"
 
 # Kubernetes tools
 brew "kubernetes-cli"
 brew "kubernetes-helm"
-brew "kail"
+brew "stern"
+brew "kubectx"
 
 # Dev tools
 brew "git"
