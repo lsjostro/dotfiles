@@ -16,7 +16,7 @@ wget -qO- https://github.com/Jguer/yay/releases/download/v9.0.1/yay_9.0.1_x86_64
 yay -S xorg xorg-xinit xinit-xsession xf86-video-intel xf86-input-libinput \
   libinput alsa-utils pulseaudio libnotify maim lightdm-gtk-greeter acpi \
   powertop go openssh fasd direnv zsh neovim neovim-remote python-neovim tmux \
-  alacritty ttf-google-fonts-git ttf-ibm-plex fzf rofi redshift lastpass-cli \
+  alacritty ttf-google-fonts-git ttf-ibm-plex jq fzf rofi redshift lastpass-cli \
   htop dunst google-chrome-beta kubectl-bin diff-so-fancy xdg-utils aws-cli \
   google-cloud-sdk bazel ripgrep i3lock pygmentize python-pygments spotify \
   python-pygments-style-solarized docker flatpak keybase-bin yarn terminus-font \
@@ -39,8 +39,6 @@ keybase config set mountdir $HOME/kbfs
 sudo systemctl enable netctl-auto@wlp2s0.service
 systemctl --user enable kbfs
 systemctl --user enable ssh-agent
-go get github.com/shelmangroup/oidc-agent
-systemctl --user enable oidc-agent
 systemctl --user enable dunst
 systemctl --user enable redshift
 

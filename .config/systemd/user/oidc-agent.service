@@ -1,8 +1,0 @@
-[Unit]
-Description=OIDC Agent
-
-[Service]
-ExecStart=/home/lsjostrom/bin/oidc-agent server
-
-[Install]
-WantedBy=default.target
