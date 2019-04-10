@@ -33,6 +33,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Golang
 Plug 'fatih/vim-go'
+Plug 'sebdah/vim-delve'
 
 " Rust
 Plug 'rust-lang/rust.vim'
