@@ -13,7 +13,7 @@ sudo pacman -S base-devel git wget iwd iw sudo
 wget -qO- https://github.com/Jguer/yay/releases/download/v9.0.1/yay_9.0.1_x86_64.tar.gz | tar xvz && yay*/yay -S yay-bin
 
 # Essentials
-yay -S xorg xorg-xinit xinit-xsession xf86-video-intel xf86-input-libinput \
+yay -S xorg xorg-xinit xinit-xsession xf86-video-intel xf86-input-libinput feh \
   libinput alsa-utils pulseaudio libnotify maim lightdm python-gobject acpi \
   powertop go openssh fasd direnv zsh neovim neovim-remote python-neovim tmux \
   alacritty ttf-google-fonts-git ttf-ibm-plex jq fzf rofi redshift lastpass-cli \
