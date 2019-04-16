@@ -20,7 +20,7 @@ yay -S xorg xorg-xinit xinit-xsession xf86-video-intel xf86-input-libinput feh \
   htop dunst google-chrome-beta kubectl-bin diff-so-fancy xdg-utils aws-cli \
   google-cloud-sdk bazel ripgrep i3lock pygmentize python-pygments spotify \
   python-pygments-style-solarized docker flatpak keybase-bin yarn terminus-font \
-  jsonnet kubectx ttf-emojione-color noto-fonts-emoji
+  jsonnet kubectx ttf-emojione-color noto-fonts-emoji stern-bin
 
 cat << EOF | sudo tee /etc/systemd/network/25-wireless.network
 [Match]
