@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -47,6 +47,11 @@ Plug 'google/vim-jsonnet'
 
 " Ale
 " Plug 'w0rp/ale'
+"
+Plug 'kristijanhusak/vim-hybrid-material'
+
+"Powershell syntax highlight
+Plug 'PProvost/vim-ps1'
 
 " Initialize plugin system
 call plug#end()
@@ -293,7 +298,9 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+
+autocmd CursorHold * silent call CocActionAsync('doHover')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -325,8 +332,11 @@ set tags=./tags;/
 " Color theme (drawing from altercation/vim-colors-solarized Bundle)
 syntax enable
 set background=dark
-colorscheme NeoSolarized
-let g:neosolarized_italic=1
+colorscheme hybrid_material
+let g:enable_bold_font = 1
+let g:enable_italic_font = 1
+" colorscheme NeoSolarized
+" let g:neosolarized_italic=1
 highlight Comment gui=italic cterm=italic
 highlight htmlArg gui=italic cterm=italic
 highlight String guifg=#2aa198 gui=italic
@@ -381,7 +391,8 @@ let g:go_def_mapping_enabled = 0
 " Airline stuff
 " set laststatus=2
 let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+" let g:airline_theme='solarized'
+let g:airline_theme='hybrid'
 let g:airline_skip_empty_sections = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_section_x = ''   " Hide file type

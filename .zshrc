@@ -12,17 +12,19 @@ export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOM
 
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export LPASS_AGENT_TIMEOUT=60
 
 export GO111MODULE=on
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+source $HOME/etc/base16-material.dark.sh
 # =============
 #    ALIAS
 # =============
 
-eval $(dircolors ~/.dircolors/dircolors.256dark)
+# eval $(dircolors ~/.dircolors/dircolors.256dark)
 alias ls='ls --color=auto'
 alias ll='ls -al'
 alias vim="nvim"
@@ -73,6 +75,7 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 # ==================
 # Kubernetes
 command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
+command -v stern >/dev/null 2>&1 && source <(stern --completion zsh)
 command -v kops >/dev/null 2>&1 && source <(kops completion zsh)
 command -v helm >/dev/null 2>&1 && source <(helm completion zsh)
 # Google cloud SDK
@@ -179,7 +182,7 @@ cd_func () {
 
 alias cd=cd_func
 _jump() {
-  dir="$(fasd -Rdl | fzf -1 -0 --no-sort +m --height 10)" && cd_func "${dir}"
+  dir="$(fasd -Rdlt | fzf --tiebreak=end -1 -0 --no-sort +m --height 10)" && cd_func "${dir}"
   zle && zle reset-prompt
 }
 zle -N _jump

@@ -30,6 +30,7 @@ window:
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
   decorations: none
+  dynamic_padding: false
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
@@ -85,40 +86,36 @@ font:
   use_thin_strokes: true
 
 # Should display the render timer
-render_timer: false
+debug:
+  render_timer: false
 
-# Use custom cursor colors. If true, display the cursor in the cursor.foreground
-# and cursor.background colors, otherwise invert the colors of the cursor.
-# custom_cursor_colors: false
-
-# Colors (Solarized Dark)
 colors:
   # Default colors
   primary:
-    background: '0x002b36'
-    foreground: '0x839496'
+    background: '0x002632'
+    foreground: '0x00ecef'
 
   # Normal colors
   normal:
-    black:   '0x073642'
-    red:     '0xdc322f'
-    green:   '0x859900'
-    yellow:  '0xb58900'
-    blue:    '0x268bd2'
-    magenta: '0xd33682'
-    cyan:    '0x2aa198'
-    white:   '0xeee8d5'
+    black:   '0x002632'
+    red:     '0x00cc66'
+    green:   '0x00b5bd'
+    yellow:  '0x00f0c6'
+    blue:    '0x0081a2'
+    magenta: '0x00b294'
+    cyan:    '0x008abe'
+    white:   '0x00ecef'
 
   # Bright colors
   bright:
-    black:   '0x002b36'
-    red:     '0xcb4b16'
-    green:   '0x586e75'
-    yellow:  '0x657b83'
-    blue:    '0x839496'
-    magenta: '0x6c71c4'
-    cyan:    '0x93a1a1'
-    white:   '0xfdf6e3'
+    black:   '0x007078'
+    red:     '0x00cc66'
+    green:   '0x002632'
+    yellow:  '0x003747'
+    blue:    '0x00b5bd'
+    magenta: '0x00ecef'
+    cyan:    '0x00cc66'
+    white:   '0x00ffff'
 
 # Visual Bell
 #
@@ -175,6 +172,8 @@ mouse:
   # or triple click.
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
+  url:
+    launcher: xdg-open
 
   # Faux Scrollback
   #
@@ -253,6 +252,8 @@ live_config_reload: true
 key_bindings:
   - { key: V,        mods: Command, action: Paste                        }
   - { key: C,        mods: Command, action: Copy                         }
+  - { key: V,        mods: Control|Shift, action: Paste                  }
+  - { key: C,        mods: Control|Shift, action: Copy                   }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }

@@ -2,6 +2,15 @@
   "coc.preferences.diagnostic.errorSign": "",
   "coc.preferences.diagnostic.warningSign": "",
   "coc.preferences.noselect": false,
+  "json.schemas": [
+    {
+      "fileMatch": [
+            "/deployment.jsonnet",
+            "/deployment.json"
+        ],
+        "url": "https://raw.githubusercontent.com/garethr/kubernetes-json-schema/master/v1.14.0/deployment.json"
+    }
+  ],
   "yaml.schemas": {
     "kubernetes": "/*.yaml",
   },
@@ -14,6 +23,7 @@
     },
     "ccls": {
       "command": "ccls",
+      "args": ["--log-file=/tmp/ccls.log"],
       "filetypes": ["c", "cpp", "objc", "objcpp"],
       "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
       "initializationOptions": {
@@ -27,6 +37,7 @@
     },
     "golang": {
       "command": "bingo",
+      "args": [""],
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
     }
