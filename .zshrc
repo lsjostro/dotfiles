@@ -16,6 +16,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export LPASS_AGENT_TIMEOUT=60
 
 export GO111MODULE=on
+export GOPROXY=https://proxy.golang.org/
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
