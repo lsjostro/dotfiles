@@ -14,6 +14,7 @@ brew "fasd"
 brew "fzf"
 cask "karabiner-elements"
 cask "alacritty"
+brew "exa"
 
 # Cloud
 brew "awscli"

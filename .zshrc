@@ -12,15 +12,19 @@ export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin
 
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export LPASS_AGENT_TIMEOUT=60
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+source $HOME/etc/base16-material.dark.sh
 
 # =============
 #    ALIAS
 # =============
 
-eval $(gdircolors ~/.dircolors/dircolors.256dark)
-alias ls='gls --color=auto'
+#eval $(gdircolors ~/.dircolors/dircolors.256dark)
+#alias ls='gls --color=auto'
+alias ls='exa --git'
 alias ll='ls -al'
 alias vim="nvim"
 alias vi="nvim"

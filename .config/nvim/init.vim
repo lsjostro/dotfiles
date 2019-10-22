@@ -30,6 +30,7 @@ Plug 'tomtom/tcomment_vim'
 " Pimped out bar at the bottom of current buffer
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'kristijanhusak/vim-hybrid-material'
 
 " Golang
 Plug 'fatih/vim-go'
@@ -70,7 +71,7 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
 set number
-set signcolumn=yes
+" set signcolumn=yes
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -325,7 +326,8 @@ set tags=./tags;/
 " Color theme (drawing from altercation/vim-colors-solarized Bundle)
 syntax enable
 set background=dark
-colorscheme NeoSolarized
+" colorscheme NeoSolarized
+colorscheme hybrid_material
 let g:neosolarized_italic=1
 highlight Comment gui=italic cterm=italic
 highlight htmlArg gui=italic cterm=italic
@@ -402,7 +404,8 @@ let g:go_def_mapping_enabled = 0
 " Airline stuff
 " set laststatus=2
 let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+" let g:airline_theme='solarized'
+let g:airline_theme='hybrid'
 let g:airline_skip_empty_sections = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_section_x = ''   " Hide file type
