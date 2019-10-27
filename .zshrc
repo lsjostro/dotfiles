@@ -22,10 +22,8 @@ source $HOME/etc/base16-material.dark.sh
 #    ALIAS
 # =============
 
-#eval $(gdircolors ~/.dircolors/dircolors.256dark)
-#alias ls='gls --color=auto'
 alias ls='exa --git'
-alias ll='ls -al'
+alias ll='exa -la'
 alias vim="nvim"
 alias vi="nvim"
 alias ag='ag --pager less'
