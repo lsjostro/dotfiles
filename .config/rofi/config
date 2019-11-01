@@ -1,4 +1,4 @@
 rofi.font: Blex Mono Regular 12
-rofi.dpi: 210
+rofi.dpi: 130
 rofi.theme: solarized_alternate
 rofi.columns: 1
