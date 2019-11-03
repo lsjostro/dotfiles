@@ -2,7 +2,7 @@
 
 ```bash
 # Init git repo
-git clone https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
+git clone -b linux https://github.com/lsjostro/dotfiles.git $HOME/.dot_git --bare && \
   git --work-tree $HOME --git-dir $HOME/.dot_git checkout --force && \
   mkdir -p $HOME/.dot_git/info && echo '*' > $HOME/.dot_git/info/exclude
 
@@ -39,10 +39,6 @@ sudo systemctl enable systemd-resolved
 nvim -c ":PlugInstall"
 nvim -c ":CocInstall coc-yaml coc-json"
 
-# install language servers
-yarn global add dockerfile-language-server-nodejs
-yarn global add bash-language-server
-
 #keybase
 keybase login
 keybase config set mountdir $HOME/kbfs
@@ -55,6 +51,5 @@ systemctl --user enable redshift
 
 # additional groups
 sudo groupadd autologin
-sudo gpasswd -a $USER docker
 sudo gpasswd -a $USER autologin
 ```

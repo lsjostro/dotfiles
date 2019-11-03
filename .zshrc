@@ -8,7 +8,7 @@ export EDITOR=nvim
 command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -f terminal16m -O style=solarizeddark %s"
 export LESS=" -R "
 export GOPATH=$HOME
-export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin
+export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin
 
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
@@ -25,13 +25,10 @@ source $HOME/etc/base16-material.dark.sh
 #    ALIAS
 # =============
 
-# eval $(dircolors ~/.dircolors/dircolors.256dark)
-#alias ls='ls --color=auto'
 alias ls='exa'
 alias ll='exa -al --git'
 alias vim="nvim"
 alias vi="nvim"
-alias ag='ag --pager less'
 alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
 alias lp-ssh-pubkey='lpass show --field="Public Key" --clip'
 alias lower="tr '[:upper:]' '[:lower:]'"
