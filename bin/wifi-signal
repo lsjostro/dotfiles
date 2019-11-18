@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Use: Put something this in your .tmux.conf file
+# set -g status-right: '#(wifi-signal)'
+#
+if [ "$(uname)" == "Linux" ]; then
+    cmd="iw dev wlan0 link"
+    [[ `$cmd` =~ "Connected" ]] && signal="" || signal="睊"
+    current=`$cmd | egrep "bitrate|SSID" | cut -d: -f2 | tr "\\n" ";"`
+    name=`echo $current | cut -d";" -f1-1 | cut -d" " -f2-`
+    echo "${name} ${signal}"
+elif [ "$(uname)" == "Darwin" ]; then
+    ssid=$(networksetup -getairportnetwork en0 | awk -F": " '{print $2}')
+    [ -z $ssid ] && echo "睊" || echo "$ssid "
+fi
+
