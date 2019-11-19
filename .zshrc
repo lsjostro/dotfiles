@@ -16,6 +16,8 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export LPASS_AGENT_TIMEOUT=60
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+export FLUX_FORWARD_NAMESPACE=flux
+
 source $HOME/etc/base16-material.dark.sh
 
 # =============
