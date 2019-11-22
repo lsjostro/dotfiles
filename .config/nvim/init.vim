@@ -68,6 +68,7 @@ set autochdir
 set nofoldenable                " disable folding
 set autoread                    "Reload files changed outside vim
 set hlsearch
+set mouse=a
 " Makes search act like search in modern browsers
 set incsearch
 set number
