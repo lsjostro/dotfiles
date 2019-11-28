@@ -18,10 +18,10 @@ charged_default="❇ "
 charged_default_osx=" "
 charging_default=" ⚡️"
 attached_default=" "
-full_charge_icon_default=" "
-high_charge_icon_default=" "
-medium_charge_icon_default=" "
-low_charge_icon_default=" "
+full_charge_icon_default="🌕"
+high_charge_icon_default="🌖"
+medium_charge_icon_default="🌗"
+low_charge_icon_default="🌘"
 
 charged_default() {
 	if is_osx; then
