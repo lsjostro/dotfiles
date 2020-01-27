@@ -20,6 +20,9 @@ export GOPROXY=https://proxy.golang.org/
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+export _JAVA_AWT_WM_NONREPARENTING=1
+export GDK_SCALE=2
+
 source $HOME/etc/base16-material.dark.sh
 # =============
 #    ALIAS

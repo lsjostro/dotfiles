@@ -15,12 +15,6 @@
     "kubernetes": "/*.yaml",
   },
   "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    },
     "ccls": {
       "command": "ccls",
       "args": ["--log-file=/tmp/ccls.log"],
@@ -29,11 +23,6 @@
       "initializationOptions": {
         "cacheDirectory": "/tmp/ccls"
       }
-    },
-    "dockerfile": {
-      "command": "docker-langserver",
-      "filetypes": ["dockerfile"],
-      "args": ["--stdio"]
     },
     "golang": {
       "command": "gopls",

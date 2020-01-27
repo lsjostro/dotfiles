@@ -1,0 +1,3 @@
+#!/bin/zsh
+source ~/.zshrc
+rofi -show run

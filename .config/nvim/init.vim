@@ -76,7 +76,7 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
 set number
-
+set mouse=a
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right
@@ -220,6 +220,8 @@ let g:fzf_colors =
 "  \ ], ' ')
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" Disable F1 help
+nmap <F1> <nop>
 
 " Paste mode
 map <leader>pp :setlocal paste!<cr>

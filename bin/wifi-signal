@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Use: Put something this in your .tmux.conf file
 # set -g status-right: '#(wifi-signal)'
