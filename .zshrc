@@ -8,7 +8,8 @@ export EDITOR=nvim
 command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -f terminal16m -O style=solarizeddark %s"
 export LESS=" -R "
 export GOPATH=$HOME
-export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+export PATH=$PATH:$JAVA_HOME/bin:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin
 
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"

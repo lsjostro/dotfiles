@@ -222,7 +222,8 @@ let g:fzf_colors =
 map <leader>pp :setlocal paste!<cr>
 
 " X clipboard copy
-vmap <silent> ,y :!xclip -f -sel clip<cr>
+"vmap <silent> ,y :!xclip -f -sel clip<cr>
+vmap <silent> ,y :!pbcopy<cr>
 " X clipboard paste
 map <silent> ,v :-1r !xclip -o -sel clip<cr>`z
 

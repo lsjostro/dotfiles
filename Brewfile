@@ -1,7 +1,7 @@
 tap "homebrew/core"
 tap "homebrew/bundle"
 tap "homebrew/services"
-tap "caskroom/cask"
+tap "homebrew/cask"
 #tap "caskroom/versions"
 tap "boz/repo"
 
@@ -27,7 +27,7 @@ brew "vault"
 
 # Kubernetes tools
 brew "kubernetes-cli"
-brew "kubernetes-helm"
+brew "helm"
 brew "stern"
 brew "kubectx"
 
