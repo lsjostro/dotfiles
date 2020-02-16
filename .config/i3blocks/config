@@ -1,0 +1,17 @@
+separator=true
+separator_block_width=40
+
+[battery]
+command=~/.config/i3blocks/battery-plus
+interval=30
+markup=pango
+instance=BAT0
+_HIDE_TIME_REMAINING=false
+_HIDE_TIME_TO_FULL=false
+_USE_BATT_GRADIENT=true
+
+
+[time]
+align=center
+command=date "+%a %F %H:%M"
+interval=30

@@ -5,10 +5,10 @@ export TERM=xterm-256color
 export DISPLAY=:0
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
-command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -f terminal16m -O style=solarizeddark %s"
+command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -f terminal16m %s"
 export LESS=" -R "
-export GOPATH=$HOME
-export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin
+#export GOPATH=$HOME
+export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
 
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
@@ -20,6 +20,10 @@ export GOPROXY=https://proxy.golang.org/
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+export QT_SCALE_FACTOR=2
 export _JAVA_AWT_WM_NONREPARENTING=1
 export GDK_SCALE=2
 

@@ -1,0 +1,175 @@
+# Variables
+set $mod Mod4
+set $lock swaylock -c 202020
+set $term alacritty
+# set $menu rofi -show run
+set $menu ~/bin/rofi-wrapper
+set $screenclip grim -g "$(slurp)" - | wl-copy
+set $background ~/etc/wallpaper.png
+
+# workspaces
+set $ws1   1:
+set $ws2   2:
+set $ws3   3:3
+set $ws4   4:4
+set $ws5   5:5
+set $ws6   6:6
+set $ws7   7:7
+set $ws8   8:8
+set $ws9   9:9
+set $ws0   10:10
+
+# Window borders
+default_border pixel default
+default_floating_border normal
+hide_edge_borders smart
+
+smart_gaps on
+gaps inner 10
+
+# Input configuration
+input * {
+    tap enabled
+    natural_scroll enabled
+    xkb_layout us-se-umlauts
+}
+
+# Shortcuts
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+4 exec $screenclip
+bindsym $mod+p exec $menu
+
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+c reload
+#bindsym $mod+Shift+e exit
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+bindsym $mod+Shift+Control+l exec $lock
+# bindsym $mod+Escape exec $power
+
+# Notifications
+bindsym Control+Space exec makoctl dismiss
+bindsym Control+Shift+Space exec makoctl dismiss --all
+
+# Multimedia
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Move your focus around
+bindsym $mod+h focus Left
+bindsym $mod+j focus Down
+bindsym $mod+k focus Up
+bindsym $mod+l focus Right
+
+# _move_ the focused window with the same, but add Shift
+bindsym $mod+Shift+h move Left
+bindsym $mod+Shift+j move Down
+bindsym $mod+Shift+k move Up
+bindsym $mod+Shift+l move Right
+
+# switch to workspace
+bindsym F1   workspace $ws1
+bindsym F2   workspace $ws2
+bindsym F3   workspace $ws3
+bindsym F4   workspace $ws4
+bindsym F5   workspace $ws5
+bindsym F6   workspace $ws6
+bindsym F7   workspace $ws7
+bindsym F8   workspace $ws8
+bindsym F9   workspace $ws9
+bindsym F10  workspace $ws0
+
+# move focused container to workspace
+bindsym Shift+F1    move container to workspace $ws1
+bindsym Shift+F2    move container to workspace $ws2
+bindsym Shift+F3    move container to workspace $ws3
+bindsym Shift+F4    move container to workspace $ws4
+bindsym Shift+F5    move container to workspace $ws5
+bindsym Shift+F6    move container to workspace $ws6
+bindsym Shift+F7    move container to workspace $ws7
+bindsym Shift+F8    move container to workspace $ws8
+bindsym Shift+F9    move container to workspace $ws9
+bindsym Shift+F10    move container to workspace $ws0
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# move focus to the parent container
+bindsym $mod+a focus parent
+
+bindsym Mod4+x floating enable; resize set width 80 ppt; resize set height 100 ppt ; move position center
+
+# Modes
+mode "resize" {
+    bindsym h resize shrink width 10px
+    bindsym j resize grow height 10px
+    bindsym k resize shrink height 10px
+    bindsym l resize grow width 10px
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+mode "$mode_system" {
+    bindsym l exec $lock, mode "default"
+    bindsym e exit
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$mode_system"
+
+#HiDPI
+output eDP-1 scale 1
+output "eDP-1" bg /home/lsjostrom/.config/sway/laser.png center
+seat seat0 xcursor_theme Bibata_Oil 48
+
+exec mako
+# Screen lock
+exec swayidle \
+	timeout 600 '$lock' \
+	timeout 900 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"' \
+	before-sleep '$lock'
+
+bar {
+  mode hide
+  font pango:IBM Plex Mono 28
+  position bottom
+  status_command i3blocks
+  workspace_buttons no
+  gaps 0 0 5 0
+  status_padding 0
+  status_edge_padding 0
+
+  colors {
+    statusline #e65100ff
+    background #00000000
+  }
+}

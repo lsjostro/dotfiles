@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -19,7 +19,7 @@ Plug 'jtratner/vim-flavored-markdown'
 Plug 'cespare/vim-toml'
 
 " Ripgrep :Rg
-Plug 'jremmen/vim-ripgrep'
+" Plug 'jremmen/vim-ripgrep'
 
 " remove trailing whitespace
 Plug 'bronson/vim-trailing-whitespace'
@@ -153,6 +153,14 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+"set cmdheight=2
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=1000
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+
+
 imap § <Esc>
 
 nnoremap <C-e> 3<C-e>
@@ -186,10 +194,45 @@ map <silent> <leader>e :GitFiles<cr>
 map <silent> <leader>d :Files<cr>
 map <silent> <leader>f :History<cr>
 " map <silent> <leader>g :BLines<cr>
-map <silent> <leader>/ :Rg<cr>
 map <silent> <leader>m :Marks<cr>
+map <silent> <leader>/ :RG<cr>
 
-let g:fzf_layout = { 'up': '~40%' }
+"" fzf
+function! CreateCenteredFloatingWindow()
+    let width = min([&columns - 4, max([80, &columns - 20])])
+    let height = min([&lines - 4, max([20, &lines - 20])])
+    " let top = ((&lines - height) / 2) - 1
+    let top = 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
+
+    let top = "┌" . repeat("─", width - 2) . "┐"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "└" . repeat("─", width - 2) . "┘"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+    set winhl=Normal:Floating
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    au BufWipeout <buffer> exe 'bw '.s:buf
+endfunction
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command], 'window': { 'width': 0.9, 'height': 0.6 }}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+let g:fzf_layout = { 'up': '~40%', 'window': 'call CreateCenteredFloatingWindow()' }
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Comment'],
   \ 'bg':      ['bg', 'Comment'],
@@ -395,6 +438,7 @@ let g:go_def_mapping_enabled = 0
 let g:airline_powerline_fonts = 1
 " let g:airline_theme='solarized'
 let g:airline_theme='hybrid'
+hi MsgArea guifg=#e65100
 let g:airline_skip_empty_sections = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_section_x = ''   " Hide file type
