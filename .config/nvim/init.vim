@@ -18,9 +18,6 @@ Plug 'jtratner/vim-flavored-markdown'
 " Toml
 Plug 'cespare/vim-toml'
 
-" Ripgrep :Rg
-" Plug 'jremmen/vim-ripgrep'
-
 " remove trailing whitespace
 Plug 'bronson/vim-trailing-whitespace'
 
@@ -270,9 +267,9 @@ nmap <F1> <nop>
 map <leader>pp :setlocal paste!<cr>
 
 " X clipboard copy
-vmap <silent> ,y :!xclip -f -sel clip<cr>
+vmap <silent> ,y :!wl-copy<cr>
 " X clipboard paste
-map <silent> ,v :-1r !xclip -o -sel clip<cr>`z
+map <silent> ,v :-1r !wl-paste<cr>
 
 " Quickly switch between tabstop
 map <leader>2 :set tabstop=2 shiftwidth=2<cr>
