@@ -6,18 +6,6 @@ set $menu ~/bin/rofi-wrapper
 set $screenclip grim -g "$(slurp)" - | wl-copy
 set $background ~/.config/sway/laser.png
 
-# workspaces
-set $ws1   1:
-set $ws2   2:
-set $ws3   3:3
-set $ws4   4:4
-set $ws5   5:5
-set $ws6   6:6
-set $ws7   7:7
-set $ws8   8:8
-set $ws9   9:9
-set $ws0   10:10
-
 # Window borders
 hide_edge_borders both
 smart_borders on
@@ -42,12 +30,10 @@ bindsym $mod+p exec $menu
 
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
-#bindsym $mod+Shift+e exit
 bindsym $mod+b splith
 bindsym $mod+v splitv
 
 bindsym $mod+Shift+Control+l exec $lock
-# bindsym $mod+Escape exec $power
 
 # Notifications
 bindsym Control+Space exec makoctl dismiss
@@ -80,36 +66,29 @@ bindsym $mod+Shift+k move Up
 bindsym $mod+Shift+l move Right
 
 # switch to workspace
-bindsym F1   workspace $ws1
-bindsym F2   workspace $ws2
-bindsym F3   workspace $ws3
-bindsym F4   workspace $ws4
-bindsym F5   workspace $ws5
-bindsym F6   workspace $ws6
-bindsym F7   workspace $ws7
-bindsym F8   workspace $ws8
-bindsym F9   workspace $ws9
-bindsym F10  workspace $ws0
-
+bindsym F1 workspace 1
+bindsym F2 workspace 2
+bindsym F3 workspace 3
+bindsym F4 workspace 4
+bindsym F5 workspace 5
+bindsym F6 workspace 6
+bindsym F7 workspace 7
+bindsym F8 workspace 8
+bindsym F9 workspace 9
 # move focused container to workspace
-bindsym Shift+F1    move container to workspace $ws1
-bindsym Shift+F2    move container to workspace $ws2
-bindsym Shift+F3    move container to workspace $ws3
-bindsym Shift+F4    move container to workspace $ws4
-bindsym Shift+F5    move container to workspace $ws5
-bindsym Shift+F6    move container to workspace $ws6
-bindsym Shift+F7    move container to workspace $ws7
-bindsym Shift+F8    move container to workspace $ws8
-bindsym Shift+F9    move container to workspace $ws9
-bindsym Shift+F10    move container to workspace $ws0
-
-# bindsym $mod+Shift+minus move scratchpad
-# bindsym $mod+minus scratchpad show
+bindsym Shift+F1 move container to workspace 1
+bindsym Shift+F2 move container to workspace 2
+bindsym Shift+F3 move container to workspace 3
+bindsym Shift+F4 move container to workspace 4
+bindsym Shift+F5 move container to workspace 5
+bindsym Shift+F6 move container to workspace 6
+bindsym Shift+F7 move container to workspace 7
+bindsym Shift+F8 move container to workspace 8
+bindsym Shift+F9 move container to workspace 9
 
 floating_modifier $mod
 bindsym $mod+Shift+f floating toggle
 bindsym $mod+f focus mode_toggle
-
 bindsym $mod+x floating enable; resize set width 80 ppt; resize set height 100 ppt ; move position center
 
 # Modes
@@ -142,7 +121,7 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 #HiDPI
 output eDP-1 scale 1
-output "eDP-1" bg $background center
+output eDP-1 bg $background center
 seat seat0 xcursor_theme Bibata_Oil 48
 
 exec rm -f $SWAYSOCK.wob && mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
@@ -155,7 +134,7 @@ exec swayidle \
 
 bar {
   mode hide
-  font pango:IBM Plex Mono 28
+  font pango:IBM Plex Mono 30
   position bottom
   status_command i3blocks
   workspace_buttons no
