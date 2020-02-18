@@ -42,6 +42,7 @@ alias lower="tr '[:upper:]' '[:lower:]'"
 alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
 alias docker="podman"
+alias icat="kitty +kitten icat"
 
 function e {
   tmux select-window -t1
