@@ -11,6 +11,9 @@ Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Rego
+Plug 'tsandall/vim-rego'
+
 " Markdown
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
@@ -36,15 +39,15 @@ Plug 'sebdah/vim-delve'
 Plug 'rust-lang/rust.vim'
 
 " Terraform
-Plug 'hashivim/vim-terraform'
 Plug 'b4b4r07/vim-hcl'
+Plug 'hashivim/vim-terraform'
 
 " Jsonnet filetype plugin
 Plug 'google/vim-jsonnet'
 
 " Ale
-" Plug 'w0rp/ale'
-"
+Plug 'w0rp/ale'
+
 Plug 'kristijanhusak/vim-hybrid-material'
 
 "Powershell syntax highlight
@@ -245,21 +248,21 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Normal'] }
 
-
-"Ale
-" let g:airline#extensions#ale#enabled = 1
-" let g:ale_sign_column_always = 1
-" let g:ale_sign_error = ''      "       ﱥ   ﬡ  樂
-" let g:ale_sign_warning = ''
+"" ALE
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = ''      "       ﱥ   ﬡ  樂
+let g:ale_sign_warning = ''
 " let g:ale_linters = {'go': ['gofmt']}
 " let g:ale_linters = {'go': ['go build', 'gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
 " let g:ale_linters = {'go': ['gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
-" let g:ale_linters = {'go': ['gofmt', 'gometalinter']}
-" let g:go_gometalinter_options = join([
-"  \    '--fast'
-"  \ ], ' ')
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_linters = {'go': ['gofmt', 'gometalinter']}
+let g:go_gometalinter_options = join([
+ \    '--fast'
+ \ ], ' ')
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 " Disable F1 help
 nmap <F1> <nop>
 

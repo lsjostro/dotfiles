@@ -1,6 +1,11 @@
 separator=true
 separator_block_width=40
 
+[essid]
+command=~/bin/wifi-signal
+interval=30
+markup=pango
+
 [battery]
 command=~/.config/i3blocks/battery-plus
 interval=30
@@ -9,7 +14,6 @@ instance=BAT0
 _HIDE_TIME_REMAINING=false
 _HIDE_TIME_TO_FULL=false
 _USE_BATT_GRADIENT=true
-
 
 [time]
 align=center
