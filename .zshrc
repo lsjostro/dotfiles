@@ -5,8 +5,8 @@ export TERM=xterm-256color
 export DISPLAY=:0
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
-command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -f terminal16m %s"
-export LESS=" -R "
+# command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -S gruvbox -f terminal16m %s"
+#export LESS=" -R "
 #export GOPATH=$HOME
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
 
@@ -15,7 +15,7 @@ export FZF_COMPLETION_TRIGGER=";"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export LPASS_AGENT_TIMEOUT=60
 
-export GO111MODULE=on
+# export GO111MODULE=on
 export GOPROXY=https://proxy.golang.org/
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
@@ -34,6 +34,8 @@ source $HOME/etc/base16-material.dark.sh
 
 alias ls='exa'
 alias ll='exa -al --git'
+alias tree='exa -T'
+alias l='less -nRX'
 alias vim="nvim"
 alias vi="nvim"
 alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
@@ -65,6 +67,7 @@ zplug "thecasualcoder/kube-fzf", as:command, use:"{*pod,*.sh}"
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "arunvelsriram/kube-fzf", use:kube-fzf.sh
+# zplug "nnao45/zsh-kubectl-completion"
 
 # Check if install and load
 if ! zplug check; then
@@ -104,7 +107,7 @@ fi
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-setopt append_history
+#setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
 # ignore duplication command history list

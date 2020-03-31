@@ -1,4 +1,5 @@
 #!/bin/zsh
 export _JAVA_AWT_WM_NONREPARENTING=1
-export GDK_SCALE=2
+#export GDK_SCALE=2
+MOZ_ENABLE_WAYLAND=1
 rofi -show run

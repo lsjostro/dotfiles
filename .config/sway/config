@@ -136,7 +136,7 @@ bindsym $mod+i mode "$mode_display"
 #HiDPI
 output eDP-1 scale 1
 output eDP-1 bg $background center
-set $src_aux DP-2
+set $src_aux DP-1
 set $native_width 2960x1440
 seat seat0 xcursor_theme Bibata_Oil 48
 
