@@ -2,12 +2,9 @@
 #    EXPORT
 # =============
 export TERM=xterm-256color
-export DISPLAY=:0
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
 # command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -S gruvbox -f terminal16m %s"
-#export LESS=" -R "
-#export GOPATH=$HOME
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
 
 export FZF_TMUX=1
@@ -15,17 +12,9 @@ export FZF_COMPLETION_TRIGGER=";"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export LPASS_AGENT_TIMEOUT=60
 
-# export GO111MODULE=on
 export GOPROXY=https://proxy.golang.org/
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-
-export MOZ_ENABLE_WAYLAND=1
-export QT_QPA_PLATFORM=wayland
-export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-export QT_SCALE_FACTOR=2
-export _JAVA_AWT_WM_NONREPARENTING=1
-export GDK_SCALE=2
 
 source $HOME/etc/base16-material.dark.sh
 # =============
@@ -204,4 +193,24 @@ bindkey '^g' _jump
 # ===================
 #    Load private
 # ===================
-[ -f ~/.zsh_private ] && source ~/.zsh_private || return 0
+[ -f ~/.zsh_private ] && source ~/.zsh_private
+
+# Sway
+export SWAYSOCK=$HOME/.local/sway.sock
+export _JAVA_AWT_WM_NONREPARENTING=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+#export GDK_BACKEND=wayland
+export QT_SCALE_FACTOR=2
+export GDK_SCALE=2
+# export GDK_DPI_SCALE=2
+export MOZ_ENABLE_WAYLAND=1
+# export MOZ_WEBRENDER=1
+# export MOZ_ACCELERATED=1
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=sway
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+  rm -f $SWAYSOCK
+  XKB_DEFAULT_LAYOUT=us exec sway
+fi
