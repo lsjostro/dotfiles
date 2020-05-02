@@ -1,5 +1,7 @@
 #!/bin/zsh
 export _JAVA_AWT_WM_NONREPARENTING=1
-MOZ_ENABLE_WAYLAND=1
-GDK_DPI_SCALE=2.8
+# export GDK_DPI_SCALE=2.5
+# export GDK_SCALE=2
+unset GDK_DPI_SCALE
+unset GDK_SCALE
 rofi -show run
