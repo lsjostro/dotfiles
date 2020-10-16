@@ -23,6 +23,8 @@ window:
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
   # (change requires restart)
+
+  dynamic_title: true
   padding:
     x: 0
     y: 0
@@ -31,9 +33,6 @@ window:
   # Setting this to false will result in window without borders and title bar.
   decorations: none
   dynamic_padding: false
-
-# Display tabs using this many cells (changes require restart)
-tabspaces: 8
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
@@ -74,7 +73,7 @@ font:
     style: Italic
 
   # Point size of the font
-  size: 30
+  size: 10
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -148,7 +147,7 @@ colors:
 #
 # To completely disable the visual bell, set its duration to 0.
 #
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
 
@@ -198,7 +197,6 @@ mouse:
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
-dynamic_title: true
 
 
 # Style of the cursor

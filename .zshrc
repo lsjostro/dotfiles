@@ -17,7 +17,7 @@ export GOPROXY=https://proxy.golang.org/
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-source $HOME/etc/base16-material.dark.sh
+#source $HOME/etc/base16-material.dark.sh
 # =============
 #    ALIAS
 # =============
@@ -38,7 +38,9 @@ alias icat="kitty +kitten icat"
 
 function e {
   tmux select-window -t1
-  nvr --remote "$@"
+  nvr --remote $(readlink -f "$@")
+  # tmux select-window -t1
+  # nvr --remote "$@"
 }
 function ev {
   tmux select-window -t1
@@ -112,49 +114,49 @@ setopt share_history
 #    PROMPT
 # =============
 
-autoload -U colors && colors
-setopt promptsubst
+# autoload -U colors && colors
+# setopt promptsubst
 
-function short_pwd {
-  echo $PWD | sed "s:${HOME}:~:" | sed "s:/\(.\)[^/]*:/\1:g" | sed "s:/[^/]*$:/$(basename $PWD):"
-}
-
-local ret_status="%(?:%{$fg_bold[yellow]%}$:%{$fg_bold[red]%}$)"
-PROMPT='%{$fg[magenta]%}$(short_pwd)%{$reset_color%} $(git_prompt_info)%{$reset_color%}${ret_status}%{$reset_color%} '
-# RPROMPT='%{$fg[yellow]%}$(date +%r)%{$reset_color%}'
-
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[red]%}✗"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
-
-# Outputs current branch info in prompt format
-function git_prompt_info() {
-  local ref
-  if [[ "$(command git config --get customzsh.hide-status 2>/dev/null)" != "1" ]]; then
-    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-  fi
-}
-
-# Checks if working tree is dirty
-function parse_git_dirty() {
-  local STATUS=''
-  local FLAGS
-  FLAGS=('--porcelain')
-
-  if [[ "$(command git config --get customzsh.hide-dirty)" != "1" ]]; then
-    FLAGS+='--ignore-submodules=dirty'
-    STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
-  fi
-
-  if [[ -n $STATUS ]]; then
-    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
-  else
-    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
-  fi
-}
+# function short_pwd {
+#   echo $PWD | sed "s:${HOME}:~:" | sed "s:/\(.\)[^/]*:/\1:g" | sed "s:/[^/]*$:/$(basename $PWD):"
+# }
+#
+# local ret_status="%(?:%{$fg_bold[yellow]%}$:%{$fg_bold[red]%}$)"
+# PROMPT='%{$fg[magenta]%}$(short_pwd)%{$reset_color%} $(git_prompt_info)%{$reset_color%}${ret_status}%{$reset_color%} '
+# # RPROMPT='%{$fg[yellow]%}$(date +%r)%{$reset_color%}'
+#
+# ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
+# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[red]%}✗"
+# ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+#
+# # Outputs current branch info in prompt format
+# function git_prompt_info() {
+#   local ref
+#   if [[ "$(command git config --get customzsh.hide-status 2>/dev/null)" != "1" ]]; then
+#     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+#     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+#     echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+#   fi
+# }
+#
+# # Checks if working tree is dirty
+# function parse_git_dirty() {
+#   local STATUS=''
+#   local FLAGS
+#   FLAGS=('--porcelain')
+#
+#   if [[ "$(command git config --get customzsh.hide-dirty)" != "1" ]]; then
+#     FLAGS+='--ignore-submodules=dirty'
+#     STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+#   fi
+#
+#   if [[ -n $STATUS ]]; then
+#     echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+#   else
+#     echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+#   fi
+# }
 
 #
 # ===================
@@ -183,33 +185,35 @@ cd_func () {
 }
 
 alias cd=cd_func
+
+redraw-prompt() {
+    local precmd
+    for precmd in $precmd_functions; do
+        $precmd
+    done
+    zle reset-prompt
+}
+zle -N redraw-prompt
+
 _jump() {
   dir="$(fasd -Rdlt | fzf --tiebreak=end -1 -0 --no-sort +m --height 10)" && cd_func "${dir}"
-  zle && zle reset-prompt
+  zle && zle redraw-prompt
 }
+
 zle -N _jump
 bindkey '^g' _jump
+
+## Prompt
+eval "$(starship init zsh)"
+
+function _precmd(){
+  tmux set -w @starship "$(env STARSHIP_CONFIG=$HOME/.config/starship-tmux.toml starship prompt -s ${STATUS:-0} -j ${NUM_JOBS:-0} -d ${STARSHIP_DURATION:-0})"
+}
+starship_precmd_user_func="_precmd"
+precmd_functions+=(_precmd)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # ===================
 #    Load private
 # ===================
 [ -f ~/.zsh_private ] && source ~/.zsh_private
-
-# Sway
-export SWAYSOCK=$HOME/.local/sway.sock
-export _JAVA_AWT_WM_NONREPARENTING=1
-export QT_AUTO_SCREEN_SCALE_FACTOR=1
-export QT_QPA_PLATFORM=wayland
-export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-#export GDK_BACKEND=wayland
-export QT_SCALE_FACTOR=2
-export GDK_SCALE=2
-export GDK_DPI_SCALE=2
-export MOZ_ENABLE_WAYLAND=1
-export XDG_SESSION_TYPE=wayland
-export XDG_CURRENT_DESKTOP=sway
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-  rm -f $SWAYSOCK
-  XKB_DEFAULT_LAYOUT=us exec sway
-fi

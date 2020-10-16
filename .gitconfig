@@ -1,7 +1,7 @@
 [core]
 excludesfile = "~/.gitignore"
 editor = nvim
-pager = diff-so-fancy | less -+R -nBJFXRgiM -h512 -x4
+pager = delta
 
 [user]
 name = Lars Sjöström
@@ -58,26 +58,6 @@ guilt = "!f(){ git log --pretty='format:%an <%ae>' $@ | sort | uniq -c | sort -r
 scat = show $1:`git ls-files --full-name $2`
 	serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
 
-[merge]
-tool = meld
-
-[mergetool]
-prompt = false
-
-[diff]
-renames = true
-tool = kdiff3
-
-[difftool]
-prompt = false
-
-[difftool "kdiff3"]
-cmd = kdiff3 $LOCAL $REMOTE
-trustExitCode = false
-
-[difftool "p4merge"]
-cmd = p4merge $LOCAL $REMOTE
-
 [color]
 ui = auto
 branch = auto
@@ -109,28 +89,34 @@ threads = 0
 [blame]
 date = relative
 
-[tig]
-show-rev-graph = yes
-show-refs = yes
-line-graphics = yes
-
-[tig "bind"]
-generic = G !echo
-stage = G !echo
-main = G !echo
-
-[tig "color"]
-cursor = black green dim
-author = green default normal
-main-revgraph = yellow default normal
-pp-commit = magenta default bold
-diff-chunk = magenta default bold
-
-[diff-so-fancy]
-	useUnicodeRuler = true
-	stripLeadingSymbols = true
 [hub]
 	protocol = git
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    # features = side-by-side line-numbers decorations
+    # whitespace-error-style = 22 reverse
+    # plus-color = "#012800"
+    # minus-color = "#340001"
+    line-numbers = true
+    # line-numbers-left-format = ""
+    # line-numbers-right-format = "│ "
+    # syntax-theme = Sublime Snazzy
+
+# [delta "decorations"]
+#     commit-decoration-style = bold yellow box ul
+#     file-style = bold yellow ul
+#     file-decoration-style = none
+# [delta]
+# plus-color = "#012800"
+# minus-color = "#340001"
+# syntax-theme = GitHub
+
 #
 # vim: ft=conf:
 [filter "lfs"]
