@@ -1,6 +1,13 @@
 call plug#begin('~/.vim/plugged')
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/diagnostic-nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+
+"Colors
+Plug 'tjdevries/colorbuddy.vim'
+Plug '~/src/github.com/shelmangroup/nvim-shelman-theme'
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -28,8 +35,8 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'tomtom/tcomment_vim'
 
 " Pimped out bar at the bottom of current buffer
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'bling/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 
 " Golang
 Plug 'fatih/vim-go'
@@ -45,11 +52,6 @@ Plug 'hashivim/vim-terraform'
 " Jsonnet filetype plugin
 Plug 'google/vim-jsonnet'
 
-" Ale
-Plug 'w0rp/ale'
-
-Plug 'kristijanhusak/vim-hybrid-material'
-
 "Powershell syntax highlight
 Plug 'PProvost/vim-ps1'
 
@@ -62,7 +64,10 @@ filetype plugin indent on     " required!
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
-set showmode                    "Show current mode down the bottom
+set noshowmode
+set noruler
+set laststatus=0
+
 " set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set noerrorbells
@@ -77,21 +82,11 @@ set hlsearch
 set incsearch
 set number
 set mouse=a
-" This makes vim act like all other editors, buffers can
-" exist in the background without being in a window.
-" http://items.sjbach.com/319/configuring-vim-right
 set hidden
-
-" Nvim python runtime environment
-" let g:python3_host_prog = "/usr/local/bin/python3"
-" let g:python_host_prog = "/usr/local/bin/python2"
-
-"turn on syntax highlighting
+set title
+set titlestring=%F%m\ %r\ %y
+"turn on syntax highlightingk
 syntax on
-
-if has("nvim")
-  set termguicolors
-endif
 
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
@@ -108,25 +103,21 @@ set nowb
 set autoindent
 set smartindent
 set smarttab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 set expandtab
 set nojoinspaces
 
 filetype plugin on
 filetype indent on
 
-" Display tabs and trailing spaces visually
-" set list listchars=tab:\ \ ,trail:Ã‚Â·
-
 set nowrap       "NoWrap lines
-" set linebreak  "Wrap lines at convenient points
 set tw=79
 set colorcolumn=80
 set fo-=t
 
-" ================ Completion =======================
+" Completion
 set wildmode=list:longest
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
@@ -153,7 +144,6 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-"set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=1000
 " don't give |ins-completion-menu| messages.
@@ -162,7 +152,6 @@ set shortmess+=c
 
 
 imap § <Esc>
-
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 vnoremap < <gv  " better indentation
@@ -171,20 +160,6 @@ map <leader>q :bd<cr>
 map <leader>w :w<cr>
 map <leader>y :w !pbcopy<cr><cr>
 map <leader>ve :e ~/.config/nvim/init.vim<cr>
-
-" File explorer
-" map <leader>e :Ex<cr>
-
-" Git mappings
-" map <leader>ga :Git add -p<cr>
-" map <leader>gw :Gwrite<cr>
-" map <leader>gb :Git checkout -b<space>
-" map <leader>gp :Git pull<cr>
-" map <leader>gd :Git diff<cr>
-" map <leader>gs :Git status<cr>
-" map <leader>gf :Git fetch<cr>
-" map <leader>gc :Gcommit<cr>
-" map <leader>pr :!stash pr create<space>
 
 " FZF
 map <silent> <space> :Buffers<cr>
@@ -248,21 +223,6 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Normal'] }
 
-"" ALE
-let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = ''      "       ﱥ   ﬡ  樂
-let g:ale_sign_warning = ''
-" let g:ale_linters = {'go': ['gofmt']}
-" let g:ale_linters = {'go': ['go build', 'gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
-" let g:ale_linters = {'go': ['gofmt', 'golint', 'gometalinter', 'gosimple', 'go vet', 'staticcheck']}
-let g:ale_linters = {'go': ['gofmt', 'gometalinter']}
-let g:go_gometalinter_options = join([
- \    '--fast'
- \ ], ' ')
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
 " Disable F1 help
 nmap <F1> <nop>
 
@@ -299,106 +259,112 @@ map <C-W><C-k> <C-W>3-
 map <C-W><C-h> <C-W>10<
 map <C-W><C-l> <C-W>10>
 
-"" COC completion
+"" syntax and completion
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+:lua << END
+require'nvim_lsp'.gopls.setup{
+  on_attach=require'diagnostic'.on_attach
+}
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+require'nvim_lsp'.jdtls.setup{
+  on_attach=require'diagnostic'.on_attach
+}
 
-" Use <c-space> for trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+require'nvim_lsp'.terraformls.setup{
+  on_attach=require'diagnostic'.on_attach,
+  cmd = {'terraform-ls', 'serve'}
+}
 
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+require'nvim_lsp'.yamlls.setup{
+  on_attach=require'diagnostic'.on_attach
+}
 
-" Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+END
 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <tab> <Plug>(completion_smart_tab)
+nmap <s-tab> <Plug>(completion_smart_s_tab)
+let g:completion_chain_complete_list = [
+    \{'complete_items': ['lsp', 'snippet']},
+    \{'mode': '<c-p>'},
+    \{'mode': '<c-n>'}
+\]
 
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" Highlight symbol under cursor on CursorHold
-" autocmd CursorHold * silent call CocActionAsync('highlight')
 
-autocmd CursorHold * silent call CocActionAsync('doHover')
+"" Diagnostics
+let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_insert_delay = 1
+let g:diagnostic_virtual_text_prefix = '⟸ '
 
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+call sign_define("LspDiagnosticsErrorSign", {"text" : "🔥", "texthl" : "LspDiagnosticsError"})
+call sign_define("LspDiagnosticsWarningSign", {"text" : "⚠", "texthl" : "LspDiagnosticsWarning"})
+call sign_define("LspDiagnosticsInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
+call sign_define("LspDiagnosticsHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
 
-" Remap for format selected region
-" vmap <leader>fr  <Plug>(coc-format-selected)
-" nmap <leader>fr  <Plug>(coc-format-selected)
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+autocmd BufEnter * lua require'completion'.on_attach()
 
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-vmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+"" Treesitter
+:lua << END
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
+  highlight = {
+    enable = true,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
 
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>af  <Plug>(coc-fix-current)
+        -- Or you can define your own textobjects like this
+        ["iF"] = {
+          python = "(function_definition) @function",
+          cpp = "(function_definition) @function",
+          c = "(function_definition) @function",
+          java = "(method_declaration) @function",
+        },
+      },
+    },
+  },
+}
+END
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 " tags
 set tags=./tags;/
 
-" Color theme (drawing from altercation/vim-colors-solarized Bundle)
-syntax enable
-set background=dark
-colorscheme hybrid_material
-let g:enable_bold_font = 1
-let g:enable_italic_font = 1
-" colorscheme NeoSolarized
-" let g:neosolarized_italic=1
-highlight Comment gui=italic cterm=italic
-highlight htmlArg gui=italic cterm=italic
-highlight String guifg=#2aa198 gui=italic
-
-" For MacVim
-if has("gui_running")
-    set guifont=Sauce\ Code\ Powerline:h16
-    set guioptions-=T
-    set guioptions-=r
-    set guioptions-=L
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
-
 " Git
-
 let g:SCMDiffCommand = "git"
 let VCSCommandDeleteOnHide = 1
 let g:git_branch_status_nogit=""
@@ -423,69 +389,11 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-" let g:go_auto_sameids = 1
-let g:go_auto_type_info = 0
+let g:go_auto_sameids = 1
+" let g:go_auto_type_info = 0
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 let g:go_def_mapping_enabled = 0
-" let g:go_info_mode = 'guru'
-"let g:go_updatetime = 20
-"
-" autocmd FileType go nmap <Leader>i <Plug>(go-info)
-" autocmd FileType go nmap <S-k> <Plug>(go-doc)
-" autocmd FileType go nmap <Leader>d <Plug>(go-doc-vertical)
-
-" Airline stuff
-" set laststatus=2
-let g:airline_powerline_fonts = 1
-" let g:airline_theme='solarized'
-let g:airline_theme='hybrid'
-hi MsgArea guifg=#e65100
-let g:airline_skip_empty_sections = 1
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline_section_x = ''   " Hide file type
-let g:airline_section_z = "\uf0c9 %l \u2162 %c"
-let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'c'  : 'C',
-      \ 'i'  : 'I',
-      \ 'ic' : 'I',
-      \ 'ix' : 'I',
-      \ 'n'  : "\ue62b",
-      \ 'ni' : "\ue62b",
-      \ 'no' : "\ue62b",
-      \ 'R'  : 'R',
-      \ 'Rv' : 'R',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ 't'  : 'T',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ }
-
-let s:hidden_all = 1
-set noshowmode
-set noruler
-set laststatus=0
-set noshowcmd
-
-let s:hidden_all = 0
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
-endfunction
-nnoremap <S-h> :call ToggleHiddenAll()<CR>
 
 " Support for github flavored markdown
 " via https://github.com/jtratner/vim-flavored-markdown
@@ -495,11 +403,17 @@ augroup markdown
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
 
-" Use 2-space indent for this filetypes
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal shiftwidth=2
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal tabstop=2
-autocmd FileType html,css,scss,jade,ruby,yaml,json,coffee setlocal softtabstop=2
-
 "" Jsonnet
 let g:jsonnet_fmt_fail_silently = 0
 autocmd BufNewFile,BufAdd,BufRead *.libjsonnet setlocal ft=jsonnet
+
+" Color theme
+set background=dark
+lua require('colorbuddy').colorscheme('shelman-dark')
+
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" " undercurl in tmux
+set t_Cs = "\e[4:3m"
+set t_Ce = "\e[4:0m"

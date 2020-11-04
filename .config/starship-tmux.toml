@@ -102,10 +102,10 @@ format = '#\[fg=#212121\]▕#\[bg=#7E57C2,fg=#f7f7f7\] $symbol$number '
 style = ""
 disabled = false
 
-[status]
-format = '\#\[fg=#212121\]▕#[bg=red,fg=#f7f7f7\] $symbol$status '
-style = ""
-disabled = false
+# [status]
+# format = '\#\[fg=#212121\]▕#[bg=red,fg=#f7f7f7\] $symbol$status '
+# style = ""
+# disabled = false
 
 [cmd_duration]
 format = '#\[fg=#212121\]▕#\[bg=#558B2F,fg=#f7f7f7\] ⏳$duration '
