@@ -1,7 +1,6 @@
 # =============
 #    EXPORT
 # =============
-export TERM=xterm-256color
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
 # command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -S gruvbox -f terminal16m %s"
@@ -25,7 +24,7 @@ export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 alias ls='exa'
 alias ll='exa -al --git'
 alias tree='exa -T'
-alias l='less -nRX'
+alias l=bat
 alias vim="nvim"
 alias vi="nvim"
 alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'

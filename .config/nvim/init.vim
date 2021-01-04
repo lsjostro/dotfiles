@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugged')
 " Autocomplete
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/diagnostic-nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 
 "Colors
@@ -271,21 +270,17 @@ nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 :lua << END
-require'nvim_lsp'.gopls.setup{
-  on_attach=require'diagnostic'.on_attach
+require'lspconfig'.gopls.setup{
 }
 
-require'nvim_lsp'.jdtls.setup{
-  on_attach=require'diagnostic'.on_attach
-}
-
-require'nvim_lsp'.terraformls.setup{
-  on_attach=require'diagnostic'.on_attach,
+require'lspconfig'.terraformls.setup{
   cmd = {'terraform-ls', 'serve'}
 }
 
-require'nvim_lsp'.yamlls.setup{
-  on_attach=require'diagnostic'.on_attach
+require'lspconfig'.vimls.setup{
+}
+
+require'lspconfig'.yamlls.setup{
 }
 
 END
