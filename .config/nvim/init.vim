@@ -2,7 +2,7 @@ call plug#begin('~/.vim/plugged')
 " Autocomplete
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 "Colors
 Plug 'tjdevries/colorbuddy.vim'

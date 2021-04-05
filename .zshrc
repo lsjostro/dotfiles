@@ -35,15 +35,18 @@ alias pbcopy="xclip -selection c"
 alias docker="podman"
 alias icat="kitty +kitten icat"
 
-function e {
-  tmux select-window -t1
-  nvr --remote $(readlink -f "$@")
-  # tmux select-window -t1
-  # nvr --remote "$@"
+function _title(){
+  printf '%-16.16s' "$(starship module directory | sed 's/\x1b\[[0-9;]*m//g')"
 }
-function ev {
-  tmux select-window -t1
-  nvr --remote -O "$@"
+
+function set_win_title(){
+    echo -ne "\033]0; $(_title) \007"
+}
+set_win_title
+
+function e {
+  nvr --remote $(readlink -f "$@")
+  echo -e "\x1b]2;$(_title) $(date +%s):nvim\x1b\\"
 }
 
 # =============
@@ -181,6 +184,7 @@ cd_func () {
   fi
   "cd" "${dir}"
   fasd -A $PWD
+  set_win_title
 }
 
 alias cd=cd_func
@@ -204,12 +208,6 @@ bindkey '^g' _jump
 
 ## Prompt
 eval "$(starship init zsh)"
-
-function _precmd(){
-  tmux set -w @starship "$(env STARSHIP_CONFIG=$HOME/.config/starship-tmux.toml starship prompt -s ${STATUS:-0} -j ${NUM_JOBS:-0} -d ${STARSHIP_DURATION:-0})"
-}
-starship_precmd_user_func="_precmd"
-precmd_functions+=(_precmd)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # ===================
