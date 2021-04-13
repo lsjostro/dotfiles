@@ -135,6 +135,7 @@ return {
 
   leader = { key="b", mods="CTRL", timeout_milliseconds=1000 },
   keys = {
+    {key="f", mods="SHIFT|CTRL", action="ToggleFullScreen"},
 
     {key="c", mods="CTRL|SHIFT", action="Copy"},
     {key="v", mods="CTRL|SHIFT", action="Paste"},

@@ -33,7 +33,7 @@ alias lower="tr '[:upper:]' '[:lower:]'"
 alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
 alias docker="podman"
-alias icat="kitty +kitten icat"
+alias icat="wezterm imgcat"
 
 function _title(){
   printf '%-16.16s' "$(starship module directory | sed 's/\x1b\[[0-9;]*m//g')"
