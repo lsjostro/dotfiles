@@ -105,7 +105,7 @@ return {
   },
   freetype_load_target = "HorizontalLcd",
 
-  font_size = 12.0,
+  font_size = 16.0,
   line_height = 1.0,
 
   initial_cols = 120,
