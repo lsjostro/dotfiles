@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/dln/src/github.com/tocaboca/Toca-Days/Infrastructure/Helm'
+let g:netrw_dirhist_3='/home/dln/src/github.com/tocaboca/Toca-Days/Infrastructure/Helm/days'
+let g:netrw_dirhist_2='/home/dln/src/github.com/tocaboca/toca-days-prod/blessings'
+let g:netrw_dirhist_1='/home/dln/src/github.com/tocaboca/toca-infrastructure/flux/k8s/infra/tenants/toca-studio/clusters/studio'
+let g:netrw_dirhist_0='/home/dln/src/github.com/tocaboca/toca-infrastructure/linkerd/gateway'
+let g:netrw_dirhist_9='/home/dln/src/github.com/tocaboca/toca-infrastructure/cluster/terraform'
+let g:netrw_dirhist_8='/home/dln/src/github.com/shelmangroup/tf-infra/lab001/vms/modules/fcos_vault_agent'
+let g:netrw_dirhist_7='/tmp/squid/etc'
+let g:netrw_dirhist_6='/tmp/squid'
+let g:netrw_dirhist_5='/tmp/squid/etc'
