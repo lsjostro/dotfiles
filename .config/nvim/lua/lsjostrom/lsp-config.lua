@@ -235,3 +235,7 @@ require'lspconfig'.tsserver.setup({
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>ci", ":TSLspImportAll<CR>",  { silent = true })
   end
 })
+
+require'lspconfig'.omnisharp.setup{
+    cmd = { "/usr/bin/omnisharp", "--languageserver" , "--hostPID", tostring(vim.fn.getpid()) };
+}

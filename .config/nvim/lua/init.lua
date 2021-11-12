@@ -58,7 +58,8 @@ local map = require("lsjostrom.utils").map
 map('n', '<C-l>', ':let @/=""<CR>')  -- clear search
 map('n', 'H', '^')
 map('n', 'L', '$')
-map('n', 'q', ':bd!<CR>')
+map('n', ',q', ':bd!<CR>')
+map('n', ',w', ':w!<CR>')
 map('i', '', '<C-w>')
 
 --- Plugins

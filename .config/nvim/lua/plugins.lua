@@ -5,6 +5,7 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 	use 'ray-x/lsp_signature.nvim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+	use 'github/copilot.vim'
 
   use {
 	  'b3nj5m1n/kommentary',

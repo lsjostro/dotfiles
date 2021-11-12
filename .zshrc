@@ -3,8 +3,7 @@
 # =============
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
-# command -v pygmentize >/dev/null 2>&1 && export LESSOPEN="|pygmentize -S gruvbox -f terminal16m %s"
-export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
+export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
 export LESS="--mouse --wheel-lines=1 -nRX"
 
 export FZF_TMUX=1
@@ -16,7 +15,6 @@ export GOPROXY=https://proxy.golang.org/
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-#source $HOME/etc/base16-material.dark.sh
 # =============
 #    ALIAS
 # =============
@@ -35,19 +33,6 @@ alias pbcopy="xclip -selection c"
 alias docker="podman"
 alias icat="wezterm imgcat"
 
-function _title(){
-  printf '%-16.16s' "$(starship module directory | sed 's/\x1b\[[0-9;]*m//g')"
-}
-
-function set_win_title(){
-    echo -ne "\033]0; $(_title) \007"
-}
-set_win_title
-
-function e {
-  nvr --remote $(readlink -f "$@")
-  echo -e "\x1b]2;$(_title) $(date +%s):nvim\x1b\\"
-}
 
 # =============
 #    Zplug
@@ -82,12 +67,12 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 # Kubernetes
 command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
 command -v stern >/dev/null 2>&1 && source <(stern --completion zsh)
-command -v kops >/dev/null 2>&1 && source <(kops completion zsh)
 command -v helm >/dev/null 2>&1 && source <(helm completion zsh)
 # Google cloud SDK
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
 # Dir env (brew install direnv)
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
+command -v pazi >/dev/null 2>&1 && eval "$(pazi init zsh)"
 
 # =============
 #    HISTORY
@@ -112,54 +97,6 @@ setopt inc_append_history
 # share command history data
 setopt share_history
 
-# =============
-#    PROMPT
-# =============
-
-# autoload -U colors && colors
-# setopt promptsubst
-
-# function short_pwd {
-#   echo $PWD | sed "s:${HOME}:~:" | sed "s:/\(.\)[^/]*:/\1:g" | sed "s:/[^/]*$:/$(basename $PWD):"
-# }
-#
-# local ret_status="%(?:%{$fg_bold[yellow]%}$:%{$fg_bold[red]%}$)"
-# PROMPT='%{$fg[magenta]%}$(short_pwd)%{$reset_color%} $(git_prompt_info)%{$reset_color%}${ret_status}%{$reset_color%} '
-# # RPROMPT='%{$fg[yellow]%}$(date +%r)%{$reset_color%}'
-#
-# ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
-# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[red]%}✗"
-# ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
-#
-# # Outputs current branch info in prompt format
-# function git_prompt_info() {
-#   local ref
-#   if [[ "$(command git config --get customzsh.hide-status 2>/dev/null)" != "1" ]]; then
-#     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-#     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-#     echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-#   fi
-# }
-#
-# # Checks if working tree is dirty
-# function parse_git_dirty() {
-#   local STATUS=''
-#   local FLAGS
-#   FLAGS=('--porcelain')
-#
-#   if [[ "$(command git config --get customzsh.hide-dirty)" != "1" ]]; then
-#     FLAGS+='--ignore-submodules=dirty'
-#     STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
-#   fi
-#
-#   if [[ -n $STATUS ]]; then
-#     echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
-#   else
-#     echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
-#   fi
-# }
-
 #
 # ===================
 #    KEY BINDINGS
@@ -175,20 +112,6 @@ bindkey '^r' history-incremental-search-backward
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
 
-cd_func () {
-  local dir
-  if [[ -z "$1" ]]; then
-    dir="$HOME"
-  else
-    dir="$@"
-  fi
-  "cd" "${dir}"
-  fasd -A $PWD
-  set_win_title
-}
-
-alias cd=cd_func
-
 redraw-prompt() {
     local precmd
     for precmd in $precmd_functions; do
@@ -199,15 +122,28 @@ redraw-prompt() {
 zle -N redraw-prompt
 
 _jump() {
-  dir="$(fasd -Rdlt | fzf --tiebreak=end -1 -0 --no-sort +m --height 10)" && cd_func "${dir}"
+  z --pipe="fzf"
   zle && zle redraw-prompt
 }
-
 zle -N _jump
 bindkey '^g' _jump
 
 ## Prompt
 eval "$(starship init zsh)"
+
+function _title(){
+  printf '%-16.16s' "$(starship module directory | sed 's/\x1b\[[0-9;]*m//g')"
+}
+
+function set_win_title(){
+    echo -ne "\033]0; $(_title) \007"
+}
+set_win_title
+
+function e {
+  nvr --remote $(readlink -f "$@")
+  echo -e "\x1b]2;$(_title) $(date +%s):nvim\x1b\\"
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # ===================

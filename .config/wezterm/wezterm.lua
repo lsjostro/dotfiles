@@ -3,6 +3,8 @@ local wezterm = require 'wezterm';
 local editPanes = {};
 local editMarker = ":nvim";
 
+local padding = 8;
+
 -- Window titles are a perfectly fine IPC mechanism 😁
 
 wezterm.on("update-right-status", function(window, pane)
@@ -18,7 +20,6 @@ function font_with_fallback(name, params)
   local names = {name, "Noto Color Emoji", "Iosevka Nerd Font Mono"}
   return wezterm.font_with_fallback(names, params)
 end
-
 
 local themeShelmanDark = {
   colors = {
@@ -50,16 +51,20 @@ local themeShelmanDark = {
 local themeShelmanLight = {
   colors = {
     foreground    = "#000000",
-    background    = "#f7f7f7",
-    cursor_bg     = "#FB8C00",
-    cursor_border = "#FB8C00",
+    background    = "#fcfcfc",
+    cursor_bg     = "#ff3300",
+    cursor_fg     = "#ffffff",
+    cursor_border = "#cc0000",
+    selection_bg  = "#FFEA00",
     split         = "#444444",
-    ansi    = { "#000000", "#ff605a", "#b1e869", "#ead89c", "#5da9f6", "#e86aff", "#82fff6", "#ded9ce" },
-    brights = { "#313131", "#f58b7f", "#dcf88f", "#eee5b2", "#a5c7ff", "#ddaaff", "#b6fff9", "#fefffe" },
+    selection_bg  = "#FFCA28",
+    ansi    = { "#212121", "#b7141e", "#457b23", "#f5971d", "#134eb2", "#550087", "#0e707c", "#eeeeee" },
+    brights = { "#424242", "#e83a3f", "#7aba39", "#fee92e", "#53a4f3", "#a94dbb", "#26bad1", "#d8d8d8" },
+
     tab_bar = {
-      background = "#444444",
+      background = "#556677",
       active_tab         = { bg_color = "#f7f7f7", fg_color = "#000000", intensity = "Normal", },
-      inactive_tab       = { bg_color = "#777777", fg_color = "#000000", intensity = "Half", },
+      inactive_tab       = { bg_color = "#778899", fg_color = "#000000", intensity = "Half", },
       inactive_tab_hover = { bg_color = "#333333", fg_color = "#909090", italic = true, }
     }
   },
@@ -67,96 +72,102 @@ local themeShelmanLight = {
   tab_bar_style = {
     active_tab_left          = wezterm.format({ {Background={Color="#f7f7f7"}}, {Foreground={Color="#000000"}}, {Text=" "} }),
     active_tab_right         = wezterm.format({ {Background={Color="#f7f7f7"}}, {Foreground={Color="#000000"}}, {Text=" "} }),
-    inactive_tab_left        = wezterm.format({ {Background={Color="#777777"}}, {Foreground={Color="#f7f7f7"}}, {Text=" "} }),
-    inactive_tab_right       = wezterm.format({ {Background={Color="#777777"}}, {Foreground={Color="#333333"}}, {Text="▕"} }),
+    inactive_tab_left        = wezterm.format({ {Background={Color="#778899"}}, {Foreground={Color="#f7f7f7"}}, {Text=" "} }),
+    inactive_tab_right       = wezterm.format({ {Background={Color="#778899"}}, {Foreground={Color="#333333"}}, {Text="▕"} }),
     inactive_tab_hover_left  = wezterm.format({ {Background={Color="#333333"}}, {Foreground={Color="#ffffff"}}, {Text=" "} }),
     inactive_tab_hover_right = wezterm.format({ {Background={Color="#333333"}}, {Foreground={Color="#ffffff"}}, {Text=" "} }),
   },
 };
 
 
-local theme = themeShelmanDark;
+local theme = themeShelmanLight;
 
 return {
   colors = theme.colors,
   tab_bar_style = theme.tab_bar_style,
   -- automatically_reload_config = false,
-  font = font_with_fallback("Iosevka Term SS09 Light"),
+  font = font_with_fallback("Iosevka Term SS09", {weight="Light"}),
+  -- font = wezterm.font("Iosevka Term SS09", {weight="Regular"}),
   font_rules = {
     {
       italic = false,
       intensity = "Half",
-      font = font_with_fallback("Iosevka Term SS09 Thin")
+      font = font_with_fallback("Iosevka Term SS09", {weight="Thin"})
     },
     {
       italic = true,
       intensity = "Normal",
-      font = font_with_fallback("Iosevka Term SS09 Light", {italic=true})
+      -- font = font_with_fallback("Iosevka Aile", {weight="Regular", italic=true})
+      font = font_with_fallback("Iosevka Term Curly Slab", {weight="Regular", italic=true})
     },
     {
       italic = true,
       intensity = "Bold",
-      font = font_with_fallback("Iosevka Term Curly Slab XLt", {italic=true})
+      font = font_with_fallback("Iosevka Term Curly Slab", {weight="Light", italic=true})
     },
     {
       intensity = "Bold",
-      font = font_with_fallback("Iosevka Term SS09 Semibold")
+      font = font_with_fallback("Iosevka Term SS09", {weight="DemiBold"})
     },
   },
-  freetype_load_target = "HorizontalLcd",
+  -- freetype_load_target = "HorizontalLcd",
+  freetype_load_target = "Light",
+  -- freetype_interpreter_version = 40,
+  -- freetype_load_flags = "FORCE_AUTOHINT",
+  warn_about_missing_glyphs = false,
 
-  font_size = 16.0,
+  bold_brightens_ansi_colors = false,
+
+  font_size = 11.0,
   line_height = 1.0,
 
-  initial_cols = 120,
-  initial_rows = 40,
+  initial_cols = 100,
+  initial_rows = 55,
   window_padding = {
-    left = 0,
-    right = 0,
-    top = 0,
-    bottom = 0,
+    left = padding,
+    right = padding,
+    top = padding,
+    bottom = padding,
   },
 
-  enable_tab_bar = true,
+  enable_tab_bar = false,
+  tab_bar_at_bottom = true,
   show_tab_index_in_tab_bar = true,
   enable_scroll_bar = false,
-  window_decorations = "NONE",
+  window_decorations = "RESIZE",
   scrollback_lines = 5000,
   alternate_buffer_wheel_scroll_speed = 2,
   check_for_updates = false,
   status_update_interval = 100,
 
-  launch_menu = {
-    {
-      label = "dln-dev",
-      args = {"ssh", "dln-dev"},
-    },
-  },
+	disable_default_key_bindings = true,
 
-  leader = { key="b", mods="CTRL", timeout_milliseconds=1000 },
+  leader = { key="o", mods="CTRL|SHIFT", timeout_milliseconds=1000 },
   keys = {
-    {key="f", mods="SHIFT|CTRL", action="ToggleFullScreen"},
 
-    {key="c", mods="CTRL|SHIFT", action="Copy"},
-    {key="v", mods="CTRL|SHIFT", action="Paste"},
+    {key="c", mods="ALT|SHIFT", action="Copy"},
+    {key="v", mods="ALT|SHIFT", action="Paste"},
     {key="n", mods="LEADER", action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
     {key="c", mods="LEADER", action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
     {key="k", mods="LEADER", action=wezterm.action{CloseCurrentTab={confirm=true}}},
     {key="l", mods="LEADER", action="ShowLauncher"},
 
-    {key="LeftArrow", mods="CTRL", action=wezterm.action{ActivateTabRelative=-1}},
-    {key="RightArrow", mods="CTRL", action=wezterm.action{ActivateTabRelative=1}},
-    {key="RightArrow", mods="CTRL|SHIFT", action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
+		{key="-", mods="CTRL", action="DecreaseFontSize"},
+    {key="=", mods="CTRL", action="IncreaseFontSize"},
 
-    {key="1", mods="ALT", action=wezterm.action{ActivateTab=0}},
-    {key="2", mods="ALT", action=wezterm.action{ActivateTab=1}},
-    {key="3", mods="ALT", action=wezterm.action{ActivateTab=2}},
-    {key="4", mods="ALT", action=wezterm.action{ActivateTab=3}},
-    {key="5", mods="ALT", action=wezterm.action{ActivateTab=4}},
-    {key="6", mods="ALT", action=wezterm.action{ActivateTab=5}},
-    {key="7", mods="ALT", action=wezterm.action{ActivateTab=6}},
-    {key="8", mods="ALT", action=wezterm.action{ActivateTab=7}},
-    {key="9", mods="ALT", action=wezterm.action{ActivateTab=8}},
-    {key="0", mods="ALT", action=wezterm.action{ActivateTab=9}},
+    -- {key="LeftArrow", mods="CTRL", action=wezterm.action{ActivateTabRelative=-1}},
+    -- {key="RightArrow", mods="CTRL", action=wezterm.action{ActivateTabRelative=1}},
+    -- {key="RightArrow", mods="CTRL|SHIFT", action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
+
+    -- {key="1", mods="ALT", action=wezterm.action{ActivateTab=0}},
+    -- {key="2", mods="ALT", action=wezterm.action{ActivateTab=1}},
+    -- {key="3", mods="ALT", action=wezterm.action{ActivateTab=2}},
+    -- {key="4", mods="ALT", action=wezterm.action{ActivateTab=3}},
+    -- {key="5", mods="ALT", action=wezterm.action{ActivateTab=4}},
+    -- {key="6", mods="ALT", action=wezterm.action{ActivateTab=5}},
+    -- {key="7", mods="ALT", action=wezterm.action{ActivateTab=6}},
+    -- {key="8", mods="ALT", action=wezterm.action{ActivateTab=7}},
+    -- {key="9", mods="ALT", action=wezterm.action{ActivateTab=8}},
+    -- {key="0", mods="ALT", action=wezterm.action{ActivateTab=9}},
   },
 }

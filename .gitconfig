@@ -1,11 +1,9 @@
 [core]
 excludesfile = "~/.gitignore"
-editor = nvim
-pager = delta
+pager = delta --line-numbers
 
 [user]
-name = Lars Sjöström
-email = lars@radicore.se
+useConfigOnly = true
 
 [column]
 ui = auto
@@ -13,26 +11,30 @@ ui = auto
 [push]
 default = tracking
 
+[branch "main"]
+rebase = true
+
 [branch "master"]
 rebase = true
 
 [alias]
 b = branch -va
-f = fetch
-fa = fetch --all
-t = tag
 d = diff --stat -p -C
 ds = diff --staged --stat -p -C
+du = !"git --no-pager diff --stat -p -C --color=always"
 patch = !git --no-pager diff --no-color
 co = checkout
 st = status -sb
-stu = status -sb --untracked=no
 pullr = pull --rebase
 wc = whatchanged --abbrev-commit --date=relative --date-order --pretty='format:%Cgreen%h %Cblue%ar %Credby %an%Creset -- %s' -n 45
+f = fuzzy status
+fd = fuzzy diff
+fl = fuzzy log
+fs = fuzzy status
 
 ll = log --graph --date=relative --topo-order --pretty='format:%C(yellow)%h%C(yellow)%d %Cblue%ar %Cgreenby %an%Creset -- %s'
 lla = log --graph --date=relative --topo-order --pretty='format:%Cgreen%h %Cblue%ar %Credby %an%Creset -- %s' --all
-gl = log --decorate --graph --abbrev-commit --color --color-words --topo-order --pretty=medium
+gl = log --decorate --graph --abbrev-commit --color --color-words --topo-order --pretty=medium 
 gla = log --decorate --graph --abbrev-commit --color --color-words --topo-order --pretty=medium --all
 sl = log --decorate --graph --abbrev-commit --color --topo-order --pretty=oneline
 sla = log --decorate --graph --abbrev-commit --color --topo-order --pretty=oneline --all
@@ -51,34 +53,16 @@ cdiff = diff --color
 diffs = diff --staged --stat -p
 diffc = diff --staged --stat -p
 vimdiff = difftool -t vimdiff
-meld = difftool -d -t meld
-kdiff3 = difftool -d -t kdiff3
 
 guilt = "!f(){ git log --pretty='format:%an <%ae>' $@ | sort | uniq -c | sort -rn; }; f"
-scat = show $1:`git ls-files --full-name $2`
-	serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
+serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
 
+identity = "! git config user.name \"$(git config user.$1.name)\"; git config user.email \"$(git config user.$1.email)\"; git config user.signingkey \"$(git config user.$1.signingkey)\"; :"
 [color]
 ui = auto
 branch = auto
 diff = auto
 status = auto
-
-[color "branch"]
-current = yellow reverse
-local = yellow
-remote = green
-
-[color "diff"]
-meta = blue bold
-frag = magenta bold
-old = red
-new = green
-
-[color "status"]
-added = blue bold
-changed = green bold
-untracked = cyan bold
 
 [apply]
 whitespace = nowarn
@@ -89,38 +73,34 @@ threads = 0
 [blame]
 date = relative
 
-[hub]
-	protocol = git
+[delta]
+plus-color = "#012800"
+minus-color = "#340001"
+syntax-theme = GitHub
+hunk-header-style = line-number syntax
 
-[core]
-    pager = delta
+[hub]
+protocol = git
+
+[http]
+cookiefile = /home/dln/.gitcookies
 
 [interactive]
-    diffFilter = delta --color-only
+diffFilter = delta --color-only
 
-[delta]
-    # features = side-by-side line-numbers decorations
-    # whitespace-error-style = 22 reverse
-    # plus-color = "#012800"
-    # minus-color = "#340001"
-    line-numbers = true
-    # line-numbers-left-format = ""
-    # line-numbers-right-format = "│ "
-    # syntax-theme = Sublime Snazzy
+[credential]
+helper = store
 
-# [delta "decorations"]
-#     commit-decoration-style = bold yellow box ul
-#     file-style = bold yellow ul
-#     file-decoration-style = none
-# [delta]
-# plus-color = "#012800"
-# minus-color = "#340001"
-# syntax-theme = GitHub
+[commit]
+# gpgsign = true
 
-#
-# vim: ft=conf:
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+[user]
+name = Lars Sjöström
+email = lars@radicore.se
+
+[init]
+defaultBranch = main
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+	insteadOf = https://github.com/
