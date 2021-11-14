@@ -2,9 +2,9 @@
 Name=tmux local
 GenericName=tmux-local
 Type=Application
-TryExec=kitty
-Icon=kitty
+TryExec=wezterm
+Icon=org.wezfurlong.wezterm
 Terminal=false
 Categories=System;TerminalEmulator;
 StartupWMClass=tmux-local
-Exec=kitty --class tmux-local -e tmux new-session -A -D -s 0
+Exec=/usr/bin/wezterm --config 'default_prog={"tmux", "-u", "new", "-As0"}' start --class=tmux-local
