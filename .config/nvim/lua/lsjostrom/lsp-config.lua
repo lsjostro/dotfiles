@@ -10,35 +10,11 @@ vim.lsp.diagnostic.on_publish_diagnostics,
 	virtual_text = {prefix = "‹❮❰ " }
 }
 )
-vim.fn.sign_define(
-"LspDiagnosticsSignError",
-{
-	text = "🔥",
-	texthl = "LspDiagnosticsSignError"
-}
-)
-
-vim.fn.sign_define(
-"LspDiagnosticsSignWarning",
-{
-	text = "⚠",
-	texthl = "LspDiagnosticsSignWarning"
-}
-)
-vim.fn.sign_define(
-"LspDiagnosticsSignInformation",
-{
-	text = "💡",
-	texthl = "LspDiagnosticsSignInformation",
-}
-)
-vim.fn.sign_define(
-"LspDiagnosticsSignHint",
-{
-	text = "💡",
-	texthl = "LspDiagnosticsSignHint",
-}
-)
+local signs = { Error = "🔥", Warn = "⚠️ ", Hint = "💡", Info = "💡" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 local on_attach = function()
 	require("folding").on_attach()

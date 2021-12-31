@@ -145,8 +145,8 @@ return {
   leader = { key="o", mods="CTRL|SHIFT", timeout_milliseconds=1000 },
   keys = {
 
-    {key="c", mods="ALT|SHIFT", action="Copy"},
-    {key="v", mods="ALT|SHIFT", action="Paste"},
+    {key="c", mods="CTRL|SHIFT", action="Copy"},
+    {key="v", mods="CTRL|SHIFT", action="Paste"},
     {key="n", mods="LEADER", action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
     {key="c", mods="LEADER", action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
     {key="k", mods="LEADER", action=wezterm.action{CloseCurrentTab={confirm=true}}},

@@ -14,6 +14,7 @@ export LPASS_AGENT_TIMEOUT=60
 export GOPROXY=https://proxy.golang.org/
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 
 # =============
 #    ALIAS
