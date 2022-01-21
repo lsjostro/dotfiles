@@ -6,6 +6,7 @@ return require('packer').startup(function()
 	use 'ray-x/lsp_signature.nvim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 	use 'github/copilot.vim'
+	use 'uarun/vim-protobuf'
 
   use {
 	  'b3nj5m1n/kommentary',
@@ -19,42 +20,122 @@ return require('packer').startup(function()
 			})
 	  end
   }
+  use {
+    'L3MON4D3/LuaSnip',
+    config = function()
+      require("luasnip/loaders/from_vscode").lazy_load()
+    end
+  }
 
   use {
-    "hrsh7th/nvim-compe",
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'andersevenrud/cmp-tmux',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+    },
     config = function()
-      require("compe").setup {
-        min_length = 0,
-        source = {
-          buffer = true,
-          nvim_lsp = true,
-          nvim_lua = true,
-        }
-      }
-      local utils = require("lsjostrom.utils")
-      local check_behind = function()
-        local is_empty = function(col)
-          return col <= 0 or vim.fn.getline("."):sub(col, col):match("%s")
-        end
-        local pos_col = vim.fn.col(".") - 1
-        return is_empty(pos_col) and is_empty(pos_col - 1) and true or false
+      local cmp = require'cmp'
+      local luasnip = require'luasnip'
+
+      local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
       end
 
-      _G.complete = function(pum, empty)
-        if vim.fn.pumvisible() == 1 then
-          return utils.term_codes(pum)
-        elseif check_behind() then
-          return utils.term_codes(empty)
-        else
-          return vim.fn["compe#complete"]()
-        end
-      end
+      cmp.setup({
 
-      utils.mapx("is", "<C-Space>",   "v:lua.complete('<C-n>', '<Tab>')")
-      utils.mapx("is", "<Tab>",   "v:lua.complete('<C-n>', '<Tab>')")
-      utils.mapx("is", "<S-Tab>", "v:lua.complete('<C-p>', '<C-h>')")
-      utils.mapx("x",  "<CR>",    "compe:#confirm('<CR')")
-      utils.mapx("is", "<C-e>",   "compe#close('<C-e>')")
+        formatting = {
+          format = require('lspkind').cmp_format({
+            with_text = true,
+            menu = {
+              buffer = "[Buffer]",
+              tmux = "[Tmux]",
+              luasnip = "[LuaSnip]",
+              nvim_lsp = "[LSP]",
+              nvim_lua = "[Lua]",
+              path = "[Path]",
+            },
+          }),
+        },
+
+        documentation = {
+          border = 'rounded'
+        },
+
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+
+        mapping = {
+          ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+          ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+          ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-u>"] = cmp.mapping.scroll_docs(4),
+          ['<C-e>'] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+          }),
+          ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = false }), { 'i', 'c' }),
+          ['<C-y>'] = cmp.mapping(cmp.mapping.confirm({ select = false }), { 'i', 'c' }),
+          ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+							local copilot_keys = vim.fn["copilot#Accept"]()
+							if copilot_keys ~= "" then
+								vim.api.nvim_feedkeys(copilot_keys, "i", true)
+							else
+								fallback()
+							end
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+        },
+
+        sources = cmp.config.sources({
+          {
+            name = 'buffer',
+            priority = 1,
+          },
+          {
+            name = 'luasnip',
+            priority = 4,
+          },
+          {
+            name = 'tmux',
+            priority = 2,
+            option = {
+              all_panes = true,
+              trigger_characters = {},
+            }
+          },
+          {
+            name = 'nvim_lsp',
+            priority = 3,
+          },
+        })
+      })
+
     end
   }
 
@@ -102,6 +183,8 @@ return require('packer').startup(function()
       local map = require('lsjostrom.utils').map
       map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>')
       map('i', '<C-k>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>')
+			map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+			map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
       map('n', '1gd', '<Cmd>lua vim.lsp.buf.type_definition()<CR>')
       map('n', 'gf',  '<Cmd>lua vim.lsp.buf.formatting()<CR>')
       map('n', 'rn',  '<Cmd>lua vim.lsp.buf.rename()<CR>')
@@ -183,6 +266,15 @@ return require('packer').startup(function()
     requires ={{'tjdevries/colorbuddy.vim'}},
     config = function()
       require('colorbuddy').colorscheme('shelman-light')
+    end
+  }
+
+	use {
+    'mattn/efm-langserver',
+    config = function()
+      require "lspconfig".efm.setup {
+        init_options = {documentFormatting = true},
+      }
     end
   }
 

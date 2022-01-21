@@ -14,10 +14,10 @@ vim.o.backupdir = "/home/lsjostrom/.local/share/nvim/backup/"
 vim.o.backup = true
 
 --- Indent
-vim.bo.autoindent = true
+vim.o.autoindent = true
 vim.o.breakindent = true
-vim.bo.expandtab = true
-vim.bo.smartindent = true
+vim.o.expandtab = true
+vim.o.smartindent = true
 vim.o.joinspaces = false
 vim.o.listchars = 'extends:›,precedes:‹,nbsp:·,tab:→ ,trail:·'
 vim.wo.foldlevel = 99
@@ -58,8 +58,8 @@ local map = require("lsjostrom.utils").map
 map('n', '<C-l>', ':let @/=""<CR>')  -- clear search
 map('n', 'H', '^')
 map('n', 'L', '$')
-map('n', ',q', ':bd!<CR>')
-map('n', ',w', ':w!<CR>')
+map('n', '<leader>q', ':bd!<CR>')
+map('n', '<leader>w', ':w!<CR>')
 map('i', '', '<C-w>')
 
 --- Plugins
@@ -85,3 +85,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.
 -- vim.cmd [[nnoremap <buffer><silent> ]g :lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = border }})<CR>]]
 -- vim.cmd [[nnoremap <buffer><silent> [g :lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "round" }})<CR>]]
 
+-- copilot.vim
+map('i', '<C-J>', [[copilot#Accept("\<CR>")]], {noremap=true, silent=true, expr=true, script=true})
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
