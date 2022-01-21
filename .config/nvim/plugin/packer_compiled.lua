@@ -182,7 +182,7 @@ _G.packer_plugins = {
     config = { "\27LJ\1\2P\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0%\1\3\0>\0\2\1G\0\1\0\18shelman-light\16colorscheme\15colorbuddy\frequire\0" },
     loaded = true,
     path = "/home/lsjostrom/.local/share/nvim/site/pack/packer/start/nvim-shelman-theme",
-    url = "/home/lsjostrom/src/github.com/shelmangroup/nvim-shelman-theme"
+    url = "https://github.com/shelmangroup/nvim-shelman-theme"
   },
   ["nvim-treesitter"] = {
     config = { "\27LJ\1\2\1\0\0\2\0\b\0\f4\0\0\0%\1\1\0>\0\2\0014\0\2\0007\0\3\0%\1\5\0:\1\4\0004\0\2\0007\0\3\0%\1\a\0:\1\6\0G\0\1\0\31nvim_treesitter#foldexpr()\rfoldexpr\texpr\15foldmethod\awo\bvim\25lsjostrom.treesitter\frequire\0" },

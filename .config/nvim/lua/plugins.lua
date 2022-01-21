@@ -290,7 +290,7 @@ return require('packer').startup(function()
     }
 
     use {
-        "~/src/github.com/shelmangroup/nvim-shelman-theme",
+        "shelmangroup/nvim-shelman-theme",
         requires = {{'tjdevries/colorbuddy.vim'}},
         config = function()
             require('colorbuddy').colorscheme('shelman-light')
