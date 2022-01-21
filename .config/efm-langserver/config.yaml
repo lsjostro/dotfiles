@@ -1,0 +1,18 @@
+version: 2
+root-markers:
+- .git/
+
+tools:
+  clang-format: &clang-format
+    format-command: 'clang-format -style="{BasedOnStyle: Google, IndentWidth: 2, AlignConsecutiveDeclarations: true, AlignConsecutiveAssignments: true, ColumnLimit: 0}"'
+    format-stdin: true
+
+  lua-lua-format: &lua-lua-format
+    format-command: 'lua-format -i'
+    format-stdin: true
+
+languages:
+  proto:
+    - <<: *clang-format
+  lua:
+    - <<: *lua-lua-format
