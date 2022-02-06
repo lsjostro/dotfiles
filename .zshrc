@@ -142,8 +142,8 @@ function set_win_title(){
 set_win_title
 
 function e {
-  nvr --remote $(readlink -f "$@")
-  echo -e "\x1b]2;$(_title) $(date +%s):nvim\x1b\\"
+  nvr --nostart --remote $(readlink -f "$@")
+  tmux select-window -t1 
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
