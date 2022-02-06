@@ -1,20 +1,5 @@
 local wezterm = require 'wezterm';
 
-
--- local editPanes = {};
--- local editMarker = ":nvim";
-
--- Window titles are a perfectly fine IPC mechanism 😁
-
--- wezterm.on("update-right-status", function(window, pane)
---     local title = pane:get_title();
---     local pid = pane:pane_id();
---     if editPanes[pid] ~= title and title:sub(-#editMarker) == editMarker then
---         editPanes[pid] = title;
---         window:perform_action(wezterm.action {ActivateTab = 0}, pane);
---     end
--- end);
-
 function font_with_fallback(name, params)
     local names = {name, "Noto Color Emoji", "Iosevka Nerd Font Mono"}
     return wezterm.font_with_fallback(names, params)
