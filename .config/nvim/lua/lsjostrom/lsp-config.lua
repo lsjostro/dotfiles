@@ -44,7 +44,10 @@ local efm_prettier = {
 
 
 lspconfig.sumneko_lua.setup {
-	cmd = {"lua-language-server", "-E", "/usr/share/lua-language-server/main.lua"},
+  on_attach = function()
+    on_attach()
+    vim.cmd [[autocmd BufWritePre <buffer> lua require'stylua-nvim'.format_file()]]
+  end,
 	settings = {
 		Lua = {
 			completion = {kewordSnippet = "Disable"},
@@ -57,14 +60,10 @@ lspconfig.sumneko_lua.setup {
 				path = {"?.lua", "?/init.lua", "?/?.lua"}
 			},
 			workspace = {
-				library = {
-					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-					[vim.fn.stdpath("config") .. "/lua"] = true,
-					[vim.fn.stdpath("data") .. "/site/pack"] = true
-				},
+        library = vim.api.nvim_get_runtime_file('', true),
 				maxPreload = 2000,
-				preloadFileSize = 1000
+				preloadFileSize = 1000,
+        checkThirdParty = false
 			}
 		}
 	}
