@@ -2,8 +2,29 @@ require("dap")
 local map = require("lsjostrom.utils").map
 local silent = { silent = true }
 
-vim.fn.sign_define("DapStopped", { text = "=>", texthl = "", linehl = "debugPC", numhl = "#009688" })
-vim.fn.sign_define("DapBreakpoint", { text = "🧘", texthl = "", linehl = "", numhl = "#009688" })
+-- vim.fn.sign_define("DapStopped", { text = "=>", texthl = "", linehl = "debugPC", numhl = "#009688" })
+-- vim.fn.sign_define("DapBreakpoint", { text = "🧘", texthl = "", linehl = "", numhl = "#009688" })
+vim.highlight.create("DapBreakpoint", { ctermbg = 0, guifg = "#993939", guibg = "#fcfaed" }, false)
+vim.highlight.create("DapLogPoint", { ctermbg = 0, guifg = "#61afef", guibg = "#fcfaed" }, false)
+vim.highlight.create("DapStopped", { ctermbg = 0, guifg = "#98c379", guibg = "#fcfaed" }, false)
+
+vim.fn.sign_define(
+	"DapBreakpoint",
+	{ text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+)
+vim.fn.sign_define(
+	"DapBreakpointCondition",
+	{ text = "ﳁ", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+)
+vim.fn.sign_define(
+	"DapBreakpointRejected",
+	{ text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+)
+vim.fn.sign_define(
+	"DapLogPoint",
+	{ text = "", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" }
+)
+vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
 
 map("n", "<F7>", ":lua require'dap'.toggle_breakpoint()<CR>", silent)
 map("n", "<F8>", ":lua require'dap'.continue()<CR>", silent) -- .continue

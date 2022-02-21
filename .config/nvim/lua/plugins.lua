@@ -315,11 +315,21 @@ return require("packer").startup(function()
 		end,
 	})
 
+	-- use({
+	-- 	"~/src/github.com/shelmangroup/nvim-shelman-theme",
+	-- 	requires = { { "tjdevries/colorbuddy.vim" } },
+	-- 	config = function()
+	-- 		require("colorbuddy").colorscheme("shelman-light")
+	-- 	end,
+	-- })
+	-- zenbones
 	use({
-		"~/src/github.com/shelmangroup/nvim-shelman-theme",
-		requires = { { "tjdevries/colorbuddy.vim" } },
+		"mcchrish/zenbones.nvim",
+		requires = {
+			"rktjmp/lush.nvim",
+		},
 		config = function()
-			require("colorbuddy").colorscheme("shelman-light")
+			require("plugins/zenbones")
 		end,
 	})
 
