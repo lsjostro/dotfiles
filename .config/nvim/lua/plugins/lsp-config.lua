@@ -15,6 +15,27 @@ map("n", "gwa", "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
 map("n", "gwr", "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
 map("n", "gwl", "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
 
+local border = {
+	{ "🭽", "FloatBorder" },
+	{ "▔", "FloatBorder" },
+	{ "🭾", "FloatBorder" },
+	{ "▕", "FloatBorder" },
+	{ "🭿", "FloatBorder" },
+	{ "▁", "FloatBorder" },
+	{ "🭼", "FloatBorder" },
+	{ "▏", "FloatBorder" },
+}
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+
+-- will format file before saving based on attached lsp capabilities
+vim.cmd([[
+augroup lsp
+  autocmd!
+  autocmd BufWritePre * lua require'utils'.auto_format_lsp()
+augroup END
+]])
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	update_in_insert = false,
 	virtual_text = { prefix = "‹❮❰ " },

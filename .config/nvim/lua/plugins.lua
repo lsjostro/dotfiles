@@ -7,9 +7,15 @@ packer.startup(function(use)
 	use("pierreglaser/folding-nvim")
 	use("ray-x/lsp_signature.nvim")
 	use("jose-elias-alvarez/nvim-lsp-ts-utils")
-	use("github/copilot.vim")
 	use("uarun/vim-protobuf")
 	use("ckipp01/stylua-nvim")
+
+	use({
+		"github/copilot.vim",
+		config = function()
+			require("plugins/copilot")
+		end,
+	})
 
 	use({
 		"mfussenegger/nvim-dap",

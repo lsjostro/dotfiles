@@ -26,6 +26,9 @@ vim.wo.list = true
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.g.netrw_dirhistmax = 0
 
 --- Search
 vim.cmd("set path+=**")
@@ -61,35 +64,3 @@ map("n", "L", "$")
 map("n", "<leader>q", ":bd!<CR>")
 map("n", "<leader>w", ":w!<CR>")
 map("i", "", "<C-w>")
-
-vim.g.netrw_dirhistmax = 0
-
-local border = {
-	{ "🭽", "FloatBorder" },
-	{ "▔", "FloatBorder" },
-	{ "🭾", "FloatBorder" },
-	{ "▕", "FloatBorder" },
-	{ "🭿", "FloatBorder" },
-	{ "▁", "FloatBorder" },
-	{ "🭼", "FloatBorder" },
-	{ "▏", "FloatBorder" },
-}
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
-
--- will format file before saving based on attached lsp capabilities
-vim.cmd([[
-augroup lsp
-  autocmd!
-  autocmd BufWritePre * lua require'utils'.auto_format_lsp()
-augroup END
-]])
-
--- copilot.vim
-map("i", "<C-J>", [[copilot#Accept("\<CR>")]], { noremap = true, silent = true, expr = true, script = true })
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
-vim.g.copilot_tab_fallback = ""
-
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
