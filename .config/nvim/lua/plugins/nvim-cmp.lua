@@ -7,7 +7,6 @@ local has_words_before = function()
 end
 
 cmp.setup({
-
 	formatting = {
 		format = require("lspkind").cmp_format({
 			with_text = true,
@@ -50,6 +49,7 @@ cmp.setup({
 			elseif has_words_before() then
 				cmp.complete()
 			else
+				-- HACK: copilot workaround
 				local copilot_keys = vim.fn["copilot#Accept"]()
 				if copilot_keys ~= "" then
 					vim.api.nvim_feedkeys(copilot_keys, "i", true)
