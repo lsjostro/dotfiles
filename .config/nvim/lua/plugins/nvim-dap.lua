@@ -1,5 +1,6 @@
 require("dap")
-local map = require("lsjostrom.utils").map
+require("dap.ext.vscode").load_launchjs()
+local map = require("utils").map
 local silent = { silent = true }
 
 -- vim.fn.sign_define("DapStopped", { text = "=>", texthl = "", linehl = "debugPC", numhl = "#009688" })

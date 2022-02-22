@@ -54,7 +54,7 @@ vim.wo.signcolumn = "yes"
 vim.o.laststatus = 0
 
 --- Key mappings
-local map = require("lsjostrom.utils").map
+local map = require("utils").map
 map("n", "<C-l>", ':let @/=""<CR>') -- clear search
 map("n", "H", "^")
 map("n", "L", "$")
@@ -84,8 +84,19 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- vim.cmd [[nnoremap <buffer><silent> ]g :lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = border }})<CR>]]
 -- vim.cmd [[nnoremap <buffer><silent> [g :lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "round" }})<CR>]]
 
+-- will format file before saving based on attached lsp capabilities
+vim.cmd([[
+augroup lsp
+  autocmd!
+  autocmd BufWritePre * lua require'utils'.auto_format_lsp()
+augroup END
+]])
+
 -- copilot.vim
 map("i", "<C-J>", [[copilot#Accept("\<CR>")]], { noremap = true, silent = true, expr = true, script = true })
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
+
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
