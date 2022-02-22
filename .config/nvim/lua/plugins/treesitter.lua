@@ -1,4 +1,6 @@
-require("nvim-treesitter.configs").setup({
+local config = require("nvim-treesitter.configs")
+
+config.setup({
 	ensure_installed = "maintained",
 	highlight = {
 		enable = true,
