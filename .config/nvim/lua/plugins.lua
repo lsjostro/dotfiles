@@ -18,6 +18,14 @@ packer.startup(function(use)
 	})
 
 	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("plugins/null-ls")
+		end,
+	})
+
+	use({
 		"mfussenegger/nvim-dap",
 		config = function()
 			require("plugins/nvim-dap")
