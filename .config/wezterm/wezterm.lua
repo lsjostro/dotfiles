@@ -177,7 +177,7 @@ return {
 	colors = theme.colors,
 	tab_bar_style = theme.tab_bar_style,
 	-- automatically_reload_config = false,
-	font = font_with_fallback("Iosevka Term SS09", { weight = "Light" }),
+	font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
 	-- font = wezterm.font("Iosevka Term SS09", {weight="Regular"}),
 	font_rules = {
 		{
