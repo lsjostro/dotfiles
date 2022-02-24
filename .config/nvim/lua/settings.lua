@@ -64,3 +64,13 @@ map("n", "L", "$")
 map("n", "<leader>q", ":bd!<CR>")
 map("n", "<leader>w", ":w!<CR>")
 map("i", "", "<C-w>")
+map("n", "<leader>l", ":set laststatus=2<CR>")
+map("n", "<leader>ll", ":set laststatus=1<CR>")
+
+-- recompile packer on plugins change
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
