@@ -12,6 +12,7 @@ vim.o.updatetime = 100
 vim.o.autochdir = true
 vim.o.backupdir = "/home/lsjostrom/.local/share/nvim/backup/"
 vim.o.backup = true
+vim.o.clipboard = "unnamedplus"
 
 --- Indent
 vim.o.autoindent = true
@@ -58,14 +59,17 @@ vim.o.laststatus = 0
 
 --- Key mappings
 local map = require("utils").map
+local silent = { silent = true }
+
 map("n", "<C-l>", ':let @/=""<CR>') -- clear search
 map("n", "H", "^")
 map("n", "L", "$")
-map("n", "<leader>q", ":bd!<CR>")
-map("n", "<leader>w", ":w!<CR>")
+map("n", "<leader>q", ":bdelete!<CR>")
+map("n", "<leader>w", ":write!<CR>")
 map("i", "", "<C-w>")
 map("n", "<leader>l", ":set laststatus=2<CR>")
-map("n", "<leader>ll", ":set laststatus=1<CR>")
+map("n", "<leader>ll", ":set laststatus=0<CR>")
+map("n", "<C-a>", "<ESC>ggVG$", silent)
 
 -- recompile packer on plugins change
 vim.cmd([[

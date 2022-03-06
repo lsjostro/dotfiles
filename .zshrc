@@ -73,7 +73,6 @@ command -v helm >/dev/null 2>&1 && source <(helm completion zsh)
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
 # Dir env (brew install direnv)
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
-command -v pazi >/dev/null 2>&1 && eval "$(pazi init zsh)"
 
 # =============
 #    HISTORY
@@ -123,11 +122,21 @@ redraw-prompt() {
 zle -N redraw-prompt
 
 _jump() {
-  z --pipe="fzf"
+  _dir=$((
+      git rev-parse --show-toplevel 2>/dev/null | xargs -r fd --type d --hidden --follow --exclude .git .
+      fre --sorted
+    ) | fzf-tmux)
+  [ -n "$_dir" ] && pushd $_dir >>/dev/null
   zle && zle redraw-prompt
 }
 zle -N _jump
 bindkey '^g' _jump
+
+fre_chpwd() {
+  fre --add "$(pwd)"
+}
+typeset -gaU chpwd_functions
+chpwd_functions+=fre_chpwd
 
 ## Prompt
 eval "$(starship init zsh)"
