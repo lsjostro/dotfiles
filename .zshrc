@@ -151,8 +151,16 @@ function set_win_title(){
 set_win_title
 
 function e {
-  nvr --nostart --remote $(readlink -f "$@")
-  tmux select-window -t1 
+  if [ -n "$1" ]; then
+    _file=$(readlink -f "$@") 
+  else
+    _git_root=$(git rev-parse --show-toplevel)
+    _store=$(printf $_git_root | sha1sum | cut -d ' ' -f 1)
+    _file=$( (fre --store_name $_store --sorted && fd --type f --hidden --follow --exclude .git . $_git_root) | fzf-tmux)
+    fre --store_name $_store --add $_file
+  fi
+  nvr --nostart --remote $_file
+  tmux select-window -t1
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
