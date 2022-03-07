@@ -27,19 +27,16 @@ alias l=bat
 alias vim="nvim"
 alias vi="nvim"
 alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
-alias lp-ssh-pubkey='lpass show --field="Public Key" --clip'
 alias lower="tr '[:upper:]' '[:lower:]'"
 alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
 alias docker="podman"
 alias icat="wezterm imgcat"
-
-
 # =============
 #    Zplug
 # =============
 export ZPLUG_HOME=$HOME/.zplug
-source $ZPLUG_HOME/init.zsh
+source /usr/share/zsh/scripts/zplug/init.zsh
 
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
@@ -47,7 +44,6 @@ zplug "thecasualcoder/kube-fzf", as:command, use:"{*pod,*.sh}"
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "arunvelsriram/kube-fzf", use:kube-fzf.sh
-# zplug "nnao45/zsh-kubectl-completion"
 
 # Check if install and load
 if ! zplug check; then
@@ -68,7 +64,7 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 # Kubernetes
 command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
 command -v stern >/dev/null 2>&1 && source <(stern --completion zsh)
-command -v helm >/dev/null 2>&1 && source <(helm completion zsh)
+
 # Google cloud SDK
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
 # Dir env (brew install direnv)
@@ -121,7 +117,7 @@ redraw-prompt() {
 }
 zle -N redraw-prompt
 
-_jump() {
+function _jump() {
   _dir=$((
       git rev-parse --show-toplevel 2>/dev/null | xargs -r fd --type d --hidden --follow --exclude .git .
       fre --sorted
@@ -132,7 +128,7 @@ _jump() {
 zle -N _jump
 bindkey '^g' _jump
 
-fre_chpwd() {
+function fre_chpwd() {
   fre --add "$(pwd)"
 }
 typeset -gaU chpwd_functions
