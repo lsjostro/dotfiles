@@ -1,7 +1,0 @@
-#!/bin/bash
-set -xe
-ns=$1
-shift
-selector="$@"
-pod=$(kubectl get pods --namespace=$ns $selector -o template --template="{{with index .items 0}}{{.metadata.name}}{{end}}")
-exec kubectl --namespace=$ns exec -ti $pod /bin/sh
