@@ -5,6 +5,7 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
 export LESS="--mouse --wheel-lines=1 -nRX"
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh
 
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
