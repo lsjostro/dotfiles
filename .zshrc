@@ -93,6 +93,15 @@ setopt inc_append_history
 # share command history data
 setopt share_history
 
+## zsh settings
+setopt pipe_fail
+setopt auto_pushd
+setopt no_beep
+setopt no_rm_star_silent
+setopt extended_glob
+setopt ksh_glob
+setopt null_glob
+
 #
 # ===================
 #    KEY BINDINGS
