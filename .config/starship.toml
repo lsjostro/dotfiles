@@ -1,6 +1,7 @@
 add_newline = false
 
 format = """\
+$hostname\
 $directory\
 $git_branch\
 $git_status\
@@ -45,6 +46,10 @@ style = "dimmed"
 # [git_status]
 # format = "([$all_status$ahead_behind]($style) )"
 # style = "bold red"
+[hostname]
+ssh_only = false
+format =  "[$hostname](bold italic):"
+disabled = false
 
 [kubernetes]
 disabled = false
