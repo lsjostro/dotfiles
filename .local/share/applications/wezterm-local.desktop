@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=wezterm-local
+GenericName=wezterm-local
+StartupWMClass=org.wezfurlong.wezterm
+Type=Application
+TryExec=/usr/bin/wezterm
+Icon=org.wezfurlong.wezterm
+Terminal=false
+Categories=System;TerminalEmulator;
+Exec=/usr/bin/wezterm --config 'default_prog={"tmux", "-u", "new", "-As0"}' start --class=wezterm-local
+
