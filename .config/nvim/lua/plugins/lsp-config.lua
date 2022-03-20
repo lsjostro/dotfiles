@@ -1,6 +1,4 @@
 local lspconfig = require("lspconfig")
--- local configs = require("lspconfig.configs")
-local util = require("lspconfig.util")
 local map = require("utils").map
 map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
 map("i", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>")
@@ -62,16 +60,12 @@ local servers = {
 	"sumneko_lua",
 	"terraformls",
 	"yamlls",
+	"gdscript",
 }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({ on_attach = on_attach })
 end
-
-local efm_prettier = {
-	formatCommand = "prettier --stdin-filepath ${INPUT}",
-	formatStdin = true,
-}
 
 lspconfig.sumneko_lua.setup({
 	on_attach = function()
