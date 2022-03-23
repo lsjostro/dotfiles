@@ -17,6 +17,9 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 
+# ripgrep 
+export RIPGREP_CONFIG_PATH=${HOME}/.config/rg/rg.conf
+
 # =============
 #    ALIAS
 # =============

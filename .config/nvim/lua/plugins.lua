@@ -3,6 +3,14 @@ packer.startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
+	--dashboard
+	use({
+		"glepnir/dashboard-nvim",
+		config = function()
+			require("plugins/dashboard")
+		end,
+	})
+
 	use("hashivim/vim-terraform")
 	use("pierreglaser/folding-nvim")
 	use("ray-x/lsp_signature.nvim")

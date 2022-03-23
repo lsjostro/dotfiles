@@ -1,6 +1,0 @@
---glob=!vendor/
---colors=path:fg:100,150,210
---colors=match:style:nobold
---colors=match:bg:180,150,40
---colors=match:fg:0,0,0
---max-columns=150
