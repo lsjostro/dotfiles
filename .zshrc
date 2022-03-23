@@ -9,10 +9,51 @@ zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "arunvelsriram/kube-fzf", use:kube-fzf.sh
 
-if ! zplug check; then
-    zplug install
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
 fi
 zplug load
+
+# history
+HISTSIZE=50000
+SAVEHIST=50000
+HISTFILE=~/.zsh_history
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_fcntl_lock
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt HIST_IGNORE_SPACE
+setopt hist_lex_words
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt hist_subst_pattern
+setopt hist_verify
+setopt share_history
+
+# zsh settings
+setopt pipe_fail
+setopt auto_pushd
+setopt no_beep
+setopt no_rm_star_silent
+setopt extended_glob
+setopt ksh_glob
+setopt null_glob
+
+# zsh syntax highlighter
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+typeset -A ZSH_HIGHLIGHT_STYLES
+
+# KEY BINDINGS
+bindkey -e
+bindkey '^r' history-incremental-search-backward
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+bindkey '^g' _jump
 
 # Exports
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
@@ -43,56 +84,19 @@ alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
 alias docker="podman"
 
-# zsh syntax highlighter
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-typeset -A ZSH_HIGHLIGHT_STYLES
-
-# Completion
+# completions
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 complete -C '/usr/bin/aws_completer' aws
 
-## Prompt
+# prompt
 eval "$(starship init zsh)"
 
-## command history configuration
-if [ -z "$HISTFILE" ]; then
-  HISTFILE=$HOME/.zsh_history
-fi
+# autoload
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
 
-HISTSIZE=1000000
-SAVEHIST=1000000
-
-#setopt append_history
-setopt extended_history
-setopt hist_expire_dups_first
-# ignore duplication command history list
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt inc_append_history
-# share command history data
-setopt share_history
-
-## zsh settings
-setopt pipe_fail
-setopt auto_pushd
-setopt no_beep
-setopt no_rm_star_silent
-setopt extended_glob
-setopt ksh_glob
-setopt null_glob
-
-# KEY BINDINGS
-# Use emacs-like key bindings by default:
-bindkey -e
-
-bindkey '^r' history-incremental-search-backward
-# Substring search plugin
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
-bindkey '^g' _jump
-
+# functions
 function redraw-prompt() {
     local precmd
     for precmd in $precmd_functions; do
@@ -130,6 +134,3 @@ function e() {
   nvr --nostart --remote $_file
   tmux select-window -t1
 }
-
-autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
