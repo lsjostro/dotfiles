@@ -13,12 +13,10 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export LPASS_AGENT_TIMEOUT=60
 
 export GOPROXY=https://proxy.golang.org/
-export RIPGREP_CONFIG_PATH=~/.ripgreprc
+export RIPGREP_CONFIG_PATH=${HOME}/.config/rg/rg.conf
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 
-# ripgrep 
-export RIPGREP_CONFIG_PATH=${HOME}/.config/rg/rg.conf
 
 # =============
 #    ALIAS
@@ -35,7 +33,6 @@ alias lower="tr '[:upper:]' '[:lower:]'"
 alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
 alias docker="podman"
-alias icat="wezterm imgcat"
 # =============
 #    Zplug
 # =============
