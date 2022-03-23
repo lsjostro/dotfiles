@@ -1,27 +1,36 @@
-# =============
-#    EXPORT
-# =============
+# zplug
+export ZPLUG_HOME=$HOME/.zplug
+source /usr/share/zsh/scripts/zplug/init.zsh
+
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "thecasualcoder/kube-fzf", as:command, use:"{*pod,*.sh}"
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
+zplug "arunvelsriram/kube-fzf", use:kube-fzf.sh
+
+if ! zplug check; then
+    zplug install
+fi
+zplug load
+
+# Exports
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export EDITOR=nvim
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
 export LESS="--mouse --wheel-lines=1 -nRX"
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh
-
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export LPASS_AGENT_TIMEOUT=60
-
-export GOPROXY=https://proxy.golang.org/
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
 export RIPGREP_CONFIG_PATH=${HOME}/.config/rg/rg.conf
+export GOPROXY=https://proxy.golang.org/
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 
-
-# =============
-#    ALIAS
-# =============
-
+# aliases
 alias ls='exa'
 alias ll='exa -al --git'
 alias tree='exa -T'
@@ -33,51 +42,22 @@ alias lower="tr '[:upper:]' '[:lower:]'"
 alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
 alias docker="podman"
-# =============
-#    Zplug
-# =============
-export ZPLUG_HOME=$HOME/.zplug
-source /usr/share/zsh/scripts/zplug/init.zsh
 
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "thecasualcoder/kube-fzf", as:command, use:"{*pod,*.sh}"
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-zplug "arunvelsriram/kube-fzf", use:kube-fzf.sh
-
-# Check if install and load
-if ! zplug check; then
-    zplug install
-fi
-zplug load
-
-# ==========================
-#    Zsh syntax highlighter
-# ==========================
+# zsh syntax highlighter
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 typeset -A ZSH_HIGHLIGHT_STYLES
-# ZSH_HIGHLIGHT_STYLES[alias]='fg=163'
 
-# ==================
-#   AUTOCOMPLETION
-# ==================
-# Kubernetes
-command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
-command -v stern >/dev/null 2>&1 && source <(stern --completion zsh)
-
-# Google cloud SDK
+# Completion
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
-# Dir env (brew install direnv)
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
+complete -C '/usr/bin/aws_completer' aws
 
-# =============
-#    HISTORY
-# =============
+## Prompt
+eval "$(starship init zsh)"
 
-## Command history configuration
+## command history configuration
 if [ -z "$HISTFILE" ]; then
-    HISTFILE=$HOME/.zsh_history
+  HISTFILE=$HOME/.zsh_history
 fi
 
 HISTSIZE=1000000
@@ -103,22 +83,17 @@ setopt extended_glob
 setopt ksh_glob
 setopt null_glob
 
-#
-# ===================
-#    KEY BINDINGS
-# ===================
+# KEY BINDINGS
 # Use emacs-like key bindings by default:
 bindkey -e
 
-# [Ctrl-r] - Search backward incrementally for a specified string. The string
-# may begin with ^ to anchor the search to the beginning of the line.
 bindkey '^r' history-incremental-search-backward
-
 # Substring search plugin
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
+bindkey '^g' _jump
 
-redraw-prompt() {
+function redraw-prompt() {
     local precmd
     for precmd in $precmd_functions; do
         $precmd
@@ -136,7 +111,6 @@ function _jump() {
   zle && zle redraw-prompt
 }
 zle -N _jump
-bindkey '^g' _jump
 
 function fre_chpwd() {
   fre --add "$(pwd)"
@@ -144,19 +118,7 @@ function fre_chpwd() {
 typeset -gaU chpwd_functions
 chpwd_functions+=fre_chpwd
 
-## Prompt
-eval "$(starship init zsh)"
-
-function _title(){
-  printf '%-16.16s' "$(starship module directory | sed 's/\x1b\[[0-9;]*m//g')"
-}
-
-function set_win_title(){
-    echo -ne "\033]0; $(_title) \007"
-}
-set_win_title
-
-function e {
+function e() {
   if [ -n "$1" ]; then
     _file=$(readlink -f "$@") 
   else
@@ -169,8 +131,5 @@ function e {
   tmux select-window -t1
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# ===================
-#    Load private
-# ===================
-[ -f ~/.zsh_private ] && source ~/.zsh_private
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
