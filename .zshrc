@@ -48,7 +48,7 @@ setopt null_glob
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 typeset -A ZSH_HIGHLIGHT_STYLES
 
-# KEY BINDINGS
+# Key bindings
 bindkey -e
 bindkey '^r' history-incremental-search-backward
 bindkey -M emacs '^P' history-substring-search-up
@@ -86,8 +86,8 @@ alias docker="podman"
 
 # completions
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
+command -v aws >/dev/null 2>&1 && complete -C '/usr/bin/aws_completer' aws
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
-complete -C '/usr/bin/aws_completer' aws
 
 # prompt
 eval "$(starship init zsh)"
@@ -97,6 +97,25 @@ autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
 # functions
+function e() {
+  if [ -n "$1" ]; then
+    _file=$(readlink -f "$@") 
+  else
+    _git_root=$(git rev-parse --show-toplevel)
+    _store=$(printf $_git_root | sha1sum | cut -d ' ' -f 1)
+    _file=$( (fre --store_name $_store --sorted && fd --type f --hidden --follow --exclude .git . $_git_root) | fzf-tmux)
+    fre --store_name $_store --add $_file
+  fi
+  nvr --nostart --remote $_file
+  tmux select-window -t1
+}
+
+function fre_chpwd() {
+  fre --add "$(pwd)"
+}
+typeset -gaU chpwd_functions
+chpwd_functions+=fre_chpwd
+
 function redraw-prompt() {
     local precmd
     for precmd in $precmd_functions; do
@@ -115,22 +134,3 @@ function _jump() {
   zle && zle redraw-prompt
 }
 zle -N _jump
-
-function fre_chpwd() {
-  fre --add "$(pwd)"
-}
-typeset -gaU chpwd_functions
-chpwd_functions+=fre_chpwd
-
-function e() {
-  if [ -n "$1" ]; then
-    _file=$(readlink -f "$@") 
-  else
-    _git_root=$(git rev-parse --show-toplevel)
-    _store=$(printf $_git_root | sha1sum | cut -d ' ' -f 1)
-    _file=$( (fre --store_name $_store --sorted && fd --type f --hidden --follow --exclude .git . $_git_root) | fzf-tmux)
-    fre --store_name $_store --add $_file
-  fi
-  nvr --nostart --remote $_file
-  tmux select-window -t1
-}
