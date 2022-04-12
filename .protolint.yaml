@@ -1,4 +1,0 @@
-lint:
-  rules:
-    remove:
-      - FILE_NAMES_LOWER_SNAKE_CASE

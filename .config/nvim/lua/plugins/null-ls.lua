@@ -3,7 +3,7 @@ local builtins = require("null-ls.builtins")
 
 null_ls.setup({
 	sources = {
-		builtins.formatting.protolint,
+		builtins.formatting.buf,
 	},
 	debug = true,
 })
