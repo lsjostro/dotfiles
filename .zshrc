@@ -69,7 +69,6 @@ source /usr/share/fzf/key-bindings.zsh
 export RIPGREP_CONFIG_PATH=${HOME}/.config/rg/rg.conf
 export GOPROXY=https://proxy.golang.org/
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 
 # aliases
 alias ls='exa'
@@ -82,7 +81,6 @@ alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
 alias lower="tr '[:upper:]' '[:lower:]'"
 alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
-alias docker="podman"
 
 # completions
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
