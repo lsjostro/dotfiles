@@ -1,6 +1,7 @@
 add_newline = false
 
 format = """\
+$cmd_duration\
 $hostname\
 $directory\
 $git_branch\
@@ -20,7 +21,7 @@ disabled = true
 fish_style_pwd_dir_length = 1
 truncation_length = 1
 truncate_to_repo = false
-style = "bold purple"
+style = "italic bold purple"
 
 [git_branch]
 format = "[$symbol$branch]($style)"
@@ -39,13 +40,10 @@ style = ""
 format = '([\[$all_status$ahead_behind\]]($style))'
 style = "dimmed"
 
-# [git_branch]
-# format = "[$symbol](dimmed yellow)[$branch](bright-green) "
-# symbol = " "
+[cmd_duration]
+min_time = 1000
+format = "⏳[$duration](bold yellow) "
 
-# [git_status]
-# format = "([$all_status$ahead_behind]($style) )"
-# style = "bold red"
 [hostname]
 ssh_only = false
 format =  "[$hostname](bold italic):"
