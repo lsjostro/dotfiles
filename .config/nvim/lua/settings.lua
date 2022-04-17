@@ -55,7 +55,7 @@ vim.o.termguicolors = true
 vim.wo.cursorline = true
 vim.wo.number = true
 vim.wo.signcolumn = "yes"
-vim.o.laststatus = 0
+vim.o.laststatus = 3
 
 --- Key mappings
 local map = require("utils").map
@@ -67,8 +67,6 @@ map("n", "L", "$")
 map("n", "<leader>q", ":bdelete!<CR>")
 map("n", "<leader>w", ":write!<CR>")
 map("i", "", "<C-w>")
-map("n", "<leader>l", ":set laststatus=2<CR>")
-map("n", "<leader>ll", ":set laststatus=0<CR>")
 map("n", "<C-a>", "<ESC>ggVG$", silent)
 
 -- recompile packer on plugins change

@@ -21,7 +21,14 @@ cmp.setup({
 		}),
 	},
 
-	documentation = { border = "rounded" },
+	window = {
+		completion = cmp.config.window.bordered({
+			winhighlight = "Normal:PMenu,FloatBorder:PMenuBorder,CursorLine:PMenuSel,Search:None",
+		}),
+		documentation = cmp.config.window.bordered({
+			winhighlight = "Normal:PMenu,FloatBorder:PMenu,CursorLine:PMenuSel,Search:None",
+		}),
+	},
 
 	snippet = {
 		expand = function(args)

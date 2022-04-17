@@ -56,7 +56,7 @@ bindkey -M emacs '^N' history-substring-search-down
 bindkey '^g' _jump
 
 # Exports
-export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+export NVIM_LISTEN_ADDRESS=/tmp/nvim.sock
 export EDITOR=nvim
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
 export LESS="--mouse --wheel-lines=1 -nRX"
@@ -103,7 +103,7 @@ function e() {
     _file=$( (fre --store_name $_store --sorted && fd --type f --hidden --follow --exclude .git . $_git_root) | fzf-tmux)
     fre --store_name $_store --add $_file
   fi
-  nvr --nostart --remote $_file
+  nvim --server $NVIM_LISTEN_ADDRESS --remote $_file
   tmux select-window -t1
 }
 
