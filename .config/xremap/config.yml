@@ -1,0 +1,5 @@
+modmap:
+  - name: Global
+    remap:
+      KEY_PAGEUP: left
+      KEY_PAGEDOWN: right

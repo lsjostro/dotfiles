@@ -1,0 +1,10 @@
+[Unit]
+Description=Xremap daemon remaps keyboard
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/xremap --device 'AT Translated Set 2 keyboard' %h/.config/xremap/config.yml
+Restart=always
+
+[Install]
+WantedBy=gnome-session-wayland@gnome.target
