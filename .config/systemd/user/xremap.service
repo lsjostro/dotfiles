@@ -1,9 +1,11 @@
 [Unit]
-Description=Xremap daemon remaps keyboard
+Description=Xremap is a key remapper for Linux. Unlike xmodmap, it supports app-specific remapping and Wayland.
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/xremap --device 'AT Translated Set 2 keyboard' %h/.config/xremap/config.yml
+Environment=XREMAP_CONFIG=%h/.config/xremap/config.yml
+Environment=DEVICE=/dev/input/event3
+ExecStart=/usr/bin/xremap --device $DEVICE $XREMAP_CONFIG
 Restart=always
 
 [Install]

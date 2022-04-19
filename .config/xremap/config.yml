@@ -1,5 +1,11 @@
 modmap:
-  - name: Global
+  - name: Dell XPS13 PgUp/PgDn remap
+
+    # Application remap doesn't work in Gnome 42 yet.
+    # https://github.com/k0kubun/xremap/issues/88
+    # application:
+    #   only: [ wezterm-local, wezterm-lsjostrom-dev ]
+
     remap:
       KEY_PAGEUP: left
       KEY_PAGEDOWN: right
