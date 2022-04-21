@@ -1,16 +1,12 @@
-local g = vim.g
-local map = require("utils").map
-local silent = { silent = true }
+vim.g.dashboard_default_executive = "telescope"
+vim.keymap.set("n", "<leader>fr", ":DashboardFindHistory<CR>")
+vim.keymap.set("n", "<leader>fl", ":SessionLoad<CR>")
+vim.keymap.set("n", "<leader>fn", ":DashboardNewFile<CR>")
+vim.keymap.set("n", "<leader>fm", ":DashboardJumpMarks<CR>")
 
-g.dashboard_default_executive = "telescope"
-map("n", "<leader>fr", ":DashboardFindHistory<CR>", silent)
-map("n", "<leader>fl", ":SessionLoad<CR>", silent)
-map("n", "<leader>fn", ":DashboardNewFile<CR>", silent)
-map("n", "<leader>fm", ":DashboardJumpMarks<CR>", silent)
+vim.g.dashboard_custom_header = {}
 
-g.dashboard_custom_header = {}
-
-g.dashboard_custom_section = {
+vim.g.dashboard_custom_section = {
 	last_session = {
 		description = { " Load saved session                    SPC f l" },
 		command = "SessionLoad",

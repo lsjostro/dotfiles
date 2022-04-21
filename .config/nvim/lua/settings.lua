@@ -58,16 +58,13 @@ vim.wo.signcolumn = "yes"
 vim.o.laststatus = 3
 
 --- Key mappings
-local map = require("utils").map
-local silent = { silent = true }
-
-map("n", "<C-l>", ':let @/=""<CR>') -- clear search
-map("n", "H", "^")
-map("n", "L", "$")
-map("n", "<leader>q", ":bdelete!<CR>")
-map("n", "<leader>w", ":write!<CR>")
-map("i", "", "<C-w>")
-map("n", "<C-a>", "<ESC>ggVG$", silent)
+vim.keymap.set("n", "<C-l>", ':let @/=""<CR>') -- clear search
+vim.keymap.set("n", "H", "^")
+vim.keymap.set("n", "L", "$")
+vim.keymap.set("n", "<leader>q", ":bdelete!<CR>")
+vim.keymap.set("n", "<leader>w", ":write!<CR>")
+vim.keymap.set("i", "", "<C-w>")
+vim.keymap.set("n", "<C-a>", "<ESC>ggVG$")
 
 -- recompile packer on plugins change
 vim.cmd([[
