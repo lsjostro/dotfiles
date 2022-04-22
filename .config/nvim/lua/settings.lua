@@ -66,6 +66,10 @@ vim.keymap.set("n", "<leader>w", ":write!<CR>")
 vim.keymap.set("i", "", "<C-w>")
 vim.keymap.set("n", "<C-a>", "<ESC>ggVG$")
 
+-- Terminal mappings
+vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
+vim.keymap.set("n", "<C-x>", ":split term://zsh<CR>")
+
 -- recompile packer on plugins change
 vim.cmd([[
   augroup packer_user_config
