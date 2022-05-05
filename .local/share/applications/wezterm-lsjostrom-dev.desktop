@@ -7,4 +7,4 @@ TryExec=/usr/bin/wezterm
 Icon=org.wezfurlong.wezterm
 Terminal=false
 Categories=System;TerminalEmulator;
-Exec=/usr/bin/wezterm --config 'default_prog={"ssh", "-M0", "-q", "lsjostrom-dev", "--", "tmux", "-u", "new", "-As0"}' start --class=wezterm-lsjostrom-dev
+Exec=/usr/bin/wezterm --config 'default_prog={"ssh", "lsjostrom-dev", "--", "tmux", "-u", "new", "-As0"}' start --class=wezterm-lsjostrom-dev
