@@ -189,7 +189,7 @@ return {
 			italic = true,
 			intensity = "Normal",
 			-- font = font_with_fallback("Iosevka Aile", {weight="Regular", italic=true})
-			font = font_with_fallback("Iosevka Term Curly Slab", { weight = "Regular", italic = true }),
+			font = font_with_fallback("Iosevka Term Curly Slab", { weight = "Light", italic = true }),
 		},
 		{
 			italic = true,
@@ -231,7 +231,7 @@ return {
 	leader = { key = "o", mods = "CTRL|SHIFT", timeout_milliseconds = 1000 },
 	keys = {
 
-		{ key = "c", mods = "CTRL|SHIFT", action = "Copy" },
+		{ key = "c", mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "ClipboardAndPrimarySelection" }) },
 		{ key = "v", mods = "CTRL|SHIFT", action = "Paste" },
 		{
 			key = "n",
