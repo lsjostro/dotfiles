@@ -201,10 +201,7 @@ return {
 			font = font_with_fallback("Iosevka Term SS09", { weight = "DemiBold" }),
 		},
 	},
-	-- freetype_load_target = "HorizontalLcd",
 	freetype_load_target = "Light",
-	-- freetype_interpreter_version = 40,
-	-- freetype_load_flags = "FORCE_AUTOHINT",
 	warn_about_missing_glyphs = false,
 
 	bold_brightens_ansi_colors = false,
@@ -230,24 +227,11 @@ return {
 
 	leader = { key = "o", mods = "CTRL|SHIFT", timeout_milliseconds = 1000 },
 	keys = {
-
 		{ key = "c", mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "ClipboardAndPrimarySelection" }) },
 		{ key = "v", mods = "CTRL|SHIFT", action = "Paste" },
-		{
-			key = "n",
-			mods = "LEADER",
-			action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }),
-		},
-		{
-			key = "c",
-			mods = "LEADER",
-			action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }),
-		},
-		{
-			key = "k",
-			mods = "LEADER",
-			action = wezterm.action({ CloseCurrentTab = { confirm = true } }),
-		},
+		{ key = "n", mods = "LEADER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
+		{ key = "c", mods = "LEADER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
+		{ key = "k", mods = "LEADER", action = wezterm.action({ CloseCurrentTab = { confirm = true } }) },
 		{ key = "l", mods = "LEADER", action = "ShowLauncher" },
 		{ key = "0", mods = "CTRL", action = "ResetFontSize" },
 		{ key = "-", mods = "CTRL", action = "DecreaseFontSize" },
