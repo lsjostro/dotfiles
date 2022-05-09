@@ -28,27 +28,6 @@ config.setup({
 		},
 	},
 
-	textobjects = {
-		move = {
-			enable = true,
-			goto_next_start = {
-				["]]"] = "@function.outer",
-				["]m"] = "@class.outer",
-			},
-			goto_next_end = {
-				["]["] = "@function.outer",
-				["]M"] = "@class.outer",
-			},
-			goto_previous_start = {
-				["[["] = "@function.outer",
-				["[m"] = "@class.outer",
-			},
-			goto_previous_end = {
-				["[]"] = "@function.outer",
-				["[M"] = "@class.outer",
-			},
-		},
-	},
 	--- nvim-ts-autotag ---
 	autotag = {
 		enable = true,
