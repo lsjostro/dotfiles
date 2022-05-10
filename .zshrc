@@ -68,6 +68,7 @@ source /usr/share/fzf/key-bindings.zsh
 export RIPGREP_CONFIG_PATH=${HOME}/.config/rg/rg.conf
 export GOPROXY=https://proxy.golang.org/
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+[ -f ~/.private.zsh ] && source ~/.private.zsh
 
 # aliases
 alias ls='exa'
@@ -93,7 +94,18 @@ eval "$(starship init zsh)"
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
-# functions
+# zsh functions
+function zoom-join() {
+  _store="zoom_rooms"
+  if [ -n "$1" ]; then
+    _id=$1
+  else
+    _id=$(fre --store_name $_store --sorted | fzf-tmux)
+  fi
+  [ -n "$_id" ] && fre --store_name $_store --add $_id && \
+    xdg-open "https://${ZOOM_DOMAIN}.zoom.us/wc/join/$_id"
+}
+
 function e() {
   if [ -n "$1" ]; then
     _file=$(readlink -f "$@") 
