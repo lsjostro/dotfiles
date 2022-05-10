@@ -37,6 +37,8 @@ cmp.setup({
 	},
 
 	mapping = {
+		["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+		["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 		["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
 		["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -56,13 +58,7 @@ cmp.setup({
 			elseif has_words_before() then
 				cmp.complete()
 			else
-				-- HACK: copilot workaround
-				local copilot_keys = vim.fn["copilot#Accept"]()
-				if copilot_keys ~= "" then
-					vim.api.nvim_feedkeys(copilot_keys, "i", true)
-				else
-					fallback()
-				end
+				fallback()
 			end
 		end, { "i", "s" }),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
@@ -77,13 +73,25 @@ cmp.setup({
 	},
 
 	sources = cmp.config.sources({
-		{ name = "buffer", priority = 1 },
-		{ name = "luasnip", priority = 4 },
+		{
+			name = "buffer",
+			priority = 1,
+		},
+		{
+			name = "luasnip",
+			priority = 4,
+		},
 		{
 			name = "tmux",
 			priority = 2,
-			option = { all_panes = true, trigger_characters = {} },
+			option = {
+				all_panes = true,
+				trigger_characters = {},
+			},
 		},
-		{ name = "nvim_lsp", priority = 3 },
+		{
+			name = "nvim_lsp",
+			priority = 3,
+		},
 	}),
 })
