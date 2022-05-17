@@ -60,6 +60,7 @@ local servers = {
 	"terraformls",
 	"yamlls",
 	"gdscript",
+	"pyright",
 }
 
 for _, lsp in ipairs(servers) do
@@ -91,8 +92,6 @@ lspconfig.sumneko_lua.setup({
 		},
 	},
 })
-
-lspconfig.terraformls.setup({})
 
 local yaml_is_k8s = function(bufnr)
 	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, 50, false) -- Stop after the first 50 lines
