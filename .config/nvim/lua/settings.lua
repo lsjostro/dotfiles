@@ -83,3 +83,11 @@ vim.cmd([[
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
 ]])
+
+-- will format file before saving based on attached lsp capabilities
+vim.cmd([[
+augroup lsp
+  autocmd!
+  autocmd BufWritePre * lua require'utils'.auto_format_lsp()
+augroup END
+]])

@@ -11,8 +11,8 @@ $character\
 """
 
 [character]
-success_symbol = "[%%](green)"
-error_symbol = "[%%](bold red)"
+success_symbol = "[%](green)"
+error_symbol = "[%](bold red)"
 
 [line_break]
 disabled = true

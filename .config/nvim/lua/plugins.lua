@@ -182,6 +182,16 @@ packer.startup(function(use)
 		end,
 	})
 
+	-- bufferline
+	use({
+		"akinsho/bufferline.nvim",
+		tag = "v2.*",
+		requires = { "kyazdani42/nvim-web-devicons" },
+		config = function()
+			require("plugins/bufferline")
+		end,
+	})
+
 	-- lualine
 	use({
 		"nvim-lualine/lualine.nvim",

@@ -14,6 +14,7 @@ local specs = lush.parse(function()
 	return {
 		CursorLine({ bg = "#f5f5f0" }),
 		CursorLineNr({ fg = "#BCAAA4", bg = "#f5f5f0" }),
+		TabLineSel({ fg = "#BCAAA4", bg = "#f5f5f0" }),
 		MsgArea({ fg = "#A1887F", bg = "#f1f1f1" }),
 		String({ fg = "#33691E", gui = "italic" }),
 		Comment({ fg = "#114499", gui = "bold,italic" }),
