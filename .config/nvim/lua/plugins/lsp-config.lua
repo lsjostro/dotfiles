@@ -85,16 +85,6 @@ lspconfig.sumneko_lua.setup({
 	},
 })
 
-local yaml_is_k8s = function(bufnr)
-	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, 50, false) -- Stop after the first 50 lines
-	for _, l in pairs(lines) do
-		if string.find(l, "apiVersion") ~= nil then
-			return true
-		end
-	end
-	return false
-end
-
 lspconfig.cssls.setup({
 	cmd = { "css-languageserver", "--stdio" },
 	filetypes = { "css" },
@@ -162,7 +152,7 @@ lspconfig.yamlls.setup({
 require("lspconfig").tsserver.setup({
 	on_attach = function(client, bufnr)
 		client.resolved_capabilities.document_formatting = false
-		on_attach(client)
+		on_attach()
 
 		require("lsp_signature").on_attach({
 			bind = false, -- This is mandatory, otherwise border config won't get registered.

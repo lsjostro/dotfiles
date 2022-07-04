@@ -14,6 +14,10 @@ vim.o.backupdir = "/home/lsjostrom/.local/share/nvim/backup/"
 vim.o.backup = true
 vim.o.clipboard = "unnamedplus"
 
+-- enable nvim-0.7 faster filetype detection
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
+
 --- Indent
 vim.o.autoindent = true
 vim.o.breakindent = true
