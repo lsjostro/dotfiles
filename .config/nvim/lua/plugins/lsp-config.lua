@@ -13,7 +13,7 @@ vim.keymap.set("n", "gwr", "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
 vim.keymap.set("n", "gwl", "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
 
 -- will format file before saving based on attached lsp capabilities
-vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]])
+vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 100)]])
 
 local border = {
 	{ "🭽", "FloatBorder" },
