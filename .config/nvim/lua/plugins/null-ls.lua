@@ -5,6 +5,7 @@ null_ls.setup({
 	sources = {
 		builtins.formatting.buf,
 		builtins.formatting.shfmt,
+		builtins.diagnostics.buf,
 		builtins.completion.spell,
 	},
 	debug = true,
