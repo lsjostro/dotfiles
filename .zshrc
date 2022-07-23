@@ -12,7 +12,8 @@ zplug "arunvelsriram/kube-fzf", use:kube-fzf.sh
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
-        echo; zplug install
+        echo
+        zplug install
     fi
 fi
 zplug load
@@ -99,34 +100,34 @@ autoload -Uz compinit && compinit
 
 # zsh functions
 function zoom-join() {
-  _store="zoom_rooms"
-  if [ -n "$1" ]; then
-    _id=$1
-  else
-    _id=$(fre --store_name $_store --sorted | fzf-tmux)
-  fi
-  [ -n "$_id" ] && fre --store_name $_store --add $_id && \
-    xdg-open "https://${ZOOM_DOMAIN}.zoom.us/wc/join/$_id"
+    _store="zoom_rooms"
+    if [ -n "$1" ]; then
+        _id=$1
+    else
+        _id=$(fre --store_name $_store --sorted | fzf-tmux)
+    fi
+    [ -n "$_id" ] && fre --store_name $_store --add "$_id" &&
+        xdg-open "https://${ZOOM_DOMAIN}.zoom.us/wc/join/$_id"
 }
 
 function e() {
-  if [ -n "$1" ]; then
-    _file=$(readlink -f "$@") 
-  else
-    _git_root=$(git rev-parse --show-toplevel)
-    _store=$(printf $_git_root | sha1sum | cut -d ' ' -f 1)
-    _file=$( (fre --store_name $_store --sorted && fd --type f --hidden --follow --exclude .git . $_git_root) | fzf-tmux)
-    fre --store_name $_store --add $_file
-  fi
-  nvim --server $NVIM_LISTEN_ADDRESS --remote $_file
-  tmux select-window -t1
+    if [ -n "$1" ]; then
+        _file=$(readlink -f "$@")
+    else
+        _git_root=$(git rev-parse --show-toplevel)
+        _store=$(echo "$_git_root" | sha1sum | cut -d ' ' -f 1)
+        _file=$( (fre --store_name "$_store" --sorted && fd --type f --hidden --follow --exclude .git . "$_git_root") | fzf-tmux)
+        fre --store_name "$_store" --add "$_file"
+    fi
+    nvim --server $NVIM_LISTEN_ADDRESS --remote "$_file"
+    tmux select-window -t1
 }
 
 function fre_chpwd() {
-  fre --add "$(pwd)"
+    fre --add "$(pwd)"
 }
 typeset -gaU chpwd_functions
-chpwd_functions+=fre_chpwd
+chpwd_functions+=("fre_chpwd")
 
 function redraw-prompt() {
     local precmd
@@ -138,11 +139,11 @@ function redraw-prompt() {
 zle -N redraw-prompt
 
 function _jump() {
-  _dir=$((
-      git rev-parse --show-toplevel 2>/dev/null | xargs -r fd --type d --hidden --follow --exclude .git .
-      fre --sorted
+    _dir=$( (
+        git rev-parse --show-toplevel 2>/dev/null | xargs -r fd --type d --hidden --follow --exclude .git .
+        fre --sorted
     ) | fzf-tmux)
-  [ -n "$_dir" ] && pushd $_dir >>/dev/null
-  zle && zle redraw-prompt
+    [ -n "$_dir" ] && pushd "$_dir" >>/dev/null || return 1
+    zle && zle redraw-prompt
 }
 zle -N _jump
