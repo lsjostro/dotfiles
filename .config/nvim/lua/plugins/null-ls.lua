@@ -4,8 +4,19 @@ local builtins = require("null-ls.builtins")
 null_ls.setup({
 	sources = {
 		builtins.formatting.buf,
+		builtins.formatting.cue_fmt,
 		builtins.formatting.shfmt,
-		builtins.diagnostics.buf,
+		builtins.diagnostics.buf.with({
+			args = { "lint", "--disable-symlinks", "--path", "$FILENAME" },
+			cwd = function()
+				local file_dir = vim.fn.expand("%:p:h") .. ";"
+				local buf_yaml = vim.fn.findfile("buf.yaml", file_dir)
+				if buf_yaml then
+					return vim.fn.fnamemodify(buf_yaml, ":h")
+				end
+			end,
+		}),
+		builtins.diagnostics.cue_fmt,
 		builtins.completion.spell,
 	},
 	debug = true,
