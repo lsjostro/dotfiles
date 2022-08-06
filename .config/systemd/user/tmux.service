@@ -1,0 +1,10 @@
+[Unit]
+Description=Run tmux server
+
+[Service]
+Restart=always
+StartLimitIntervalSec=0
+ExecStart=/usr/bin/tmux -D -u
+
+[Install]
+WantedBy=default.target
