@@ -69,9 +69,10 @@ export RIPGREP_CONFIG_PATH=${HOME}/.config/rg/rg.conf
 export GOPROXY=https://proxy.golang.org/
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export PYENV_ROOT="$HOME/.pyenv"
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-[ -f ~/.private.zsh ] && source ~/.private.zsh
+[ -f ~/.private.zsh ] && source "$HOME/.private.zsh"
 
 # aliases
 alias ls='exa'
@@ -87,7 +88,7 @@ alias pbcopy="xclip -selection c"
 
 # completions
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
-command -v aws >/dev/null 2>&1 && complete -C '/usr/bin/aws_completer' aws
+# command -v aws >/dev/null 2>&1 && complete -C '/usr/bin/aws_completer' aws
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 # prompt
