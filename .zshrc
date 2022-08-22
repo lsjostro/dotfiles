@@ -85,6 +85,7 @@ alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
 alias lower="tr '[:upper:]' '[:lower:]'"
 alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
+alias sudo="doas"
 
 # completions
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
