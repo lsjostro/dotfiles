@@ -3,6 +3,7 @@ local builtins = require("null-ls.builtins")
 
 null_ls.setup({
 	sources = {
+		builtins.formatting.black,
 		builtins.formatting.buf,
 		builtins.formatting.cue_fmt,
 		builtins.formatting.shfmt,
