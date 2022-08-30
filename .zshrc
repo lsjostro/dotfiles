@@ -56,7 +56,7 @@ bindkey -M emacs '^N' history-substring-search-down
 bindkey '^g' _jump
 
 # Exports
-export NVIM_LISTEN_ADDRESS=/tmp/nvim.sock
+export NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/nvim.sock
 export EDITOR=nvim
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
 export LESS="--mouse --wheel-lines=1 -nRX"
@@ -86,6 +86,7 @@ alias lower="tr '[:upper:]' '[:lower:]'"
 alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
 alias sudo="doas"
+alias e='tmux-edit-helper'
 
 # completions
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
@@ -111,19 +112,6 @@ function zoom-join() {
 		xdg-open "https://${ZOOM_DOMAIN}.zoom.us/wc/join/$_id"
 }
 
-function e() {
-	if [ -n "$1" ]; then
-		_file=$(readlink -f "$@")
-	else
-		_git_root=$(git rev-parse --show-toplevel)
-		_store=$(echo "$_git_root" | sha1sum | cut -d ' ' -f 1)
-		_file=$( (fre --store_name "$_store" --sorted && fd --type f --hidden --follow --exclude .git . "$_git_root") | fzf-tmux)
-		fre --store_name "$_store" --add "$_file"
-	fi
-	nvim --server $NVIM_LISTEN_ADDRESS --remote "$_file"
-	tmux select-window -t1
-}
-
 function fre_chpwd() {
 	fre --add "$(pwd)"
 }
@@ -140,7 +128,7 @@ function redraw-prompt() {
 zle -N redraw-prompt
 
 function _jump() {
-	_dir=$(fre --sorted | fzf-tmux --no-sort)
+	_dir=$(fre --sorted | fzf-tmux --no-sort -p 90%,40% -y 0)
 	[ -n "$_dir" ] && pushd "$_dir" >>/dev/null || return 1
 	zle && zle redraw-prompt
 }

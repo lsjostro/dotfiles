@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -fe -o pipefail
+
+if [ -n "$1" ]; then
+	_file=$(readlink -f "$@")
+else
+	FZF=${FZF:-"fzf-tmux -p 90%,50% -y 0"}
+	_git_root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+	_store=$(echo "$_git_root" | sha1sum | cut -d ' ' -f 1)
+	_file=$( (fre --store_name "$_store" --sorted && fd --type f --hidden --follow --exclude .git . "$_git_root") | $FZF)
+	fre --store_name "$_store" --add "$_file"
+fi
+
+nvim --server "$XDG_RUNTIME_DIR/nvim.sock" --remote "$_file" && tmux select-window -t1
