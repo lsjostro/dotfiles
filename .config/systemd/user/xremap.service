@@ -4,8 +4,7 @@ Description=Xremap is a key remapper for Linux. Unlike xmodmap, it supports app-
 [Service]
 Type=simple
 Environment=XREMAP_CONFIG=%h/.config/xremap/config.yml
-Environment=DEVICE=/dev/input/event3
-ExecStart=/usr/bin/xremap --device $DEVICE $XREMAP_CONFIG
+ExecStart=/usr/bin/xremap $XREMAP_CONFIG
 Restart=always
 
 [Install]

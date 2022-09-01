@@ -5,88 +5,7 @@ function font_with_fallback(name, params)
 	return wezterm.font_with_fallback(names, params)
 end
 
-local themeShelmanDark = {
-	colors = {
-		foreground = "#ded9ce",
-		background = "#171a23",
-		cursor_bg = "#FB8C00",
-		cursor_border = "#FB8C00",
-		split = "#444444",
-		ansi = {
-			"#000000",
-			"#ff605a",
-			"#b1e869",
-			"#ead89c",
-			"#5da9f6",
-			"#e86aff",
-			"#82fff6",
-			"#ded9ce",
-		},
-		brights = {
-			"#313131",
-			"#f58b7f",
-			"#dcf88f",
-			"#eee5b2",
-			"#a5c7ff",
-			"#ddaaff",
-			"#b6fff9",
-			"#fefffe",
-		},
-		tab_bar = {
-			background = "#000000",
-			active_tab = {
-				bg_color = "#171a23",
-				fg_color = "#c0b070",
-				intensity = "Normal",
-			},
-			inactive_tab = {
-				bg_color = "#000000",
-				fg_color = "#c0c0c0",
-				intensity = "Half",
-			},
-			inactive_tab_hover = {
-				bg_color = "#333333",
-				fg_color = "#909090",
-				italic = true,
-			},
-		},
-	},
-
-	tab_bar_style = {
-		active_tab_left = wezterm.format({
-			{ Background = { Color = "#171a23" } },
-			{ Foreground = { Color = "#000000" } },
-			{ Text = " " },
-		}),
-		active_tab_right = wezterm.format({
-			{ Background = { Color = "#171a23" } },
-			{ Foreground = { Color = "#000000" } },
-			{ Text = " " },
-		}),
-		inactive_tab_left = wezterm.format({
-			{ Background = { Color = "#000000" } },
-			{ Foreground = { Color = "#171a23" } },
-			{ Text = " " },
-		}),
-		inactive_tab_right = wezterm.format({
-			{ Background = { Color = "#000000" } },
-			{ Foreground = { Color = "#171a23" } },
-			{ Text = "▕" },
-		}),
-		inactive_tab_hover_left = wezterm.format({
-			{ Background = { Color = "#333333" } },
-			{ Foreground = { Color = "#ffffff" } },
-			{ Text = " " },
-		}),
-		inactive_tab_hover_right = wezterm.format({
-			{ Background = { Color = "#333333" } },
-			{ Foreground = { Color = "#ffffff" } },
-			{ Text = " " },
-		}),
-	},
-}
-
-local themeShelmanLight = {
+local theme = {
 	colors = {
 		foreground = "#000000",
 		background = "#fcfcfc",
@@ -115,70 +34,13 @@ local themeShelmanLight = {
 			"#26bad1",
 			"#d8d8d8",
 		},
-
-		tab_bar = {
-			background = "#556677",
-			active_tab = {
-				bg_color = "#f7f7f7",
-				fg_color = "#000000",
-				intensity = "Normal",
-			},
-			inactive_tab = {
-				bg_color = "#778899",
-				fg_color = "#000000",
-				intensity = "Half",
-			},
-			inactive_tab_hover = {
-				bg_color = "#333333",
-				fg_color = "#909090",
-				italic = true,
-			},
-		},
-	},
-
-	tab_bar_style = {
-		active_tab_left = wezterm.format({
-			{ Background = { Color = "#f7f7f7" } },
-			{ Foreground = { Color = "#000000" } },
-			{ Text = " " },
-		}),
-		active_tab_right = wezterm.format({
-			{ Background = { Color = "#f7f7f7" } },
-			{ Foreground = { Color = "#000000" } },
-			{ Text = " " },
-		}),
-		inactive_tab_left = wezterm.format({
-			{ Background = { Color = "#778899" } },
-			{ Foreground = { Color = "#f7f7f7" } },
-			{ Text = " " },
-		}),
-		inactive_tab_right = wezterm.format({
-			{ Background = { Color = "#778899" } },
-			{ Foreground = { Color = "#333333" } },
-			{ Text = "▕" },
-		}),
-		inactive_tab_hover_left = wezterm.format({
-			{ Background = { Color = "#333333" } },
-			{ Foreground = { Color = "#ffffff" } },
-			{ Text = " " },
-		}),
-		inactive_tab_hover_right = wezterm.format({
-			{ Background = { Color = "#333333" } },
-			{ Foreground = { Color = "#ffffff" } },
-			{ Text = " " },
-		}),
 	},
 }
-
-local theme = themeShelmanLight
 
 return {
 	enable_wayland = true,
 	colors = theme.colors,
-	tab_bar_style = theme.tab_bar_style,
-	-- automatically_reload_config = false,
 	font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
-	-- font = wezterm.font("Iosevka Term SS09", {weight="Regular"}),
 	font_rules = {
 		{
 			italic = false,
@@ -188,7 +50,6 @@ return {
 		{
 			italic = true,
 			intensity = "Normal",
-			-- font = font_with_fallback("Iosevka Aile", {weight="Regular", italic=true})
 			font = font_with_fallback("Iosevka Term Curly Slab", { weight = "Light", italic = true }),
 		},
 		{
@@ -225,14 +86,9 @@ return {
 
 	disable_default_key_bindings = true,
 
-	leader = { key = "o", mods = "CTRL|SHIFT", timeout_milliseconds = 1000 },
 	keys = {
 		{ key = "c", mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "ClipboardAndPrimarySelection" }) },
 		{ key = "v", mods = "CTRL|SHIFT", action = "Paste" },
-		{ key = "n", mods = "LEADER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
-		{ key = "c", mods = "LEADER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
-		{ key = "k", mods = "LEADER", action = wezterm.action({ CloseCurrentTab = { confirm = true } }) },
-		{ key = "l", mods = "LEADER", action = "ShowLauncher" },
 		{ key = "0", mods = "CTRL", action = "ResetFontSize" },
 		{ key = "-", mods = "CTRL", action = "DecreaseFontSize" },
 		{ key = "=", mods = "CTRL", action = "IncreaseFontSize" },
