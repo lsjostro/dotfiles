@@ -86,6 +86,17 @@ return {
 
 	disable_default_key_bindings = true,
 
+	window_frame = {
+		border_left_width = "0.2cell",
+		border_right_width = "0.2cell",
+		border_bottom_height = "0.1cell",
+		border_top_height = "0.1cell",
+		border_left_color = "#8C3C21",
+		border_right_color = "#8C3C21",
+		border_bottom_color = "#8C3C21",
+		border_top_color = "#8C3C21",
+	},
+
 	keys = {
 		{ key = "c", mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "ClipboardAndPrimarySelection" }) },
 		{ key = "v", mods = "CTRL|SHIFT", action = "Paste" },
