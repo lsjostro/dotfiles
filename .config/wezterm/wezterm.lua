@@ -14,31 +14,12 @@ local theme = {
 		cursor_border = "#cc0000",
 		split = "#444444",
 		selection_bg = "#FFCA28",
-		ansi = {
-			"#212121",
-			"#b7141e",
-			"#457b23",
-			"#f5971d",
-			"#134eb2",
-			"#550087",
-			"#0e707c",
-			"#eeeeee",
-		},
-		brights = {
-			"#424242",
-			"#e83a3f",
-			"#7aba39",
-			"#fee92e",
-			"#53a4f3",
-			"#a94dbb",
-			"#26bad1",
-			"#d8d8d8",
-		},
+		ansi = { "#212121", "#b7141e", "#457b23", "#f5971d", "#134eb2", "#550087", "#0e707c", "#eeeeee" },
+		brights = { "#424242", "#e83a3f", "#7aba39", "#fee92e", "#53a4f3", "#a94dbb", "#26bad1", "#d8d8d8" },
 	},
 }
 
 return {
-	enable_wayland = true,
 	colors = theme.colors,
 	font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
 	font_rules = {
@@ -64,16 +45,21 @@ return {
 	},
 	freetype_load_target = "Light",
 	warn_about_missing_glyphs = false,
-
 	bold_brightens_ansi_colors = false,
 
 	font_size = 11.0,
 	line_height = 1.1,
 
-	initial_cols = 150,
-	initial_rows = 54,
-	window_padding = { left = 10, right = 10, top = 21, bottom = 0 },
+	initial_cols = 125,
+	initial_rows = 45,
+	window_padding = {
+		left = 0,
+		right = 0,
+		top = 0,
+		bottom = 0,
+	},
 
+	enable_wayland = true,
 	enable_tab_bar = false,
 	tab_bar_at_bottom = true,
 	show_tab_index_in_tab_bar = true,
@@ -91,10 +77,10 @@ return {
 		border_right_width = "0.2cell",
 		border_bottom_height = "0.1cell",
 		border_top_height = "0.1cell",
-		border_left_color = "#8C3C21",
-		border_right_color = "#8C3C21",
-		border_bottom_color = "#8C3C21",
-		border_top_color = "#8C3C21",
+		border_left_color = "#8c3c21",
+		border_right_color = "#8c3c21",
+		border_bottom_color = "#8c3c21",
+		border_top_color = "#8c3c21",
 	},
 
 	keys = {

@@ -90,7 +90,6 @@ alias e='tmux-edit-helper'
 
 # completions
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
-# command -v aws >/dev/null 2>&1 && complete -C '/usr/bin/aws_completer' aws
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 # prompt
