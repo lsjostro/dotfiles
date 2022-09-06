@@ -132,3 +132,4 @@ function _jump() {
 	zle && zle redraw-prompt
 }
 zle -N _jump
+# vim:set ft=sh:
