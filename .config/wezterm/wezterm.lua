@@ -53,9 +53,9 @@ return {
 	initial_cols = 125,
 	initial_rows = 45,
 	window_padding = {
-		left = 0,
-		right = 0,
-		top = 0,
+		left = 10,
+		right = 10,
+		top = 21,
 		bottom = 0,
 	},
 
