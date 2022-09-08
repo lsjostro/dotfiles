@@ -2,12 +2,9 @@
 export ZPLUG_HOME=$HOME/.zplug
 source /usr/share/zsh/scripts/zplug/init.zsh
 
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "thecasualcoder/kube-fzf", as:command, use:"{*pod,*.sh}"
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-zplug "arunvelsriram/kube-fzf", use:kube-fzf.sh
+zplug "zsh-users/zsh-completions"
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+zplug 'zsh-users/zsh-history-substring-search', defer:3
 
 if ! zplug check --verbose; then
 	printf "Install? [y/N]: "
