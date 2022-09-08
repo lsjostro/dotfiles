@@ -1,5 +1,6 @@
 [Unit]
 Description=Run tmux server
+After=gnome-session-wayland@gnome.target
 
 [Service]
 Restart=always
@@ -7,4 +8,4 @@ StartLimitIntervalSec=0
 ExecStart=/usr/bin/tmux -D -u
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
