@@ -59,6 +59,14 @@ for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({ on_attach = on_attach })
 end
 
+lspconfig.sqls.setup({
+	on_attach = function(client, bufnr)
+		require("sqls").on_attach(client, bufnr)
+		client.resolved_capabilities.execute_command = true
+		client.resolved_capabilities.document_formatting = false
+	end,
+})
+
 lspconfig.sumneko_lua.setup({
 	on_attach = function()
 		on_attach()

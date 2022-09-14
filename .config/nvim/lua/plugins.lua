@@ -8,6 +8,7 @@ packer.startup(function(use)
 	use("jose-elias-alvarez/nvim-lsp-ts-utils")
 	use("uarun/vim-protobuf")
 	use("ckipp01/stylua-nvim")
+	use("nanotee/sqls.nvim")
 
 	use({
 		"github/copilot.vim",
