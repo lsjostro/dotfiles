@@ -66,6 +66,8 @@ lspconfig.sqls.setup({
 		client.resolved_capabilities.document_formatting = false
 	end,
 })
+vim.keymap.set("v", "x", "<Plug>(sqls-execute-query)")
+vim.keymap.set("n", "<leader>db", "<Cmd>SqlsSwitchConnection<CR>")
 
 lspconfig.sumneko_lua.setup({
 	on_attach = function()
