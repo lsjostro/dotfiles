@@ -2,12 +2,6 @@ require("dap")
 require("dap.ext.vscode").load_launchjs()
 local silent = { silent = true }
 
--- vim.fn.sign_define("DapStopped", { text = "=>", texthl = "", linehl = "debugPC", numhl = "#009688" })
--- vim.fn.sign_define("DapBreakpoint", { text = "🧘", texthl = "", linehl = "", numhl = "#009688" })
-vim.highlight.create("DapBreakpoint", { ctermbg = 0, guifg = "#993939", guibg = "#fcfaed" }, false)
-vim.highlight.create("DapLogPoint", { ctermbg = 0, guifg = "#61afef", guibg = "#fcfaed" }, false)
-vim.highlight.create("DapStopped", { ctermbg = 0, guifg = "#98c379", guibg = "#fcfaed" }, false)
-
 vim.fn.sign_define(
 	"DapBreakpoint",
 	{ text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
