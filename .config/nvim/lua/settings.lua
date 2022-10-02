@@ -60,6 +60,7 @@ vim.wo.cursorline = true
 vim.wo.number = true
 vim.wo.signcolumn = "yes"
 vim.o.laststatus = 3
+vim.o.cmdheight = 0
 
 --- Key mappings
 vim.keymap.set("n", "<C-l>", ':let @/=""<CR>') -- clear search
