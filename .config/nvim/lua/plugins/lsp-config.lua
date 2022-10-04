@@ -53,6 +53,7 @@ local servers = {
 	"yamlls",
 	"gdscript",
 	"pyright",
+	"bufls",
 }
 
 for _, lsp in ipairs(servers) do
