@@ -7,7 +7,7 @@ else
 	FZF=${FZF:-"fzf-tmux -p 90%,50% -y 0"}
 	_git_root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
 	_store=$(echo "$_git_root" | sha1sum | cut -d ' ' -f 1)
-	_file=$( (fre --store_name "$_store" --sorted && fd --type f --hidden --follow --exclude .git . "$_git_root") | $FZF)
+	_file=$( (fre --store_name "$_store" --sorted && fd --type f --hidden --follow --exclude .git . "$_git_root") | cat -n | sort -k2 -k1n | uniq -f1 | sort -nk1,1 | cut -f2- | $FZF --no-sort)
 	fre --store_name "$_store" --add "$_file"
 fi
 
