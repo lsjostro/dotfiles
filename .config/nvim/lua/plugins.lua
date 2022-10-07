@@ -54,6 +54,13 @@ packer.startup(function(use)
 	})
 
 	use({
+		"folke/yanky.nvim",
+		config = function()
+			require("plugins/yanky")
+		end,
+	})
+
+	use({
 		"L3MON4D3/LuaSnip",
 		config = function()
 			require("luasnip/loaders/from_vscode").lazy_load()

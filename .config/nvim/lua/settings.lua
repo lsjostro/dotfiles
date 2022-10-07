@@ -78,9 +78,6 @@ vim.keymap.set("v", "<C-s>", ":sort<CR>")
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
 vim.keymap.set("n", "<C-x>", ":split term://zsh<CR>")
 
--- Python
--- vim.g.python3_host_prog = vim.fn.getenv("PYENV_ROOT") .. "/versions/py3nvim/bin/python"
-
 -- recompile packer on plugins change
 vim.cmd([[
   augroup packer_user_config
