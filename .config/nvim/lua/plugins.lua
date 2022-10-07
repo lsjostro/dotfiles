@@ -61,6 +61,13 @@ packer.startup(function(use)
 	})
 
 	use({
+		"ojroques/nvim-osc52",
+		config = function()
+			require("plugins/osc52")
+		end,
+	})
+
+	use({
 		"L3MON4D3/LuaSnip",
 		config = function()
 			require("luasnip/loaders/from_vscode").lazy_load()
