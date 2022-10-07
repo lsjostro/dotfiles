@@ -100,15 +100,10 @@ eval "$(starship init zsh)"
 autoload bashcompinit && bashcompinit
 
 # zsh functions
-function zoom-join() {
-	_store="zoom_rooms"
-	if [ -n "$1" ]; then
-		_id=$1
-	else
-		_id=$(fre --store_name $_store --sorted | fzf-tmux)
-	fi
-	[ -n "$_id" ] && fre --store_name $_store --add "$_id" &&
-		xdg-open "https://${ZOOM_DOMAIN}.zoom.us/wc/join/$_id"
+
+# Clipboard OSC 52
+function clip() {
+  echo -en "\x1b]52;c;$(base64 -w0)\x07"
 }
 
 function fre_chpwd() {
