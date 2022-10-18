@@ -1,4 +1,7 @@
 local lspconfig = require("lspconfig")
+
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 vim.keymap.set("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
 vim.keymap.set("i", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>")
 vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
