@@ -11,3 +11,4 @@
 *.pyc
 *.so
 *.swp
+.terraform.lock.hcl

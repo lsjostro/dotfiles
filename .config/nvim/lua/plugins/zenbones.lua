@@ -14,9 +14,8 @@ local specs = lush.parse(function()
 	return {
 		CursorLine({ bg = "#f5f5f0" }),
 		CursorLineNr({ fg = "#BCAAA4", bg = "#f5f5f0" }),
-		TabLineSel({ fg = "#BCAAA4", bg = "#f5f5f0" }),
 		MsgArea({ fg = "#A1887F", bg = "#f1f1f1" }),
-		String({ fg = "#33691E", gui = "italic" }),
+		String({ fg = "#2E7D32", gui = "italic" }),
 		Comment({ fg = "#114499", gui = "bold,italic" }),
 		CopilotSuggestion({ fg = "#0066cc", gui = "bold,italic" }),
 		LineNr({ fg = "#CFD8DC", gui = "bold,italic" }),
@@ -45,6 +44,7 @@ local specs = lush.parse(function()
 		GitSignsDeleteNr({ fg = "#FFCDD2" }),
 		GitSignsChange({ fg = "#FFA726" }),
 		GitSignsChangeNr({ fg = "#FFE0B2" }),
+
 		PMenu({ bg = "#F7F5F0" }),
 		PMenuBorder({ bg = "#F7F5F0", fg = "#886622" }),
 		PMenuSel({ fg = "#FFFFFF", bg = "#1976D2" }),
@@ -52,6 +52,7 @@ local specs = lush.parse(function()
 		PMenuThumb({ bg = "#64B5F6" }),
 		StatusLine({ base = base.VertSplit, fg = "#BCAAA4" }),
 		StatusLineNC({ base = base.VertSplit, fg = "#BCAAA4" }),
+
 		TreesitterContext({ bg = "#f0f0f0", fg = "#BCAAA4", gui = "bold,italic" }),
 		TreesitterContextLineNumber({ bg = "#f0f0f0", fg = "#979770", gui = "bold,italic" }),
 	}
