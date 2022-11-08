@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 
-function font_with_fallback(name, params)
+local function font_with_fallback(name, params)
 	local names = { name, "Noto Color Emoji", "Iosevka Nerd Font Mono" }
 	return wezterm.font_with_fallback(names, params)
 end
@@ -50,8 +50,8 @@ return {
 	font_size = 11.0,
 	line_height = 1.1,
 
-	initial_cols = 125,
-	initial_rows = 45,
+	initial_cols = 185,
+	initial_rows = 55,
 	window_padding = {
 		left = 10,
 		right = 10,
