@@ -1,7 +1,5 @@
 local lspconfig = require("lspconfig")
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 vim.keymap.set("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
 vim.keymap.set("i", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>")
 vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
@@ -66,8 +64,8 @@ end
 lspconfig.sqls.setup({
 	on_attach = function(client, bufnr)
 		require("sqls").on_attach(client, bufnr)
-		client.resolved_capabilities.execute_command = true
-		client.resolved_capabilities.document_formatting = false
+		client.server_capabilities.execute_command = true
+		client.server_capabilities.documentFormattingProvider = false
 	end,
 })
 vim.keymap.set("v", "x", "<Plug>(sqls-execute-query)")
