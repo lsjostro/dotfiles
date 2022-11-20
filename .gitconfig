@@ -77,7 +77,7 @@ hunk-header-style = line-number syntax
 protocol = git
 
 [http]
-cookiefile = /home/dln/.gitcookies
+cookiefile = /home/lsjostrom/.gitcookies
 
 [interactive]
 diffFilter = delta --color-only --features=interactive
