@@ -1,0 +1,9 @@
+# Set to true to use lowercase keywords instead of uppercase.
+lowercaseKeywords: false
+connections:
+  - alias: in_memory_sqlite3
+    driver: sqlite3
+    dataSourceName: ':memory:'
+  - alias: postgres_local
+    driver: postgresql
+    dataSourceName: 'host=localhost port=5432 user= password= dbname='
