@@ -33,6 +33,7 @@ sync = branchless sync
 bco = branchless checkout
 c = branchless checkout
 
+gerrit-new = !git fetch origin main && git checkout --detach origin/main
 gerrit-push = !git push origin HEAD:refs/for/main
 gerrit-push-wip = !git push origin HEAD:refs/for/main%wip
 gerrit-push-ready = !git push origin HEAD:refs/for/main%ready
@@ -78,8 +79,8 @@ protocol = git
 [http]
 cookiefile = /home/dln/.gitcookies
 
-; [interactive]
-; diffFilter = delta --color-only
+[interactive]
+diffFilter = delta --color-only --features=interactive
 
 [credential]
 helper = store

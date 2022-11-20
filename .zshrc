@@ -92,6 +92,10 @@ alias e='tmux-edit-helper'
 # completions
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
+## bazel
+if [ ! -f "${fpath[1]}/_bazel" ]; then
+  curl -sLo "${fpath[1]}/_bazel" https://raw.githubusercontent.com/bazelbuild/bazel/master/scripts/zsh_completion/_bazel
+fi
 
 # prompt
 eval "$(starship init zsh)"
