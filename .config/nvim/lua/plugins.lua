@@ -54,7 +54,7 @@ packer.startup(function(use)
 	})
 
 	use({
-		"folke/yanky.nvim",
+		"gbprod/yanky.nvim",
 		config = function()
 			require("plugins/yanky")
 		end,
@@ -173,27 +173,6 @@ packer.startup(function(use)
 		},
 		config = function()
 			require("plugins/zenbones")
-		end,
-	})
-
-	use({
-		"cuducos/yaml.nvim",
-		ft = { "yaml" },
-		requires = {
-			"nvim-treesitter/nvim-treesitter",
-			-- "nvim-telescope/telescope.nvim" -- optional
-		},
-		config = function()
-			require("yaml_nvim").init()
-		end,
-	})
-
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup({
-				disable_filetype = { "TelescopePrompt", "vim" },
-			})
 		end,
 	})
 

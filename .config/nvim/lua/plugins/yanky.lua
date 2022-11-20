@@ -1,5 +1,12 @@
 local yanky = require("yanky")
-yanky.setup({})
+yanky.setup({
+	ring = {
+		history_length = 100,
+		storage = "memory",
+		sync_with_numbered_registers = false,
+		cancel_event = "update",
+	},
+})
 
 vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
