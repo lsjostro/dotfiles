@@ -85,8 +85,17 @@ diffFilter = delta --color-only --features=interactive
 [credential]
 helper = store
 
+[gitsign]
+connectorID = https://accounts.google.com
+
+[gpg]
+format = x509
+
+[gpg "x509"]
+program = gitsign
+
 [commit]
-# gpgsign = true
+gpgsign = false
 
 [user]
 name = Lars Sjöström
