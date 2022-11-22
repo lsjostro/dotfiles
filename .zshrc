@@ -110,6 +110,11 @@ function clip() {
   echo -en "\x1b]52;c;$(base64 -w0)\x07"
 }
 
+fix_cursor() {
+  echo -ne '\e[5 q'
+}
+precmd_functions+=(fix_cursor)
+
 function fre_chpwd() {
 	fre --add "$(pwd)"
 }

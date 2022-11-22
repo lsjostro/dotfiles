@@ -59,6 +59,10 @@ return {
 		bottom = 0,
 	},
 
+	default_cursor_style = "SteadyBlock",
+	cursor_thickness = "3px",
+	cursor_blink_rate = 0,
+
 	enable_wayland = true,
 	enable_tab_bar = false,
 	tab_bar_at_bottom = true,
