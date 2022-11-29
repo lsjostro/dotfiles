@@ -93,5 +93,9 @@ cmp.setup({
 			name = "nvim_lsp",
 			priority = 3,
 		},
+		{
+			name = "nvim_lsp_signature_help",
+			priority = 4,
+		},
 	}),
 })
