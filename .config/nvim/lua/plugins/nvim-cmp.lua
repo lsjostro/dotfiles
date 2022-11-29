@@ -16,6 +16,7 @@ cmp.setup({
 				luasnip = "[LuaSnip]",
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[Lua]",
+				nvim_lsp_signature_help = "[Signature]",
 				path = "[Path]",
 			},
 		}),
@@ -78,10 +79,6 @@ cmp.setup({
 			priority = 1,
 		},
 		{
-			name = "luasnip",
-			priority = 4,
-		},
-		{
 			name = "tmux",
 			priority = 2,
 			option = {
@@ -96,6 +93,10 @@ cmp.setup({
 		{
 			name = "nvim_lsp_signature_help",
 			priority = 4,
+		},
+		{
+			name = "luasnip",
+			priority = 5,
 		},
 	}),
 })
