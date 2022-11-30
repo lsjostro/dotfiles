@@ -14,6 +14,8 @@ vim.o.autochdir = true
 vim.o.backupdir = "/home/lsjostrom/.local/share/nvim/backup/"
 vim.o.backup = true
 vim.o.clipboard = "unnamedplus"
+vim.o.spell = true
+vim.o.spelllang = "en_us"
 
 -- enable nvim-0.7 faster filetype detection
 vim.g.do_filetype_lua = 1
