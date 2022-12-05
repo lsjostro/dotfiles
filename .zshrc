@@ -110,6 +110,11 @@ function clip() {
   echo -en "\x1b]52;c;$(base64 -w0)\x07"
 }
 
+# TMUX passthrough OSC 99 notification
+function tnotify() {
+  printf "\033Ptmux;\033\033]777;notify;%s;%s\033\\\033\\" "$1" "$2"
+}
+
 # bar cursor in wezterm/zsh
 function fix_cursor() {
   echo -en '\e[5 q'
