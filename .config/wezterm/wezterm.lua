@@ -44,14 +44,18 @@ return {
 		},
 	},
 	freetype_load_target = "Light",
+	freetype_render_target = "HorizontalLcd",
 	warn_about_missing_glyphs = false,
 	bold_brightens_ansi_colors = false,
 
 	font_size = 11.0,
 	line_height = 1.1,
+	cell_width = 0.95,
 
 	initial_cols = 185,
 	initial_rows = 55,
+	use_resize_increments = true,
+
 	window_padding = {
 		left = 10,
 		right = 10,
