@@ -11,4 +11,8 @@ else
 	fre --store_name "$_store" --add "$_file"
 fi
 
+tmux new-window -S -n nvim \
+	-e "GOPACKAGESDRIVER=$GOPACKAGESDRIVER" \
+	nvim --listen "$XDG_RUNTIME_DIR/nvim.sock"
+
 nvim --server "$XDG_RUNTIME_DIR/nvim.sock" --remote "$_file" && tmux select-window -t1
