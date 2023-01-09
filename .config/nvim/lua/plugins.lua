@@ -10,6 +10,32 @@ packer.startup(function(use)
 	use("rafamadriz/friendly-snippets")
 
 	use({
+		"numToStr/Comment.nvim",
+		requires = {
+			"JoosepAlviste/nvim-ts-context-commentstring",
+		},
+		config = function()
+			require("Comment").setup({
+				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+			})
+		end,
+	})
+
+	use({
+		"m-demare/hlargs.nvim",
+		requires = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("hlargs").setup({
+				excluded_argnames = {
+					usages = {
+						lua = { "self", "use" },
+					},
+				},
+			})
+		end,
+	})
+
+	use({
 		"github/copilot.vim",
 		config = function()
 			require("plugins/copilot")
@@ -42,13 +68,6 @@ packer.startup(function(use)
 		"theHamsta/nvim-dap-virtual-text",
 		config = function()
 			require("nvim-dap-virtual-text").setup({ commented = true })
-		end,
-	})
-
-	use({
-		"b3nj5m1n/kommentary",
-		config = function()
-			require("plugins/kommentary")
 		end,
 	})
 
