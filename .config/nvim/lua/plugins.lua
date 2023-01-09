@@ -221,4 +221,15 @@ packer.startup(function(use)
 			require("illuminate").configure({ delay = 200 })
 		end,
 	})
+
+	-- noice
+	use({
+		"folke/noice.nvim",
+		requires = {
+			"MunifTanjim/nui.nvim",
+		},
+		config = function()
+			require("plugins/noice")
+		end,
+	})
 end)
