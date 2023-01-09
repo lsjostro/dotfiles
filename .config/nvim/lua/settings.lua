@@ -14,7 +14,7 @@ vim.o.autochdir = true
 vim.o.backupdir = "/home/lsjostrom/.local/share/nvim/backup/"
 vim.o.backup = true
 vim.o.clipboard = "unnamedplus"
-vim.o.spell = true
+vim.o.spell = false
 vim.o.spelllang = "en_us"
 
 -- enable nvim-0.7 faster filetype detection
@@ -35,6 +35,7 @@ vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.fillchars = "stl: ,stlnc: ,eob:🮙"
 vim.g.netrw_dirhistmax = 0
 
 --- Search
