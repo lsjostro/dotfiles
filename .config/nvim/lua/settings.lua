@@ -69,10 +69,10 @@ vim.o.cmdheight = 1
 vim.keymap.set("n", "<C-l>", ':let @/=""<CR>') -- clear search
 vim.keymap.set("n", "H", "^")
 vim.keymap.set("n", "L", "$")
-vim.keymap.set("n", "<leader>q", ":bdelete!<CR>")
+vim.keymap.set("n", "<leader>q", ":bdelete!<CR>", { silent = true })
 vim.keymap.set("n", "<C-l>", ":bnext<CR>")
 vim.keymap.set("n", "<C-h>", ":bprevious<CR>")
-vim.keymap.set("n", "<leader>w", ":write!<CR>")
+vim.keymap.set("n", "<leader>w", ":write!<CR>", { silent = true })
 vim.keymap.set("i", "", "<C-w>")
 vim.keymap.set("n", "<C-a>", "<ESC>ggVG$")
 vim.keymap.set("v", "<C-s>", ":sort<CR>")
