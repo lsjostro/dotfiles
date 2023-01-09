@@ -66,16 +66,16 @@ vim.o.laststatus = 3
 vim.o.cmdheight = 1
 
 --- Key mappings
-vim.keymap.set("n", "<C-l>", ':let @/=""<CR>') -- clear search
-vim.keymap.set("n", "H", "^")
-vim.keymap.set("n", "L", "$")
+vim.keymap.set("n", "<leader>l", ':let @/ = ""<CR>', { noremap = true, silent = true }) -- clear search
+vim.keymap.set("n", "H", "^", { silent = true }) -- move to start of line
+vim.keymap.set("n", "L", "$", { silent = true }) -- move to end of line
 vim.keymap.set("n", "<leader>q", ":bdelete!<CR>", { silent = true })
-vim.keymap.set("n", "<C-l>", ":bnext<CR>")
-vim.keymap.set("n", "<C-h>", ":bprevious<CR>")
+vim.keymap.set("n", "<C-l>", ":bnext<CR>", { silent = true })
+vim.keymap.set("n", "<C-h>", ":bprevious<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w", ":write!<CR>", { silent = true })
-vim.keymap.set("i", "", "<C-w>")
-vim.keymap.set("n", "<C-a>", "<ESC>ggVG$")
-vim.keymap.set("v", "<C-s>", ":sort<CR>")
+vim.keymap.set("i", "", "<C-w>", { silent = true })
+vim.keymap.set("n", "<C-a>", "<ESC>ggVG$", { silent = true })
+vim.keymap.set("v", "<C-s>", ":sort<CR>", { silent = true })
 
 -- Terminal mappings
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
