@@ -39,9 +39,7 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local on_attach = function()
-	require("folding").on_attach()
-end
+local on_attach = function() end
 
 -- simple setups --
 local servers = {

@@ -3,7 +3,6 @@ packer.startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 	use("hashivim/vim-terraform")
-	use("pierreglaser/folding-nvim")
 	use("jose-elias-alvarez/nvim-lsp-ts-utils")
 	use("ckipp01/stylua-nvim")
 	use("nanotee/sqls.nvim")
