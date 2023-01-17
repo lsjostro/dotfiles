@@ -5,14 +5,15 @@ if [ -n "$1" ]; then
 	_file=$(readlink -f "$@")
 else
 	FZF=${FZF:-"fzf-tmux -p 90%,50% -y 0"}
-	_git_root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+	_git_root=$(git rev-parse --show-toplevel 2>/dev/null || sl root 2>/dev/null || pwd)
 	_store=$(echo "$_git_root" | sha1sum | cut -d ' ' -f 1)
-	_file=$( (fre --store_name "$_store" --sorted && fd --type f --hidden --follow --exclude .git . "$_git_root") | cat -n | sort -k2 -k1n | uniq -f1 | sort -nk1,1 | cut -f2- | $FZF --no-sort)
+	_file=$( (fre --store_name "$_store" --sorted && fd --type f --hidden --follow --exclude .git --exclude .sl --ignore-file "${_git_root}/.gitignore" . "$_git_root") | cat -n | sort -k2 -k1n | uniq -f1 | sort -nk1,1 | cut -f2- | $FZF --no-sort)
 	fre --store_name "$_store" --add "$_file"
 fi
 
-tmux new-window -S -n nvim \
-	-e "GOPACKAGESDRIVER=$GOPACKAGESDRIVER" \
-	nvim --listen "$XDG_RUNTIME_DIR/nvim.sock"
+tmux select-window -t nvim 2>/dev/null ||
+	tmux new-window -S -n nvim \
+		-e "GOPACKAGESDRIVER=$GOPACKAGESDRIVER" \
+		nvim --listen "$XDG_RUNTIME_DIR/nvim.sock"
 
-nvim --server "$XDG_RUNTIME_DIR/nvim.sock" --remote "$_file" && tmux select-window -t1
+nvim --server "$XDG_RUNTIME_DIR/nvim.sock" --remote "$_file"

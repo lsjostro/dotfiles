@@ -6,4 +6,4 @@ connections:
     dataSourceName: ':memory:'
   - alias: postgres_local
     driver: postgresql
-    dataSourceName: 'host=localhost port=5432 user= password= dbname='
+    dataSourceName: 'host=localhost port=5433 user=test password=test dbname=test'
