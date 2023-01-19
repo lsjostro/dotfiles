@@ -16,7 +16,7 @@ $character\
 command = '~/bin/starship-sl-status'
 when = true
 style = "italic fg:#79AE6F"
-format = '[(🌱 $output)]($style)'
+format = '[(🌱 $output )]($style)'
 
 [character]
 success_symbol = "[%](green)"

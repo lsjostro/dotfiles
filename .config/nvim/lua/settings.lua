@@ -10,7 +10,7 @@ vim.o.splitright = true
 vim.o.ttimeout = true
 vim.o.ttimeoutlen = 50
 vim.o.updatetime = 100
-vim.o.autochdir = true
+vim.o.autochdir = false
 vim.o.backupdir = "/home/lsjostrom/.local/share/nvim/backup/"
 vim.o.backup = true
 vim.o.clipboard = "unnamedplus"
@@ -70,6 +70,7 @@ vim.keymap.set("n", "<leader>l", ':let @/ = ""<CR>', { noremap = true, silent = 
 vim.keymap.set("n", "H", "^", { silent = true }) -- move to start of line
 vim.keymap.set("n", "L", "$", { silent = true }) -- move to end of line
 vim.keymap.set("n", "<leader>q", ":bdelete!<CR>", { silent = true })
+vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true })
 vim.keymap.set("n", "<C-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<C-h>", ":bprevious<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w", ":write!<CR>", { silent = true })
