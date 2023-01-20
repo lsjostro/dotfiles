@@ -5,9 +5,10 @@ if [ -n "$1" ]; then
 	_file=$(readlink -f "$@")
 else
 	FZF=${FZF:-"fzf-tmux -p 90%,50% -y 0"}
-	_git_root=$(git rev-parse --show-toplevel 2>/dev/null || sl root 2>/dev/null || pwd)
-	_store=$(echo "$_git_root" | sha1sum | cut -d ' ' -f 1)
-  _file=$( ( (fre --store_name "$_store" --sorted | xargs -n 100 ls -d 2>/dev/null || true) && fd --type f --hidden --follow --exclude .git --exclude .sl --ignore-file "${_git_root}/.gitignore" . "$_git_root") | cat -n | sort -k2 -k1n | uniq -f1 | sort -nk1,1 | cut -f2- | $FZF --no-sort)
+	_root=$(git rev-parse --show-toplevel 2>/dev/null || sl root 2>/dev/null || pwd)
+	_store=$(echo "$_root" | sha1sum | cut -d ' ' -f 1)
+	_file=$( ( (fre --store_name "$_store" --sorted | xargs -n 100 ls -d 2>/dev/null || true) && fd --type f --hidden --follow --exclude .git --exclude .sl --ignore-file "${_root}/.gitignore" . "$_root") | cat -n | sort -k2 -k1n | uniq -f1 | sort -nk1,1 | cut -f2- | sed -e "s#^${_root}/##" | $FZF --no-sort)
+	_file="${_root}/${_file}"
 	fre --store_name "$_store" --add "$_file"
 fi
 

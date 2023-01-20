@@ -21,7 +21,11 @@ vim.keymap.set("n", "<leader>p", '<cmd>lua require("telescope.builtin").register
 vim.keymap.set("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<CR>')
 vim.keymap.set("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<CR>')
 vim.keymap.set("n", "g/", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>')
-vim.keymap.set("n", "g?", '<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<CR>')
+vim.keymap.set(
+	"n",
+	"g?",
+	'<cmd>lua require("telescope.builtin").lsp_workspace_symbols({ query = (vim.bo.filetype == "go" and "\'" or "") })<CR>'
+)
 vim.keymap.set("n", "ge", '<cmd>lua require("telescope.builtin").lsp_document_diagnostics()<CR>')
 vim.keymap.set("n", "Db", '<cmd>lua require("telescope").extensions.dap.list_breakpoints()<CR>')
 vim.keymap.set("n", "Dc", '<cmd>lua require("telescope").extensions.dap.commands()<CR>')
