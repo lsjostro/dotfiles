@@ -7,6 +7,7 @@ null_ls.setup({
 		builtins.formatting.buf,
 		builtins.formatting.cue_fmt,
 		builtins.formatting.shfmt,
+		builtins.formatting.prettierd,
 		builtins.diagnostics.buf.with({
 			args = { "lint", "--disable-symlinks", "--path", "$FILENAME" },
 			cwd = function()
@@ -18,7 +19,6 @@ null_ls.setup({
 			end,
 		}),
 		builtins.diagnostics.cue_fmt,
-		builtins.completion.spell,
 	},
 	debug = true,
 })

@@ -74,29 +74,17 @@ cmp.setup({
 	},
 
 	sources = cmp.config.sources({
-		{
-			name = "buffer",
-			priority = 1,
-		},
+		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
+		{ name = "buffer" },
 		{
 			name = "tmux",
-			priority = 2,
 			option = {
 				all_panes = true,
 				trigger_characters = {},
 			},
 		},
-		{
-			name = "nvim_lsp",
-			priority = 3,
-		},
-		{
-			name = "nvim_lsp_signature_help",
-			priority = 4,
-		},
-		{
-			name = "luasnip",
-			priority = 5,
-		},
+		{ name = "luasnip" },
+		{ name = "emoji" },
 	}),
 })
