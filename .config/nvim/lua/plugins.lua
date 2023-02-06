@@ -139,6 +139,7 @@ packer.startup(function(use)
 			"nvim-telescope/telescope-fzy-native.nvim",
 			"nvim-telescope/telescope-github.nvim",
 			"nvim-telescope/telescope-dap.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
 		},
 		config = function()
 			require("plugins/telescope")

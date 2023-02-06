@@ -11,7 +11,6 @@ vim.keymap.set("n", "<leader>f", '<cmd>lua require("telescope.builtin").oldfiles
 vim.keymap.set("n", "<space>", '<cmd>lua require("telescope.builtin").oldfiles({cwd_only=true})<CR>')
 vim.keymap.set("n", "<leader>e", '<cmd>lua require("telescope.builtin").git_files()<CR>')
 vim.keymap.set("n", "<leader>g", '<cmd>lua require("telescope.builtin").git_status()<CR>')
--- vim.keymap.set("n", "<leader>a", '<cmd>lua require("telescope.builtin").lsp_code_actions()<CR>')
 vim.keymap.set("n", "<leader>m", '<cmd>lua require("telescope.builtin").marks()<CR>')
 vim.keymap.set("n", "<leader>s", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>')
 vim.keymap.set("n", "<leader>t", '<cmd>lua require("telescope.builtin").treesitter()<CR>')
@@ -37,9 +36,10 @@ vim.keymap.set("n", "Dv", '<cmd>lua require("telescope").extensions.dap.variable
 telescope.setup({
 	defaults = {
 		layout_strategy = "flex",
-		-- layout_defaults = {flip_columns = 160},
 		layout_config = {
 			preview_cutoff = 10,
+			prompt_position = "bottom",
+			mirror = true,
 		},
 		mappings = {
 			i = {
@@ -52,6 +52,13 @@ telescope.setup({
 		file_previewer = previewers.vim_buffer_cat.new,
 		grep_previewer = previewers.vim_buffer_vimgrep.new,
 		qflist_previewer = previewers.vim_buffer_qflist.new,
+		extensions = {
+			["ui-select"] = {
+				require("telescope.themes").get_dropdown({
+					-- even more opts
+				}),
+			},
+		},
 	},
 })
 
@@ -76,7 +83,7 @@ end
 -- Extensions
 telescope.load_extension("fzy_native")
 telescope.load_extension("gh")
--- telescope.load_extension("packer")  -- currently breaking packer
+telescope.load_extension("ui-select")
 
 local M = {}
 
