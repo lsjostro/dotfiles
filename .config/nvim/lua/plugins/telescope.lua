@@ -8,29 +8,19 @@ vim.keymap.set(
 	'<cmd>lua require("telescope.builtin").buffers({sort_mru=true, ignore_current_buffer=true})<CR>'
 )
 vim.keymap.set("n", "<leader>f", '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
+vim.keymap.set("n", "<leader><space>", '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
 vim.keymap.set("n", "<space>", '<cmd>lua require("telescope.builtin").oldfiles({cwd_only=true})<CR>')
 vim.keymap.set("n", "<leader>e", '<cmd>lua require("telescope.builtin").git_files()<CR>')
 vim.keymap.set("n", "<leader>g", '<cmd>lua require("telescope.builtin").git_status()<CR>')
 vim.keymap.set("n", "<leader>m", '<cmd>lua require("telescope.builtin").marks()<CR>')
-vim.keymap.set("n", "<leader>s", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>')
 vim.keymap.set("n", "<leader>t", '<cmd>lua require("telescope.builtin").treesitter()<CR>')
 vim.keymap.set("n", "<leader>/", '<cmd>lua require("telescope.builtin").live_grep()<CR>')
-vim.keymap.set("n", "<leader>.", '<cmd>lua require("telescope.builtin").file_browser()<CR>')
 vim.keymap.set("n", "<leader>p", '<cmd>lua require("telescope.builtin").registers()<CR>')
-vim.keymap.set("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<CR>')
-vim.keymap.set("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<CR>')
-vim.keymap.set("n", "g/", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>')
 vim.keymap.set(
 	"n",
 	"g?",
 	'<cmd>lua require("telescope.builtin").lsp_workspace_symbols({ query = (vim.bo.filetype == "go" and "\'" or "") })<CR>'
 )
-vim.keymap.set("n", "ge", '<cmd>lua require("telescope.builtin").lsp_document_diagnostics()<CR>')
-vim.keymap.set("n", "Db", '<cmd>lua require("telescope").extensions.dap.list_breakpoints()<CR>')
-vim.keymap.set("n", "Dc", '<cmd>lua require("telescope").extensions.dap.commands()<CR>')
-vim.keymap.set("n", "Df", '<cmd>lua require("telescope").extensions.dap.frames()<CR>')
-vim.keymap.set("n", "DD", "<cmd>:GoBreakToggle<CR>")
-vim.keymap.set("n", "Dv", '<cmd>lua require("telescope").extensions.dap.variables()<CR>')
 
 -- Setup
 telescope.setup({

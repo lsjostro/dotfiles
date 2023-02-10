@@ -19,6 +19,9 @@ null_ls.setup({
 			end,
 		}),
 		builtins.diagnostics.cue_fmt,
+		builtins.diagnostics.golangci_lint,
+		builtins.diagnostics.eslint_d,
+		builtins.code_actions.eslint_d,
 	},
 	debug = true,
 })
