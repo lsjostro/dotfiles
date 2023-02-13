@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -xfe -o pipefail
 
+eval "$(direnv export bash)"
+
 if [ -n "$1" ]; then
 	_file=$(readlink -f "$@")
 else
