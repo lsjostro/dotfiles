@@ -33,8 +33,8 @@ vim.wo.list = true
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.wo.foldmethod = "expr"
+-- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.fillchars = "stl: ,stlnc: ,eob:🮙"
 vim.g.netrw_dirhistmax = 0
 
@@ -46,7 +46,7 @@ vim.o.smartcase = true
 vim.o.wildmode = "longest:full,full"
 
 if vim.fn.executable("rg") then
-  vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
+	vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
 end
 
 --- Completion
