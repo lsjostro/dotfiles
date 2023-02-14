@@ -72,7 +72,7 @@ lspconfig.sqls.setup({
 vim.keymap.set("v", "x", "<Plug>(sqls-execute-query)")
 vim.keymap.set("n", "<leader>db", "<Cmd>SqlsSwitchConnection<CR>")
 
-lspconfig.sumneko_lua.setup({
+lspconfig.lua_ls.setup({
 	on_attach = function()
 		on_attach()
 		vim.cmd([[autocmd BufWritePre <buffer> lua require'stylua-nvim'.format_file()]])
