@@ -70,10 +70,6 @@ function M.config()
   end
 
   lspconfig.lua_ls.setup({
-    on_attach = function()
-      on_attach()
-      vim.cmd([[autocmd BufWritePre <buffer> lua require'stylua-nvim'.format_file()]])
-    end,
     settings = {
       Lua = {
         completion = { kewordSnippet = "Disable" },
