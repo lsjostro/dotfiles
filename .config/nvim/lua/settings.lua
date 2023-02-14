@@ -46,7 +46,7 @@ vim.o.smartcase = true
 vim.o.wildmode = "longest:full,full"
 
 if vim.fn.executable("rg") then
-	vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
+  vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
 end
 
 --- Completion
@@ -81,11 +81,3 @@ vim.keymap.set("v", "<C-s>", ":sort<CR>", { silent = true })
 -- Terminal mappings
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
 vim.keymap.set("n", "<C-x>", ":split term://zsh<CR>")
-
--- recompile packer on plugins change
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])

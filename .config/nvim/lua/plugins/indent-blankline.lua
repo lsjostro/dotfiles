@@ -1,18 +1,44 @@
--- vim.wo.colorcolumn = "100"
-vim.g.indent_blankline_char = "│"
-vim.g.indent_blankline_space_char = "⬝"
-vim.g.indent_blankline_space_char_highlight_list = { "IndentSpace" }
--- vim.g.indent_blankline_char_list = {'|', '¦', '┆', '┊'}
-vim.g.indent_blankline_buftype_exclude = { "help", "terminal" }
-vim.g.indent_blankline_filetype_exclude = { "text", "markdown" }
--- vim.g.indent_blankline_show_end_of_line = true
-vim.g.indent_blankline_show_first_indent_level = true
-vim.g.indent_blankline_show_trailing_blankline_indent = true
-vim.g.indent_blankline_char_highlight_list = {
-	"Indent1",
-	"Indent2",
-	"Indent3",
-	"Indent4",
-	"Indent5",
-	"Indent6",
+local M = {
+  "lukas-reineke/indent-blankline.nvim",
+  event = "BufReadPre",
+  config = {
+    buftype_exclude = { "terminal", "nofile" },
+    filetype_exclude = {
+      "help",
+      "neogitstatus",
+      "NvimTree",
+      "neo-tree",
+      "Trouble",
+    },
+    char = "│",
+    -- char = "┊",
+    char_highlight_list = { "Indent1", "Indent2", "Indent3", "Indent4", "Indent5", "Indent6" },
+    use_treesitter_scope = false,
+    show_trailing_blankline_indent = false,
+    show_current_context = true,
+    context_patterns = {
+      "class",
+      "return",
+      "function",
+      "method",
+      "^if",
+      "^while",
+      "jsx_element",
+      "^for",
+      "^object",
+      "^table",
+      "block",
+      "arguments",
+      "if_statement",
+      "else_clause",
+      "jsx_element",
+      "jsx_self_closing_element",
+      "try_statement",
+      "catch_clause",
+      "import_statement",
+      "operation_type",
+    },
+  },
 }
+
+return M
