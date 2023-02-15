@@ -1,2 +1,2 @@
-require("settings")
-require("plugins-init")
+require("config.settings")
+require("config.lazy")

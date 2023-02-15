@@ -72,4 +72,25 @@ return {
       vim.keymap.set("x", "<leader>c", require("osc52").copy_visual)
     end,
   },
+
+  {
+    "gbprod/yanky.nvim",
+
+    opts = {
+      ring = {
+        history_length = 100,
+        storage = "memory",
+        sync_with_numbered_registers = false,
+        cancel_event = "update",
+      },
+    },
+    keys = {
+      { "p",     "<Plug>(YankyPutAfter)",     mode = { "n", "x" } },
+      { "P",     "<Plug>(YankyPutBefore)",    mode = { "n", "x" } },
+      { "gp",    "<Plug>(YankyGPutAfter)",    mode = { "n", "x" } },
+      { "gP",    "<Plug>(YankyGPutBefore)",   mode = { "n", "x" } },
+      { "<c-p>", "<Plug>(YankyCycleForward)" },
+      { "<c-n>", "<Plug>(YankyCycleBackward)" },
+    }
+  }
 }
