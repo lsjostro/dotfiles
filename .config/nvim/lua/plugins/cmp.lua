@@ -36,8 +36,8 @@ function M.config()
     mapping = {
       ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
       ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-      ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-      ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+      -- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+      -- ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
       ["<C-d>"] = cmp.mapping.scroll_docs( -2),
       ["<C-u>"] = cmp.mapping.scroll_docs(2),
       ["<C-e>"] = cmp.mapping({

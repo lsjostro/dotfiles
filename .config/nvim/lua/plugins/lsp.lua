@@ -192,6 +192,7 @@ return {
           builtins.diagnostics.cue_fmt,
           builtins.diagnostics.golangci_lint,
           builtins.diagnostics.eslint_d,
+          builtins.diagnostics.terraform_validate,
           builtins.code_actions.eslint_d,
         },
         debug = true,

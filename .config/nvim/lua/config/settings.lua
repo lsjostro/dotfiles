@@ -46,7 +46,7 @@ vim.o.smartcase = true
 vim.o.wildmode = "longest:full,full"
 
 if vim.fn.executable("rg") then
-	vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
+  vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
 end
 
 --- Completion
