@@ -13,8 +13,8 @@ return {
       vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>")
       vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
       vim.keymap.set("n", "rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-      vim.keymap.set("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
-      vim.keymap.set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
+      vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+      vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 
       -- will format file before saving based on attached lsp capabilities
       vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format({sync = true})]])
