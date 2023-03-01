@@ -20,7 +20,7 @@ return {
     "numToStr/Comment.nvim",
     keys = {
       { "<C-_>", "<Plug>(comment_toggle_linewise_current)" },
-      { "<C-_>", "<Plug>(comment_toggle_linewise_visual)", mode = "v" },
+      { "gc",    "<Plug>(comment_toggle_linewise_visual)", mode = "v" },
     },
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",

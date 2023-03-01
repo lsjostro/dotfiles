@@ -15,8 +15,8 @@ else
 	fre --store_name "$_store" --add "$_file"
 fi
 
-tmux select-window -t nvim 2>/dev/null ||
-	tmux new-window -S -n nvim \
+tmux select-window -t 1 2>/dev/null ||
+	tmux new-window -S -n 1 \
 		-e "GOPACKAGESDRIVER=$GOPACKAGESDRIVER" \
 		-e "GOFLAGS=$GOFLAGS" \
 		nvim --listen "$XDG_RUNTIME_DIR/nvim.sock"

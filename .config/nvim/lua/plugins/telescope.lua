@@ -35,6 +35,7 @@ function M.config()
   vim.keymap.set("n", "<leader>t", '<cmd>lua require("telescope.builtin").treesitter()<CR>')
   vim.keymap.set("n", "<leader>/", '<cmd>lua require("telescope.builtin").live_grep()<CR>')
   vim.keymap.set("n", "<leader>p", '<cmd>lua require("telescope.builtin").registers()<CR>')
+  vim.keymap.set("n", "<leader>d", '<cmd>lua require("telescope.builtin").diagnostics()<CR>')
   vim.keymap.set(
     "n",
     "g?",

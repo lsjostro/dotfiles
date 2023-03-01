@@ -33,8 +33,6 @@ vim.wo.list = true
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
--- vim.wo.foldmethod = "expr"
--- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.fillchars = "stl: ,stlnc: ,eob:🮙"
 vim.g.netrw_dirhistmax = 0
 
