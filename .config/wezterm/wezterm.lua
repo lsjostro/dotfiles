@@ -1,26 +1,42 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
+local mux = wezterm.mux
 
 local function font_with_fallback(name, params)
   local names = { name, "Noto Color Emoji", "Iosevka Nerd Font Mono" }
   return wezterm.font_with_fallback(names, params)
 end
 
-local theme = {
-  colors = {
-    foreground = "#000000",
-    background = "#fcfcfc",
-    cursor_bg = "#EA526F",
-    cursor_fg = "#ffffff",
-    cursor_border = "#cc0000",
-    split = "#444444",
-    selection_bg = "#FFCA28",
-    ansi = { "#212121", "#b7141e", "#457b23", "#f5971d", "#134eb2", "#550087", "#0e707c", "#eeeeee" },
-    brights = { "#424242", "#e83a3f", "#7aba39", "#fee92e", "#53a4f3", "#a94dbb", "#26bad1", "#d8d8d8" },
-  },
-}
+wezterm.on('mux-startup', function()
+  local tab, pane, window = mux.spawn_window {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+end)
+
+local function scheme_for_appearance(appearance)
+  if appearance:find 'Dark' then
+    return 'dark'
+  else
+    return 'light'
+  end
+end
 
 return {
-  colors = theme.colors,
+  unix_domains = {
+    {
+      name = "lsjostrom-dev",
+      local_echo_threshold_ms = 100,
+      proxy_command = { "ssh", "lsjostrom-dev", "wezterm", "cli", "proxy" },
+    },
+  },
+  color_scheme_dirs = { "/home/lsjostrom/src/github.com/shelmangroup/shelman-colors/wezterm" },
+  color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
   font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
   font_rules = {
     {
@@ -90,5 +106,16 @@ return {
     { key = "0", mods = "CTRL",       action = "ResetFontSize" },
     { key = "-", mods = "CTRL",       action = "DecreaseFontSize" },
     { key = "=", mods = "CTRL",       action = "IncreaseFontSize" },
+    -- MUX
+    { key = "E", mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = 'lsjostrom-dev' }, },
+    { key = "1", mods = "ALT",        action = wezterm.action { ActivateTab = 0 } },
+    { key = "2", mods = "ALT",        action = wezterm.action { ActivateTab = 1 } },
+    { key = "3", mods = "ALT",        action = wezterm.action { ActivateTab = 2 } },
+    { key = "4", mods = "ALT",        action = wezterm.action { ActivateTab = 3 } },
+    { key = "5", mods = "ALT",        action = wezterm.action { ActivateTab = 4 } },
+    { key = "6", mods = "ALT",        action = wezterm.action { ActivateTab = 5 } },
+    { key = "7", mods = "ALT",        action = wezterm.action { ActivateTab = 6 } },
+    { key = "8", mods = "ALT",        action = wezterm.action { ActivateTab = 7 } },
+    { key = "9", mods = "ALT",        action = wezterm.action { ActivateTab = 8 } },
   },
 }
