@@ -88,7 +88,7 @@ return {
   cursor_thickness = "3px",
   cursor_blink_rate = 0,
   enable_wayland = true,
-  enable_tab_bar = true,
+  enable_tab_bar = false,
   use_fancy_tab_bar = true,
   tab_bar_at_bottom = true,
   show_tab_index_in_tab_bar = true,
@@ -132,7 +132,7 @@ return {
     {
       name = dev_server,
       local_echo_threshold_ms = 100,
-      proxy_command = is_server == false and { "ssh", dev_server, "wezterm", "cli", "proxy" } or null,
+      proxy_command = is_server == false and { "ssh", dev_server, "wezterm", "cli", "proxy" } or nil,
     },
   },
 }

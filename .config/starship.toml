@@ -8,7 +8,6 @@ $git_branch\
 $git_commit\
 $git_status\
 $git_state\
-${custom.sl_status}\
 $character\
 """
 
@@ -34,12 +33,10 @@ style = "italic bold purple"
 [git_branch]
 format = "[$symbol$branch]($style)"
 style = "fg:#559955"
-symbol = " "
 truncation_length = 16
 truncation_symbol = ""
 
 [git_commit]
-format = "[ $hash$tag]($style) "
 style = "fg:#559955"
 
 [git_state]

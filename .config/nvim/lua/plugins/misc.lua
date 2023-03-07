@@ -58,13 +58,12 @@ return {
 
   {
     "ojroques/nvim-osc52",
-
     config = function()
       local osc52 = require("osc52")
       osc52.setup({
         max_length = 0, -- Maximum length of selection (0 for no limit)
         silent = false, -- Disable message on successful copy
-        trim = false, -- Trim text before copy
+        trim = false,   -- Trim text before copy
       })
 
       vim.keymap.set("n", "<leader>c", require("osc52").copy_operator, { expr = true })
@@ -75,7 +74,6 @@ return {
 
   {
     "gbprod/yanky.nvim",
-
     opts = {
       ring = {
         history_length = 100,
@@ -92,5 +90,12 @@ return {
       { "<c-p>", "<Plug>(YankyCycleForward)" },
       { "<c-n>", "<Plug>(YankyCycleBackward)" },
     }
+  },
+
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end,
   }
 }

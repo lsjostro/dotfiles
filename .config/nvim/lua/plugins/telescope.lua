@@ -1,8 +1,8 @@
-local function project_files()
-  require("telescope.builtin").find_files({
-    cwd = require("lspconfig.util").root_pattern(".git")(vim.fn.expand("%:p")),
-  })
-end
+-- local function project_files()
+--   require("telescope.builtin").find_files({
+--     cwd = require("lspconfig.util").root_pattern(".git")(vim.fn.expand("%:p")),
+--   })
+-- end
 
 local M = {
   "nvim-telescope/telescope.nvim",
@@ -53,9 +53,9 @@ function M.config()
       },
       mappings = {
         i = {
-          ["<CR>"] = actions.select_default + actions.center,
-          ["<esc>"] = actions.close,
-          ["<tab>"] = actions.add_selection,
+              ["<CR>"] = actions.select_default + actions.center,
+              ["<esc>"] = actions.close,
+              ["<tab>"] = actions.add_selection,
         },
       },
       color_devicons = true,
@@ -63,7 +63,7 @@ function M.config()
       grep_previewer = previewers.vim_buffer_vimgrep.new,
       qflist_previewer = previewers.vim_buffer_qflist.new,
       extensions = {
-        ["ui-select"] = {
+            ["ui-select"] = {
           require("telescope.themes").get_dropdown({
             -- even more opts
           }),

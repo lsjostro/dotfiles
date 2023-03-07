@@ -10,7 +10,7 @@ vim.o.splitright = true
 vim.o.ttimeout = true
 vim.o.ttimeoutlen = 50
 vim.o.updatetime = 100
-vim.o.autochdir = false
+vim.o.autochdir = true
 vim.o.backupdir = "/home/lsjostrom/.local/share/nvim/backup/"
 vim.o.backup = true
 vim.o.clipboard = "unnamedplus"
@@ -52,7 +52,7 @@ vim.cmd("set shortmess+=c")
 vim.o.completeopt = "menuone,noinsert,noselect"
 
 --- Appearance
-vim.o.background = "light"
+-- vim.o.background = "dark"
 vim.o.scrolloff = 8
 vim.o.showmode = false
 vim.o.sidescrolloff = 5
@@ -65,8 +65,8 @@ vim.o.cmdheight = 1
 
 --- Key mappings
 vim.keymap.set("n", "<leader>l", ':let @/ = ""<CR>', { noremap = true, silent = true }) -- clear search
-vim.keymap.set("n", "H", "^", { silent = true }) -- move to start of line
-vim.keymap.set("n", "L", "$", { silent = true }) -- move to end of line
+vim.keymap.set("n", "H", "^", { silent = true })                                        -- move to start of line
+vim.keymap.set("n", "L", "$", { silent = true })                                        -- move to end of line
 vim.keymap.set("n", "<leader>q", ":bdelete!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true })
 vim.keymap.set("n", "<C-l>", ":bnext<CR>", { silent = true })
