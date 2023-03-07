@@ -50,12 +50,30 @@ local function set_font_size_by_hostname()
   end
 end
 
+
+wezterm.on("user-var-changed", function(window, pane, name, value)
+  wezterm.log_info("user-var-changed", name, value)
+
+  if name == "nvim_activate" then
+    for _, t in ipairs(window:mux_window():tabs_with_info()) do
+      for _, p in ipairs(t.tab:panes()) do
+        if p:get_title() == "nvim" then
+          window:perform_action(act.ActivateTab(t.index), p)
+          if t.index > 0 then
+            window:perform_action(act.MoveTab(0), p)
+          end
+        end
+      end
+    end
+  end
+end)
+
 local dev_server = "lsjostrom-dev"
 local is_server = wezterm.hostname() == dev_server
 
 return {
   color_scheme_dirs = { "/home/lsjostrom/src/github.com/shelmangroup/shelman-colors/wezterm" },
-  color_scheme = scheme_for_appearance("light"),
+  color_scheme = scheme_for_appearance("Dark"),
   font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
   font_rules = {
     {
@@ -137,6 +155,7 @@ return {
     { key = "7", mods = "ALT",        action = wezterm.action { ActivateTab = 6 } },
     { key = "8", mods = "ALT",        action = wezterm.action { ActivateTab = 7 } },
     { key = "9", mods = "ALT",        action = wezterm.action { ActivateTab = 8 } },
+    { key = "0", mods = "ALT",        action = wezterm.action { ActivateTab = 9 } },
   },
   unix_domains = {
     {
