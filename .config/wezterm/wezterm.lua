@@ -40,6 +40,15 @@ local function scheme_for_appearance(appearance)
   end
 end
 
+local function set_font_size_by_hostname()
+  local hostname = wezterm.hostname()
+  if hostname == 'kean' then
+    return 16.0
+  else
+    return 11.0
+  end
+end
+
 local dev_server = "lsjostrom-dev"
 local is_server = wezterm.hostname() == dev_server
 
@@ -72,7 +81,7 @@ return {
   freetype_render_target = "HorizontalLcd",
   warn_about_missing_glyphs = false,
   bold_brightens_ansi_colors = false,
-  font_size = 11.0,
+  font_size = set_font_size_by_hostname(),
   line_height = 1.1,
   cell_width = 0.95,
   initial_cols = 185,
