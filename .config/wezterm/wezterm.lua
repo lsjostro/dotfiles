@@ -30,6 +30,7 @@ wezterm.on('mux-startup', function()
   window:spawn_tab {}
   window:spawn_tab {}
   window:spawn_tab {}
+  window:spawn_tab {}
 end)
 
 local function scheme_for_appearance(appearance)
