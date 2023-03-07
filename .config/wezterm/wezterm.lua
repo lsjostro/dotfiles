@@ -7,6 +7,19 @@ local function font_with_fallback(name, params)
   return wezterm.font_with_fallback(names, params)
 end
 
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = mux.spawn_window(cmd or {})
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+  window:spawn_tab {}
+end)
+
 wezterm.on('mux-startup', function()
   local tab, pane, window = mux.spawn_window {}
   window:spawn_tab {}
@@ -27,16 +40,12 @@ local function scheme_for_appearance(appearance)
   end
 end
 
+local dev_server = "lsjostrom-dev"
+local is_server = wezterm.hostname() == dev_server
+
 return {
-  unix_domains = {
-    {
-      name = "lsjostrom-dev",
-      local_echo_threshold_ms = 100,
-      proxy_command = { "ssh", "lsjostrom-dev", "wezterm", "cli", "proxy" },
-    },
-  },
   color_scheme_dirs = { "/home/lsjostrom/src/github.com/shelmangroup/shelman-colors/wezterm" },
-  color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
+  color_scheme = scheme_for_appearance("light"),
   font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
   font_rules = {
     {
@@ -107,7 +116,7 @@ return {
     { key = "-", mods = "CTRL",       action = "DecreaseFontSize" },
     { key = "=", mods = "CTRL",       action = "IncreaseFontSize" },
     -- MUX
-    { key = "E", mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = 'lsjostrom-dev' }, },
+    { key = "E", mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = dev_server }, },
     { key = "1", mods = "ALT",        action = wezterm.action { ActivateTab = 0 } },
     { key = "2", mods = "ALT",        action = wezterm.action { ActivateTab = 1 } },
     { key = "3", mods = "ALT",        action = wezterm.action { ActivateTab = 2 } },
@@ -117,5 +126,12 @@ return {
     { key = "7", mods = "ALT",        action = wezterm.action { ActivateTab = 6 } },
     { key = "8", mods = "ALT",        action = wezterm.action { ActivateTab = 7 } },
     { key = "9", mods = "ALT",        action = wezterm.action { ActivateTab = 8 } },
+  },
+  unix_domains = {
+    {
+      name = dev_server,
+      local_echo_threshold_ms = 100,
+      proxy_command = is_server == false and { "ssh", dev_server, "wezterm", "cli", "proxy" } or null,
+    },
   },
 }
