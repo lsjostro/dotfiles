@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
+local dev_server = "lsjostrom-dev"
 
 local function font_with_fallback(name, params)
   local names = { name, "Noto Color Emoji", "Iosevka Nerd Font Mono" }
@@ -8,7 +9,15 @@ local function font_with_fallback(name, params)
 end
 
 wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
+  local args = {}
+  if cmd then
+    args = cmd.args
+  end
+
+  local _, _, window = mux.spawn_window {
+    workspace = 'local',
+    args = args,
+  }
   window:spawn_tab {}
   window:spawn_tab {}
   window:spawn_tab {}
@@ -18,10 +27,19 @@ wezterm.on('gui-startup', function(cmd)
   window:spawn_tab {}
   window:spawn_tab {}
   window:spawn_tab {}
+
+  mux.spawn_window {
+    workspace = dev_server,
+    domain = { DomainName = dev_server }
+  }
+
+  mux.set_active_workspace 'local'
 end)
 
 wezterm.on('mux-startup', function()
-  local tab, pane, window = mux.spawn_window {}
+  local _, _, window = mux.spawn_window {
+    workspace = dev_server,
+  }
   window:spawn_tab {}
   window:spawn_tab {}
   window:spawn_tab {}
@@ -68,11 +86,10 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
   end
 end)
 
-local dev_server = "lsjostrom-dev"
 local is_server = wezterm.hostname() == dev_server
 
 return {
-  color_scheme_dirs = { "/home/lsjostrom/src/github.com/shelmangroup/shelman-colors/wezterm" },
+  color_scheme_dirs = { wezterm.home_dir .. "/src/github.com/shelmangroup/shelman-colors/wezterm" },
   color_scheme = scheme_for_appearance("Dark"),
   font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
   font_rules = {
@@ -139,23 +156,25 @@ return {
     border_top_color = "#000000",
   },
   keys = {
-    { key = "c", mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "ClipboardAndPrimarySelection" }) },
-    { key = "v", mods = "CTRL|SHIFT", action = "Paste" },
-    { key = "0", mods = "CTRL",       action = "ResetFontSize" },
-    { key = "-", mods = "CTRL",       action = "DecreaseFontSize" },
-    { key = "=", mods = "CTRL",       action = "IncreaseFontSize" },
+    { key = "c",     mods = "CTRL|SHIFT", action = act({ CopyTo = "ClipboardAndPrimarySelection" }) },
+    { key = "v",     mods = "CTRL|SHIFT", action = "Paste" },
+    { key = "0",     mods = "CTRL",       action = "ResetFontSize" },
+    { key = "-",     mods = "CTRL",       action = "DecreaseFontSize" },
+    { key = "=",     mods = "CTRL",       action = "IncreaseFontSize" },
     -- MUX
-    { key = "E", mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = dev_server }, },
-    { key = "1", mods = "ALT",        action = wezterm.action { ActivateTab = 0 } },
-    { key = "2", mods = "ALT",        action = wezterm.action { ActivateTab = 1 } },
-    { key = "3", mods = "ALT",        action = wezterm.action { ActivateTab = 2 } },
-    { key = "4", mods = "ALT",        action = wezterm.action { ActivateTab = 3 } },
-    { key = "5", mods = "ALT",        action = wezterm.action { ActivateTab = 4 } },
-    { key = "6", mods = "ALT",        action = wezterm.action { ActivateTab = 5 } },
-    { key = "7", mods = "ALT",        action = wezterm.action { ActivateTab = 6 } },
-    { key = "8", mods = "ALT",        action = wezterm.action { ActivateTab = 7 } },
-    { key = "9", mods = "ALT",        action = wezterm.action { ActivateTab = 8 } },
-    { key = "0", mods = "ALT",        action = wezterm.action { ActivateTab = 9 } },
+    { key = "E",     mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = dev_server }, },
+    { key = "1",     mods = "ALT",        action = act { ActivateTab = 0 } },
+    { key = "2",     mods = "ALT",        action = act { ActivateTab = 1 } },
+    { key = "3",     mods = "ALT",        action = act { ActivateTab = 2 } },
+    { key = "4",     mods = "ALT",        action = act { ActivateTab = 3 } },
+    { key = "5",     mods = "ALT",        action = act { ActivateTab = 4 } },
+    { key = "6",     mods = "ALT",        action = act { ActivateTab = 5 } },
+    { key = "7",     mods = "ALT",        action = act { ActivateTab = 6 } },
+    { key = "8",     mods = "ALT",        action = act { ActivateTab = 7 } },
+    { key = "9",     mods = "ALT",        action = act { ActivateTab = 8 } },
+    { key = "0",     mods = "ALT",        action = act { ActivateTab = 9 } },
+    -- ShowLauncher
+    { key = "Space", mods = "CTRL",       action = act.ShowLauncher },
   },
   unix_domains = {
     {

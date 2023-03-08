@@ -68,10 +68,10 @@ threads = 0
 date = relative
 
 [delta]
-plus-color = "#012800"
-minus-color = "#340001"
-syntax-theme = GitHub
-hunk-header-style = line-number syntax
+; plus-color = "#012800"
+; minus-color = "#340001"
+; syntax-theme = GitHub
+; hunk-header-style = line-number syntax
 
 [hub]
 protocol = git
