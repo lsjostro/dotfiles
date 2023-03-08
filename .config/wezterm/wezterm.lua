@@ -1,19 +1,15 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
-local dev_server = "lsjostrom-dev"
 
-local function font_with_fallback(name, params)
-  local names = { name, "Noto Color Emoji", "Iosevka Nerd Font Mono" }
-  return wezterm.font_with_fallback(names, params)
-end
+local dev_server = "lsjostrom-dev"
+local is_server = wezterm.hostname() == dev_server
 
 wezterm.on('gui-startup', function(cmd)
   local args = {}
   if cmd then
     args = cmd.args
   end
-
   local _, _, window = mux.spawn_window {
     workspace = 'local',
     args = args,
@@ -51,6 +47,27 @@ wezterm.on('mux-startup', function()
   window:spawn_tab {}
 end)
 
+wezterm.on("user-var-changed", function(window, pane, name, value)
+  wezterm.log_info("user-var-changed", name, value)
+  if name == "nvim_activate" then
+    for _, t in ipairs(window:mux_window():tabs_with_info()) do
+      for _, p in ipairs(t.tab:panes()) do
+        if p:get_title() == "nvim" then
+          window:perform_action(act.ActivateTab(t.index), p)
+          if t.index > 0 then
+            window:perform_action(act.MoveTab(0), p)
+          end
+        end
+      end
+    end
+  end
+end)
+
+local function font_with_fallback(name, params)
+  local names = { name, "Noto Color Emoji", "Iosevka Nerd Font Mono" }
+  return wezterm.font_with_fallback(names, params)
+end
+
 local function scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
     return 'dark'
@@ -67,26 +84,6 @@ local function set_font_size_by_hostname()
     return 11.0
   end
 end
-
-
-wezterm.on("user-var-changed", function(window, pane, name, value)
-  wezterm.log_info("user-var-changed", name, value)
-
-  if name == "nvim_activate" then
-    for _, t in ipairs(window:mux_window():tabs_with_info()) do
-      for _, p in ipairs(t.tab:panes()) do
-        if p:get_title() == "nvim" then
-          window:perform_action(act.ActivateTab(t.index), p)
-          if t.index > 0 then
-            window:perform_action(act.MoveTab(0), p)
-          end
-        end
-      end
-    end
-  end
-end)
-
-local is_server = wezterm.hostname() == dev_server
 
 return {
   color_scheme_dirs = { wezterm.home_dir .. "/src/github.com/shelmangroup/shelman-colors/wezterm" },
