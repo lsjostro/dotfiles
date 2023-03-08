@@ -10,19 +10,15 @@ wezterm.on('gui-startup', function(cmd)
   if cmd then
     args = cmd.args
   end
+
   local _, _, window = mux.spawn_window {
     workspace = 'local',
     args = args,
   }
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
+  -- spawn 10 tabs
+  for _ = 1, 10 do
+    window:spawn_tab {}
+  end
 
   mux.spawn_window {
     workspace = dev_server,
@@ -36,30 +32,34 @@ wezterm.on('mux-startup', function()
   local _, _, window = mux.spawn_window {
     workspace = dev_server,
   }
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
-  window:spawn_tab {}
+  -- Spawn 10 mux tabs (on dev server)
+  for _ = 1, 10 do
+    window:spawn_tab {}
+  end
 end)
+
+local function activate_nvim(window, pane)
+  wezterm.log_info("activate_nvim")
+  for _, t in ipairs(window:mux_window():tabs_with_info()) do
+    for _, p in ipairs(t.tab:panes()) do
+      if p:get_title() == "nvim" then
+        window:perform_action(
+          act.Multiple({
+            act.ActivateTab(t.index),
+            act.MoveTab(0),
+          }),
+          pane
+        )
+        return
+      end
+    end
+  end
+end
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
   wezterm.log_info("user-var-changed", name, value)
   if name == "nvim_activate" then
-    for _, t in ipairs(window:mux_window():tabs_with_info()) do
-      for _, p in ipairs(t.tab:panes()) do
-        if p:get_title() == "nvim" then
-          window:perform_action(act.ActivateTab(t.index), p)
-          if t.index > 0 then
-            window:perform_action(act.MoveTab(0), p)
-          end
-        end
-      end
-    end
+    activate_nvim(window, pane)
   end
 end)
 
@@ -78,6 +78,7 @@ end
 
 local function set_font_size_by_hostname()
   local hostname = wezterm.hostname()
+  -- larger font size on my HiDPI laptop
   if hostname == 'kean' then
     return 16.0
   else
