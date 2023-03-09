@@ -4,7 +4,7 @@ return {
     dependencies = {
       "kyazdani42/nvim-web-devicons"
     },
-    event = "VeryLazy",
+    event = "BufReadPre",
     config = function()
       local lualine = require("lualine")
 
