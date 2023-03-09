@@ -14,6 +14,7 @@ return {
   event = "InsertEnter",
   config = function()
     local cmp = require("cmp")
+    require("copilot_cmp").setup()
 
     cmp.setup({
       formatting = {
