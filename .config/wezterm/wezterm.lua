@@ -68,14 +68,6 @@ local function font_with_fallback(name, params)
   return wezterm.font_with_fallback(names, params)
 end
 
-local function scheme_for_appearance(appearance)
-  if appearance:find 'Dark' then
-    return 'dark'
-  else
-    return 'light'
-  end
-end
-
 local function set_font_size_by_hostname()
   local hostname = wezterm.hostname()
   -- larger font size on my HiDPI laptop
@@ -86,9 +78,11 @@ local function set_font_size_by_hostname()
   end
 end
 
+wezterm.add_to_config_reload_watch_list(wezterm.home_dir .. "/.config/shelman-theme/current/wezterm")
+
 return {
-  color_scheme_dirs = { wezterm.home_dir .. "/src/github.com/shelmangroup/shelman-colors/wezterm" },
-  color_scheme = scheme_for_appearance("light"),
+  color_scheme_dirs = { wezterm.home_dir .. "/.config/shelman-theme/current/wezterm" },
+  color_scheme = "Shelman Theme",
   font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
   font_rules = {
     {

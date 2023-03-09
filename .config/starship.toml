@@ -28,16 +28,16 @@ disabled = true
 fish_style_pwd_dir_length = 1
 truncation_length = 1
 truncate_to_repo = false
-style = "italic bold purple"
+style = "italic bold"
 
 [git_branch]
 format = "[$symbol$branch]($style)"
-style = "fg:#559955"
+style = "fg:#79AE6F"
 truncation_length = 16
 truncation_symbol = ""
 
 [git_commit]
-style = "fg:#559955"
+style = "fg:#79AE6F"
 
 [git_state]
 style = ""
