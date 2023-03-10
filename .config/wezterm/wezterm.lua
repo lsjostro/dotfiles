@@ -154,7 +154,10 @@ return {
     { key = "-",         mods = "CTRL",       action = "DecreaseFontSize" },
     { key = "=",         mods = "CTRL",       action = "IncreaseFontSize" },
     -- MUX
+    { key = "A",         mods = "CTRL|SHIFT", action = act.AttachDomain(dev_server) },
     { key = "E",         mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = dev_server }, },
+    { key = "Backspace", mods = "ALT",        action = act.SwitchWorkspaceRelative(1) },
+    { key = "l",         mods = "ALT",        action = act.ShowLauncher },
     { key = "1",         mods = "ALT",        action = act { ActivateTab = 0 } },
     { key = "2",         mods = "ALT",        action = act { ActivateTab = 1 } },
     { key = "3",         mods = "ALT",        action = act { ActivateTab = 2 } },
@@ -165,9 +168,6 @@ return {
     { key = "8",         mods = "ALT",        action = act { ActivateTab = 7 } },
     { key = "9",         mods = "ALT",        action = act { ActivateTab = 8 } },
     { key = "0",         mods = "ALT",        action = act { ActivateTab = 9 } },
-    -- ShowLauncher
-    { key = "Space",     mods = "CTRL",       action = act.ShowLauncher },
-    { key = "Backspace", mods = "ALT",        action = act.SwitchWorkspaceRelative(1) },
   },
   unix_domains = {
     {
