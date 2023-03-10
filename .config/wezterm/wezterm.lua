@@ -153,6 +153,7 @@ return {
     { key = "0",         mods = "CTRL",       action = "ResetFontSize" },
     { key = "-",         mods = "CTRL",       action = "DecreaseFontSize" },
     { key = "=",         mods = "CTRL",       action = "IncreaseFontSize" },
+    { key = "r",         mods = "ALT",        action = act.ReloadConfiguration },
     -- MUX
     { key = "A",         mods = "CTRL|SHIFT", action = act.AttachDomain(dev_server) },
     { key = "E",         mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = dev_server }, },
