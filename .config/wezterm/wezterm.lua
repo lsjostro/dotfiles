@@ -20,11 +20,6 @@ wezterm.on('gui-startup', function(cmd)
     window:spawn_tab {}
   end
 
-  mux.spawn_window {
-    workspace = dev_server,
-    domain = { DomainName = dev_server }
-  }
-
   mux.set_active_workspace 'local'
 end)
 
