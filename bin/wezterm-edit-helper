@@ -20,7 +20,7 @@ function _nvim_setenv() {
 }
 
 nvim --server "$XDG_RUNTIME_DIR/nvim.sock" --remote-expr "42" 2>/dev/null ||
-	(wezterm cli spawn --cwd "${PWD}" nvim --listen "$XDG_RUNTIME_DIR/nvim.sock" && sleep 0.5)
+	(rm -f "$XDG_RUNTIME_DIR/nvim.sock" && wezterm cli spawn --cwd "${PWD}" nvim --listen "$XDG_RUNTIME_DIR/nvim.sock" && sleep 0.5)
 
 _nvim_setenv BUILD_COMMAND "$BUILD_COMMAND"
 _nvim_setenv GOPACKAGESDRIVER "$GOPACKAGESDRIVER"
