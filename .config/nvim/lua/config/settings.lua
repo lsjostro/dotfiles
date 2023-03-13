@@ -78,3 +78,7 @@ vim.keymap.set("v", "<C-s>", ":sort<CR>", { silent = true })
 -- Terminal mappings
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
 vim.keymap.set("n", "<C-x>", ":split term://zsh<CR>")
+
+-- AutoCommand OSC7 workaround for tmux
+-- see https://github.com/neovim/neovim/issues/21771
+vim.cmd([[autocmd DirChanged * call chansend(v:stderr, printf("\033]7;file://%s\033\\", v:event.cwd))]])
