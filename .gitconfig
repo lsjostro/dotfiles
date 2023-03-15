@@ -67,11 +67,13 @@ threads = 0
 [blame]
 date = relative
 
-[delta]
-plus-color = "#012800"
-minus-color = "#340001"
-syntax-theme = GitHub
-hunk-header-style = line-number syntax
+; [delta]
+; plus-color = "#012800"
+; minus-color = "#340001"
+; syntax-theme = GitHub
+; hunk-header-style = line-number syntax
+[include]
+  path = ~/.config/shelman-theme/current/delta/delta.conf
 
 [hub]
 protocol = git

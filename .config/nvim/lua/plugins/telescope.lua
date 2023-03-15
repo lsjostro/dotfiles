@@ -46,9 +46,9 @@ return {
           },
           mappings = {
             i = {
-                  ["<CR>"] = actions.select_default + actions.center,
-                  ["<esc>"] = actions.close,
-                  ["<tab>"] = actions.add_selection,
+              ["<CR>"] = actions.select_default + actions.center,
+              ["<esc>"] = actions.close,
+              ["<tab>"] = actions.add_selection,
             },
           },
           color_devicons = true,
@@ -56,7 +56,7 @@ return {
           grep_previewer = previewers.vim_buffer_vimgrep.new,
           qflist_previewer = previewers.vim_buffer_qflist.new,
           extensions = {
-                ["ui-select"] = {
+            ["ui-select"] = {
               require("telescope.themes").get_dropdown({
                 -- even more opts
               }),
