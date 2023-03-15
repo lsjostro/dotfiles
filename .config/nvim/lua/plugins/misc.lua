@@ -33,23 +33,6 @@ return {
   },
 
   {
-    "onsails/lspkind-nvim",
-    config = function()
-      require("lspkind").init({})
-    end,
-  },
-
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-      vim.diagnostic.config({
-        virtual_text = false,
-      })
-    end,
-  },
-
-  {
     "RRethy/vim-illuminate",
     config = function()
       require("illuminate").configure({ delay = 200 })
@@ -65,7 +48,6 @@ return {
         silent = false, -- Disable message on successful copy
         trim = false,   -- Trim text before copy
       })
-
       vim.keymap.set("n", "<leader>c", require("osc52").copy_operator, { expr = true })
       vim.keymap.set("n", "<leader>cc", "<leader>c_", { remap = true })
       vim.keymap.set("x", "<leader>c", require("osc52").copy_visual)

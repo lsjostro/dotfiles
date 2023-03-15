@@ -1,7 +1,6 @@
 return {
   {
     "neovim/nvim-lspconfig",
-
     config = function()
       local lspconfig = require("lspconfig")
 
@@ -167,7 +166,6 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-
     config = function()
       local null_ls = require("null-ls")
       local builtins = require("null-ls.builtins")
@@ -198,5 +196,22 @@ return {
         debug = true,
       })
     end
+  },
+
+  {
+    "onsails/lspkind-nvim",
+    config = function()
+      require("lspkind").init({})
+    end,
+  },
+
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+      vim.diagnostic.config({
+        virtual_text = false,
+      })
+    end,
   }
 }
