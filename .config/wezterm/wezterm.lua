@@ -73,8 +73,6 @@ local function set_font_size_by_hostname()
   end
 end
 
-wezterm.add_to_config_reload_watch_list(wezterm.home_dir .. "/.config/shelman-theme/current/wezterm")
-
 return {
   color_scheme_dirs = { wezterm.home_dir .. "/.config/shelman-theme/current/wezterm" },
   color_scheme = "Shelman Theme",
@@ -182,7 +180,6 @@ return {
   unix_domains = {
     {
       name = dev_server,
-      local_echo_threshold_ms = 100,
       proxy_command = is_server == false and { "ssh", dev_server, "wezterm", "cli", "proxy" } or nil,
     },
   },
