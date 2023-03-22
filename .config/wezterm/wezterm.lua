@@ -142,8 +142,8 @@ return {
   },
   leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 },
   keys = {
-    { key = "c",         mods = "CTRL|SHIFT", action = act({ CopyTo = "ClipboardAndPrimarySelection" }) },
-    { key = "v",         mods = "CTRL|SHIFT", action = "Paste" },
+    { key = "c",         mods = "CTRL|SHIFT", action = act.CopyTo "ClipboardAndPrimarySelection" },
+    { key = "v",         mods = "CTRL|SHIFT", action = act.PasteFrom "PrimarySelection" },
     { key = "0",         mods = "CTRL",       action = "ResetFontSize" },
     { key = "-",         mods = "CTRL",       action = "DecreaseFontSize" },
     { key = "=",         mods = "CTRL",       action = "IncreaseFontSize" },
