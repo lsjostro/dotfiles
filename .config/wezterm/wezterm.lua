@@ -153,7 +153,7 @@ return {
     { key = "A",         mods = "CTRL|SHIFT", action = act.AttachDomain(dev_server) },
     { key = "E",         mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = dev_server }, },
     { key = "Backspace", mods = "ALT",        action = act.SwitchWorkspaceRelative(1) },
-    { key = "h",         mods = "LEADER",     action = act.SplitHorizontal },
+    { key = "s",         mods = "LEADER",     action = act.SplitHorizontal },
     { key = "v",         mods = "LEADER",     action = act.SplitVertical },
     -- run gitui in a split pane
     {
