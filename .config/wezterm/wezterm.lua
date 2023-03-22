@@ -166,7 +166,6 @@ return {
       mods = "ALT",
       action = act.SplitPane { direction = 'Up', command = { args = { 'wezterm-edit-helper' } }, size = { Percent = 40 }, },
     },
-    { key = "l", mods = "LEADER", action = act.ActivateCommandPalette },
     { key = "1", mods = "ALT",    action = act { ActivateTab = 0 } },
     { key = "2", mods = "ALT",    action = act { ActivateTab = 1 } },
     { key = "3", mods = "ALT",    action = act { ActivateTab = 2 } },
@@ -177,6 +176,11 @@ return {
     { key = "8", mods = "ALT",    action = act { ActivateTab = 7 } },
     { key = "9", mods = "ALT",    action = act { ActivateTab = 8 } },
     { key = "0", mods = "ALT",    action = act { ActivateTab = 9 } },
+    { key = "o", mods = "LEADER", action = act.ActivateCommandPalette },
+    { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left' },
+    { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right' },
+    { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up' },
+    { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down' },
   },
   unix_domains = {
     {
