@@ -148,14 +148,13 @@ return {
     { key = "0",         mods = "CTRL",       action = "ResetFontSize" },
     { key = "-",         mods = "CTRL",       action = "DecreaseFontSize" },
     { key = "=",         mods = "CTRL",       action = "IncreaseFontSize" },
-    { key = "r",         mods = "ALT",        action = act.ReloadConfiguration },
+    { key = "r",         mods = "LEADER",     action = act.ReloadConfiguration },
     -- MUX
     { key = "A",         mods = "CTRL|SHIFT", action = act.AttachDomain(dev_server) },
     { key = "E",         mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = dev_server }, },
     { key = "Backspace", mods = "ALT",        action = act.SwitchWorkspaceRelative(1) },
     { key = "s",         mods = "LEADER",     action = act.SplitHorizontal },
     { key = "v",         mods = "LEADER",     action = act.SplitVertical },
-    -- run gitui in a split pane
     {
       key = "g",
       mods = "ALT",
