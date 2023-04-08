@@ -146,9 +146,9 @@ return {
       })
 
       -- SQLS execute query only
-      lspconfig.sqls.setup({
+      lspconfig.sqlls.setup({
         on_attach = function(client, bufnr)
-          require("sqls").on_attach(client, bufnr)
+          require("sqlls").on_attach(client, bufnr)
           client.server_capabilities.execute_command = true
           client.server_capabilities.documentFormattingProvider = false
         end,
