@@ -115,6 +115,7 @@ return {
     top = 21,
     bottom = 0,
   },
+  hide_mouse_cursor_when_typing = false,
   default_cursor_style = "SteadyBlock",
   cursor_thickness = "3px",
   cursor_blink_rate = 0,
