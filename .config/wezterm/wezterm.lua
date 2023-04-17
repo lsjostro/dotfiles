@@ -98,6 +98,7 @@ return {
       font = font_with_fallback("Iosevka Term SS09", { weight = "DemiBold" }),
     },
   },
+  front_end = "WebGpu",
   freetype_load_target = "Light",
   freetype_render_target = "HorizontalLcd",
   warn_about_missing_glyphs = false,
