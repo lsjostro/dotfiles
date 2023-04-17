@@ -99,8 +99,6 @@ return {
     },
   },
   front_end = "WebGpu",
-  freetype_load_target = "Light",
-  freetype_render_target = "HorizontalLcd",
   warn_about_missing_glyphs = false,
   bold_brightens_ansi_colors = false,
   font_size = set_font_size_by_hostname(),
