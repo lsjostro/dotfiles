@@ -3,7 +3,6 @@ local act = wezterm.action
 local mux = wezterm.mux
 
 local dev_server = "lsjostrom-dev"
-local is_server = wezterm.hostname() == dev_server
 
 wezterm.on('gui-startup', function(cmd)
   local args = {}
@@ -11,51 +10,17 @@ wezterm.on('gui-startup', function(cmd)
     args = cmd.args
   end
 
-  local _, _, window = mux.spawn_window {
+  _, _, _ = mux.spawn_window {
     workspace = 'local',
     args = args,
   }
-  -- spawn 10 tabs
-  for _ = 1, 10 do
-    window:spawn_tab {}
-  end
+
+  _, _, _ = mux.spawn_window {
+    workspace = dev_server,
+    args = args,
+  }
 
   mux.set_active_workspace 'local'
-end)
-
-wezterm.on('mux-startup', function()
-  local _, _, window = mux.spawn_window {
-    workspace = dev_server,
-  }
-  -- Spawn 10 mux tabs (on dev server)
-  for _ = 1, 10 do
-    window:spawn_tab {}
-  end
-end)
-
-local function activate_nvim(window, pane)
-  wezterm.log_info("activate_nvim")
-  for _, t in ipairs(window:mux_window():tabs_with_info()) do
-    for _, p in ipairs(t.tab:panes()) do
-      if p:get_title() == "nvim" then
-        window:perform_action(
-          act.Multiple({
-            act.ActivateTab(t.index),
-            act.MoveTab(0),
-          }),
-          pane
-        )
-        return
-      end
-    end
-  end
-end
-
-wezterm.on("user-var-changed", function(window, pane, name, value)
-  wezterm.log_info("user-var-changed", name, value)
-  if name == "nvim_activate" then
-    activate_nvim(window, pane)
-  end
 end)
 
 local function font_with_fallback(name, params)
@@ -99,6 +64,7 @@ return {
     },
   },
   front_end = "WebGpu",
+  webgpu_power_preference = 'HighPerformance',
   warn_about_missing_glyphs = false,
   bold_brightens_ansi_colors = false,
   font_size = set_font_size_by_hostname(),
@@ -141,50 +107,14 @@ return {
     border_bottom_color = "#000000",
     border_top_color = "#000000",
   },
-  leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 },
   keys = {
     { key = "c",         mods = "CTRL|SHIFT", action = act.CopyTo "ClipboardAndPrimarySelection" },
     { key = "v",         mods = "CTRL|SHIFT", action = act.PasteFrom "Clipboard" },
     { key = "0",         mods = "CTRL",       action = "ResetFontSize" },
     { key = "-",         mods = "CTRL",       action = "DecreaseFontSize" },
     { key = "=",         mods = "CTRL",       action = "IncreaseFontSize" },
-    { key = "r",         mods = "LEADER",     action = act.ReloadConfiguration },
-    -- MUX
-    { key = "A",         mods = "CTRL|SHIFT", action = act.AttachDomain(dev_server) },
-    { key = "E",         mods = "CTRL|SHIFT", action = act.DetachDomain { DomainName = dev_server }, },
+    { key = "r",         mods = "ALT",        action = act.ReloadConfiguration },
+    { key = "o",         mods = "ALT",        action = act.ActivateCommandPalette },
     { key = "Backspace", mods = "ALT",        action = act.SwitchWorkspaceRelative(1) },
-    { key = "s",         mods = "LEADER",     action = act.SplitHorizontal },
-    { key = "v",         mods = "LEADER",     action = act.SplitVertical },
-    {
-      key = "g",
-      mods = "ALT",
-      action = act.SplitPane { direction = 'Right', command = { args = { 'gitui' } }, size = { Percent = 80 }, },
-    },
-    {
-      key = "e",
-      mods = "ALT",
-      action = act.SplitPane { direction = 'Up', command = { args = { 'wezterm-edit-helper' } }, size = { Percent = 40 }, },
-    },
-    { key = "1", mods = "ALT",    action = act { ActivateTab = 0 } },
-    { key = "2", mods = "ALT",    action = act { ActivateTab = 1 } },
-    { key = "3", mods = "ALT",    action = act { ActivateTab = 2 } },
-    { key = "4", mods = "ALT",    action = act { ActivateTab = 3 } },
-    { key = "5", mods = "ALT",    action = act { ActivateTab = 4 } },
-    { key = "6", mods = "ALT",    action = act { ActivateTab = 5 } },
-    { key = "7", mods = "ALT",    action = act { ActivateTab = 6 } },
-    { key = "8", mods = "ALT",    action = act { ActivateTab = 7 } },
-    { key = "9", mods = "ALT",    action = act { ActivateTab = 8 } },
-    { key = "0", mods = "ALT",    action = act { ActivateTab = 9 } },
-    { key = "o", mods = "LEADER", action = act.ActivateCommandPalette },
-    { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left' },
-    { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right' },
-    { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up' },
-    { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down' },
-  },
-  unix_domains = {
-    {
-      name = dev_server,
-      proxy_command = is_server == false and { "ssh", dev_server, "wezterm", "cli", "proxy" } or nil,
-    },
   },
 }
