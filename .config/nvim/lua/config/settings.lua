@@ -81,4 +81,7 @@ vim.keymap.set("n", "<C-x>", ":split term://zsh<CR>")
 
 -- AutoCommand OSC7 workaround for tmux
 -- see https://github.com/neovim/neovim/issues/21771
-vim.cmd([[autocmd DirChanged * call chansend(v:stderr, printf("\033]7;file://%s\033\\", v:event.cwd))]])
+vim.api.nvim_create_autocmd("dirchanged", {
+  pattern = "*",
+  command = 'call chansend(v:stderr, printf("\\033]7;%s\\033", v:event.cwd))',
+})
