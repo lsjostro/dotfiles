@@ -41,7 +41,7 @@ end
 return {
   color_scheme_dirs = { wezterm.home_dir .. "/.config/shelman-theme/current/wezterm" },
   color_scheme = "Shelman Theme",
-  font = font_with_fallback("Iosevka Term SS09", { weight = "Light" }),
+  font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
   font_rules = {
     {
       italic = false,
@@ -69,7 +69,8 @@ return {
   bold_brightens_ansi_colors = false,
   font_size = set_font_size_by_hostname(),
   command_palette_font_size = 14.0,
-  line_height = 1.065,
+  line_height = 1.1,
+  cell_width = 0.95,
   initial_cols = 185,
   initial_rows = 55,
   use_resize_increments = true,
