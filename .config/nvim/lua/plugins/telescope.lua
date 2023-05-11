@@ -20,8 +20,8 @@ return {
         '<cmd>lua require("telescope.builtin").buffers({sort_mru=true, ignore_current_buffer=true})<CR>'
       )
       vim.keymap.set("n", "<leader>f", '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
-      vim.keymap.set("n", "<leader><space>", '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
-      vim.keymap.set("n", "<space>", '<cmd>lua require("telescope.builtin").oldfiles({cwd_only=true})<CR>')
+      vim.keymap.set("n", "<space>", '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
+      vim.keymap.set("n", "<leader><space>", '<cmd>lua require("telescope.builtin").oldfiles({cwd_only=true})<CR>')
       vim.keymap.set("n", "<leader>e", '<cmd>lua require("telescope.builtin").git_files()<CR>')
       vim.keymap.set("n", "<leader>g", '<cmd>lua require("telescope.builtin").git_status()<CR>')
       vim.keymap.set("n", "<leader>m", '<cmd>lua require("telescope.builtin").marks()<CR>')
