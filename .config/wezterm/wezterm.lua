@@ -80,6 +80,7 @@ return {
     top = 21,
     bottom = 0,
   },
+  adjust_window_size_when_changing_font_size = false,
   hide_mouse_cursor_when_typing = false,
   default_cursor_style = "SteadyBlock",
   cursor_thickness = "3px",
