@@ -14,9 +14,18 @@ autoload -Uz _zinit
 zi ice wait lucid
 zi load zsh-users/zsh-completions
 zi ice wait lucid
-zi load zsh-users/zsh-syntax-highlighting
+zi load zdharma-continuum/fast-syntax-highlighting
 zi ice wait lucid
 zi load zsh-users/zsh-history-substring-search
+zi ice wait lucid
+zi load Aloxaf/fzf-tab
+zi ice wait lucid
+zi load Freed-Wu/fzf-tab-source
+
+## fzf-tab
+zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
+zstyle ':fzf-tab:*' continuous-trigger '/'
+zstyle ':fzf-tab:*' fzf-min-height 30
 
 # history
 HISTSIZE=50000
@@ -46,14 +55,14 @@ setopt ksh_glob
 setopt null_glob
 
 # zsh syntax highlighter
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-typeset -A ZSH_HIGHLIGHT_STYLES
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+# typeset -A ZSH_HIGHLIGHT_STYLES
 
 # Key bindings
 bindkey -e
 bindkey '^r' history-incremental-search-backward
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
 bindkey '^g' _jump
 
 # Exports
@@ -61,6 +70,8 @@ export NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/nvim.sock
 export EDITOR=nvim
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/bin:/usr/local/sbin:$HOME/.yarn/bin:$HOME/.krew/bin:$HOME/.local/bin
 export LESS="--mouse --wheel-lines=1 -nRX"
+export LESSCOLORIZER="bat"
+export LESSOPEN="|lesspipe.sh %s"
 export FZF_TMUX=1
 export FZF_COMPLETION_TRIGGER=";"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
@@ -73,7 +84,6 @@ export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-[ -f ~/.private.zsh ] && source "$HOME/.private.zsh"
 
 # aliases
 alias ls='exa'
@@ -88,10 +98,12 @@ alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
 alias sudo="doas"
 alias e='tmux-edit-helper'
+alias kubectl='grc kubectl'
 
 # completions
 command -v gcloud >/dev/null 2>&1 && source /opt/google-cloud-sdk/completion.zsh.inc
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
+
 ## bazel
 if [ ! -f "${fpath[1]}/_bazel" ]; then
   curl -sLo "${fpath[1]}/_bazel" https://raw.githubusercontent.com/bazelbuild/bazel/master/scripts/zsh_completion/_bazel
@@ -101,7 +113,9 @@ fi
 eval "$(starship init zsh)"
 
 # autoload
-autoload bashcompinit && bashcompinit
+autoload -Uz compdef
+autoload -U +X bashcompinit && bashcompinit
+autoload -U +X compinit && compinit
 
 # zsh functions
 
@@ -142,4 +156,11 @@ function _jump() {
 	zle && zle redraw-prompt
 }
 zle -N _jump
+
+function _grc() {
+  shift words
+  (( CURRENT-- ))
+  _normal
+}
+compdef _grc grc
 # vim:set ft=sh:
