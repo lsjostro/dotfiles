@@ -1,0 +1,46 @@
+#! /usr/bin/env bash
+mime=$(file -Lbs --mime-type "$1")
+category=${mime%%/*}
+kind=${mime##*/}
+ext=${1##*.}
+if [ "$kind" = json ]; then
+	if [ "$(command -v jq)" ]; then
+		jq -Cr . "$1"
+	fi
+elif [ "$kind" = vnd.sqlite3 ]; then
+	if [ "$(command -v yes)" ] && [ "$(command -v sqlite3)" ] && [ "$(command -v bat)" ]; then
+		yes .q | sqlite3 "$1" | bat --color=always -plsql
+	fi
+# https://github.com/wofr06/lesspipe/pull/107
+elif [ -d "$1" ]; then
+	if [ "$(command -v exa)" ]; then
+		exa --git -hl --color=always --icons "$1"
+	fi
+# https://github.com/wofr06/lesspipe/pull/110
+elif [ "$kind" = pdf ]; then
+	if [ "$(command -v pdftotext)" ] && [ "$(command -v sed)" ]; then
+		pdftotext -q "$1" - | sed "s/\f/$(hr ─)\n/g"
+	fi
+# https://github.com/wofr06/lesspipe/pull/115
+elif [ "$kind" = rfc822 ]; then
+	if [ "$(command -v bat)" ]; then
+		bat --color=always -lEmail "$1"
+	fi
+# https://github.com/wofr06/lesspipe/pull/106
+elif [ "$category" = image ]; then
+	if [ "$(command -v chafa)" ]; then
+		chafa -f symbols "$1"
+	fi
+	if [ "$(command -v exiftool)" ]; then
+		exiftool "$1" | bat --color=always -plyaml
+	fi
+# https://github.com/wofr06/lesspipe/pull/117
+elif [ "$category" = text ]; then
+	if [ "$(command -v bat)" ]; then
+		bat --color=always "$1"
+	elif [ "$(command -v pygmentize)" ]; then
+		pygmentize "$1" | less
+	fi
+else
+	exit 1
+fi
