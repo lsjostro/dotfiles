@@ -80,7 +80,6 @@ source /usr/share/fzf/key-bindings.zsh
 export RIPGREP_CONFIG_PATH=${HOME}/.config/rg/rg.conf
 export GOPROXY=https://proxy.golang.org/
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
