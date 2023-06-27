@@ -98,7 +98,7 @@ alias pbcopy="xclip -selection c"
 alias sudo="doas"
 alias e='tmux-edit-helper'
 alias kubectl='grc kubectl'
-alias top='btm --basic --enable_cache_memory --enable_gpu_memory --battery --color=default-light'
+alias top='btm --basic --enable_cache_memory --enable_gpu_memory --battery --color=default'
 
 # completions
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"

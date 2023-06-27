@@ -47,6 +47,7 @@ local colors = {
   indent5 = '#ffdfba',
   indent6 = '#f3e5f5',
 
+  visual = '#d6e1e9',
   selection = '#d6e1e9',
   selection_inactive = '#2c363c',
 

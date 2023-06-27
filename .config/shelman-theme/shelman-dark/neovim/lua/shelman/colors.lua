@@ -1,7 +1,7 @@
 local colors = {
   white = '#FFFFFF',
   black = '#000000',
-  bg = '#1d2229',
+  bg = '#11171d',
   fg = '#e3e0cd',
   ansi_black = '#000000',
   ansi_red = '#ff0035',
@@ -47,7 +47,8 @@ local colors = {
   indent5 = '#6d89ad',
   indent6 = '#7e9ec8',
 
-  selection = '#0f2030',
+  visual = '#324d66',
+  selection = '#324d66',
   selection_inactive = '#2d2d2d',
 
   search_bg = '#483600',

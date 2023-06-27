@@ -1,7 +1,7 @@
 (
     selected_tab: Reset,
     command_fg: Rgb(227,224,205),
-    selection_bg: Rgb(15,32,48),
+    selection_bg: Rgb(50,77,102),
     selection_fg: Rgb(227,224,205),
     cmdbar_extra_lines_bg: Rgb(55,71,90),
     cmdbar_bg: Rgb(55,71,90),
