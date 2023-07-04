@@ -47,6 +47,8 @@ setopt extended_glob
 setopt ksh_glob
 setopt null_glob
 
+export LC_ALL=en_US.UTF-8
+
 # zsh syntax highlighter
 # ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 # typeset -A ZSH_HIGHLIGHT_STYLES
@@ -74,6 +76,7 @@ source /usr/share/fzf/key-bindings.zsh
 export RIPGREP_CONFIG_PATH=${HOME}/.config/rg/rg.conf
 export GOPROXY=https://proxy.golang.org/
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export NIX_REMOTE=daemon
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
@@ -125,8 +128,8 @@ prompt_precmd() {
 precmd_functions+=(prompt_precmd)
 
 autoload -Uz vcs_info
-chpwd_functions+=vcs_info
-precmd_functions+=vcs_info
+chpwd_functions+=(vcs_info)
+precmd_functions+=(vcs_info)
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' formats '%F{#559955} %b%u%c%f '
 zstyle ':vcs_info:*' unstagedstr ' %F{#ff0}󰦒'
