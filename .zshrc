@@ -18,14 +18,7 @@ zi load zdharma-continuum/fast-syntax-highlighting
 zi ice wait lucid
 zi load zsh-users/zsh-history-substring-search
 zi ice wait lucid
-zi load Aloxaf/fzf-tab
-zi ice wait lucid
-zi load Freed-Wu/fzf-tab-source
-
-## fzf-tab
-zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
-zstyle ':fzf-tab:*' continuous-trigger '/'
-zstyle ':fzf-tab:*' fzf-min-height 30
+zi snippet https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/shrink-path/shrink-path.plugin.zsh
 
 # history
 HISTSIZE=50000
@@ -57,6 +50,7 @@ setopt null_glob
 # zsh syntax highlighter
 # ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 # typeset -A ZSH_HIGHLIGHT_STYLES
+zle_highlight=('paste:none')
 
 # Key bindings
 bindkey -e
@@ -114,7 +108,31 @@ if [ ! -f "${fpath[1]}/_bazel" ]; then
 fi
 
 # prompt
-eval "$(starship init zsh)"
+prompt_chpwd() {
+  if [[ ${#PWD} < 25 ]]; then
+    PROMPT_PWD="$PWD"
+  else
+    PROMPT_PWD="$(shrink_path -t -l -e "%{%G\e[2;3;38;5;202m\U2026\e[0;2;3m%}")"
+  fi
+}
+chpwd_functions+=prompt_chpwd
+
+prompt_precmd() {
+  PROMPT_LABEL="$HOST"
+  print -n '\e[5 q'          # Fix cursor
+  print -n "\e]7;${PWD}\a"   # OSC 7 for terminal pwd
+}
+precmd_functions+=(prompt_precmd)
+
+autoload -Uz vcs_info
+chpwd_functions+=vcs_info
+precmd_functions+=vcs_info
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' formats '%F{#559955} %b%u%c%f '
+zstyle ':vcs_info:*' unstagedstr ' %F{#ff0}󰦒'
+zstyle ':vcs_info:*' stagedstr ' %F{#9ff}󰐖'
+setopt PROMPT_SUBST
+PROMPT=$'%F{#fff}%K{#a10000}%{\e[3m%} ${PROMPT_LABEL} %{\e[0m%}%S%F{#a10000}%k%{%G\Ue0ba%}%k%s%f%{\e[2;3m%}${PROMPT_PWD}%{\e[0m%} ${vcs_info_msg_0_}%# '
 
 # autoload
 autoload -Uz compdef

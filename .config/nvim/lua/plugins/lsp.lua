@@ -32,7 +32,7 @@ return {
       vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
       vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         update_in_insert = false,
-        virtual_text = false,
+        virtual_text = true,
       })
 
       local signs = { Error = "🔥", Warn = "⚠️ ", Hint = "💡", Info = "💡" }
@@ -203,15 +203,15 @@ return {
     config = function()
       require("lspkind").init({})
     end,
-  },
-
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-      vim.diagnostic.config({
-        virtual_text = false,
-      })
-    end,
   }
+
+  -- {
+  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  --   config = function()
+  --     require("lsp_lines").setup()
+  --     vim.diagnostic.config({
+  --       virtual_text = false,
+  --     })
+  --   end,
+  -- }
 }
