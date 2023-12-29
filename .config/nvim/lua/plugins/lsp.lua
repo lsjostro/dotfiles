@@ -20,13 +20,13 @@ return {
 
       local border = {
         { "🭽", "FloatBorder" },
-        { "▔",  "FloatBorder" },
+        { "▔", "FloatBorder" },
         { "🭾", "FloatBorder" },
-        { "▕",  "FloatBorder" },
+        { "▕", "FloatBorder" },
         { "🭿", "FloatBorder" },
-        { "▁",  "FloatBorder" },
+        { "▁", "FloatBorder" },
         { "🭼", "FloatBorder" },
-        { "▏",  "FloatBorder" },
+        { "▏", "FloatBorder" },
       }
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
       vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
@@ -102,49 +102,6 @@ return {
         settings = {},
       })
 
-      lspconfig.yamlls.setup({
-        settings = {
-          yaml = {
-            format = { enable = true, singleQuote = true },
-            schemaStore = { enable = true, url = "https://json.schemastore.org" },
-            schemas = {
-              -- ["https://json.schemastore.org/github-workflow"] = "*.github/workflows/*",
-              ["https://json.schemastore.org/kustomization.json"] = "kustomization.yaml",
-              -- ["https://json.schemastore.org/ansible-role-2.9.json"] = "*/tasks/*.y*ml",
-              kubernetes = {
-                "clusterrolebinding.yaml",
-                "clusterrole-contour.yaml",
-                "clusterrole.yaml",
-                "configmap.yaml",
-                "cronjob.yaml",
-                "daemonset.yaml",
-                "deployment-*.yaml",
-                "deployment.yaml",
-                "*-deployment.yaml",
-                "hpa.yaml",
-                "ingress.yaml",
-                "job.yaml",
-                "namespace.yaml",
-                "pvc.yaml",
-                "rbac.yaml",
-                "rolebinding.yaml",
-                "role.yaml",
-                "sa.yaml",
-                "secret.yaml",
-                "serviceaccounts.yaml",
-                "service-account.yaml",
-                "serviceaccount.yaml",
-                "service-*.yaml",
-                "service.yaml",
-                "*-service.yaml",
-                "statefulset.yaml",
-              },
-            },
-            validate = true,
-          },
-        },
-      })
-
       -- SQLS execute query only
       lspconfig.sqlls.setup({
         on_attach = function(client, bufnr)
@@ -196,6 +153,21 @@ return {
         debug = true,
       })
     end
+  },
+
+  {
+    "someone-stole-my-name/yaml-companion.nvim",
+    dependencies = {
+      { "neovim/nvim-lspconfig" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+    config = function()
+      require("yaml-companion").setup()
+      require("telescope").load_extension("yaml_schema")
+      local cfg = require("yaml-companion").setup({})
+      require("lspconfig")["yamlls"].setup(cfg)
+    end,
   },
 
   {

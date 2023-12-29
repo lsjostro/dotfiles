@@ -18,6 +18,7 @@ return {
           "cmake",
           "cpp",
           "css",
+          "cue",
           "diff",
           "dockerfile",
           "gdscript",
@@ -126,7 +127,7 @@ return {
       context.setup({
         enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
         max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-        patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        patterns = {   -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
           default = {
             "class",
             "function",

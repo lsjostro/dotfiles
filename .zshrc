@@ -82,9 +82,9 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # aliases
-alias ls='exa'
-alias ll='exa -al --git'
-alias tree='exa -T'
+alias ls='eza'
+alias ll='eza -al --git'
+alias tree='eza -T'
 alias l=bat
 alias vim="nvim"
 alias vi="nvim"
@@ -92,10 +92,9 @@ alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
 alias lower="tr '[:upper:]' '[:lower:]'"
 alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
-alias sudo="doas"
 alias e='tmux-edit-helper'
 alias kubectl='grc kubectl'
-alias top='btm --basic --enable_cache_memory --enable_gpu_memory --battery --color=default'
+alias top='btm --basic --enable_cache_memory --enable_gpu_memory --battery --color=default-light'
 
 # completions
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
@@ -132,10 +131,10 @@ chpwd_functions+=(vcs_info)
 precmd_functions+=(vcs_info)
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' formats '%F{#559955} %b%u%c%f '
-zstyle ':vcs_info:*' unstagedstr ' %F{#ff0}󰦒'
+zstyle ':vcs_info:*' unstagedstr ' %F{#f88}󰦒'
 zstyle ':vcs_info:*' stagedstr ' %F{#9ff}󰐖'
 setopt PROMPT_SUBST
-PROMPT=$'%F{#fff}%K{#a10000}%{\e[3m%} ${PROMPT_LABEL} %{\e[0m%}%S%F{#a10000}%k%{%G\Ue0ba%}%k%s%f%{\e[2;3m%}${PROMPT_PWD}%{\e[0m%} ${vcs_info_msg_0_}%# '
+PROMPT=$'%F{#fff}%K{#543}%{\e[3m%} ${PROMPT_LABEL} %{\e[0m%}%S%F{#543}%k%{%G\Ue0ba%}%k%s%f%{\e[2;3m%}${PROMPT_PWD}%{\e[0m%} ${vcs_info_msg_0_}%# '
 
 # autoload
 autoload -Uz compdef
