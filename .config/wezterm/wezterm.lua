@@ -38,9 +38,19 @@ local function set_font_size_by_hostname()
   end
 end
 
+
+local function scheme_for_appearance(appearance)
+  if appearance:find "Dark" then
+    return "Catppuccin Mocha"
+  else
+    return "Catppuccin Latte"
+  end
+end
+
 return {
-  color_scheme_dirs = { wezterm.home_dir .. "/.config/shelman-theme/current/wezterm" },
-  color_scheme = "Shelman Theme",
+  -- color_scheme_dirs = { wezterm.home_dir .. "/.config/shelman-theme/current/wezterm" },
+  -- color_scheme = "Shelman Theme",
+  color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
   font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
   font_rules = {
     {
