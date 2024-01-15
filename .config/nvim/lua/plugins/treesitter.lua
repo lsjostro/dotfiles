@@ -28,7 +28,6 @@ return {
           "go",
           "gomod",
           "graphql",
-          "help",
           "hcl",
           "html",
           "http",
