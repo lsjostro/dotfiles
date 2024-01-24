@@ -10,7 +10,6 @@ k9s:
     headless: false
     logoless: false
     crumbsless: false
-    reactive: false
     noIcons: false
     skin: gruvbox-light
   skipLatestRevCheck: false
@@ -30,7 +29,6 @@ k9s:
     tail: 100
     buffer: 5000
     sinceSeconds: -1
-    fullScreen: false
     textWrap: false
     showTime: false
   thresholds:
