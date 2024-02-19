@@ -107,6 +107,16 @@ if [ ! -f "${fpath[1]}/_bazel" ]; then
   curl -sLo "${fpath[1]}/_bazel" https://raw.githubusercontent.com/bazelbuild/bazel/master/scripts/zsh_completion/_bazel
 fi
 
+## git-branchless
+if [ ! -f "${fpath[1]}/_git_branchless" ]; then
+  curl -sLo "${fpath[1]}/_git_branchless" https://gist.githubusercontent.com/minijackson/68effb0e6c7d8333e20f07da20076c28/raw/5469ffa1c6adc245adb82316f1013937c5148da7/_git-branchless
+fi
+
+## go-task
+if [ ! -f "${fpath[1]}/_task" ]; then
+  curl -sLo "${fpath[1]}/_task" https://raw.githubusercontent.com/go-task/task/main/completion/zsh/_task
+fi
+
 # prompt
 prompt_chpwd() {
   if [[ ${#PWD} < 25 ]]; then
