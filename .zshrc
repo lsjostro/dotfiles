@@ -16,8 +16,6 @@ zi load zsh-users/zsh-completions
 zi ice wait lucid
 zi load zdharma-continuum/fast-syntax-highlighting
 zi ice wait lucid
-zi load zsh-users/zsh-history-substring-search
-zi ice wait lucid
 zi snippet https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/shrink-path/shrink-path.plugin.zsh
 
 # history
@@ -54,11 +52,11 @@ export LC_ALL=en_US.UTF-8
 # typeset -A ZSH_HIGHLIGHT_STYLES
 zle_highlight=('paste:none')
 
+source $HOME/.zsh/history.zsh
 # Key bindings
 bindkey -e
-bindkey '^r' history-incremental-search-backward
-bindkey '^P' history-beginning-search-backward
-bindkey '^N' history-beginning-search-forward
+bindkey '^P' my-history-prefix-search-backward-widget
+bindkey '^N' my-history-prefix-search-forward-widget
 bindkey '^g' _jump
 
 # Exports
@@ -188,3 +186,5 @@ function _grc() {
 }
 compdef _grc grc
 # vim:set ft=sh:
+
+eval "$(atuin init zsh)"
