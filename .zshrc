@@ -55,8 +55,7 @@ zle_highlight=('paste:none')
 source $HOME/.zsh/history.zsh
 # Key bindings
 bindkey -e
-bindkey '^P' my-history-prefix-search-backward-widget
-bindkey '^N' my-history-prefix-search-forward-widget
+bindkey '^P' atuin-up-search
 bindkey '^g' _jump
 
 # Exports
