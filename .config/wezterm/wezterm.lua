@@ -23,21 +23,6 @@ wezterm.on('gui-startup', function(cmd)
   mux.set_active_workspace 'local'
 end)
 
-local function font_with_fallback(name, params)
-  local names = { name, "Noto Color Emoji", "Iosevka Nerd Font Mono" }
-  return wezterm.font_with_fallback(names, params)
-end
-
-local function set_font_size_by_hostname()
-  local hostname = wezterm.hostname()
-  -- larger font size on my HiDPI laptop
-  if hostname == 'kean' then
-    return 16.0
-  else
-    return 11.0
-  end
-end
-
 local function scheme_for_appearance(appearance)
   if appearance:find "Dark" then
     return "Catppuccin Mocha"
@@ -47,36 +32,27 @@ local function scheme_for_appearance(appearance)
 end
 
 return {
-  -- color_scheme_dirs = { wezterm.home_dir .. "/.config/shelman-theme/current/wezterm" },
-  -- color_scheme = "Shelman Theme",
   color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
-  font = font_with_fallback("Iosevka Term SS09", { weight = "Regular" }),
+  font = wezterm.font({ family = "IosevkaShelman Nerd Font" }),
   font_rules = {
     {
       italic = false,
       intensity = "Half",
-      font = font_with_fallback("Iosevka Term SS09", { weight = "Thin" }),
+      font = wezterm.font("IosevkaShelman Nerd Font", { weight = "Light" }),
     },
     {
       italic = true,
       intensity = "Normal",
-      font = font_with_fallback("Iosevka Term Curly Slab", { weight = "Light", italic = true }),
-    },
-    {
-      italic = true,
-      intensity = "Bold",
-      font = font_with_fallback("Iosevka SS15", { weight = "ExtraLight", italic = true }),
-    },
-    {
-      intensity = "Bold",
-      font = font_with_fallback("Iosevka Term SS09", { weight = "DemiBold" }),
+      font = wezterm.font("IosevkaShelman Nerd Font", { weight = "Light", italic = true }),
     },
   },
+  underline_position = -9,
+  underline_thickness = 2,
   front_end = "WebGpu",
   webgpu_power_preference = 'HighPerformance',
   warn_about_missing_glyphs = false,
   bold_brightens_ansi_colors = false,
-  font_size = set_font_size_by_hostname(),
+  font_size = 11,
   command_palette_font_size = 14.0,
   line_height = 1.1,
   cell_width = 0.95,
