@@ -1,1 +1,6 @@
-../shelman-theme/current/gitui/theme.ron
+(
+    selection_bg: Some(Black),
+    selection_fg: Some(Reset),
+    cmdbar_bg: Some(Reset),
+    cmdbar_extra_lines_bg: Some(Reset),
+)
