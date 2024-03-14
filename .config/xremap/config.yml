@@ -1,7 +1,0 @@
-modmap:
-  - name: Dell XPS13 PgUp/PgDn remap
-    application:
-      only: [ wezterm-local, wezterm-lsjostrom-dev ]
-    remap:
-      KEY_PAGEUP: left
-      KEY_PAGEDOWN: right
