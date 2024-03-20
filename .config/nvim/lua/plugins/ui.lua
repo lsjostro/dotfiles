@@ -1,21 +1,39 @@
 local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
+local highlight = {
+  "IndentBlanklineIndent1",
+  "IndentBlanklineIndent2",
+  "IndentBlanklineIndent3",
+  "IndentBlanklineIndent4",
+  "IndentBlanklineIndent5",
+  "IndentBlanklineIndent6",
+}
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-  local Color, colors, Group, _, styles = require("colorbuddy").setup()
-  Color.new("IndentBlanklineIndent", "#7698c6", styles.nocombine)
-  Group.new("IndentBlanklineIndent1", colors.IndentBlanklineIndent:light(0.1))
-  Group.new("IndentBlanklineIndent2", colors.IndentBlanklineIndent:light(0.15))
-  Group.new("IndentBlanklineIndent3", colors.IndentBlanklineIndent:light(0.2))
-  Group.new("IndentBlanklineIndent4", colors.IndentBlanklineIndent:light(0.25))
-  Group.new("IndentBlanklineIndent5", colors.IndentBlanklineIndent:light(0.3))
-  Group.new("IndentBlanklineIndent6", colors.IndentBlanklineIndent:light(0.35))
+  local colorbuddy = require("colorbuddy")
+  local Color = colorbuddy.Color
+  local Group = colorbuddy.Group
 
-  Color.new("IndentBlanklineContextChar", "#f0a972", styles.nocombine)
-  Group.new("IndentBlanklineContextChar", colors.IndentBlanklineContextChar)
+  local c = colorbuddy.colors
+  local s = colorbuddy.styles
+  Color.new("IndentBlanklineIndent", "#7698c6", s.nocombine)
+  Group.new("IndentBlanklineIndent1", c.IndentBlanklineIndent:light())
+  Group.new("IndentBlanklineIndent2", c.IndentBlanklineIndent:light():light())
+  Group.new("IndentBlanklineIndent3", c.IndentBlanklineIndent:light():light():light())
+  Group.new("IndentBlanklineIndent4", c.IndentBlanklineIndent:light():light():light())
+  Group.new("IndentBlanklineIndent5", c.IndentBlanklineIndent:light():light():light())
+  Group.new("IndentBlanklineIndent6", c.IndentBlanklineIndent:light():light():light())
 end)
 
 return {
+  {
+    "echasnovski/mini.indentscope",
+    opts = {
+      draw = {
+        delay = 10,
+      },
+    },
+  },
   {
     "lukas-reineke/indent-blankline.nvim",
     dependencies = {
@@ -26,27 +44,7 @@ return {
       indent = {
         char = "┊",
         tab_char = "┊",
-        highlight = {
-          "IndentBlanklineIndent1",
-          "IndentBlanklineIndent2",
-          "IndentBlanklineIndent3",
-          "IndentBlanklineIndent4",
-          "IndentBlanklineIndent5",
-          "IndentBlanklineIndent6",
-        },
-      },
-      scope = {
-        enabled = true,
-        show_start = false,
-        char = "│",
-        highlight = {
-          "IndentBlanklineIndent1",
-          "IndentBlanklineIndent2",
-          "IndentBlanklineIndent3",
-          "IndentBlanklineIndent4",
-          "IndentBlanklineIndent5",
-          "IndentBlanklineIndent6",
-        },
+        highlight = highlight,
       },
     },
   },
