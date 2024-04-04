@@ -60,6 +60,10 @@ return {
     enabled = false,
   },
   {
+    "akinsho/bufferline.nvim",
+    enabled = false,
+  },
+  {
     "b0o/incline.nvim",
     config = function()
       require("incline").setup({
@@ -81,15 +85,15 @@ return {
           end
 
           local function get_git_diff()
-            local icons = { removed = " ", changed = " ", added = " " }
-            local signs = vim.b[props.buf].gitsigns_status_dict
+            local icons = { delete = " ", change = " ", add = " " }
+            local summary = vim.b.minidiff_summary
             local labels = {}
-            if signs == nil then
+            if summary == nil then
               return labels
             end
             for name, icon in pairs(icons) do
-              if tonumber(signs[name]) and signs[name] > 0 then
-                table.insert(labels, { icon .. signs[name] .. " ", group = "Diff" .. name })
+              if tonumber(summary[name]) and summary[name] > 0 then
+                table.insert(labels, { icon .. summary[name] .. " ", group = "MiniDiffSign" .. name })
               end
             end
             if #labels > 0 then
@@ -114,8 +118,11 @@ return {
             return label
           end
 
+          local filetype_icon, color = require("nvim-web-devicons").get_icon_color(filename)
+
           return {
-            { "  ╱ " },
+            { filetype_icon, guifg = color },
+            { " ╱ " },
             { get_diagnostic_label() },
             { get_git_diff() },
             { filename, gui = "italic" },

@@ -91,13 +91,17 @@ helper = store
 connectorID = https://accounts.google.com
 
 [gpg]
-format = x509
+format = ssh
 
 [gpg "x509"]
 program = gitsign
 
+[gpg "ssh"]
+allowedSignersFile = ~/.ssh/authorized_keys
+defaultKeyCommand = git-signing-key
+
 [commit]
-gpgsign = false
+gpgsign = true
 
 [user]
 name = Lars Sjöström
