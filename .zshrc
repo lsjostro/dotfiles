@@ -45,7 +45,7 @@ setopt extended_glob
 setopt ksh_glob
 setopt null_glob
 
-export LC_ALL=en_US.UTF-8
+# export LC_ALL=en_US.UTF-8
 
 # zsh syntax highlighter
 # ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -91,7 +91,7 @@ alias upper="tr '[:lower:]' '[:upper:]'"
 alias pbcopy="xclip -selection c"
 alias e='tmux-edit-helper'
 alias kubectl='grc kubectl'
-alias top='btm --basic --enable_cache_memory --enable_gpu_memory --battery --color=default-light'
+alias top='btm --basic --enable_cache_memory --enable_gpu_memory --battery --color=default'
 
 # completions
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
