@@ -52,7 +52,6 @@ setopt null_glob
 # typeset -A ZSH_HIGHLIGHT_STYLES
 zle_highlight=('paste:none')
 
-source $HOME/.zsh/history.zsh
 # Key bindings
 bindkey -e
 bindkey '^P' atuin-up-search
