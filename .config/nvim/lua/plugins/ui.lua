@@ -25,12 +25,34 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
   Group.new("IndentBlanklineIndent6", c.IndentBlanklineIndent:light():light():light())
 end)
 
+local logo = [[
+███████ ██   ██ ███████ ██      ███    ███  █████  ███    ██      ██████  ██████   ██████  ██    ██ ██████ 
+██      ██   ██ ██      ██      ████  ████ ██   ██ ████   ██     ██       ██   ██ ██    ██ ██    ██ ██   ██
+███████ ███████ █████   ██      ██ ████ ██ ███████ ██ ██  ██     ██   ███ ██████  ██    ██ ██    ██ ██████ 
+     ██ ██   ██ ██      ██      ██  ██  ██ ██   ██ ██  ██ ██     ██    ██ ██   ██ ██    ██ ██    ██ ██     
+███████ ██   ██ ███████ ███████ ██      ██ ██   ██ ██   ████      ██████  ██   ██  ██████   ██████  ██     
+]]
+
 return {
+  {
+    "nvimdev/dashboard-nvim",
+    opts = {
+      theme = "hyper",
+      config = {
+        header = vim.split(string.rep("\n", 8) .. logo, "\n"),
+        week_header = { enable = false },
+        packages = { enable = false },
+        project = { enable = false },
+        footer = {},
+        shortcut = {},
+      },
+    },
+  },
   {
     "echasnovski/mini.indentscope",
     opts = {
       draw = {
-        delay = 10,
+        delay = 50,
       },
     },
   },
@@ -53,6 +75,7 @@ return {
     "rcarriga/nvim-notify",
     opts = {
       timeout = 1500,
+      render = "wrapped-compact",
     },
   },
   {

@@ -13,6 +13,7 @@ vim.o.autochdir = true
 vim.o.fillchars = "stl: ,stlnc: ,eob:🮙"
 vim.o.scrolloff = 7
 vim.o.updatetime = 100
+vim.o.timeoutlen = 0
 
 -- AutoCommand OSC7 workaround for tmux
 -- see https://github.com/neovim/neovim/issues/21771

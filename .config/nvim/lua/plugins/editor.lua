@@ -7,22 +7,26 @@ return {
     "telescope.nvim",
     opts = {
       defaults = {
-        layout_strategy = "vertical",
+        layout_strategy = "horizontal",
         layout_config = {
           anchor = "top",
-          vertical = {
+          horizontal = {
             prompt_position = "top",
-            mirror = true,
-            -- preview_width = 0.5,
-            preview_height = 0.5,
+            mirror = false,
+            preview_width = 0.4,
+            -- preview_height = 0.5,
           },
           width = 0.9,
           height = 0.9,
           preview_cutoff = 10,
         },
-        -- sorting_strategy = "ascending",
+        sorting_strategy = "ascending",
         winblend = 0,
         wrap_results = true,
+        previewer = false,
+        preview = {
+          hide_on_startup = true,
+        },
       },
     },
   },
