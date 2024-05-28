@@ -37,7 +37,7 @@ return {
   {
     "nvimdev/dashboard-nvim",
     opts = {
-      theme = "hyper",
+      -- theme = "hyper",
       config = {
         header = vim.split(string.rep("\n", 8) .. logo, "\n"),
         week_header = { enable = false },
@@ -52,7 +52,7 @@ return {
     "echasnovski/mini.indentscope",
     opts = {
       draw = {
-        delay = 50,
+        delay = 10,
       },
     },
   },

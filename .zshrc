@@ -45,7 +45,7 @@ setopt extended_glob
 setopt ksh_glob
 setopt null_glob
 
-# export LC_ALL=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # zsh syntax highlighter
 # ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
