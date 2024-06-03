@@ -14,6 +14,7 @@ vim.o.fillchars = "stl: ,stlnc: ,eob:🮙"
 vim.o.scrolloff = 7
 vim.o.updatetime = 2500
 vim.o.timeoutlen = 0
+vim.opt.list = false
 
 -- AutoCommand OSC7 workaround for tmux
 -- see https://github.com/neovim/neovim/issues/21771
