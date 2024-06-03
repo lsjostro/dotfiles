@@ -1,0 +1,60 @@
+add_newline = false
+
+format = """\
+$cmd_duration\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_status\
+$git_state\
+($character)\
+"""
+
+[character]
+success_symbol = "[%](green)"
+error_symbol = "[%](bold red)"
+
+[line_break]
+disabled = true
+
+[directory]
+fish_style_pwd_dir_length = 1
+truncation_length = 1
+truncate_to_repo = false
+truncation_symbol = "…"
+style = "italic"
+
+[git_branch]
+format = "[$symbol$branch]($style)"
+style = "italic bold green"
+symbol = " "
+truncation_length = 16
+truncation_symbol = "…"
+
+[git_commit]
+style = "cyan"
+
+[git_state]
+style = ""
+
+[git_status]
+format = '([$all_status$ahead_behind]($style))'
+style = "fg:#00ac73"
+modified = "[ 󰦒](yellow)"
+deleted = "[ ✘](red)"
+untracked = "[ ?](purple)"
+staged = "[ 󰐖](cyan)"
+
+[cmd_duration]
+min_time = 1000
+format = "⏳[$duration](bold yellow) "
+
+[hostname]
+ssh_only = false
+format = "[$hostname](italic bold):"
+disabled = false
+
+[kubernetes]
+disabled = false
+style = ""
