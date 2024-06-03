@@ -71,7 +71,6 @@ return {
 	alternate_buffer_wheel_scroll_speed = 2,
 	check_for_updates = false,
 	status_update_interval = 100,
-	term = "wezterm",
 	disable_default_key_bindings = true,
 	keys = {
 		{ key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("ClipboardAndPrimarySelection") },

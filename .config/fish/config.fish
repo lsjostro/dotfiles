@@ -8,6 +8,7 @@ fish_add_path $HOME/bin
 #set -gx LOCALE_ARCHIVE /usr/lib/locale/locale-archive
 set -gx NIX_REMOTE daemon
 set -gx NVIM_LISTEN_ADDRESS $XDG_RUNTIME_DIR/nvim.sock
+set -gx SSH_ASKPASS /usr/lib/ssh/gnome-ssh-askpass4
 fish_add_path $HOME/.nix-profile/bin
 
 if status is-interactive
