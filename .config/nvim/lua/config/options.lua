@@ -12,7 +12,7 @@ vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
 vim.o.autochdir = true
 vim.o.fillchars = "stl: ,stlnc: ,eob:🮙"
 vim.o.scrolloff = 7
-vim.o.updatetime = 2500
+vim.o.updatetime = 500
 vim.o.timeoutlen = 0
 vim.opt.list = false
 

@@ -1,17 +1,21 @@
 return {
+  -- {
+  --   "lsjostro/alabaster.nvim",
+  --   -- dir = "~/src/github.com/blmiranda/alabaster.nvim/",
+  --   lazy = false,
+  --   dependencies = {
+  --     { "tjdevries/colorbuddy.nvim" },
+  --   },
+  -- },
   {
-    "lsjostro/alabaster.nvim",
-    -- dir = "~/src/github.com/blmiranda/alabaster.nvim/",
+    "shelmangroup/dieter.nvim",
     lazy = false,
-    dependencies = {
-      { "tjdevries/colorbuddy.nvim" },
-    },
   },
 
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "alabaster",
+      colorscheme = "dieter",
     },
   },
 }
