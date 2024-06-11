@@ -47,6 +47,27 @@ echo -e "\x1b[4:5mdashed underline \x1b[58:2::255:0:0m and with color\x1b[0m"
 echo
 echo "Emoji: 🚀 💩 😁 🍖 🔥 🔷"
 
+echo "Geometrical:"
+echo -e '◆ ◇ ◈ ● ○ ◉ ◎ ◍ ◌'
+echo -e '■ □ ▢ ▣ ▤ ▥ ▦ ▧ ▨ ▩'
+echo -e '◧ ◨ ◩ ◪ ◫ ◬ ◭ ◮ △ ▲ ▱ ▰ ▽ ▼ ▾ ▿'
+echo -e '◠ ◡ ◢ ◣ ◤ ◥ ◦ ◧ ◨ ◩ ◪ ◫ ◬ ◭ ◮ ◯ ◰ ◱ ◲ ◳ ◴ ◵ ◶ ◷ ◸ ◹ ◺ ◻ ◼ ◽ ◾ ◿'
+
+echo "Arrows:"
+echo -e '← → ↑ ↓ ↔ ↔ ↕ ↖ ↗ ↙ ↘ ↠ ↣ ↦ ↧ ↨ ↩ ↪ ↫ ↬ ↭ ↮ ↯ ↰ ↱ ↲ ↳ ↴ ↵ ↶ ↷ ↸ ↹ ↺ ↻ ↼ ↽ ↾ ↿ ↼ ↽ ↾ ↿'
+echo -e '⇄ ↔ ⇀ ⇂ ⇄ ⇆ ⇌ ⇎ ⇐ ⇑ ⇓ ⇕ ⇖ ⇗ ⇘ ⇙ ⇚ ⇛ ⇜ ⇝ ⇞ ⇟'
+
+echo
+echo "Blocks:"
+echo -e '🮙 ░ ▒ ▓ █ █ ▊ ▋ ▌ ▍ ▎ ▏'
+echo -e '🮙 ░ ▒ ▓ █ █ ▊ ▋ ▌ ▍ ▎ ▏'
+echo -e '🮙 ░ ▒ ▓ █ █ ▊ ▋ ▌ ▍ ▎ ▏'
+echo -e '▄ ▀ ▁ ▂ ▃ ▄ ▅ ▆ ▇ █'
+echo
+echo -e '╭──────────────╮'
+echo -e '│ border chars │'
+echo -e '╰──────────────╯'
+
 echo
 echo "Ligatures:"
 echo "-<< -< -<- <-- <--- <<- <- -> ->> --> ---> ->- >- >>- <-> <--> <---> <----> <!--"
