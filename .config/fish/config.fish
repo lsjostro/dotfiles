@@ -41,7 +41,7 @@ if status is-interactive
     end
 
     function jump
-        set _dir $(fre --sorted | fzf-tmux --no-sort -p 90%,40% -y 0)
+        set _dir $(fre --sorted | fzf-tmux --no-sort -p 90%,40% -y 0 -- -e)
         [ -n "$_dir" ] && pushd $_dir >>/dev/null
         commandline -f repaint
     end
