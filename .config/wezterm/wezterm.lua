@@ -26,9 +26,30 @@ end)
 
 local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		return "Catppuccin Mocha"
+		return {
+			background = "#0d1117",
+			-- background = "#000000",
+			foreground = "#b2b2b2",
+			cursor_bg = "#00d992",
+			cursor_fg = "#000000",
+			cursor_border = "#000000",
+			selection_bg = "#d7d7d7",
+			selection_fg = "#000000",
+			ansi = { "#000000", "#ff0035", "#85ff00", "#ffc900", "#00a7ff", "#cb01ff", "#00e0ff", "#f0f0f0" },
+			brights = { "#000000", "#ff8c88", "#baff94", "#ffe090", "#88ccff", "#e38dff", "#97eeff", "#ffffff" },
+		}
 	else
-		return "Catppuccin Latte"
+		return {
+			background = "#fefeff",
+			foreground = "#333333",
+			cursor_bg = "#aa0000",
+			cursor_fg = "#ffffff",
+			cursor_border = "#ffffff",
+			selection_bg = "#ffe6a4",
+			selection_fg = "#483600",
+			ansi = { "#000000", "#9e001d", "#306300", "#deae00", "#00669e", "#7d009e", "#008a9e", "#f7f7f7" },
+			brights = { "#000000", "#ff0035", "#509e00", "#ffc900", "#00a7ff", "#cb01ff", "#00e0ff", "#ffffff" },
+		}
 	end
 end
 
@@ -60,11 +81,9 @@ config.font_rules = {
 	},
 }
 
-config.freetype_load_flags = "NO_HINTING"
-config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
 
-config.font_size = 11
+config.font_size = 10.2
 
 config.unicode_version = 14
 config.warn_about_missing_glyphs = false
