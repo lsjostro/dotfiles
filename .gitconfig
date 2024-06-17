@@ -28,6 +28,7 @@ co = checkout
 st = status -sb
 pullr = pull --rebase
 
+new = !git fetch -u origin main:main && git branchless switch -d origin/main
 sl = branchless smartlog
 sync = branchless sync
 bco = branchless checkout
@@ -73,6 +74,8 @@ hunk-label-style = bold
 line-numbers = true
 max-line-distance = 0.9
 
+[rebase]
+autosquash = true
 
 [hub]
 protocol = git
