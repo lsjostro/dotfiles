@@ -24,7 +24,7 @@ wezterm.on("gui-startup", function(cmd)
 	mux.set_active_workspace("local")
 end)
 
-local function scheme_for_appearance(appearance)
+local function colors_for_appearance(appearance)
 	if appearance:find("Dark") then
 		return {
 			background = "#0d1117",
@@ -53,7 +53,7 @@ local function scheme_for_appearance(appearance)
 	end
 end
 
-config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+config.colors = colors_for_appearance(wezterm.gui.get_appearance())
 -- config.font = wezterm.font({ family = "IosevkaShelman Nerd Font" })
 -- config.font_rules = {
 -- 	{
