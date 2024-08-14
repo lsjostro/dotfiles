@@ -1,0 +1,58 @@
+font-size = 11
+
+font-codepoint-map = U+2191-U+2195,U+2500-U+259F=Berkeley Mono Variable
+font-family = Berkeley Mono Variable
+font-family-bold-italic = Monaspace Xenon
+font-style-bold-italic = ExtraLight Italic
+font-variation-italic = wght=100
+
+mouse-hide-while-typing = true
+cursor-style = "block"
+adjust-cursor-thickness = 5
+unfocused-split-opacity = 1.0
+
+shell-integration = "fish"
+
+window-decoration = false
+gtk-tabs-location = "bottom"
+window-padding-x = 12
+window-padding-y = 0
+window-padding-balance = true
+window-padding-color = "extend"
+window-theme = "system"
+
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+keybind = ctrl+tab=goto_split:previous
+keybind = alt+enter=toggle_fullscreen
+keybind = alt+one=unbind
+keybind = alt+two=unbind
+keybind = alt+three=unbind
+keybind = alt+four=unbind
+keybind = alt+five=unbind
+keybind = alt+six=unbind
+keybind = alt+seven=unbind
+keybind = alt+eight=unbind
+keybind = alt+nine=unbind
+
+background = #fefeff
+foreground = #222222
+cursor-color = #aa0000
+selection-background = #ffe6a4
+selection-foreground = #483600
+palette = 0=#000000
+palette = 1=#9e001d
+palette = 2=#306300
+palette = 3=#deae00
+palette = 4=#00669e
+palette = 5=#7d009e
+palette = 6=#008a9e
+palette = 7=#f7f7f7
+palette = 8=#000000
+palette = 9=#ff0035
+palette = 10=#509e00
+palette = 11=#ffc900
+palette = 12=#00a7ff
+palette = 13=#cb01ff
+palette = 14=#00e0ff
+palette = 15=#ffffff
