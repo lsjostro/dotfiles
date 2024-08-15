@@ -5,9 +5,14 @@ font-family-bold-italic = Monaspace Xenon
 font-style-bold-italic = ExtraLight Italic
 font-variation-italic = wght=100
 
+adjust-cell-height = 1
+adjust-cursor-thickness = 5
+adjust-font-baseline = 1
+adjust-underline-position = 2
+adjust-underline-thickness = -1
+
 mouse-hide-while-typing = true
 cursor-style = "block"
-adjust-cursor-thickness = 5
 unfocused-split-opacity = 1.0
 
 shell-integration = "fish"
