@@ -17,8 +17,9 @@ unfocused-split-opacity = 1.0
 
 shell-integration = "fish"
 
-window-decoration = false
+window-decoration = true
 gtk-tabs-location = "bottom"
+gtk-titlebar = false
 window-padding-x = 12
 window-padding-y = 0
 window-padding-balance = true
