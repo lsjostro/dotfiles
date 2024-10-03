@@ -4,32 +4,27 @@ return {
     enabled = false,
   },
   {
-    "danielfalk/smart-open.nvim",
-    branch = "0.2.x",
-    dependencies = {
-      "kkharji/sqlite.lua",
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      { "nvim-telescope/telescope-fzy-native.nvim" },
-    },
-    config = function()
-      local util = require("lazyvim.util")
-      util.on_load("telescope.nvim", function()
-        local telescope = require("telescope")
-        telescope.load_extension("smart_open")
-      end)
-    end,
-  },
-  {
     "telescope.nvim",
     keys = {
       {
         "<leader><leader>",
+        "<cmd>Telescope git_files<cr>",
+        desc = "VCS Files",
+      },
+      {
+        "<tab>",
         function()
-          require("telescope").extensions.smart_open.smart_open({
-            filename_first = false,
+          require("telescope.builtin").buffers({
+            sort_mru = true,
+            ignore_current_buffer = true,
           })
         end,
-        desc = "Telescope smart open",
+        desc = "Telescope buffers open",
+      },
+      {
+        "<C-p>",
+        "<cmd>Telescope projects<cr>",
+        desc = "Projects",
       },
     },
     config = function()
@@ -69,6 +64,7 @@ return {
       })
     end,
   },
+
   {
     "monkoose/neocodeium",
     event = "VeryLazy",
@@ -76,6 +72,8 @@ return {
       local neocodeium = require("neocodeium")
       neocodeium.setup()
       vim.keymap.set("i", "<C-j>", neocodeium.accept)
+      vim.keymap.set("i", "<A-f>", neocodeium.accept)
+      vim.keymap.set("i", "<C-h>", neocodeium.cycle_or_complete)
     end,
   },
 }

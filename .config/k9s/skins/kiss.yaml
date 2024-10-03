@@ -22,9 +22,9 @@ k9s:
     buttonFgColor: default
     buttonBgColor: default
     buttonFocusFgColor: default
-    buttonFocusBgColor: default
+    buttonFocusBgColor: blue
     labelFgColor: default
-    fieldFgColor: default
+    fieldFgColor: blue
   frame:
     border:
       fgColor: default
