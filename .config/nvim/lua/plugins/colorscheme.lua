@@ -8,7 +8,7 @@ return {
   --   },
   -- },
   {
-    "shelmangroup/dieter.nvim",
+    "git@git.patagia.dev:Patagia/dieter.nvim.git",
     lazy = false,
   },
 
