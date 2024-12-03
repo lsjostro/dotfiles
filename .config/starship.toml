@@ -8,6 +8,8 @@ $git_branch\
 $git_commit\
 $git_status\
 $git_state\
+${custom.jj}\
+${custom.jjstate}\
 ($character)\
 """
 
@@ -58,3 +60,47 @@ disabled = false
 [kubernetes]
 disabled = false
 style = ""
+
+[custom.jj]
+command = '''
+  jj log --ignore-working-copy --no-graph --color never -r @ -T '
+    surround(
+      " \e[0;2;3m",
+      "\e[0m",
+      coalesce(
+        surround(
+          "\e[1;2;3m❝",
+          "❞\e[0m",
+          if(
+            description.first_line().substr(0, 15).starts_with(description.first_line()),
+            description.first_line().substr(0, 15),
+            description.first_line().substr(0, 14) ++ "…"
+          )
+        ),
+        "…"
+      ),
+    )
+  '
+'''
+when = "jj root"
+
+[custom.jjstate]
+when = "jj root"
+command = '''
+ 	jj log --ignore-working-copy --no-graph --color never -r @ -T '
+	  surround(
+	    " \e[2;3m",
+	    "\e[0m",
+	    separate(
+	      " ",
+	      surround("\e[0;1;95m ", "\e[0;2;3m", change_id.shortest()),
+        surround("\e[0;35m󰸕 ", "\e[0m", bookmarks.join("╱")),
+	      surround("\e[0;34m ",   "\e[0;2;3m", commit_id.shortest()),
+	      if(conflict,  "󰂭"),
+	      if(empty,     ""),
+	      if(divergent, ""),
+	      if(hidden,    "󰘓"),
+	    )
+	  )
+	'
+'''

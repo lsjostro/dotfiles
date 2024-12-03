@@ -1,6 +1,7 @@
 alias e='tmux-edit-helper'
 alias dotgit='git --work-tree $HOME --git-dir $HOME/.dot_git'
 alias l='bat --wrap=never --pager="less -S"'
+alias j='jj'
 alias ls=eza
 alias tail='tail -n $LINES'
 alias timestamp='TZ=Z date "+%Y%m%dT%H%M%SZ"'

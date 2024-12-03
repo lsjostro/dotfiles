@@ -10,6 +10,8 @@ l = ["log", "--limit=25", "-T", "builtin_log_comfortable", "-r", "(main..@) | (m
 la = ["log", "--limit=25", "-T", "builtin_log_oneline", "-r", "all()"]
 s = ["show", "--tool=difftu"]
 ss = ["show", "--tool=difft"]
+gf = ["git", "fetch"]
+gp = ["git", "push"]
 
 [ui]
 default-command = [ "log", "--limit=25", "-T", "builtin_log_comfortable" ]
