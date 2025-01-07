@@ -13,6 +13,9 @@ local colors = {
     string = hsl(96, 50, 33),
     comment = hsl(230, 66, 40),
     comment_error = hsl(2, 85, 40),
+    func = hsl(360, 100, 20),
+    member = hsl(219, 100, 30),
+    punc = hsl(219, 45, 75),
 
     diagnostic_error = hsl(347, 80, 45),
     diagnostic_warning = hsl(30, 100, 50),
@@ -36,6 +39,11 @@ local colors = {
     highlight_subtle = hsl(0, 0, 94),
     highlight_intense = hsl(42, 100, 30),
 
+    cmp_bg = hsl(53, 100, 93),
+    cmp_selected_fg = hsl(319,100, 0), -- hsl(180, 0, 90),
+    cmp_selected_bg = hsl(180, 0, 90),
+
+    suggestion = hsl(180, 0, 60),
   },
 
   dark = {

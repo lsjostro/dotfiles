@@ -1,4 +1,10 @@
-{ inputs, config, pkgs, lib,... }:
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
 
   home.packages = with pkgs; [
@@ -240,10 +246,10 @@
           "prefix" = bold;
           "rest" = "bright black";
           "divergent prefix" = underline;
-          "bookmark" = "magenta";
-          "bookmarks" = "magenta";
-          "change_id" = "magenta";
-          "local_bookmarks" = "magenta";
+          "bookmark" = "bright magenta";
+          "bookmarks" = "bright magenta";
+          "change_id" = "bright magenta";
+          "local_bookmarks" = "bright magenta";
 
           "diff file_header" = bold;
           "diff hunk_header" = "cyan";
@@ -252,13 +258,14 @@
           "diff added" = "green";
           "diff added token" = "green";
           "diff modified" = "cyan";
-          "diff untracked" = "magenta";
+          "diff untracked" = "blue";
           "diff renamed" = "cyan";
           "diff copied" = "green";
           "diff access-denied" = {
             bg = "red";
           };
 
+          "empty" = "green";
           "elided" = "blue";
           "node elided" = dim;
           "node working_copy" = {
@@ -273,12 +280,16 @@
           };
           "operation id" = "blue";
           "operation current_operation" = bold;
-          "remote_bookmarks" = "magenta";
+          "remote_bookmarks" = "bright magenta";
           "working_copy" = {
             fg = "green";
             bold = true;
           };
-          "working_copy change_id" = "magenta";
+          "working_copy empty" = {
+            fg = "green";
+            bold = true;
+          };
+          "working_copy change_id" = "bright magenta";
           "working_copy description placeholder" = "green";
           "working_copy empty description placeholder" = "green";
           "working_copy bookmark" = "bright magenta";
@@ -305,7 +316,6 @@
           "divergent"
           "divergent change_id"
           "divergent rest"
-          "empty"
           "empty description placeholder"
           "error_source"
           "git_head"
@@ -334,7 +344,6 @@
           "working_copy conflict"
           "working_copy divergent"
           "working_copy divergent change_id"
-          "working_copy empty"
           "working_copy git_refs"
           "working_copy local_branches"
           "working_copy placeholder"

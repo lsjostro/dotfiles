@@ -19,12 +19,30 @@ function GetIndicators()
   local counts = vim.diagnostic.count(bufnr)
   local errors = counts[vim.diagnostic.severity.ERROR] or 0
   local warnings = counts[vim.diagnostic.severity.WARN] or 0
-  local warn_string = warnings > 0 and "%#DiagnosticWarn# " .. warnings .. " " or "  "
-  local error_string = errors > 0 and "%#DiagnosticError# " .. errors .. " " or "  "
+  local warn_string = warnings > 0 and "%#DiagnosticWarn# " .. warnings .. " " or ""
+  local error_string = errors > 0 and "%#DiagnosticError# " .. errors .. " " or ""
   return warn_string .. error_string
 end
 
-vim.opt.rulerformat = "%40(%=%{%v:lua.GetIndicators()%}%#Label#│ %t %)"
+function CondensedPath()
+  local path = vim.fn.expand("%:p")
+  local home = os.getenv("HOME")
+  if home then
+    path = vim.fn.substitute(path, '^' .. home, '~', '')
+  end
+
+  local segments = vim.fn.split(path, '/')
+  if #segments <= 3 then
+    return path
+  end
+
+  local early_path = table.concat(vim.list_slice(segments, 1, #segments - 2), '/')
+  local late_path = table.concat(vim.list_slice(segments, #segments - 1), '/')
+
+  return vim.fn.pathshorten(early_path) .. '/' .. late_path
+end
+
+vim.opt.rulerformat = "%50(%=%{%v:lua.GetIndicators()%}%#MsgArea#%{%v:lua.CondensedPath()%}%)%7(%l:%c%)"
 
 -- Search
 vim.opt.ignorecase = true
@@ -55,7 +73,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 --
 
 vim.o.autochdir = true
--- vim.o.cia = 'kind,abbr,menu'
+vim.o.cia = 'kind,abbr,menu'
 vim.o.fillchars = "stl: ,stlnc: ,eob:░,vert:│"
 vim.o.icm = "split"
 vim.o.list = false
@@ -65,10 +83,8 @@ vim.o.showcmd = false
 vim.o.showmode = false
 vim.o.smoothscroll = true
 vim.o.splitkeep = "screen"
-vim.o.timeoutlen = 10
-vim.o.timeout = true
-vim.o.updatetime = 50
-
+vim.o.timeout = false
+vim.o.updatetime = 250
 
 -- Use rg
 vim.o.grepprg = [[rg --glob "!.jj" --glob "!.git" --no-heading --vimgrep --follow $*]]
@@ -102,6 +118,29 @@ vim.keymap.set({ "i", "s" }, "<Tab>", function()
 end, { expr = true })
 
 
+-- Autoformat
+
+vim.g.autoformat_enabled = true -- set to true by default
+
+vim.api.nvim_create_user_command('ToggleAutoFormat', function()
+  vim.g.autoformat_enabled = not vim.g.autoformat_enabled
+  print('Autoformatting ' .. (vim.g.autoformat_enabled and 'enabled' or 'disabled'))
+end, {})
+
+vim.api.nvim_create_augroup("AutoFormat", {})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = "AutoFormat",
+  callback = function()
+    if vim.g.autoformat_enabled then
+      vim.lsp.buf.format({
+        async = false,
+        timeout_ms = 2000 -- Adjust timeout as needed
+      })
+    end
+  end,
+})
+
 -- Keymap
 local opts = function(label)
   return { noremap = true, silent = true, desc = label }
@@ -117,6 +156,7 @@ vim.keymap.set({ "n", "v" }, "<Leader>a", vim.lsp.buf.code_action, { remap = tru
 vim.keymap.set("n", "<Leader>af", function()
   vim.lsp.buf.format({ async = true })
 end, opts("Format Buffer"))
+vim.keymap.set('n', '<Leader><Leader>', "<cmd>Pick visit_paths cwd=''<cr>", opts("Visits"))
 vim.keymap.set('n', '<Leader>b', "<cmd>Pick buffers<cr>", opts("Open buffer picker"))
 vim.keymap.set('n', '<Leader>/', "<cmd>Pick grep_live_root<cr>", opts("Search workspace files"))
 vim.keymap.set('n', '<Leader>d', "<cmd>Pick diagnostic<cr>", opts("Open diagnostics picker"))
@@ -127,11 +167,13 @@ vim.keymap.set('n', '<Leader>f', "<cmd>Pick files_root<cr>", opts("Open file pic
 vim.keymap.set('n', '<c-p>', "<Leader>f", { remap = true })
 vim.keymap.set('n', '<Leader>g', "<cmd>Pick oldfiles<cr>", opts("Open file picker history"))
 vim.keymap.set("n", '<Leader>k', vim.lsp.buf.hover, opts("Show docs for item under cursor"))
+vim.keymap.set('n', '<Leader>p', "<cmd>Pick projects<cr>", opts("Open projects picker"))
 vim.keymap.set('n', '<Leader>q', require('mini.bufremove').delete, opts("Delete buffer"))
 vim.keymap.set('n', '<Leader>s', "<cmd>Pick lsp scope='document_symbol'<cr>", opts("Open symbol picker"))
 vim.keymap.set('n', '<Leader>S', "<cmd>Pick lsp scope='workspace_symbol'<cr>", opts("Open workspace symbol picker"))
 vim.keymap.set("n", "<Leader>ws", "<C-w>s", opts("Horizontal split"))
 vim.keymap.set("n", "<Leader>wv", "<C-w>v", opts("Vertical split"))
+vim.keymap.set("n", "<m-f>", require('mini.files').open, opts("Open file manager"))
 vim.keymap.set('n', '<tab>', "<cmd>Pick buffers include_current=false<cr>", opts("Buffers"))
 vim.keymap.set("n", "zz", "zt", { remap = true })
 vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y', opts("Yank to clipboard"))
@@ -149,9 +191,18 @@ vim.keymap.set("n", "K", function()
     max_width = 80,
     offset_x = 2,
   }
-  end, {})
+end, {})
 vim.keymap.set("n", "<Leader>ub", function()
   vim.o.background = (vim.o.background == "light" and "dark" or "light")
-  end, opts("Toggle dark/light background"))
+end, opts("Toggle dark/light background"))
+vim.keymap.set("n", "<Leader>uc", function()
+  if vim.g.colors_name == "dieter-nocolor" then
+    vim.cmd [[colorscheme dieter]]
+  else
+    vim.cmd [[colorscheme dieter-nocolor]]
+  end
+end, opts("Toggle Dieter colors"))
+vim.keymap.set("n", "<Leader>uf", "<cmd>ToggleAutoFormat<cr>", opts("Toggle autoformat on save"))
 vim.keymap.set("n", "<Leader>uh", "<cmd>InlayHintsToggle<cr>", opts("Toggle inlay hints"))
-
+vim.keymap.set("n", "<Leader>un", "<cmd>set invnumber<cr>", opts("Toggle line numbers"))
+vim.keymap.set("n", "<Leader>uw", "<cmd>set invwrap<cr>", opts("Toggle line wrapping"))

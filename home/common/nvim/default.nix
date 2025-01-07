@@ -1,7 +1,8 @@
-{ inputs
-, lib
-, pkgs
-, ...
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
 }:
 {
   imports = [
@@ -12,6 +13,7 @@
 
   programs.neovim = {
     enable = true;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
@@ -36,6 +38,29 @@
       go-nvim
       targets-vim
       ts-comments-nvim
+
+      {
+        plugin = pkgs.vimUtils.buildVimPlugin {
+          name = "neocodeium";
+          src = pkgs.fetchFromGitHub {
+            owner = "monkoose";
+            repo = "neocodeium";
+            rev = "4da81528468b33585c411f31eb390dce573ccb14"; # v1.8.0
+            hash = "sha256-1n9nNqBNwNDSzbAkm8eB4HZLNy5HmMg25jPwQAnW5OU=";
+          };
+          doCheck = false;
+        };
+        type = "lua";
+        config = ''
+          local neocodeium =require('neocodeium')
+          neocodeium.setup {
+            root_dir = { ".bzr", ".jj", ".git", ".hg", ".svn", "_FOSSIL_", "package.json" }
+          }
+          vim.keymap.set("i", "<C-j>", neocodeium.accept, { remap = true })
+          vim.keymap.set("i", "<A-f>", neocodeium.accept, { remap = true })
+          vim.keymap.set("i", "<C-h>", neocodeium.cycle_or_complete, { remap = true })
+        '';
+      }
 
       {
         plugin = pkgs.vimUtils.buildVimPlugin {
@@ -89,27 +114,28 @@
           src = pkgs.fetchFromGitHub {
             owner = "MysticalDevil";
             repo = "inlay-hints.nvim";
-            rev = "af84dee42cd118af6d592b06c1c0e45d6432a6c0"; # 2024-08-23
-            hash = "sha256-DZVtFAUK9c8GInp+JdCQ1BKe0dkAheHKI67oxdMmA24=";
+            rev = "3259b54f3b954b4d8260f3ee49ceabe978ea5636";
+            hash = "sha256-99KCGoPowa4PA1jkCm4ZbbgrFl84NWnKQMgkfy8KS5E=";
           };
         };
         type = "lua";
         config = ''
-          require('inlay-hints').setup()
-          require("inlay-hints.utils").enable_inlay_hints()
-        '';
-      }
-
-      {
-        plugin = codeium-nvim;
-        type = "lua";
-        config = ''
-          require'codeium'.setup {
-            enable_chat = false,
+          require('inlay-hints').setup {
+            autocmd = { enable = false },
           }
         '';
       }
 
+      # {
+      #   plugin = codeium-nvim;
+      #   type = "lua";
+      #   config = ''
+      #     require'codeium'.setup {
+      #       enable_chat = false,
+      #     }
+      #   '';
+      # }
+      #
       {
         plugin = pkgs.vimUtils.buildVimPlugin {
           name = "diagflow";

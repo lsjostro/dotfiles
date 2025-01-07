@@ -8,7 +8,7 @@
       enter_accept = true;
       filter_mode_shell_up_key_binding = "session";
       history_filter = [ ];
-      inline_height = 8;
+      inline_height = 10;
       prefers_reduced_motion = true;
       search_mode_shell_up_key_binding = "prefix";
       show_help = false;

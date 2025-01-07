@@ -1,13 +1,9 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   programs.fish = {
     enable = true;
 
-
     plugins = [
-      {
-        name = "grc";
-        src = pkgs.fishPlugins.grc.src;
-      }
       {
         name = "transient";
         src = pkgs.fishPlugins.transient-fish.src;
@@ -52,12 +48,6 @@
           	            end
           	          end
           	        '';
-      };
-
-      kubectl = {
-        description = "Wraps kubectl in grc";
-        wraps = "kubectl";
-        body = "grc.wrap kubectl $argv";
       };
 
       edit = {
@@ -129,7 +119,7 @@
 
       fish_prompt.body = ''
         	        echo -e "\033[s\033[$LINES;1H\033[1;2;38;5;238m$(string pad -c '┄' -w $COLUMNS (fish_jj_prompt || fish_vcs_prompt))\033[0m\033[u"
-                string join "" -- (set_color --dim) (prompt_hostname) ':' (prompt_pwd --full-length-dirs=4) (set_color --bold normal) ' ❯ ' (set_color normal)
+                string join "" -- (set_color --italics) (prompt_hostname) ':' (prompt_pwd --full-length-dirs=4) (set_color --bold normal) ' ❯ ' (set_color normal)
         	      '';
 
       transient_prompt_func.body = ''
@@ -163,6 +153,5 @@
       xc = "fish_clipboard_copy";
     };
   };
-
 
 }
