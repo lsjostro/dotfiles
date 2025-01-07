@@ -149,8 +149,6 @@
     interactiveShellInit = lib.concatStringsSep "\n" [
       (builtins.readFile ../../files/config/fish/config.fish)
       (builtins.readFile ../../files/config/fish/semantic-prompt.fish)
-      (builtins.readFile ../../files/config/fish/go-task.fish)
-      (builtins.readFile ../../files/config/fish/jj.fish)
       (builtins.readFile ../../files/config/fish/vcs.fish)
     ];
 
