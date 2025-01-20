@@ -59,12 +59,13 @@
       devShell.${system} = pkgs.mkShell {
         packages = with pkgs; [
           just
+          nix-direnv
           nh
         ];
       };
 
       homeConfigurations = {
-        "lsjostrom@dev" = mkHome [ ./home/lsjostrom/dev.nix ];
+        "lsjostrom@dele" = mkHome [ ./home/lsjostrom/dev.nix ];
         "lsjostrom@lsjo-test" = mkHome [ ./home/lsjostrom/dev.nix ];
       };
     };
