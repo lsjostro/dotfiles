@@ -61,6 +61,7 @@
       devShell.${system} = pkgs.mkShell {
         packages = with pkgs; [
           just
+          nix-direnv
           nh
           nixd
           nixfmt-rfc-style
@@ -70,7 +71,7 @@
       nixosConfigurations = { };
 
       homeConfigurations = {
-        "lsjostrom@dev" = mkHome [ ./home/lsjostrom/dev.nix ];
+        "lsjostrom@dele" = mkHome [ ./home/lsjostrom/dev.nix ];
         "lsjostrom@lsjo-test" = mkHome [ ./home/lsjostrom/dev.nix ];
         "lsjostro@nemo" = mkHome [ ./home/lsjostrom/nemo.nix ];
       };
