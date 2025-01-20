@@ -74,3 +74,6 @@ bind \ee vcs_broot
 bind \eg vcs_ui
 bind \eS vcs_diff
 bind \es vcs_status
+
+# jj completions
+COMPLETE=fish jj | source
