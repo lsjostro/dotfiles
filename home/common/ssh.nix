@@ -11,4 +11,9 @@
       PreferredAuthentications publickey
     '';
   };
+  home.file = {
+    ".ssh/rc" = {
+      source = ./../../files/scripts/ssh-rc;
+    };
+  };
 }
