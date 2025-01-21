@@ -72,7 +72,6 @@
 
       homeConfigurations = {
         "lsjostrom@dele" = mkHome [ ./home/lsjostrom/dev.nix ];
-        "lsjostrom@lsjo-test" = mkHome [ ./home/lsjostrom/dev.nix ];
         "lsjostro@nemo" = mkHome [ ./home/lsjostrom/nemo.nix ];
       };
     };
