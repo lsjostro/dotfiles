@@ -12,5 +12,6 @@
     ./tmux.nix
     ./vcs.nix
     ./ghostty.nix
+    ./scripts.nix
   ];
 }
