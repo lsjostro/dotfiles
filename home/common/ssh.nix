@@ -11,9 +11,14 @@
       PreferredAuthentications publickey
     '';
   };
+
   home.file = {
     ".ssh/rc" = {
       source = ./../../files/scripts/ssh-rc;
     };
+  };
+
+  home.sessionVariables = {
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
   };
 }

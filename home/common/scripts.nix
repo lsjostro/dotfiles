@@ -10,5 +10,7 @@
 
   };
 
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  home.sessionVariables = {
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
+  };
 }
