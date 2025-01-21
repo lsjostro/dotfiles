@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
     ./nix.nix
@@ -11,5 +11,6 @@
     ./k8s.nix
     ./tmux.nix
     ./vcs.nix
+    ./ghostty.nix
   ];
 }
