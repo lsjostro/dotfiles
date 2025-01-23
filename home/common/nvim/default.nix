@@ -126,16 +126,30 @@
         '';
       }
 
-      # {
-      #   plugin = codeium-nvim;
-      #   type = "lua";
-      #   config = ''
-      #     require'codeium'.setup {
-      #       enable_chat = false,
-      #     }
-      #   '';
-      # }
-      #
+      {
+        plugin = pkgs.vimUtils.buildVimPlugin {
+          name = "conform";
+          src = pkgs.fetchFromGitHub {
+            owner = "stevearc";
+            repo = "conform.nvim";
+            rev = "80b57f662b5e13ae8c2c7c38639966084625fa5e";
+            hash = "sha256-zC1WZFS+ZA1+BM36VnVkVE+/ovXdWCzL9kDIP3q9rIk=";
+          };
+        };
+        type = "lua";
+        config = ''
+          require('conform').setup {
+            formatters_by_ft = {
+              ["cue"] = { { "cue_fmt" } },
+              ["html"] = { { "prettierd", "prettier" } },
+              ["sass"] = { { "prettierd", "prettier" } },
+              ["proto"] = { { "buf" } },
+              ["terraform"] = { { "terraform_fmt" } },
+            }
+          }
+        '';
+      }
+
       {
         plugin = pkgs.vimUtils.buildVimPlugin {
           name = "diagflow";
