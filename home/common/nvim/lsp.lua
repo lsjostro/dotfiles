@@ -2,9 +2,16 @@ local lspconfig = require("lspconfig")
 local servers = {
   cssls = {},
   html = {},
-  jsonls = {},
   superhtml = {},
   ts_ls = {},
+  jsonls = {
+    settings = {
+      json = {
+        format = { enable = true },
+        validate = { enable = true },
+      },
+    },
+  },
   yamlls = {
     settings = {
       yaml = {
