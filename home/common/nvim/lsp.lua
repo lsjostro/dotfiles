@@ -5,6 +5,14 @@ local servers = {
   jsonls = {},
   superhtml = {},
   ts_ls = {},
+  yamlls = {
+    settings = {
+      yaml = {
+        keyOrdering = false,
+        format = { enable = true },
+      },
+    },
+  },
 
   gopls = {
     settings = {
