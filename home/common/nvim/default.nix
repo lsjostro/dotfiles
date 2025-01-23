@@ -31,6 +31,7 @@
       shellcheck
       shfmt
       stylua
+      yaml-language-server
     ];
 
     plugins = with pkgs.vimPlugins; [
