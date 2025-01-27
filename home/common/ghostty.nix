@@ -9,6 +9,7 @@
     installBatSyntax = false;
     package = pkgs.emptyDirectory;
     themes = {
+
       PatagiaLight = {
         background = "#fefeff";
         foreground = "#222222";
@@ -23,7 +24,7 @@
           "4=#00669e"
           "5=#7d009e"
           "6=#008a9e"
-          "7=#f7f7f7"
+          "7=#cdcdcd"
           "8=#b0b0b0"
           "9=#ff0035"
           "10=#509e00"
@@ -34,7 +35,13 @@
           "15=#ffffff"
         ];
       };
+
       PatagiaDark = {
+        background = "#000000";
+        foreground = "#b7bec7";
+        cursor-color = "#e7e7b7";
+        selection-background = "#84979f";
+        selection-foreground = "#000000";
         palette = [
           "0=#000000"
           "1=#ff0035"
@@ -53,12 +60,8 @@
           "14=#97eeff"
           "15=#ffffff"
         ];
-        background = "#000000";
-        foreground = "#b7bec7";
-        cursor-color = "#e7e7b7";
-        selection-background = "#84979f";
-        selection-foreground = "#000000";
       };
+
     };
     settings = {
       font-size = 10.5;
