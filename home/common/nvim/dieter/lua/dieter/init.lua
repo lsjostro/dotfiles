@@ -11,11 +11,15 @@ local colors = {
     dimmed_subtle = hsl(0, 0, 20),
 
     string = hsl(96, 50, 33),
-    comment = hsl(230, 66, 40),
+    comment = hsl(360, 66, 40),
     comment_error = hsl(2, 85, 40),
     func = hsl(360, 100, 20),
     member = hsl(219, 100, 30),
     punc = hsl(219, 45, 75),
+
+    -- suggestion = hsl(180, 0, 60),
+    -- suggestion = hsl(158, 66, 40),
+    suggestion = hsl(220, 95, 55),
 
     diagnostic_error = hsl(347, 80, 45),
     diagnostic_warning = hsl(30, 100, 50),
@@ -36,14 +40,13 @@ local colors = {
 
     dialog_bg = hsl(224, 5, 92),
     selection = hsl(270, 75, 92),
+    highlight = hsl(0, 0, 90),
     highlight_subtle = hsl(0, 0, 94),
     highlight_intense = hsl(42, 100, 30),
 
     cmp_bg = hsl(53, 100, 93),
-    cmp_selected_fg = hsl(319,100, 0), -- hsl(180, 0, 90),
+    cmp_selected_fg = hsl(319, 100, 0), -- hsl(180, 0, 90),
     cmp_selected_bg = hsl(180, 0, 90),
-
-    suggestion = hsl(180, 0, 60),
   },
 
   dark = {
@@ -178,6 +181,7 @@ local setupGroups = function(c)
     InclineNormal = { bg = c.background },
     InclineNormalNC = { bg = c.background },
 
+    EndOfBuffer = { fg = c.dimmed },
     WinSeparator = { bg = c.dialog_bg, fg = c.dialog_fg },
     NormalFloat = { bg = c.doc_bg, fg = c.doc_fg },
     FloatBorder = { fg = c.doc_fg },
@@ -211,7 +215,8 @@ local setupGroups = function(c)
     BlinkCmpSignatureHelp = { link = 'BlinkCmpDoc' },
     BlinkCmpSignatureHelpBorder = { link = 'BlinkCmpDocBorder' },
 
-    NeoCodeiumSuggestion = { fg = c.suggestion, bold = true, italic = true },
+    BlinkCmpGhostText = { fg = c.suggestion, italic = true },
+    NeoCodeiumSuggestion = { link = 'BlinkCmpGhostText' },
     LspReferenceText = { fg = c.highlight_intense, undercurl = true },
     LspInlayHint = { fg = c.accent1, italic = true, bold = true },
   }

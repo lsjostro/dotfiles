@@ -65,11 +65,13 @@
     };
     settings = {
       font-size = 10.5;
-      font-family = "TX-02";
-      font-family-bold-italic = "Monaspace Xenon";
+
+      font-family = "Berkeley Mono";
+      font-family-bold-italic = "Monaspace Radon Var";
+      font-style = "Regular";
       font-style-bold = "Bold";
-      font-style-italic = "Light Oblique";
-      font-style-bold-italic = "ExtraLight Italic";
+      font-style-italic = "SemiLight Oblique";
+      font-style-bold-italic = "Italic";
       font-synthetic-style = false;
 
       adjust-cursor-thickness = 4;
@@ -77,7 +79,8 @@
       adjust-underline-thickness = -2;
 
       mouse-hide-while-typing = true;
-      unfocused-split-opacity = 1.0;
+      unfocused-split-opacity = 0.85;
+      unfocused-split-fill = "#14151a";
 
       shell-integration = "fish";
 
