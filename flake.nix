@@ -34,7 +34,6 @@
       nixpkgs,
       nix-index-database,
       home-manager,
-      jujutsu,
       ...
     }:
     let
