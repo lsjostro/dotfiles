@@ -31,12 +31,12 @@ set fish_color_normal normal
 set fish_color_operator
 set fish_color_option
 set fish_color_param normal
-set fish_color_quote --italics
+set fish_color_quote normal
 set fish_color_redirection
 set fish_color_search_match -r
 set fish_color_selection -r
 set fish_color_status normal
-set fish_color_string --italics
+set fish_color_string normal
 set fish_color_user normal
 set fish_color_valid_path
 set fish_pager_color_background

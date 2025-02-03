@@ -119,7 +119,7 @@
 
       fish_prompt.body = ''
         	        echo -e "\033[s\033[$LINES;1H\033[1;2;38;5;238m$(string pad -c '┄' -w $COLUMNS (fish_jj_prompt || fish_vcs_prompt))\033[0m\033[u"
-                string join "" -- (set_color --italics) (prompt_hostname) ':' (prompt_pwd --full-length-dirs=4) (set_color --bold normal) ' ❯ ' (set_color normal)
+                string join "" -- (set_color --dim) (prompt_hostname) ':' (prompt_pwd --full-length-dirs=4) (set_color --bold normal) ' ❯ ' (set_color normal)
         	      '';
 
       transient_prompt_func.body = ''

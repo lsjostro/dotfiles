@@ -163,6 +163,7 @@ local setupGroups = function(c)
     DiagnosticUnderlineWarn = { fg = c.diagnostic_warn, undercurl = true },
     DiagnosticUnderlineInfo = { fg = c.diagnostic_info, undercurl = true },
     DiagnosticUnderlinehint = { fg = c.diagnostic_hint, undercurl = true },
+    DiagnosticUnnecessary = { fg = c.dimmed },
 
     DiagnosticSignError = { fg = c.diagnostic_error },
     DiagnosticSignHint = { fg = c.diagnostic_hint },
