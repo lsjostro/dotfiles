@@ -215,7 +215,7 @@ local setupGroups = function(c)
     BlinkCmpSignatureHelp = { link = 'BlinkCmpDoc' },
     BlinkCmpSignatureHelpBorder = { link = 'BlinkCmpDocBorder' },
 
-    BlinkCmpGhostText = { fg = c.suggestion, italic = true },
+    BlinkCmpGhostText = { fg = c.suggestion, italic = true, bold = true },
     NeoCodeiumSuggestion = { link = 'BlinkCmpGhostText' },
     LspReferenceText = { fg = c.highlight_intense, undercurl = true },
     LspInlayHint = { fg = c.accent1, italic = true },
@@ -243,7 +243,7 @@ local setupGroupsNoColor = function(c)
   g["@variable"] = cl
   g["@variable.member"] = cl
   g["@variable.parameter"] = cl
-  g.Comment = { fg = c.dimmed_subtle, italic = true, bold = true }
+  g.Comment = { fg = c.dimmed_subtle, italic = true }
   g.CommentError = { link = "Comment" }
   return g
 end
