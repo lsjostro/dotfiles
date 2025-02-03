@@ -146,6 +146,10 @@
         backend = "ssh";
       };
 
+      git = {
+        subprocess = true;
+      };
+
       ui = {
         "default-command" = [
           "log"
