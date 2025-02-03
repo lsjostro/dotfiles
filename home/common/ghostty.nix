@@ -64,14 +64,14 @@
 
     };
     settings = {
-      font-size = 10.5;
-
+      font-size = 11;
       font-family = "Berkeley Mono";
-      font-family-bold-italic = "Monaspace Radon Var";
+      font-family-italic = "Monaspace Radon Var";
+      font-family-bold-italic = "Monaspace Krypton Var";
       font-style = "Regular";
       font-style-bold = "Bold";
-      font-style-italic = "SemiLight Oblique";
-      font-style-bold-italic = "Italic";
+      font-style-italic = "Italic";
+      font-style-bold-italic = "ExtraLight";
       font-synthetic-style = false;
 
       adjust-cursor-thickness = 4;

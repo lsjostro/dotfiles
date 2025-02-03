@@ -125,8 +125,8 @@ local setupGroups = function(c)
 
     Visual = { bg = c.selection },
 
-    Comment = { fg = c.comment, italic = true, bold = true },
-    CommentError = { fg = c.comment_error, italic = true, bold = true },
+    Comment = { fg = c.comment, italic = true },
+    CommentError = { fg = c.comment_error, italic = true },
     ["@comment.note"] = { link = "Comment" },
     ["@comment.todo"] = { link = "CommentError" },
     ["@comment.error"] = { link = "CommentError" },
@@ -218,7 +218,7 @@ local setupGroups = function(c)
     BlinkCmpGhostText = { fg = c.suggestion, italic = true },
     NeoCodeiumSuggestion = { link = 'BlinkCmpGhostText' },
     LspReferenceText = { fg = c.highlight_intense, undercurl = true },
-    LspInlayHint = { fg = c.accent1, italic = true, bold = true },
+    LspInlayHint = { fg = c.accent1, italic = true },
   }
 end
 
