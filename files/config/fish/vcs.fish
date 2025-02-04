@@ -53,15 +53,6 @@ function vcs_log
     commandline -f repaint
 end
 
-function vcs_ui
-    if __jj_in_repo
-        lazyjj
-    else
-        gitui
-    end
-    commandline -f repaint
-end
-
 # Abbreviations
 
 abbr -a d vcs_diff
@@ -71,7 +62,6 @@ abbr -a s vcs_status
 bind \c_ vcs_jump
 bind \ea vcs_log
 bind \ee vcs_broot
-bind \eg vcs_ui
 bind \eS vcs_diff
 bind \es vcs_status
 

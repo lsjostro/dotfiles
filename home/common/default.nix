@@ -3,6 +3,7 @@
   imports = [
     ./nix.nix
     ./atuin.nix
+    ./broot.nix
     ./devel.nix
     ./utils.nix
     ./nvim
