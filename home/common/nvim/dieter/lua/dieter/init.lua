@@ -10,6 +10,12 @@ local colors = {
     dimmed = hsl(0, 0, 80),
     dimmed_subtle = hsl(0, 0, 20),
 
+    highlight_subtle = hsl(0, 0, 94),
+    highlight = hsl(0, 0, 90),
+    highlight_intense = hsl(42, 100, 30),
+
+    dialog_fg = hsl(230, 13, 10),
+
     string = hsl(96, 50, 33),
     comment = hsl(360, 66, 40),
     comment_error = hsl(2, 85, 40),
@@ -32,11 +38,18 @@ local colors = {
     change_quarter = hsl(224, 100, 85),
     delete = hsl(350, 100, 40),
 
-    dialog_bg = hsl(224, 5, 92),
     selection = hsl(270, 75, 92),
-    highlight_subtle = hsl(0, 0, 94),
-    highlight = hsl(0, 0, 90),
-    highlight_intense = hsl(42, 100, 30),
+
+    search_bg = hsl(43, 100, 8),
+    search_fg = hsl(43, 100, 85),
+
+    cmp_bg = hsl(218, 30, 97),
+    cmp_fg = hsl(218, 30, 13),
+    cmp_selected_fg = hsl(218, 50, 8),
+    cmp_selected_bg = hsl(218, 30, 85),
+
+    doc_bg = hsl(200, 30, 90),
+    doc_fg = hsl(220, 80, 10),
   },
 
   dark = {
