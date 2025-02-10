@@ -153,29 +153,6 @@
 
       {
         plugin = pkgs.vimUtils.buildVimPlugin {
-          name = "diagflow";
-          src = pkgs.fetchFromGitHub {
-            owner = "dgagn";
-            repo = "diagflow.nvim";
-            rev = "fc09d55d2e60edc8ed8f9939ba97b7b7e6488c99";
-            hash = "sha256-2WNuaIEXcAgUl2Kb/cCHEOrtehw9alaoM96qb4MLArw=";
-          };
-        };
-        type = "lua";
-        config = ''
-          require('diagflow').setup {
-            scope = "line",
-            gap_size = 0,
-            max_width = 50,
-            max_height = 20,
-            show_borders = true,
-            toggle_event = { "InsertEnter", "InsertLeave" },
-          }
-        '';
-      }
-
-      {
-        plugin = pkgs.vimUtils.buildVimPlugin {
           name = "dieter-nvim";
           src = ./dieter;
         };

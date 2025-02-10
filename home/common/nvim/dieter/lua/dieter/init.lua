@@ -13,12 +13,7 @@ local colors = {
     string = hsl(96, 50, 33),
     comment = hsl(360, 66, 40),
     comment_error = hsl(2, 85, 40),
-    func = hsl(360, 100, 20),
-    member = hsl(219, 100, 30),
-    punc = hsl(219, 45, 75),
 
-    -- suggestion = hsl(180, 0, 60),
-    -- suggestion = hsl(158, 66, 40),
     suggestion = hsl(220, 95, 55),
 
     diagnostic_error = hsl(347, 80, 45),
@@ -36,17 +31,12 @@ local colors = {
     change = hsl(41, 80, 80),
     change_quarter = hsl(224, 100, 85),
     delete = hsl(350, 100, 40),
-    delete_quarter = hsl(350, 100, 85),
 
     dialog_bg = hsl(224, 5, 92),
     selection = hsl(270, 75, 92),
-    highlight = hsl(0, 0, 90),
     highlight_subtle = hsl(0, 0, 94),
+    highlight = hsl(0, 0, 90),
     highlight_intense = hsl(42, 100, 30),
-
-    cmp_bg = hsl(53, 100, 93),
-    cmp_selected_fg = hsl(319, 100, 0), -- hsl(180, 0, 90),
-    cmp_selected_bg = hsl(180, 0, 90),
   },
 
   dark = {
@@ -57,27 +47,27 @@ local colors = {
     accent2 = hsl(40, 57, 57),  -- Yellow
 
     dimmed = hsl(212, 19, 25),
-    -- dimmed_subtle = hsl(212, 19, 70),
-    dimmed_subtle = hsl(212, 5, 65),
+    dimmed_subtle = hsl(212, 19, 50),
 
     highlight_subtle = hsl(212, 27, 11),
+    highlight = hsl(212, 27, 18),
     highlight_intense = hsl(58, 100, 60),
 
     dialog_fg = hsl(191, 15, 75),
 
-    -- string = hsl(96, 35, 60),
-    -- string = hsl(80, 79, 83),
-    string = hsl(90, 45, 70),
-    comment = hsl(2, 69, 68),
+    string = hsl(90, 30, 60),
+    comment = hsl(216, 30, 55),
     comment_error = hsl(2, 85, 50),
     func = hsl(40, 57, 87),
     member = hsl(213, 45, 75),
     punc = hsl(213, 45, 50),
 
+    suggestion = hsl(158, 66, 40),
+
     diagnostic_error = hsl(353, 100, 45),
     diagnostic_warning = hsl(30, 100, 50),
     diagnostic_info = hsl(176, 80, 60),
-    diagnostic_hint = hsl(176, 80, 60),
+    diagnostic_hint = hsl(210, 74, 60),
 
     popup_error_bg = hsl(0, 95, 7),
     popup_warning_bg = hsl(27, 95, 7),
@@ -91,7 +81,10 @@ local colors = {
     delete = hsl(350, 100, 40),
     delete_quarter = hsl(350, 100, 15),
 
-    selection = hsl(213, 60, 40),
+    selection = hsl(218, 90, 20),
+
+    search_bg = hsl(43, 100, 8),
+    search_fg = hsl(43, 100, 85),
 
     cmp_bg = hsl(218, 30, 13),
     cmp_fg = hsl(218, 30, 80),
@@ -100,8 +93,6 @@ local colors = {
 
     doc_bg = hsl(220, 80, 10),
     doc_fg = hsl(200, 30, 60),
-
-    suggestion = hsl(180, 55, 40),
   },
 
 }
@@ -121,9 +112,14 @@ local setupGroups = function(c)
     Special = { link = "NormalNC" },
     Type = { link = "NormalNC" },
 
+    MsgArea = { fg = c.dimmed_subtle },
+
     String = { fg = c.string },
 
     Visual = { bg = c.selection },
+
+    Search = { bg = c.search_bg, fg = c.search_fg },
+    CurSearch = { link = "Search" },
 
     Comment = { fg = c.comment, italic = true },
     CommentError = { fg = c.comment_error, italic = true },
@@ -143,37 +139,37 @@ local setupGroups = function(c)
     GitSignsDeleteNr = { link = "DiffDelete" },
 
     -- Treesitter
-    -- ["@function"] = { link = "NormalNC" },
     ["@punctuation.special"] = { fg = c.punc },
     ["@special"] = { link = "NormalNC" },
     ["@variable"] = { link = "NormalNC" },
     ["@variable.member"] = { fg = c.member },
     ["@variable.parameter"] = { fg = c.accent2 },
-    -- ["@lsp.type.variable"] = { fg = c.dimmed_subtle, italic = true },
 
     -- UI Elements
     CursorLine = { bg = c.highlight_subtle },
 
     DiagnosticError = { fg = c.diagnostic_error, italic = true },
+    DiagnosticHint = { fg = c.diagnostic_hint, italic = true },
+    DiagnosticInfo = { fg = c.diagnostic_info, italic = true },
+    DiagnosticWarn = { fg = c.diagnostic_warn, italic = true },
     DiagnosticFloatingError = { fg = c.diagnostic_error, bg = c.popup_error_bg },
-    DiagnosticFloatingWarn = { fg = c.diagnostic_warning, bg = c.popup_warning_bg },
-    DiagnosticFloatingInfo = { fg = c.diagnostic_info, bg = c.popup_info_bg },
     DiagnosticFloatingHint = { fg = c.diagnostic_hint, bg = c.popup_hint_bg },
-    DiagnosticUnderlineError = { fg = c.diagnostic_error, undercurl = true },
-    DiagnosticUnderlineWarn = { fg = c.diagnostic_warn, undercurl = true },
-    DiagnosticUnderlineInfo = { fg = c.diagnostic_info, undercurl = true },
-    DiagnosticUnderlinehint = { fg = c.diagnostic_hint, undercurl = true },
-    DiagnosticUnnecessary = { fg = c.dimmed },
+    DiagnosticFloatingInfo = { fg = c.diagnostic_info, bg = c.popup_info_bg },
+    DiagnosticFloatingWarn = { fg = c.diagnostic_warning, bg = c.popup_warning_bg },
+    DiagnosticUnderlineError = { fg = c.foreground, undercurl = true, sp = c.diagnostic_error },
+    DiagnosticUnderlineHint = { fg = c.foreground, undercurl = true, sp = c.diagnostic_hint },
+    DiagnosticUnderlineInfo = { fg = c.foreground, undercurl = true, sp = c.diagnostic_info },
+    DiagnosticUnderlineWarn = { fg = c.foreground, undercurl = true, sp = c.diagnostic_warn },
 
     DiagnosticSignError = { fg = c.diagnostic_error },
     DiagnosticSignHint = { fg = c.diagnostic_hint },
     DiagnosticSignInfo = { fg = c.diagnostic_info },
     DiagnosticSignWarn = { fg = c.diagnostic_warning },
-    LineNr = { fg = c.dimmed, italic = true },
-    CursorLineNr = { fg = c.dimmed_subtle, bg = c.highlight_subtle, bold = true },
+    LineNr = { fg = c.dimmed },
+    CursorLineNr = { fg = c.dimmed_subtle, bg = c.highlight_subtle },
 
-    IndentLine = { fg = c.dimmed },
-    IndentLineCurrent = { fg = c.dimmed_subtle },
+    IndentLine = { fg = c.highlight },
+    IndentLineCurrent = { fg = c.highlight },
     MiniIndentscopeSymbol = { link = "IndentLine" },
     MiniIndentscopeSymbolOff = { link = "IndentLine" },
 
@@ -184,8 +180,8 @@ local setupGroups = function(c)
 
     EndOfBuffer = { fg = c.dimmed },
     WinSeparator = { bg = c.dialog_bg, fg = c.dialog_fg },
-    NormalFloat = { bg = c.doc_bg, fg = c.doc_fg },
-    FloatBorder = { fg = c.doc_fg },
+    NormalFloat = { bg = c.background, fg = c.foreground },
+    FloatBorder = { fg = c.foreground },
     FloatTitle = { fg = c.doc_fg, bold = true },
 
     Title = { fg = c.foreground, bold = true },
@@ -201,6 +197,8 @@ local setupGroups = function(c)
     MiniClueDescGroup = { bg = c.background, fg = c.foreground, italic = true },
     MiniClueDescSingle = { bg = c.background, fg = c.foreground },
     MiniClueSeparator = { link = "MiniClueBorder" },
+
+    MiniCursorWord = { underdotted = true, bold = true, sp = c.diagnostic_hint },
 
     MiniStarterCurrent = { link = "MiniPickMatchCurrent" },
 
@@ -218,8 +216,9 @@ local setupGroups = function(c)
 
     BlinkCmpGhostText = { fg = c.suggestion, italic = true, bold = true },
     NeoCodeiumSuggestion = { link = 'BlinkCmpGhostText' },
+
     LspReferenceText = { fg = c.highlight_intense, undercurl = true },
-    LspInlayHint = { fg = c.accent1, italic = true },
+    LspInlayHint = { fg = c.accent1, italic = true, bold = true },
   }
 end
 
@@ -244,7 +243,7 @@ local setupGroupsNoColor = function(c)
   g["@variable"] = cl
   g["@variable.member"] = cl
   g["@variable.parameter"] = cl
-  g.Comment = { fg = c.dimmed_subtle, italic = true }
+  -- g.Comment = { fg = c.dimmed_subtle, italic = true, bold = true }
   g.CommentError = { link = "Comment" }
   return g
 end

@@ -92,23 +92,31 @@ vim.o.updatetime = 250
 vim.o.grepprg = [[rg --glob "!.jj" --glob "!.git" --no-heading --vimgrep --follow $*]]
 vim.opt.grepformat = vim.opt.grepformat ^ { "%f:%l:%c:%m" }
 
-vim.fn.sign_define(
-  "DiagnosticSignError",
-  { text = "", hl = "DiagnosticSignError", texthl = "DiagnosticSignError", culhl = "DiagnosticSignErrorLine" }
-)
-vim.fn.sign_define(
-  "DiagnosticSignWarn",
-  { text = "", hl = "DiagnosticSignWarn", texthl = "DiagnosticSignWarn", culhl = "DiagnosticSignWarnLine" }
-)
-vim.fn.sign_define(
-  "DiagnosticSignInfo",
-  { text = "", hl = "DiagnosticSignInfo", texthl = "DiagnosticSignInfo", culhl = "DiagnosticSignInfoLine" }
-)
-vim.fn.sign_define(
-  "DiagnosticSignHint",
-  { text = "", hl = "DiagnosticSignHint", texthl = "DiagnosticSignHint", culhl = "DiagnosticSignHintLine" }
-)
-
+-- Diagnostics
+vim.diagnostic.config {
+  severity_sort = true,
+  signs = {
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignErrorLine",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarnLine",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfoLine",
+      [vim.diagnostic.severity.HINT] = "DiagnostigSignHintLine",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnostigSignHint",
+    },
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+  },
+  virtual_lines = true,
+}
 
 -- Make <Tab> work for snippets
 vim.keymap.set({ "i", "s" }, "<Tab>", function()
