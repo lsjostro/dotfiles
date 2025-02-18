@@ -62,7 +62,6 @@ require 'blink-cmp'.setup({
 
   sources = {
     default = { 'lsp', 'buffer' },
-    cmdline = {},
     providers = {},
   },
 
