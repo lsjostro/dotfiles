@@ -140,7 +140,7 @@
     settings = {
 
       signing = {
-        sign-all = true;
+        behavior = "own";
         backend = "ssh";
       };
 
