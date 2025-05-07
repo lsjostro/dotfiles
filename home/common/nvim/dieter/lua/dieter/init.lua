@@ -15,6 +15,8 @@ local colors = {
     highlight_intense = hsl(42, 100, 30),
 
     dialog_fg = hsl(230, 13, 10),
+    dialog_bg = hsl(50, 15, 95),
+    dialog_border = hsl(50, 25, 75),
 
     string = hsl(96, 50, 33),
     comment = hsl(360, 66, 40),
@@ -38,7 +40,7 @@ local colors = {
     change_quarter = hsl(224, 100, 85),
     delete = hsl(350, 100, 40),
 
-    selection = hsl(270, 75, 92),
+    selection = hsl(270, 45, 92),
 
     search_bg = hsl(43, 100, 8),
     search_fg = hsl(43, 100, 85),
@@ -67,6 +69,7 @@ local colors = {
     highlight_intense = hsl(58, 100, 60),
 
     dialog_fg = hsl(191, 15, 75),
+    dialog_bg = "NONE",
 
     string = hsl(90, 30, 60),
     comment = hsl(216, 30, 55),
@@ -111,8 +114,6 @@ local colors = {
 }
 
 local setupGroups = function(c)
-  c.dialog_bg = c.background
-
   return {
     Normal = { fg = c.foreground, bg = c.background },
 
@@ -126,6 +127,7 @@ local setupGroups = function(c)
     Type = { link = "NormalNC" },
 
     MsgArea = { fg = c.dimmed_subtle },
+    StatusLine = { fg = c.dimmed, bg = c.dimmed_subtle },
 
     String = { fg = c.string },
 
@@ -165,10 +167,10 @@ local setupGroups = function(c)
     DiagnosticHint = { fg = c.diagnostic_hint, italic = true },
     DiagnosticInfo = { fg = c.diagnostic_info, italic = true },
     DiagnosticWarn = { fg = c.diagnostic_warn, italic = true },
-    DiagnosticFloatingError = { fg = c.diagnostic_error, bg = c.popup_error_bg },
-    DiagnosticFloatingHint = { fg = c.diagnostic_hint, bg = c.popup_hint_bg },
-    DiagnosticFloatingInfo = { fg = c.diagnostic_info, bg = c.popup_info_bg },
-    DiagnosticFloatingWarn = { fg = c.diagnostic_warning, bg = c.popup_warning_bg },
+    DiagnosticFloatingError = { fg = c.diagnostic_error, bg = c.dialog_bg },
+    DiagnosticFloatingHint = { fg = c.diagnostic_hint, bg = c.dialog_bg },
+    DiagnosticFloatingInfo = { fg = c.diagnostic_info, bg = c.dialog_bg },
+    DiagnosticFloatingWarn = { fg = c.diagnostic_warning, bg = c.dialog_bg },
     DiagnosticUnderlineError = { fg = c.foreground, undercurl = true, sp = c.diagnostic_error },
     DiagnosticUnderlineHint = { fg = c.foreground, undercurl = true, sp = c.diagnostic_hint },
     DiagnosticUnderlineInfo = { fg = c.foreground, undercurl = true, sp = c.diagnostic_info },
@@ -193,22 +195,22 @@ local setupGroups = function(c)
 
     EndOfBuffer = { fg = c.dimmed },
     WinSeparator = { bg = c.dialog_bg, fg = c.dialog_fg },
-    NormalFloat = { bg = c.background, fg = c.foreground },
-    FloatBorder = { fg = c.foreground },
-    FloatTitle = { fg = c.doc_fg, bold = true },
+    NormalFloat = { bg = c.dialog_bg, fg = c.foreground },
+    FloatBorder = { bg = c.dialog_bg, fg = c.dialog_border },
+    FloatTitle = { bg = c.dialog_bg, fg = c.dialog_border, bold = true },
 
     Title = { fg = c.foreground, bold = true },
 
     MiniPickNormal = { bg = c.dialog_bg, fg = c.dialog_fg },
-    MiniPickBorder = { link = "MiniPickNormal" },
+    MiniPickBorder = { bg = c.dialog_bg, fg = c.dialog_border },
     MiniPickBorderText = { link = "MiniPickBorder" },
     MiniPickMatchCurrent = { bg = c.dialog_bg, fg = c.dialog_fg, reverse = true },
 
-    MiniClueBorder = { link = "MiniPicBorder" },
-    MiniClueTitle = { bg = c.background, fg = c.foreground, bold = true },
+    MiniClueBorder = { link = "MiniPickBorder" },
+    MiniClueTitle = { bg = c.dialog_bg, fg = c.dialog_border, bold = true },
     MiniClueNextKey = { link = "MiniClueTitle" },
-    MiniClueDescGroup = { bg = c.background, fg = c.foreground, italic = true },
-    MiniClueDescSingle = { bg = c.background, fg = c.foreground },
+    MiniClueDescGroup = { bg = c.dialog_bg, fg = c.foreground, italic = true },
+    MiniClueDescSingle = { bg = c.dialog_bg, fg = c.foreground },
     MiniClueSeparator = { link = "MiniClueBorder" },
 
     MiniCursorWord = { underdotted = true, bold = true, sp = c.diagnostic_hint },

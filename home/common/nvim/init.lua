@@ -5,10 +5,9 @@ vim.g.maplocalleader = ","
 
 -- UI
 
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 vim.opt.guicursor =
 "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
-vim.opt.laststatus = 0
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.ruler = true
@@ -44,7 +43,7 @@ function CondensedPath()
   return vim.fn.pathshorten(early_path) .. '/' .. late_path
 end
 
-vim.opt.rulerformat = "%50(%=%{%v:lua.GetIndicators()%}%#MsgArea#%{%v:lua.CondensedPath()%}%)%7(%l:%c%)"
+vim.opt.statusline = "%{%v:lua.CondensedPath()%}%=%{%v:lua.GetIndicators()%}%7(%l:%c%)"
 
 -- Search
 vim.opt.ignorecase = true
@@ -94,6 +93,7 @@ vim.opt.grepformat = vim.opt.grepformat ^ { "%f:%l:%c:%m" }
 
 -- Diagnostics
 vim.diagnostic.config {
+  float = { border = "rounded" },
   severity_sort = true,
   signs = {
     linehl = {
@@ -115,8 +115,17 @@ vim.diagnostic.config {
       [vim.diagnostic.severity.HINT] = "",
     },
   },
-  virtual_lines = true,
+  virtual_lines = false,
 }
+vim.keymap.set('n', '<Space>ud', function()
+  if vim.diagnostic.config().virtual_lines == true then
+    -- vim.diagnostic.config({ virtual_lines = { current_line = true } })
+    vim.diagnostic.config({ virtual_lines = false })
+  else
+    vim.diagnostic.config({ virtual_lines = true })
+  end
+end, { desc = 'Toggle diagnostic virtual_lines' })
+
 
 -- Make <Tab> work for snippets
 vim.keymap.set({ "i", "s" }, "<Tab>", function()
@@ -169,8 +178,13 @@ end, opts("Format Buffer"))
 vim.keymap.set('n', '<Leader><Leader>', "<cmd>Pick visit_paths cwd=''<cr>", opts("Visits"))
 vim.keymap.set('n', '<Leader>b', "<cmd>Pick buffers<cr>", opts("Open buffer picker"))
 vim.keymap.set('n', '<Leader>/', "<cmd>Pick grep_live_root<cr>", opts("Search workspace files"))
-vim.keymap.set('n', '<Leader>d', "<cmd>Pick diagnostic<cr>", opts("Open diagnostics picker"))
-vim.keymap.set("n", "<Leader>D", vim.diagnostic.setloclist, { desc = "Diagnostics to location list" })
+vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, opts("Show diagnostics for line"))
+vim.keymap.set('n', '<m-d>', vim.diagnostic.open_float, opts("Show diagnostics for line"))
+vim.keymap.set('n', '<Leader>D', function()
+  local width = vim.o.columns - 8
+  MiniExtra.pickers.diagnostic({ scope = "current" }, { window = { config = { width = width } } })
+end, opts("Open diagnostics picker"))
+
 vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, opts("Rename Symbol"))
 vim.keymap.set('n', '<Leader>F', "<cmd>Pick files<cr>", opts("Open file picker CWD"))
 vim.keymap.set('n', '<Leader>f', "<cmd>Pick files_root<cr>", opts("Open file picker"))
@@ -214,5 +228,10 @@ vim.keymap.set("n", "<Leader>uc", function()
 end, opts("Toggle Dieter colors"))
 vim.keymap.set("n", "<Leader>uf", "<cmd>ToggleAutoFormat<cr>", opts("Toggle autoformat on save"))
 vim.keymap.set("n", "<Leader>uh", "<cmd>InlayHintsToggle<cr>", opts("Toggle inlay hints"))
+vim.keymap.set("n", "<Leader>ul", "<cmd>set invcursorline<cr>", opts("Toggle cursor line"))
 vim.keymap.set("n", "<Leader>un", "<cmd>set invnumber<cr>", opts("Toggle line numbers"))
 vim.keymap.set("n", "<Leader>uw", "<cmd>set invwrap<cr>", opts("Toggle line wrapping"))
+
+vim.keymap.set("n", "<Leader>ui", function()
+  vim.g.miniindentscope_disable = not vim.g.miniindentscope_disable
+end, opts("Toggle indent scope"))
