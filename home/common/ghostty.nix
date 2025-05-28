@@ -68,18 +68,20 @@
       font-family = "Berkeley Mono";
       font-family-italic = "Monaspace Radon Var";
       font-family-bold-italic = "Monaspace Krypton Var";
-      font-style = "Regular";
-      font-style-bold = "Bold";
-      font-style-italic = "Italic";
+      font-style = "SemiCondensed";
+      font-style-bold = "Bold SemiCondensed";
+      font-style-italic = "ExtraLight Italic";
       font-style-bold-italic = "ExtraLight";
       font-synthetic-style = false;
 
+      adjust-cell-height = 2;
+      adjust-font-baseline = 1;
       adjust-cursor-thickness = 4;
       adjust-underline-position = 5;
       adjust-underline-thickness = -2;
 
       mouse-hide-while-typing = true;
-      unfocused-split-opacity = 0.80;
+      unfocused-split-opacity = 0.9;
       unfocused-split-fill = "#056157";
 
       shell-integration = "fish";
