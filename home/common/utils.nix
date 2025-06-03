@@ -6,6 +6,7 @@
     procs
     viddy
     delta
+    bitwarden-cli
   ];
 
   programs = {
