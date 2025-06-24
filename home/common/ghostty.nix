@@ -90,6 +90,8 @@
       gtk-titlebar = false;
       window-padding-balance = true;
       window-padding-color = "extend";
+      window-padding-x = 10;
+      window-padding-y = 10;
       window-height = 60;
       window-width = 160;
       window-theme = "system";
