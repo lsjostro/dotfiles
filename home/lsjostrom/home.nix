@@ -17,7 +17,7 @@ in
   programs.jujutsu = {
     settings.user.email = email;
     settings.user.name = realName;
-    settings.git.push-bookmark-prefix = "lsjostro/push-";
+    settings.templates.git_push_bookmark = ''"lsjostro/push-" ++ change_id.short()'';
     settings.signing.backends.ssh.allowed-signers = "/home/lsjostrom/.ssh/authorized_keys";
     settings.signing.key = "/home/lsjostrom/.ssh/git_signing_key.pub";
   };
