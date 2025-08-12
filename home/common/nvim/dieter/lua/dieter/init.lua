@@ -19,7 +19,7 @@ local colors = {
     dialog_border = hsl(50, 25, 75),
 
     string = hsl(96, 50, 33),
-    comment = hsl(360, 66, 40),
+    comment = "#2350a4",
     comment_error = hsl(2, 85, 40),
 
     suggestion = hsl(220, 95, 55),
