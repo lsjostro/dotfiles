@@ -9,6 +9,7 @@
     controlPersist = "15m";
     extraConfig = ''
       PreferredAuthentications publickey
+      Include ~/.ssh/private_config
     '';
   };
 
