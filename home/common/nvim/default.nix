@@ -46,7 +46,7 @@
             owner = "monkoose";
             repo = "neocodeium";
             rev = "511ae8a76561a6352f845169bcb6c906fd1892bb"; # 2025-04-19
-            hash = "sha256-7y4iCfCP1Ht9+Q4b11+PTRsjNaJEIGaeBzJnzYwFIqw=";
+            hash = "sha256-qx+mbZz2tzA8F7pEYD4eGjujvpPa4/KfO9M6oxKFnM0=";
           };
           doCheck = false;
         };
@@ -69,7 +69,7 @@
             owner = "actionshrimp";
             repo = "direnv.nvim";
             rev = "main";
-            hash = "sha256-7NcVskgAurbIuEVIXxHvXZfYQBOEXLURGzllfVEQKNE=";
+            hash = "sha256-qx+mbZz2tzA8F7pEYD4eGjujvpPa4/KfO9M6oxKFnM0=";
           };
         };
         type = "lua";
@@ -133,7 +133,7 @@
             owner = "stevearc";
             repo = "conform.nvim";
             rev = "80b57f662b5e13ae8c2c7c38639966084625fa5e";
-            hash = "sha256-zC1WZFS+ZA1+BM36VnVkVE+/ovXdWCzL9kDIP3q9rIk=";
+            hash = "sha256-qx+mbZz2tzA8F7pEYD4eGjujvpPa4/KfO9M6oxKFnM0=";
           };
         };
         type = "lua";
