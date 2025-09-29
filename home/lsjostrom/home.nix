@@ -28,6 +28,11 @@ in
     identityPaths = [
       "${config.home.homeDirectory}/.age/id-dotfiles"
     ];
+    secrets = {
+      "codestral_api_key" = {
+        file = ../../secrets/codestral_api_key.age;
+      };
+    };
   };
 
 }

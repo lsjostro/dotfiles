@@ -45,8 +45,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "monkoose";
             repo = "neocodeium";
-            rev = "511ae8a76561a6352f845169bcb6c906fd1892bb"; # 2025-04-19
-            hash = "sha256-qx+mbZz2tzA8F7pEYD4eGjujvpPa4/KfO9M6oxKFnM0=";
+            rev = "f67384cee91f8ffc0d2e09d257691b2461725d5b"; # 2025-04-19
+            hash = "sha256-UemmcgQbdTDYYh8BCCjHgr/wQ8M7OH0ef6MBMHfOJv8=";
           };
           doCheck = false;
         };
@@ -132,8 +132,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "stevearc";
             repo = "conform.nvim";
-            rev = "80b57f662b5e13ae8c2c7c38639966084625fa5e";
-            hash = "sha256-qx+mbZz2tzA8F7pEYD4eGjujvpPa4/KfO9M6oxKFnM0=";
+            rev = "3543d000dafbc41cc7761d860cfdb24e82154f75";
+            hash = "sha256-UemmcgQbdTDYYh8BCCjHgr/wQ8M7OH0ef6MBMHfOJv8=";
           };
         };
         type = "lua";
