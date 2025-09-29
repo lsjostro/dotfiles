@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 let
   realName = "Lars Sjöstrom";
   email = "lars@radicore.se";
@@ -23,4 +23,11 @@ in
   };
 
   home.stateVersion = "25.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+
+  age = {
+    identityPaths = [
+      "${config.home.homeDirectory}/.age/id-dotfiles"
+    ];
+  };
+
 }

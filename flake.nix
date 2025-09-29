@@ -23,6 +23,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     # jujutsu.url = "github:jj-vcs/jj/v0.26.0";
+    ragenix.url = "github:yaxitech/ragenix";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +34,7 @@
       self,
       nixpkgs,
       nix-index-database,
+      ragenix,
       home-manager,
       ...
     }:
@@ -50,8 +52,10 @@
           };
           modules = [
             nix-index-database.hmModules.nix-index
+            ragenix.homeManagerModules.default
             ./home/common
-          ] ++ modules;
+          ]
+          ++ modules;
         };
     in
     {
@@ -64,6 +68,7 @@
           nh
           nixd
           nixfmt-rfc-style
+          (inputs.ragenix.packages.${system}.default.override { plugins = [ age-plugin-tpm ]; })
         ];
       };
 
