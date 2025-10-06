@@ -133,7 +133,7 @@
             owner = "stevearc";
             repo = "conform.nvim";
             rev = "3543d000dafbc41cc7761d860cfdb24e82154f75";
-            hash = "sha256-UemmcgQbdTDYYh8BCCjHgr/wQ8M7OH0ef6MBMHfOJv8=";
+            hash = "sha256-pUF9F5QoDzCZuVRcJEF91M8Qjkh/xosMkf9tRavkmJs=";
           };
         };
         type = "lua";
