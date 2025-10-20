@@ -13,6 +13,7 @@
     ./tmux.nix
     ./vcs.nix
     ./ghostty.nix
+    ./helix.nix
     ./scripts.nix
   ];
 }

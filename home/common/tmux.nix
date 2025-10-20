@@ -33,7 +33,7 @@
 
       set -s command-alias[1000] stty='run-shell "tmux send-keys \"stty cols #{pane_width} rows #{pane_height}\" Enter"'
 
-      bind -n M-1 if-shell 'tmux select-window -t nvim' refresh-client 'new-window -S -n nvim nvim --listen $XDG_RUNTIME_DIR/nvim-persistent.sock'
+      bind -n M-1 if-shell 'tmux select-window -t t0' refresh-client 'new-window -S -n t0'
       bind -n M-2 if-shell 'tmux select-window -t t1' refresh-client 'new-window -S -n t1'
       bind -n M-3 if-shell 'tmux select-window -t t2' refresh-client 'new-window -S -n t2'
       bind -n M-4 if-shell 'tmux select-window -t t3' refresh-client 'new-window -S -n t3'

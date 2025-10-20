@@ -13,7 +13,7 @@
   programs.neovim = {
     enable = true;
     # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-    defaultEditor = true;
+    defaultEditor = false;
     viAlias = true;
     vimAlias = true;
     withNodeJs = false;
