@@ -14,6 +14,7 @@
     ./vcs.nix
     ./ghostty.nix
     ./helix.nix
+    ./zellij.nix
     ./scripts.nix
   ];
 }

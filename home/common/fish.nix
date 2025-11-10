@@ -50,24 +50,24 @@
           	        '';
       };
 
-      edit = {
-        description = "Open a file in already running nvim and switch tab";
-        argumentNames = [ "file" ];
-        body = ''
-          	          set _file (readlink -f "$file")
-          	          if test -z "$file"
-          	              set _root (vcs_root)
-          	              set _file (fd --type f . "$_root" | sed -e "s#^$_root/##" | fzf --no-sort --layout=reverse)
-          	              set _file "$_root/$_file"
-          	          end
-          	          set _nvim_socket "$XDG_RUNTIME_DIR/nvim-persistent.sock"
-          	          if test -S "$_nvim_socket" && tmux select-window -t nvim 2>/dev/null
-          	            nvim --server "$_nvim_socket" --remote "$_file"
-          	            return 0
-          	          end
-          	          tmux new-window -S -n nvim nvim --listen "$_nvim_socket" "$_file"
-          	        '';
-      };
+      # edit = {
+      #   description = "Open a file in already running nvim and switch tab";
+      #   argumentNames = [ "file" ];
+      #   body = ''
+      #     	          set _file (readlink -f "$file")
+      #     	          if test -z "$file"
+      #     	              set _root (vcs_root)
+      #     	              set _file (fd --type f . "$_root" | sed -e "s#^$_root/##" | fzf --no-sort --layout=reverse)
+      #     	              set _file "$_root/$_file"
+      #     	          end
+      #     	          set _nvim_socket "$XDG_RUNTIME_DIR/nvim-persistent.sock"
+      #     	          if test -S "$_nvim_socket" && tmux select-window -t nvim 2>/dev/null
+      #     	            nvim --server "$_nvim_socket" --remote "$_file"
+      #     	            return 0
+      #     	          end
+      #     	          tmux new-window -S -n nvim nvim --listen "$_nvim_socket" "$_file"
+      #     	        '';
+      # };
 
       jl.body = ''
         	        jj log --color=always --no-graph -T builtin_log_oneline -r 'all()' | fzf --ansi --reverse --wrap --preview 'jj show --tool=difftu {1}' --preview-window=down,70% --color=light
@@ -143,7 +143,8 @@
     ];
 
     shellAbbrs = {
-      e = "edit";
+      edit = "hx";
+      e = "hx";
       l = "bat";
       top = "btm --basic --enable_cache_memory --battery";
       ts = "TZ=Z date '+%Y%m%dT%H%M%SZ'";
