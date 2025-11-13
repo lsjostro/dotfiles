@@ -17,7 +17,8 @@
       set -g set-titles-string "#H - #T"
       set -g status off
       set -g status-interval 30
-      set -g status-style "italics,reverse"
+      set -g status-style "reverse"
+      set -g mode-style "reverse"
       set -g status-left-length 0
       set -g status-right-length 0
       set -g status-left '#W #{pane_current_path}'

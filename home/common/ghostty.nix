@@ -96,7 +96,9 @@
       window-height = 60;
       window-width = 160;
       window-theme = "system";
-      theme = "light:PatagiaLight,dark:PatagiaDark";
+      # theme = "light:PatagiaLight,dark:PatagiaDark";
+      theme = "light:GitHub Light High Contrast,dark:GitHub Dark High Contrast";
+
 
       keybind = [
         "ctrl+shift+c=copy_to_clipboard"
