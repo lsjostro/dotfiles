@@ -6,7 +6,7 @@
     ./broot.nix
     ./devel.nix
     ./utils.nix
-    ./nvim
+    # ./nvim
     ./fish.nix
     ./ssh.nix
     ./k8s.nix
