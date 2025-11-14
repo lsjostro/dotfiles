@@ -50,6 +50,9 @@
           };
           "unbind \"Alt f\"" = { };
           "unbind \"Ctrl p\"" = { };
+          # Crusial in helix
+          "unbind \"Alt o\"" = { };
+          "unbind \"Alt i\"" = { };
         };
         "shared_except \"session\"" = {
           "unbind \"Ctrl q\"" = { };
