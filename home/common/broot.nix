@@ -41,19 +41,19 @@
           leave_broot = true;
         }
         {
-          invocation = "hx";
+          invocation = "edit";
           key = "enter";
           shortcut = "e";
-          external = "hx {file}";
+          external = "edit {file}";
           apply_to = "text_file";
           from_shell = true;
           leave_broot = true;
         }
         {
-          invocation = "nvim";
+          invocation = "hx";
           key = "enter";
           apply_to = "text_file";
-          external = "hx {file}";
+          external = "edit {file}";
           from_shell = true;
           leave_broot = true;
         }
