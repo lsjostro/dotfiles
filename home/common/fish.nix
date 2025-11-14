@@ -61,12 +61,12 @@
           	              set _file "$_root/$_file"
           	          end
                       if test -n "$_file"
-                      	zellij action go-to-tab-name edit
+                      	zellij action go-to-tab-name -c edit
                       	zellij action write 27 # send <Escape> key
                       	zellij action write-chars ":open $_file"
                       	zellij action write 13 # send <Enter> key
                       else
-                      	zellij action go-to-tab-name edit -c
+                      	zellij action go-to-tab-name -c edit
                       end
           	        '';
       };
