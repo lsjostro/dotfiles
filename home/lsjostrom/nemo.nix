@@ -10,8 +10,10 @@ in
   };
 
   programs.git = {
-    userName = realName;
-    userEmail = email;
+    settings = {
+      user.name = realName;
+      user.email = email;
+    };
   };
 
   programs.jujutsu = {
