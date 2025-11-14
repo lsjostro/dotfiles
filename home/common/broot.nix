@@ -41,10 +41,10 @@
           leave_broot = true;
         }
         {
-          invocation = "helix";
+          invocation = "hx";
           key = "enter";
           shortcut = "e";
-          external = "helix {file}";
+          external = "hx {file}";
           apply_to = "text_file";
           from_shell = true;
           leave_broot = true;
@@ -53,7 +53,7 @@
           invocation = "nvim";
           key = "enter";
           apply_to = "text_file";
-          external = "helix {file}";
+          external = "hx {file}";
           from_shell = true;
           leave_broot = true;
         }

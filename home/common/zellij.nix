@@ -6,13 +6,11 @@
 
   programs.zellij = {
     enable = true;
-    enableFishIntegration = false;
-    attachExistingSession = false;
-
     settings = {
       default_layout = "compact";
       pane_frames = false;
       show_startup_tips = false;
+      theme = "iceberg-light";
 
       ui.pane_frames = {
         hide_session_name = true;
@@ -41,6 +39,7 @@
           "bind \"Alt 9\"".GoToTab = 9;
           "bind \"Alt 0\"".GoToTab = 10;
           "bind \"Alt `\"".ToggleFloatingPanes = { };
+          "bind \"Alt Esc\"".ToggleFloatingPanes = { };
           "bind \"Alt s\""."LaunchOrFocusPlugin \"file:~/.config/zellij/plugins/zsm.wasm\"" = {
             floating = true;
             move_to_focused_tab = true;
@@ -50,6 +49,7 @@
             floating = true;
           };
           "unbind \"Alt f\"" = { };
+          "unbind \"Ctrl p\"" = { };
         };
         "shared_except \"session\"" = {
           "unbind \"Ctrl q\"" = { };

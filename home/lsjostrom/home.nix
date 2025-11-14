@@ -10,8 +10,10 @@ in
   };
 
   programs.git = {
-    userName = realName;
-    userEmail = email;
+    settings = {
+      user.name = realName;
+      user.email = email;
+    };
   };
 
   programs.jujutsu = {
@@ -24,15 +26,15 @@ in
 
   home.stateVersion = "25.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
 
-  age = {
-    identityPaths = [
-      "${config.home.homeDirectory}/.age/id-dotfiles"
-    ];
-    secrets = {
-      "codestral_api_key" = {
-        file = ../../secrets/codestral_api_key.age;
-      };
-    };
-  };
+  # age = {
+  #   identityPaths = [
+  #     "${config.home.homeDirectory}/.age/id-dotfiles"
+  #   ];
+  #   secrets = {
+  #     "codestral_api_key" = {
+  #       file = ../../secrets/codestral_api_key.age;
+  #     };
+  #   };
+  # };
 
 }

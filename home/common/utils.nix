@@ -5,7 +5,6 @@
     jless
     procs
     viddy
-    delta
     bitwarden-cli
   ];
 
