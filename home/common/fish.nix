@@ -146,6 +146,7 @@
 
     shellAbbrs = {
       e = "edit";
+      z = "zellij";
       l = "bat";
       top = "btm --basic --enable_cache_memory --battery";
       ts = "TZ=Z date '+%Y%m%dT%H%M%SZ'";
