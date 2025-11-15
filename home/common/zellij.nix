@@ -6,8 +6,58 @@
 
   programs.zellij = {
     enable = true;
+
+    layouts = {
+
+      helix = {
+        layout = {
+          default_tab_template = {
+            children = [ ];
+            pane = {
+              size = 1;
+              borderless = true;
+              plugin = {
+                location = "zellij:compact-bar";
+                tooltip = "Alt -";
+              };
+            };
+          };
+          tab_template = {
+            _props = {
+              name = "helix";
+            };
+            pane = {
+              command = "hx";
+            };
+          };
+          helix = {
+            _props = {
+              name = "helix";
+            };
+          };
+          tab = {
+            _props = {
+              name = "shell";
+            };
+          };
+        };
+      };
+
+      zsm = {
+        layout = {
+          pane = {
+            borderless = true;
+            plugin = {
+              location = "file:~/.config/zellij/plugins/zsm.wasm";
+            };
+          };
+        };
+      };
+
+    };
+
     settings = {
-      default_layout = "compact";
+      default_layout = "zsm";
       pane_frames = false;
       show_startup_tips = false;
       theme = "iceberg-light";
@@ -72,4 +122,3 @@
     sha256 = "sha256-MRlBRVGdvcEoaFtFb5cDdDePoZ/J2nQvvkoyG6zkSds=";
   };
 }
-

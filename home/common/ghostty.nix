@@ -65,14 +65,6 @@
     };
     settings = {
       font-size = 10;
-      # font-family = "Berkeley Mono";
-      # font-family-italic = "Monaspace Radon Var";
-      # font-family-bold-italic = "Monaspace Krypton Var";
-      # font-style = "SemiCondensed";
-      # font-style-bold = "Bold SemiCondensed";
-      # font-style-italic = "ExtraLight Italic";
-      # font-style-bold-italic = "ExtraLight";
-      # font-synthetic-style = false;
       font-family = "Go Mono";
 
       adjust-cell-height = 6;
