@@ -27,7 +27,8 @@
               name = "helix";
             };
             pane = {
-              command = "hx";
+              command = "fish";
+              args = ["-c" "direnv exec . hx"];
             };
           };
           helix = {
