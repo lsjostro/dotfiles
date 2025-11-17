@@ -59,14 +59,15 @@
     {
       overlays = import ./overlays { inherit inputs outputs; };
 
+      formatter = pkgs.nixpkgs-fmt;
+
       devShell.${system} = pkgs.mkShell {
         packages = with pkgs; [
           just
-          nix-direnv
           nh
           nixd
           nixfmt-rfc-style
-          (inputs.ragenix.packages.${system}.default.override { plugins = [ age-plugin-tpm ]; })
+          # (inputs.ragenix.packages.${system}.default.override { plugins = [ age-plugin-tpm ]; })
         ];
       };
 
