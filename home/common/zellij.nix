@@ -9,7 +9,7 @@
 
     layouts = {
 
-      helix = {
+      devel = {
         layout = {
           default_tab_template = {
             children = [ ];
@@ -32,7 +32,7 @@
           };
           helix = {
             _props = {
-              name = "helix";
+              name = "edit";
             };
           };
           tab = {
@@ -49,6 +49,9 @@
             borderless = true;
             plugin = {
               location = "file:~/.config/zellij/plugins/zsm.wasm";
+              floating = true;
+              move_to_focused_tab = true;
+              default_layout = "devel";
             };
           };
         };
@@ -57,7 +60,7 @@
     };
 
     settings = {
-      default_layout = "zsm";
+      default_layout = "devel";
       pane_frames = false;
       show_startup_tips = false;
       theme = "iceberg-light";
@@ -93,6 +96,7 @@
           "bind \"Alt s\""."LaunchOrFocusPlugin \"file:~/.config/zellij/plugins/zsm.wasm\"" = {
             floating = true;
             move_to_focused_tab = true;
+            default_layout = "devel";
           };
           "bind \"Alt /\""."LaunchOrFocusPlugin \"file:~/.config/zellij/plugins/forgot.wasm\"" = {
             LOAD_ZELLIJ_BINDINGS = true;
