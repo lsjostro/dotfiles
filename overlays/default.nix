@@ -1,4 +1,5 @@
 { inputs, ... }:
-{
-  # additions = final: _prev: import dln.pkgs final.pkgs;
+
+final: prev: {
+  zjstatus = inputs.zjstatus.packages.${prev.system}.default;
 }

@@ -15,13 +15,14 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     ragenix.url = "github:yaxitech/ragenix";
+    zjstatus.url = "github:dj95/zjstatus";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -32,14 +33,19 @@
       self,
       nixpkgs,
       nix-index-database,
-      ragenix,
       home-manager,
+      zjstatus,
       ...
     }:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      overlay = import ./overlays { inherit inputs outputs; };
+
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ overlay ];
+      };
 
       mkHome =
         modules:
@@ -50,15 +56,12 @@
           };
           modules = [
             nix-index-database.hmModules.nix-index
-            # ragenix.homeManagerModules.default
             ./home/common
           ]
           ++ modules;
         };
     in
     {
-      overlays = import ./overlays { inherit inputs outputs; };
-
       formatter = pkgs.nixpkgs-fmt;
 
       devShell.${system} = pkgs.mkShell {
@@ -67,7 +70,6 @@
           nh
           nixd
           nixfmt-rfc-style
-          # (inputs.ragenix.packages.${system}.default.override { plugins = [ age-plugin-tpm ]; })
         ];
       };
 

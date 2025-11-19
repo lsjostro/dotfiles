@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   ...
 }:
@@ -17,8 +18,34 @@
               size = 1;
               borderless = true;
               plugin = {
-                location = "zellij:compact-bar";
-                tooltip = "Alt -";
+                location = "file:${pkgs.zjstatus}/bin/zjstatus.wasm";
+                border_enabled = false;
+                hide_frame_for_single_pane = true;
+                format_left = "#[fg=#777777,reverse]{mode} {command_hostname}";
+                format_center = "#[fg=#777777,reverse]{session}:{tabs}";
+                format_right = "#[fg=#777777,reverse]{datetime}";
+                format_space = "#[fg=#777777,reverse]";
+
+                mode_normal = "  ";
+                mode_locked = "  ";
+                mode_resize = " 󰩨 ";
+                mode_pane = "  ";
+                mode_tab = "  ";
+                mode_scroll = " 󱕒 ";
+                mode_session = "  ";
+                mode_move = " 󰆾 ";
+
+                tab_normal = "";
+                tab_active = "#[fg=#777777,reverse,bold]{index}";
+
+                command_hostname_command = "hostname -s";
+                command_hostname_format = "#[fg=#777777,reverse]{stdout}";
+                command_hostname_rendermode = "static";
+                command_hostname_interval = "0";
+
+                datetime = "#[fg=#777777,reverse,italic] {format}";
+                datetime_format = "%R";
+                datetime_timezone = "Europe/Stockholm";
               };
             };
           };
@@ -28,19 +55,26 @@
             };
             pane = {
               command = "fish";
-              args = ["-c" "direnv exec . hx"];
+              args = [
+                "-c"
+                "direnv exec . hx"
+              ];
             };
           };
-          helix = {
-            _props = {
-              name = "edit";
-            };
-          };
-          tab = {
-            _props = {
-              name = "shell";
-            };
-          };
+          _children = [
+            {
+              tab = {
+                _props.name = "edit";
+                pane.command = "fish";
+                pane.args = [
+                  "-c"
+                  "direnv exec . hx"
+                ];
+              };
+            }
+
+            { tab._props.name = "shell"; }
+          ];
         };
       };
 
@@ -71,13 +105,7 @@
         rounded_corners = true;
       };
       plugins = {
-        compact-bar = {
-          _props.location = "zellij:compact-bar";
-          tooltip = "Alt -";
-        };
-        tab-bar.path = "tab-bar";
-        status-bar.path = "status-bar";
-        strider.path = "strider";
+        zjstatus.path = "${pkgs.zjstatus}/bin/zjstatus.wasm";
       };
 
       keybinds = {
