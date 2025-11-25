@@ -11,6 +11,7 @@
     difftastic
     git-get
     git-graph
+    mergiraf
     tea
   ];
 
@@ -145,7 +146,7 @@
       templates = {
         commit_trailers = ''
 format_signed_off_by_trailer(self)
-++ if(!trailers.contains_key("Change-Id"), format_gerrit_change_id_trailer(self))'';
+'';
       };
 
       ui = {
@@ -164,6 +165,10 @@ format_signed_off_by_trailer(self)
           "$left"
           "$right"
         ];
+        mergiraf = {
+          conflict-marker-style = "git";
+          merge-tool-edits-conflict-markers = true;
+        };
         difftu = {
           program = "difft";
           "diff-args" = [
