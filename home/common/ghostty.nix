@@ -6,6 +6,7 @@
   programs.ghostty = {
     enable = true;
     enableFishIntegration = true;
+    systemd.enable = false;
     installBatSyntax = false;
     package = pkgs.emptyDirectory;
     themes = {
