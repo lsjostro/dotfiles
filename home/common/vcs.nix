@@ -220,6 +220,7 @@ format_signed_off_by_trailer(self)
       };
 
       "revset-aliases" = {
+        "immutable_heads()" = "builtin_immutable_heads() | remote_bookmarks()";
         # Prevent rewriting commits on main@origin and commits authored by other users;
         "user(x)" = "author(x) | committer(x)";
         "trunk()" = "latest((present(main) | present(master)) & remote_bookmarks())";
