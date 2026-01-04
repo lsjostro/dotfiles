@@ -3,7 +3,7 @@
   home.packages = with pkgs; [
     age-plugin-fido2-hmac
     comma
-    dogdns
+    doggo
     file
     just
     nix-output-monitor
