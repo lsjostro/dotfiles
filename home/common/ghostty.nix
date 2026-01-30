@@ -65,7 +65,7 @@
 
     };
     settings = {
-      font-size = 10;
+      font-size = 11;
       font-family = "Go Mono";
 
       adjust-cell-height = 6;
@@ -91,7 +91,6 @@
       window-theme = "system";
       # theme = "light:PatagiaLight,dark:PatagiaDark";
       theme = "light:GitHub Light High Contrast,dark:GitHub Dark High Contrast";
-
 
       keybind = [
         "ctrl+shift+c=copy_to_clipboard"
