@@ -4,7 +4,6 @@
     dust
     jless
     procs
-    viddy
     bitwarden-cli
   ];
 

@@ -151,7 +151,6 @@
       l = "bat";
       top = "btm --basic --enable_cache_memory --battery";
       ts = "TZ=Z date '+%Y%m%dT%H%M%SZ'";
-      w = "viddy $history[1]";
       xc = "fish_clipboard_copy";
     };
   };
