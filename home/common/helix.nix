@@ -47,6 +47,15 @@
           name = "rust";
           auto-format = true;
         }
+        {
+          name = "bash";
+          file-types = [
+            "sh"
+            "bash"
+            "zsh"
+            "bats"
+          ];
+        }
       ];
 
     };
