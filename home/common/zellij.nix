@@ -7,6 +7,23 @@
 
   programs.zellij = {
     enable = true;
+    settings = {
+      default_layout = "devel";
+      default_mode = "locked";
+      pane_frames = false;
+      show_startup_tips = false;
+      theme = "iceberg-light";
+
+      ui.pane_frames = {
+        hide_session_name = true;
+        rounded_corners = true;
+      };
+
+      plugins = {
+        zjstatus.path = "${pkgs.zjstatus}/bin/zjstatus.wasm";
+      };
+    };
+    extraConfig = builtins.readFile ./zellij.config.kdl;
 
     layouts = {
 
@@ -21,8 +38,8 @@
                 location = "file:${pkgs.zjstatus}/bin/zjstatus.wasm";
                 border_enabled = false;
                 hide_frame_for_single_pane = true;
-                format_left = "#[fg=#777777,reverse]{mode} {command_hostname}";
-                format_center = "#[fg=#777777,reverse]{session}:{tabs}";
+                format_left = "#[fg=#777777,reverse]{mode} #[fg=#777777,reverse]{tabs}#[fg=#777777,reverse]:{session}@{command_hostname}";
+                format_center = "#[fg=#777777,reverse]";
                 format_right = "#[fg=#777777,reverse]{datetime}";
                 format_space = "#[fg=#777777,reverse]";
 
@@ -49,105 +66,61 @@
               };
             };
           };
-          tab_template = {
-            _props = {
-              name = "helix";
-            };
-            pane = {
-              command = "fish";
-              args = [
-                "-c"
-                "direnv exec . hx"
-              ];
-            };
-          };
           _children = [
-            {
-              tab = {
-                _props.name = "edit";
-                pane.command = "fish";
-                pane.args = [
-                  "-c"
-                  "direnv exec . hx"
-                ];
-              };
-            }
-
-            { tab._props.name = "shell"; }
+            { tab._props.name = "1"; }
+            { tab._props.name = "2"; }
+            { tab._props.name = "3"; }
           ];
-        };
-      };
 
-      zsm = {
-        layout = {
-          pane = {
-            borderless = true;
-            plugin = {
-              location = "file:~/.config/zellij/plugins/zsm.wasm";
-              floating = true;
-              move_to_focused_tab = true;
-              default_layout = "devel";
-            };
+          swap_floating_layout = {
+            _children = [
+              {
+                floating_panes = {
+                  _props.max_panes = 1;
+                  _children = [
+                    {
+                      pane = {
+                        x = "5%";
+                        y = "5%";
+                        width = "90%";
+                        height = "90%";
+                      };
+                    }
+                  ];
+                };
+              }
+
+              {
+                floating_panes = {
+                  _props.max_panes = 2;
+                  _children = [
+                    {
+                      pane = {
+                        x = "4%";
+                        y = "5%";
+                        width = "45%";
+                        height = "90%";
+                      };
+                    }
+
+                    {
+                      pane = {
+                        x = "51%";
+                        y = "5%";
+                        width = "45%";
+                        height = "90%";
+                      };
+                    }
+                  ];
+                };
+              }
+            ];
           };
         };
       };
 
     };
 
-    settings = {
-      default_layout = "devel";
-      pane_frames = false;
-      show_startup_tips = false;
-      theme = "iceberg-light";
-
-      ui.pane_frames = {
-        hide_session_name = true;
-        rounded_corners = true;
-      };
-      plugins = {
-        zjstatus.path = "${pkgs.zjstatus}/bin/zjstatus.wasm";
-      };
-
-      keybinds = {
-        shared = {
-          "bind \"Alt 1\"".GoToTab = 1;
-          "bind \"Alt 2\"".GoToTab = 2;
-          "bind \"Alt 3\"".GoToTab = 3;
-          "bind \"Alt 4\"".GoToTab = 4;
-          "bind \"Alt 5\"".GoToTab = 5;
-          "bind \"Alt 6\"".GoToTab = 6;
-          "bind \"Alt 7\"".GoToTab = 7;
-          "bind \"Alt 8\"".GoToTab = 8;
-          "bind \"Alt 9\"".GoToTab = 9;
-          "bind \"Alt 0\"".GoToTab = 10;
-          "bind \"Alt `\"".ToggleFloatingPanes = { };
-          "bind \"Alt Esc\"".ToggleFloatingPanes = { };
-          "bind \"Alt s\""."LaunchOrFocusPlugin \"file:~/.config/zellij/plugins/zsm.wasm\"" = {
-            floating = true;
-            move_to_focused_tab = true;
-            default_layout = "devel";
-          };
-          "bind \"Alt /\""."LaunchOrFocusPlugin \"file:~/.config/zellij/plugins/forgot.wasm\"" = {
-            LOAD_ZELLIJ_BINDINGS = true;
-            floating = true;
-          };
-          "unbind \"Alt f\"" = { };
-          "unbind \"Ctrl p\"" = { };
-          # Crusial in helix
-          "unbind \"Alt o\"" = { };
-          "unbind \"Alt i\"" = { };
-        };
-        "shared_except \"session\"" = {
-          "unbind \"Ctrl q\"" = { };
-        };
-      };
-
-    };
-  };
-
-  home.file.".config/zellij/plugins/zsm.wasm".source = pkgs.fetchurl {
-    url = "https://github.com/liam-mackie/zsm/releases/download/v0.4.1/zsm.wasm";
-    sha256 = "sha256-+VCf9MEHQVmr2q8lu95jAOsvCQU0iJa3ljqbnIC9ywg=";
   };
 
   home.file.".config/zellij/plugins/forgot.wasm".source = pkgs.fetchurl {

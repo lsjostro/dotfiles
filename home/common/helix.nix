@@ -22,7 +22,7 @@
       typescript-language-server
       yaml-language-server
       typescript
-      nodePackages.prettier
+      prettier
       bash-language-server
       marksman
       tinymist
