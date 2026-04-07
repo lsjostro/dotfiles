@@ -20,7 +20,7 @@
       };
 
       plugins = {
-        zjstatus.path = "${pkgs.zjstatus}/bin/zjstatus.wasm";
+        zjstatus.path = "file:~/.config/zellij/plugins/zjstatus.wasm";
       };
     };
     extraConfig = builtins.readFile ./zellij.config.kdl;
@@ -35,7 +35,7 @@
               size = 1;
               borderless = true;
               plugin = {
-                location = "file:${pkgs.zjstatus}/bin/zjstatus.wasm";
+                location = "file:~/.config/zellij/plugins/zjstatus.wasm";
                 border_enabled = false;
                 hide_frame_for_single_pane = true;
                 format_left = "#[fg=#777777,reverse]{mode} #[fg=#777777,reverse]{tabs}#[fg=#777777,reverse]:{session}@{command_hostname}";
@@ -126,5 +126,9 @@
   home.file.".config/zellij/plugins/forgot.wasm".source = pkgs.fetchurl {
     url = "https://github.com/karimould/zellij-forgot/releases/download/0.4.2/zellij_forgot.wasm";
     sha256 = "sha256-MRlBRVGdvcEoaFtFb5cDdDePoZ/J2nQvvkoyG6zkSds=";
+  };
+  home.file.".config/zellij/plugins/zjstatus.wasm".source = pkgs.fetchurl {
+    url = "https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm";
+    sha256 = "sha256-TeQm0gscv4YScuknrutbSdksF/Diu50XP4W/fwFU3VM=";
   };
 }

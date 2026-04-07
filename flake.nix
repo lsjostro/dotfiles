@@ -22,7 +22,6 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     ragenix.url = "github:yaxitech/ragenix";
-    zjstatus.url = "github:dj95/zjstatus";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +33,6 @@
       nixpkgs,
       nix-index-database,
       home-manager,
-      zjstatus,
       ...
     }:
     let
@@ -55,7 +53,7 @@
             inherit inputs outputs;
           };
           modules = [
-            nix-index-database.hmModules.nix-index
+            nix-index-database.homeModules.nix-index
             ./home/common
           ]
           ++ modules;
