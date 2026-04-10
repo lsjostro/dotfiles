@@ -1,49 +1,40 @@
 keybinds {
 	shared {
+		bind "Alt 1" { GoToTab 1; }
+		bind "Alt 2" { GoToTab 2; }
+		bind "Alt 3" { GoToTab 3; }
+		bind "Alt 4" { GoToTab 4; }
+		bind "Alt 5" { GoToTab 5; }
+		bind "Alt 6" { GoToTab 6; }
+		bind "Alt 7" { GoToTab 7; }
+		bind "Alt 8" { GoToTab 8; }
+		bind "Alt 9" { GoToTab 9; }
+		bind "Alt 0" { GoToTab 10; }
+
+		bind "Shift Alt t" { NewTab; }
+		bind "Alt `" { NewPane "right"; }
+		bind "Shift Alt `" { NewPane "down"; }
+
+		bind "Alt [" { FocusPreviousPane; }
+		bind "Alt ]" { FocusNextPane; }
+
+		bind "Alt s" {
+			LaunchOrFocusPlugin "session-manager" {
+				floating true
+				move_to_focused_tab true
+			};
+		}
 		bind "Alt /" {
 			LaunchOrFocusPlugin "file:~/.config/zellij/plugins/forgot.wasm" {
 				LOAD_ZELLIJ_BINDINGS true
 				floating true
 			}
 		}
-		bind "Alt 0" {
-			GoToTab 10
-		}
-		bind "Alt 1" {
-			GoToTab 1
-		}
-		bind "Alt 2" {
-			GoToTab 2
-		}
-		bind "Alt 3" {
-			GoToTab 3
-		}
-		bind "Alt 4" {
-			GoToTab 4
-		}
-		bind "Alt 5" {
-			GoToTab 5
-		}
-		bind "Alt 6" {
-			GoToTab 6
-		}
-		bind "Alt 7" {
-			GoToTab 7
-		}
-		bind "Alt 8" {
-			GoToTab 8
-		}
-		bind "Alt 9" {
-			GoToTab 9
-		}
-		bind "Alt s" {
-			 LaunchOrFocusPlugin "session-manager" {
-                floating true
-                move_to_focused_tab true
-            };
-		}
-	}
-	shared_except "session" {
-		unbind "Ctrl q"
+
+		bind "Ctrl q" { Detach; }
+
+		// Unbinds
+		unbind "Ctrl n" "Ctrl p" "Ctrl b" "Ctrl h" "Ctrl t" "Ctrl s" "Ctrl o" "Ctrl g"
+		unbind "Alt o" "Alt i" "Alt p" "Alt n" "Alt f"
 	}
 }

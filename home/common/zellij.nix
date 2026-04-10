@@ -9,7 +9,6 @@
     enable = true;
     settings = {
       default_layout = "devel";
-      default_mode = "locked";
       pane_frames = false;
       show_startup_tips = false;
       theme = "iceberg-light";
