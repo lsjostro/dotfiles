@@ -1,15 +1,11 @@
 { pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
-    age-plugin-tpm
     comma
     doggo
     file
     just
     nix-output-monitor
-    rage
-    secretspec
-    passage
   ];
 
   programs.claude-code = {

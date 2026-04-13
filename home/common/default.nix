@@ -8,6 +8,7 @@
     ./utils.nix
     # ./nvim
     ./fish.nix
+    ./rage.nix
     ./ssh.nix
     ./k8s.nix
     ./tmux.nix
