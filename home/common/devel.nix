@@ -67,6 +67,37 @@
       };
     };
 
+    rules = {
+      version-control = ''
+        # Version Control
+
+        Use jujutsu (`jj`) instead of `git` for all version control operations. This includes:
+        - Checking status and history
+        - Creating and managing commits/changes
+        - Diffing
+        - Rebasing and squashing
+        - Managing branches/bookmarks
+
+        Only use `git` when a tool strictly requires it and has no `jj` equivalent (e.g., `gh` CLI for GitHub API operations).
+      '';
+
+      code-style = ''
+        # Code Style Guidelines
+
+        - Use consistent formatting
+        - Follow language conventions
+        - Comment heavily — explain why, not just what
+        - Use plain comments - Do not use decorative separator comments with dashes or box-drawing characters
+      '';
+
+      testing = ''
+        # Testing Conventions
+
+        - Write tests for all new features
+        - Maintain test coverage above 80%
+      '';
+    };
+
     settings = {
       env = {
         DISABLE_TELEMETRY = lib.mkForce "1";
