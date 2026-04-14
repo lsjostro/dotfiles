@@ -6,7 +6,6 @@
     ./broot.nix
     ./devel.nix
     ./utils.nix
-    # ./nvim
     ./fish.nix
     ./rage.nix
     ./ssh.nix
