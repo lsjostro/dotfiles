@@ -20,26 +20,26 @@
   };
 
   programs.delta = {
-      enable = true;
-      options = {
-        file-added-label = "[+]";
-        file-decoration-style = "none";
-        file-modified-label = "[*]";
-        file-removed-label = "[-]";
-        file-renamed-label = "[>]";
-        file-style = "bold reverse";
-        file-transformation = "s/$/  ░▒▓/";
-        grep-file-style = "bold reverse";
-        hunk-header-decoration-style = "none";
-        hunk-header-file-style = "bold";
-        hunk-header-line-number-style = "bold";
-        hunk-header-style = "bold";
-        hunk-label = "⯁";
-        hunk-label-style = "bold";
-        line-numbers = true;
-        max-line-distance = "0.9";
-        navigate = true;
-      };
+    enable = true;
+    options = {
+      file-added-label = "[+]";
+      file-decoration-style = "none";
+      file-modified-label = "[*]";
+      file-removed-label = "[-]";
+      file-renamed-label = "[>]";
+      file-style = "bold reverse";
+      file-transformation = "s/$/  ░▒▓/";
+      grep-file-style = "bold reverse";
+      hunk-header-decoration-style = "none";
+      hunk-header-file-style = "bold";
+      hunk-header-line-number-style = "bold";
+      hunk-header-style = "bold";
+      hunk-label = "⯁";
+      hunk-label-style = "bold";
+      line-numbers = true;
+      max-line-distance = "0.9";
+      navigate = true;
+    };
   };
 
   programs.git = {
@@ -143,10 +143,15 @@
         backend = "ssh";
       };
 
+      gerrit = {
+        default-remote = "origin";
+        default-remote-branch = "main";
+      };
+
       templates = {
         commit_trailers = ''
-format_signed_off_by_trailer(self)
-'';
+          format_signed_off_by_trailer(self)
+        '';
       };
 
       ui = {
@@ -209,9 +214,52 @@ format_signed_off_by_trailer(self)
           "diff"
           "--tool=difft"
         ];
+
+        evolve = [
+          "rebase"
+          "--skip-emptied"
+          "--destination"
+          "trunk()"
+        ];
+
+        sync = [
+          "git"
+          "fetch"
+          "--all-remotes"
+        ];
+
+        tug = [
+          "util"
+          "exec"
+          "--"
+          "bash"
+          "-c"
+          ''
+            #!/usr/bin/env bash
+            set -eu pipefail
+            jj sync && jj evolve && jj
+          ''
+        ];
+
         s = [
-          "show"
-          "--tool=difftu"
+          "util"
+          "exec"
+          "--"
+          "bash"
+          "-c"
+          ''
+            #!/usr/bin/env bash
+            set -eo pipefail
+            printf '\e[38;5;240m\u2504%.0s\e[0m' $(seq 1 $(tput cols)) '\n'
+            jj show --stat
+            printf '\e[38;5;240m\u2504%.0s\e[0m' $(seq 1 $(tput cols)) '\n'
+            if [ -n "$1" ]; then
+              jj diff --tool=difft -r "$@"
+            else
+              jj log -T builtin_log_oneline -r '(main..@) | (main..@)-' -n 15
+            fi
+          ''
+          ""
         ];
         ss = [
           "show"
