@@ -143,6 +143,10 @@
         backend = "ssh";
       };
 
+      git = {
+        sign-on-push = true;
+      };
+
       gerrit = {
         default-remote = "origin";
         default-remote-branch = "main";
