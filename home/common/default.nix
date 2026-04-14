@@ -10,7 +10,6 @@
     ./rage.nix
     ./ssh.nix
     ./k8s.nix
-    ./tmux.nix
     ./vcs.nix
     ./ghostty.nix
     ./helix.nix
