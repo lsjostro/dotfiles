@@ -24,12 +24,6 @@ keybinds {
 				move_to_focused_tab true
 			};
 		}
-		bind "Alt /" {
-			LaunchOrFocusPlugin "file:~/.config/zellij/plugins/forgot.wasm" {
-				LOAD_ZELLIJ_BINDINGS true
-				floating true
-			}
-		}
 
 		bind "Ctrl q" { Detach; }
 
