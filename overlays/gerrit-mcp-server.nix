@@ -2,10 +2,11 @@ final: prev:
 
 let
   py = prev.python3Packages;
+  name = "gerrit-mcp-server";
 in
 {
   gerrit-mcp-server = py.buildPythonApplication {
-    pname = "gerrit-mcp-server";
+    pname = name;
     version = "0-unstable-2026-03-23";
 
     src = prev.fetchFromGitHub {
@@ -48,5 +49,7 @@ in
     '';
 
     doCheck = false;
+
+    meta.mainProgram = name;
   };
 }

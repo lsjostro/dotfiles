@@ -11,45 +11,6 @@
     ];
 
     functions = {
-      confirm = {
-        description = "Ask for confirmation";
-        argumentNames = [ "message" ];
-        body = ''
-          	          read -l -p 'printf "\\e[31;1m$message\\e[0m (y/N) "' confirm
-          	          test "$confirm" = 'y'
-          	        '';
-      };
-
-      poweroff = {
-        description = "Wraps poweroff to first prompt for confirmation";
-        wraps = "poweroff";
-        body = ''confirm "⚠ Really poweroff $(hostname)?" && command poweroff $argv'';
-      };
-
-      reboot = {
-        description = "Wraps reboot to first prompt for confirmation";
-        wraps = "reboot";
-        body = ''confirm "⚠ Really reboot $(hostname)?" && command reboot $argv'';
-      };
-
-      shutdown = {
-        description = "Wraps shutdown to first prompt for confirmation";
-        wraps = "shutdown";
-        body = ''confirm "⚠ Really shutdown $(hostname)?" && command shutdown $argv'';
-      };
-
-      tmux-refresh-env = {
-        description = "Refresh environment variables from tmux session";
-        body = ''
-          	          for var in (tmux show-environment | string match -rv '^-')
-          	            set -l parts (string split -m 1 '=' $var)
-          	            if test (count $parts) -eq 2
-          	              set -Ux $parts[1] $parts[2]
-          	            end
-          	          end
-          	        '';
-      };
-
       edit = {
         description = "Open a file in already running helix and switch tab";
         argumentNames = [ "file" ];
@@ -61,12 +22,12 @@
           	              set _file "$_root/$_file"
           	          end
                       if test -n "$_file"
-                      	zellij action go-to-tab-name -c edit
+                      	zellij action go-to-tab-name -c 1
                       	zellij action write 27 # send <Escape> key
                       	zellij action write-chars ":open $_file"
                       	zellij action write 13 # send <Enter> key
                       else
-                      	zellij action go-to-tab-name -c edit
+                      	zellij action go-to-tab-name -c 1
                       end
           	        '';
       };
