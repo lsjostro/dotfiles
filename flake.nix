@@ -33,6 +33,7 @@
       nixpkgs,
       nix-index-database,
       home-manager,
+      ragenix,
       ...
     }:
     let
@@ -53,6 +54,7 @@
             inherit inputs outputs;
           };
           modules = [
+            ragenix.homeManagerModules.default
             nix-index-database.homeModules.nix-index
             ./home/common
           ]
@@ -68,6 +70,8 @@
           nh
           nixd
           nixfmt
+          (inputs.ragenix.packages.${system}.default.override { plugins = [ age-plugin-tpm ]; })
+          age
         ];
       };
 

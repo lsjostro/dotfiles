@@ -1,5 +1,11 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}:
+{
+  age.secrets.kagi_api_key.file = ../../secrets/kagi_api_key.age;
+
   programs.fish = {
     enable = true;
 
