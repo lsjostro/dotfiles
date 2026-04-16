@@ -13,6 +13,7 @@ let
         local pin
         pin=$(${pkgs.systemd}/bin/systemd-ask-password "TPM PIN:") || return 1
         key_id=$(echo -n "$pin" | ${pkgs.keyutils}/bin/keyctl padd user age-tpm-pin @u)
+        ${pkgs.keyutils}/bin/keyctl link @u @s
         ${pkgs.keyutils}/bin/keyctl timeout "$key_id" 28800
         echo -n "$pin"
       fi
