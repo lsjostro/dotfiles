@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   home.packages = with pkgs; [
     comma
@@ -7,6 +12,7 @@
     just
     nix-output-monitor
   ];
+  age.secrets.kagi_api_key.file = ../../secrets/kagi_api_key.age;
 
   programs.claude-code = {
     enable = true;
@@ -58,6 +64,7 @@
       # Kagi Search API
       kagi = {
         type = "stdio";
+        env.KAGI_API_KEY_FILE = config.age.secrets.kagi_api_key.path;
         command = lib.getExe pkgs.kagi-mcp-server;
       };
       # Linear project mgmt

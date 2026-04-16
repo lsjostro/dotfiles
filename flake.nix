@@ -72,6 +72,7 @@
           nixfmt
           (inputs.ragenix.packages.${system}.default.override { plugins = [ age-plugin-tpm ]; })
           rage
+          age
         ];
       };
 

@@ -51,6 +51,7 @@ in
       name = "kagi-mcp-server";
       text = ''
         export KAGI_API_KEY
+        KAGI_API_KEY=$(cat "$KAGI_API_KEY_FILE")
         exec ${kagimcp}/bin/kagimcp "$@"
       '';
     };
