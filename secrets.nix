@@ -6,6 +6,7 @@ let
 
   secrets = {
     "kagi_api_key" = keys;
+    "gerrit_mcp_config" = keys;
   };
 in
 

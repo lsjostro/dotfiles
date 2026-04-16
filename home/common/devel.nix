@@ -13,6 +13,7 @@
     nix-output-monitor
   ];
   age.secrets.kagi_api_key.file = ../../secrets/kagi_api_key.age;
+  age.secrets.gerrit_mcp_config.file = ../../secrets/gerrit_mcp_config.age;
 
   programs.claude-code = {
     enable = true;
@@ -59,6 +60,7 @@
       gerrit = {
         type = "stdio";
         command = lib.getExe pkgs.gerrit-mcp-server;
+        env.GERRIT_CONFIG_PATH = config.age.secrets.gerrit_mcp_config.path;
         args = [ "stdio" ];
       };
       # Kagi Search API
