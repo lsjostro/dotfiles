@@ -158,13 +158,48 @@
         '';
       };
 
+      "template-aliases" = {
+        summary = ''
+          	          concat(
+          	            "Change     " ++ label("change_id", change_id.shortest(64))
+          	              ++ if(hidden, label("hidden", "  (hidden)"))
+          	              ++ if(divergent, label("divergent", "  (divergent)"))
+          	              ++ "\n",
+          	            "Commit     " ++ label("commit_id", commit_id.shortest(64)) ++ "\n",
+          	            "Author     " ++ author
+          	              ++ "  " ++ format_timestamp(author.timestamp())
+          	              ++ label("rest", "  (" ++ author.timestamp().ago() ++ ")") ++ "\n",
+          	            if(committer.email() != author.email(),
+          	              "Committer  " ++ committer
+          	                ++ "  " ++ format_timestamp(committer.timestamp())
+          	                ++ label("rest", "  (" ++ committer.timestamp().ago() ++ ")") ++ "\n"),
+          	            if(parents,
+          	              "Parents    " ++ parents.map(|p|
+          	                label("change_id", p.change_id().shortest(64))
+          	                  ++ "  "
+          	                  ++ if(p.description(),
+          	                        p.description().first_line(),
+          	                        label("description_placeholder", "(no description)"))
+          	              ).join("\n           ") ++ "\n"),
+          	            if(signature,
+          	              "Signed     " ++ format_short_cryptographic_signature(signature) ++ "\n"),
+          	            if(bookmarks, "Bookmarks  " ++ bookmarks ++ "\n"),
+          	            if(tags, "Tags       " ++ tags ++ "\n"),
+          	            "\n",
+          	            label("wc_description",
+          	              indent("  ",
+          	                if(description,
+          	                   description,
+          	                   label("description_placeholder", "(no description set)\n"))
+          	              )
+          	            ),
+          	            "\n"
+          	          )
+          	        '';
+      };
+
       ui = {
-        "default-command" = [
-          "log"
-          "--limit=10"
-          "-T"
-          "builtin_log_comfortable"
-        ];
+        "default-command" = [ "s" ];
         pager = "delta";
       };
 
@@ -255,12 +290,12 @@
             #!/usr/bin/env bash
             set -eo pipefail
             printf '\e[38;5;240m\u2504%.0s\e[0m' $(seq 1 $(tput cols)) '\n'
-            jj show --stat
+            jj show --stat -T summary
             printf '\e[38;5;240m\u2504%.0s\e[0m' $(seq 1 $(tput cols)) '\n'
             if [ -n "$1" ]; then
               jj diff --tool=difft -r "$@"
             else
-              jj log -T builtin_log_oneline -r '(main..@) | (main..@)-' -n 15
+              jj log -T builtin_log_comfortable -r '(main..@) | (main..@)-' -n 15
             fi
           ''
           ""
@@ -293,6 +328,24 @@
             fg = "default";
             underline = true;
           };
+          diff_green = {
+            fg = "black";
+            bg = "#e9fdda";
+          };
+          diff_red = {
+            fg = "black";
+            bg = "#fddada";
+          };
+          change_id = {
+            fg = "#9b00a7";
+            bg = "#faf5ff";
+          };
+          bookmark = {
+            fg = "#5a28d9";
+            bg = "#f5f6ff";
+          };
+          wc_bg = "#fffaf0";
+
         in
         {
           "error" = bold;
@@ -304,10 +357,13 @@
           "prefix" = bold;
           "rest" = "bright black";
           "divergent prefix" = underline;
-          "bookmark" = "bright magenta";
-          "bookmarks" = "bright magenta";
-          "change_id" = "bright magenta";
-          "local_bookmarks" = "bright magenta";
+          "bookmark" = bookmark;
+          "bookmarks" = bookmark;
+          "change_id" = change_id;
+          "local_bookmarks" = bookmark;
+          "wc_description" = {
+            bg = wc_bg;
+          };
 
           "diff file_header" = bold;
           "diff hunk_header" = "cyan";
@@ -338,22 +394,39 @@
           };
           "operation id" = "blue";
           "operation current_operation" = bold;
-          "remote_bookmarks" = "bright magenta";
+          "remote_bookmarks" = bookmark;
           "working_copy" = {
             fg = "green";
+            bg = wc_bg;
             bold = true;
           };
           "working_copy empty" = {
             fg = "green";
             bold = true;
           };
-          "working_copy change_id" = "bright magenta";
-          "working_copy description placeholder" = "green";
-          "working_copy empty description placeholder" = "green";
-          "working_copy bookmark" = "bright magenta";
-          "working_copy bookmarks" = "bright magenta";
-          "working_copy local_bookmarks" = "bright magenta";
-          "working_copy remote_bookmarks" = "bright magenta";
+          "working_copy change_id" = change_id // {
+	            bold = true;
+	        };
+	        "working_copy description placeholder" = {
+	          fg = "green";
+	          bg = wc_bg;
+	        };
+	        "working_copy empty description placeholder" = {
+	          fg = "green";
+	          bg = wc_bg;
+	        };
+	        "working_copy bookmark" = bookmark // {
+	          bold = true;
+	        };
+	        "working_copy bookmarks" = bookmark // {
+	          bold = true;
+	        };
+	        "working_copy local_bookmarks" = bookmark // {
+	          bold = true;
+	        };
+	        "working_copy remote_bookmarks" = bookmark // {
+	          bold = true;
+	        };
         }
         // lib.genAttrs [
           "author"
@@ -394,6 +467,8 @@
           "tags"
           "timestamp"
           "working_copies"
+        ] (_: "default")
+	        // lib.genAttrs [
           "working_copy author"
           "working_copy branch"
           "working_copy branches"
@@ -410,8 +485,7 @@
           "working_copy tags"
           "working_copy timestamp"
           "working_copy working_copies"
-        ] (_: "default");
-
+        ] (_: { bg = wc_bg; });
     };
   };
 }
