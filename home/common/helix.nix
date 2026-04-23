@@ -85,6 +85,7 @@
       keys.normal = {
         space.q = ":buffer-close";
         tab = [ "buffer_picker" ];
+        "A-r" = ":reload";
       };
 
     };
