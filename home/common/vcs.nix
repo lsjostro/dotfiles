@@ -159,43 +159,83 @@
       };
 
       "template-aliases" = {
+        "bookmark_capsules(bookmarks)" =
+          let
+            capL = builtins.fromJSON ''"\uE0B6"'';
+            capR = builtins.fromJSON ''"\uE0B4"'';
+          in
+          ''
+            bookmarks.map(|b|
+            	label("bookmark_cap", "${capL}") ++ label("bookmark", b.name()) ++ label("bookmark_cap", "${capR}")
+            ).join(" ")
+          '';
+
+        log_caps = ''
+          if(root,
+            format_root_commit(self),
+            label(if(current_working_copy, "working_copy"),
+              concat(
+                separate(" ",
+                  label("change_id", change_id.shortest(8))
+                    ++ if(hidden, label("hidden", " hidden"))
+                    ++ if(divergent, label("divergent", " divergent")),
+                  if(empty, label("empty", "(empty)")),
+                  if(description,
+                    description.first_line(),
+                    label(if(empty, "empty"), description_placeholder),
+                  ),
+                  label(if(immutable, "immutable"), bookmark_capsules(bookmarks)),
+                  tags,
+                  working_copies,
+                  if(self.contained_in("first_parent(@)"), label("git_head", " ")),
+                  if(conflict, label("conflict", "  conflict ")),
+                  if(config("ui.show-cryptographic-signatures").as_boolean(),
+                    format_short_cryptographic_signature(signature)),
+                ) ++ "\n\n",
+              ),
+            )
+          )
+        '';
+
         summary = ''
-          	          concat(
-          	            "Change     " ++ label("change_id", change_id.shortest(64))
-          	              ++ if(hidden, label("hidden", "  (hidden)"))
-          	              ++ if(divergent, label("divergent", "  (divergent)"))
-          	              ++ "\n",
-          	            "Commit     " ++ label("commit_id", commit_id.shortest(64)) ++ "\n",
-          	            "Author     " ++ author
-          	              ++ "  " ++ format_timestamp(author.timestamp())
-          	              ++ label("rest", "  (" ++ author.timestamp().ago() ++ ")") ++ "\n",
-          	            if(committer.email() != author.email(),
-          	              "Committer  " ++ committer
-          	                ++ "  " ++ format_timestamp(committer.timestamp())
-          	                ++ label("rest", "  (" ++ committer.timestamp().ago() ++ ")") ++ "\n"),
-          	            if(parents,
-          	              "Parents    " ++ parents.map(|p|
-          	                label("change_id", p.change_id().shortest(64))
-          	                  ++ "  "
-          	                  ++ if(p.description(),
-          	                        p.description().first_line(),
-          	                        label("description_placeholder", "(no description)"))
-          	              ).join("\n           ") ++ "\n"),
-          	            if(signature,
-          	              "Signed     " ++ format_short_cryptographic_signature(signature) ++ "\n"),
-          	            if(bookmarks, "Bookmarks  " ++ bookmarks ++ "\n"),
-          	            if(tags, "Tags       " ++ tags ++ "\n"),
-          	            "\n",
-          	            label("wc_description",
-          	              indent("  ",
-          	                if(description,
-          	                   description,
-          	                   label("description_placeholder", "(no description set)\n"))
-          	              )
-          	            ),
-          	            "\n"
-          	          )
-          	        '';
+          concat(
+            "Change     " ++ label("change_id", change_id.shortest(64))
+              ++ if(hidden, label("hidden", "  (hidden)"))
+              ++ if(divergent, label("divergent", "  (divergent)"))
+              ++ "\n",
+            "Commit     " ++ label("commit_id", commit_id.shortest(64)) ++ "\n",
+            "Author     " ++ author
+              ++ "  " ++ format_timestamp(author.timestamp())
+              ++ label("rest", "  (" ++ author.timestamp().ago() ++ ")") ++ "\n",
+            if(committer.email() != author.email(),
+              "Committer  " ++ committer
+                ++ "  " ++ format_timestamp(committer.timestamp())
+                ++ label("rest", "  (" ++ committer.timestamp().ago() ++ ")") ++ "\n"),
+            if(parents,
+              "Parents    " ++ parents.map(|p|
+                label("change_id", p.change_id().shortest(64))
+                  ++ "  "
+                  ++ if(p.description(),
+                        p.description().first_line(),
+                        label("description_placeholder", "(no description)"))
+              ).join("\n           ") ++ "\n"),
+            if(signature,
+              "Signed     " ++ format_short_cryptographic_signature(signature) ++ "\n"),
+            if(bookmarks,
+              "Bookmarks  " ++ label(if(immutable, "immutable"), bookmark_capsules(bookmarks)) ++ "\n"),
+            if(tags, "Tags       " ++ tags ++ "\n"),
+            "\n",
+            label("wc_description",
+              indent("  ",
+                if(description,
+                   description,
+                   label("description_placeholder", "(no description set)\n"))
+              )
+            ),
+            "\n"
+          )
+        '';
+
       };
 
       ui = {
@@ -229,7 +269,7 @@
           "log"
           "--limit=25"
           "-T"
-          "builtin_log_comfortable"
+          "log_caps"
           "-r"
           "(main..@) | (main..@)-"
         ];
@@ -237,7 +277,7 @@
           "log"
           "--limit=25"
           "-T"
-          "builtin_log_oneline"
+          "log_caps"
           "-r"
           "all()"
         ];
@@ -295,7 +335,7 @@
             if [ -n "$1" ]; then
               jj diff --tool=difft -r "$@"
             else
-              jj log -T builtin_log_comfortable -r '(main..@) | (main..@)-' -n 15
+              jj log -T log_caps -r '(main..@) | (main..@)-' -n 15
             fi
           ''
           ""
@@ -341,8 +381,8 @@
             bg = "#faf5ff";
           };
           bookmark = {
-            fg = "#5a28d9";
-            bg = "#f5f6ff";
+            fg = "#9a907e";
+            bg = "#faeeda";
           };
           wc_bg = "#fffaf0";
 
@@ -361,6 +401,27 @@
           "bookmarks" = bookmark;
           "change_id" = change_id;
           "local_bookmarks" = bookmark;
+          "bookmark_cap" = {
+            fg = bookmark.bg;
+            bg = "default";
+          };
+          "immutable bookmark" = {
+            fg = "#6c7788";
+            bg = "#eeedfe";
+          };
+          "immutable bookmark_cap" = {
+            fg = "#eeedfe";
+            bg = "default";
+          };
+          "git_head" = {
+            fg = "#8855ee";
+            bold = true;
+          };
+          "conflict" = {
+            fg = "#ff3a2b";
+            bg = "#ffcabc";
+            bold = true;
+          };
           "wc_description" = {
             bg = wc_bg;
           };
@@ -405,28 +466,28 @@
             bold = true;
           };
           "working_copy change_id" = change_id // {
-	            bold = true;
-	        };
-	        "working_copy description placeholder" = {
-	          fg = "green";
-	          bg = wc_bg;
-	        };
-	        "working_copy empty description placeholder" = {
-	          fg = "green";
-	          bg = wc_bg;
-	        };
-	        "working_copy bookmark" = bookmark // {
-	          bold = true;
-	        };
-	        "working_copy bookmarks" = bookmark // {
-	          bold = true;
-	        };
-	        "working_copy local_bookmarks" = bookmark // {
-	          bold = true;
-	        };
-	        "working_copy remote_bookmarks" = bookmark // {
-	          bold = true;
-	        };
+            bold = true;
+          };
+          "working_copy description placeholder" = {
+            fg = "green";
+            bg = wc_bg;
+          };
+          "working_copy empty description placeholder" = {
+            fg = "green";
+            bg = wc_bg;
+          };
+          "working_copy bookmark" = bookmark // {
+            bold = true;
+          };
+          "working_copy bookmarks" = bookmark // {
+            bold = true;
+          };
+          "working_copy local_bookmarks" = bookmark // {
+            bold = true;
+          };
+          "working_copy remote_bookmarks" = bookmark // {
+            bold = true;
+          };
         }
         // lib.genAttrs [
           "author"
@@ -439,7 +500,6 @@
           "config_list overridden name"
           "config_list overridden value"
           "config_list value"
-          "conflict"
           "conflict_description"
           "conflict_description difficult"
           "description placeholder"
@@ -449,7 +509,6 @@
           "divergent rest"
           "empty description placeholder"
           "error_source"
-          "git_head"
           "git_refs"
           "hidden prefix"
           "hint"
@@ -468,24 +527,29 @@
           "timestamp"
           "working_copies"
         ] (_: "default")
-	        // lib.genAttrs [
-          "working_copy author"
-          "working_copy branch"
-          "working_copy branches"
-          "working_copy commit_id"
-          "working_copy committer"
-          "working_copy conflict"
-          "working_copy divergent"
-          "working_copy divergent change_id"
-          "working_copy git_refs"
-          "working_copy local_branches"
-          "working_copy placeholder"
-          "working_copy remote_branches"
-          "working_copy tag"
-          "working_copy tags"
-          "working_copy timestamp"
-          "working_copy working_copies"
-        ] (_: { bg = wc_bg; });
+        //
+          lib.genAttrs
+            [
+              "working_copy author"
+              "working_copy branch"
+              "working_copy branches"
+              "working_copy commit_id"
+              "working_copy committer"
+              "working_copy conflict"
+              "working_copy divergent"
+              "working_copy divergent change_id"
+              "working_copy git_refs"
+              "working_copy local_branches"
+              "working_copy placeholder"
+              "working_copy remote_branches"
+              "working_copy tag"
+              "working_copy tags"
+              "working_copy timestamp"
+              "working_copy working_copies"
+            ]
+            (_: {
+              bg = wc_bg;
+            });
     };
   };
 }
