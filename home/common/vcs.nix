@@ -158,6 +158,33 @@
         '';
       };
 
+      templates.log = "log_caps";
+
+      templates.log_short = ''
+        if(root,
+          format_root_commit(self),
+          label(if(current_working_copy, "working_copy"),
+            concat(
+              separate(" ",
+                format_short_change_id_with_hidden_and_divergent_info(self),
+                if(empty, label("empty", "(empty)")),
+                if(description,
+                  description.first_line(),
+                  label(if(empty, "empty"), description_placeholder),
+                ),
+                bookmarks,
+                tags,
+                working_copies,
+                if(git_head, label("git_head", " ")),
+                if(conflict, label("conflict", "  conflict ")),
+                if(config("ui.show-cryptographic-signatures").as_boolean(),
+                  format_short_cryptographic_signature(signature)),
+              ) ++ "\n",
+            ),
+          )
+        )
+      '';
+
       "template-aliases" = {
         "bookmark_capsules(bookmarks)" =
           let
