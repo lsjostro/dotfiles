@@ -38,6 +38,10 @@
 
     languages = {
 
+      language-server.rust-analyzer.config = {
+        diagnostics.experimental.enable = true;
+      };
+
       language = [
         {
           name = "nix";
