@@ -25,6 +25,9 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    claude-code.url = "github:sadjow/claude-code-nix";
+    claude-code.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs =
@@ -34,6 +37,7 @@
       nix-index-database,
       home-manager,
       ragenix,
+      claude-code,
       ...
     }:
     let
@@ -52,6 +56,7 @@
           inherit pkgs;
           extraSpecialArgs = {
             inherit inputs outputs;
+            claudeCodePackage = claude-code.packages.${system}.default;
           };
           modules = [
             ragenix.homeManagerModules.default

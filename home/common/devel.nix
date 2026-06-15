@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  claudeCodePackage,
   ...
 }:
 {
@@ -17,6 +18,7 @@
 
   programs.claude-code = {
     enable = true;
+    package = claudeCodePackage;
     enableMcpIntegration = true;
     lspServers = {
       nix = {
@@ -74,6 +76,12 @@
         type = "http";
         url = "https://mcp.linear.app/mcp";
       };
+      # Buildkite
+      buildkite = {
+        type = "http";
+        url = "https://mcp.buildkite.com/mcp";
+      };
+
     };
 
     rules = {
@@ -108,6 +116,15 @@
     };
 
     settings = {
+      enabledPlugins = {
+        "feature-dev@claude-plugins-official" = true;
+        "frontend-design@claude-plugins-official" = true;
+        "rust-analyzer-lsp@claude-plugins-official" = true;
+        "superpowers@claude-plugins-official" = true;
+      };
+
+      model = "claude-opus-4-7";
+
       env = {
         DISABLE_TELEMETRY = lib.mkForce "1";
         CLAUDE_CODE_ENABLE_TELEMETRY = lib.mkForce "0";
